@@ -6,7 +6,7 @@ Cross-platform components that work perfectly on iOS, Android, Web, macOS, Windo
 
 > ⚠️ Early development. API may change.
 >
-> 🚧 Building in public on [X](https://x.com/kamranebekirov)
+> 🚧 Building in public on [X](https://x.com/kamranebekirovyz)
 >
 > 💬 Your feedback and contributions are welcomed!
 

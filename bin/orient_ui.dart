@@ -33,6 +33,8 @@ void main(List<String> args) async {
   }
 }
 
+void _log(String emoji, String message) => print('$emoji $message');
+
 void _printUsage() {
   print('Orient UI - Design system for Flutter');
   print('Usage:');
@@ -42,20 +44,20 @@ void _printUsage() {
 }
 
 void _listComponents() {
-  print('📦 Available widgets:\n');
+  _log('📦', 'Available widgets:\n');
   for (final name in components.keys) {
     print('  • $name');
   }
-  print('\n💡 Usage: orient_ui add <widget>');
+  _log('\n💡', 'Usage: orient_ui add <widget>');
 }
 
 Future<void> _initCommand() async {
-  print('🎨 Initializing Orient UI...');
+  _log('🎨', 'Initializing Orient UI...');
 
   try {
     await _fetchAndSave('styling.dart', 'lib/styling.dart');
 
-    print('🎉 All set! Wrap your app:');
+    _log('🎉', 'All set! Wrap your app:');
     print('   ┌─────────────────────────────────');
     print('   │ Styling(');
     print('   │   brightness: Brightness.light,');
@@ -63,16 +65,16 @@ Future<void> _initCommand() async {
     print('   │ )');
     print('   └─────────────────────────────────');
   } catch (e) {
-    print('❌ Failed: $e');
+    _log('❌', 'Failed: $e');
     exit(1);
   }
 }
 
 Future<void> _addCommand(String widget) async {
-  print('📦 Adding $widget...');
+  _log('📦', 'Adding $widget...');
 
   if (!components.containsKey(widget)) {
-    print('❌ Widget "$widget" not found');
+    _log('❌', 'Widget "$widget" not found');
     _listComponents();
     exit(1);
   }
@@ -81,14 +83,14 @@ Future<void> _addCommand(String widget) async {
 
   try {
     await _fetchAndSave(component.filename, 'lib/$widget.dart');
-    print('📝 Don\'t forget to import styling.dart in $widget.dart');
+    _log('📝', 'Don\'t forget to import styling.dart in $widget.dart');
 
     if (component.dependencies.isNotEmpty) {
-      print('⚠️  Depends on: ${component.dependencies.join(', ')}');
+      _log('⚠️ ', 'Depends on: ${component.dependencies.join(', ')}');
       print('   Run: orient_ui add ${component.dependencies.first}');
     }
   } catch (e) {
-    print('❌ Failed: $e');
+    _log('❌', 'Failed: $e');
     exit(1);
   }
 }
@@ -112,5 +114,5 @@ Future<void> _fetchAndSave(String filename, String destination) async {
   file.createSync(recursive: true);
   file.writeAsStringSync(response.body);
 
-  print('✨ Created $destination');
+  _log('✨', 'Created $destination');
 }

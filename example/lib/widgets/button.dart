@@ -1,3 +1,5 @@
+import 'package:example/styling.dart';
+import 'package:example/widgets/spinner.dart';
 import 'package:flutter/widgets.dart';
 
 enum ButtonVariant { primary, secondary, ghost, destructive, outline, link }
@@ -115,7 +117,7 @@ class _ButtonState extends State<Button> {
                   SizedBox(
                     height: iconSize,
                     width: iconSize,
-                    child: Center(child: _LoadingSpinner(color: fg)),
+                    child: Center(child: Spinner(color: fg)),
                   )
                 else if (widget.icon != null)
                   IconTheme(

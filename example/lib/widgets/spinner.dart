@@ -1,16 +1,15 @@
 import 'package:flutter/widgets.dart';
 
-class _LoadingSpinner extends StatefulWidget {
+class Spinner extends StatefulWidget {
   final Color color;
 
-  const _LoadingSpinner({required this.color});
+  const Spinner({super.key, required this.color});
 
   @override
-  State<_LoadingSpinner> createState() => _LoadingSpinnerState();
+  State<Spinner> createState() => SpinnerState();
 }
 
-class _LoadingSpinnerState extends State<_LoadingSpinner>
-    with SingleTickerProviderStateMixin {
+class SpinnerState extends State<Spinner> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override

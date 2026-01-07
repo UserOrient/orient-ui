@@ -1,16 +1,22 @@
 ## Orient UI
 
-A design system for Flutter. Copy-paste widgets that you own! 😍
+A design system for Flutter by [UserOrient](https://app.userorient.com). Copy-paste widgets that you own! 😍
+
+Cross-platform components that work perfectly on iOS, Android, Web, macOS, Windows, and Linux.
 
 > ⚠️ Early development. API may change.
+>
+> 🚧 Building in public on [X](https://x.com/kamranebekirov)
+>
+> 💬 Your feedback and contributions are welcomed!
 
-## Installation
+## 📦 Installation
 
 ```bash
 dart pub global activate orient_ui
 ```
 
-## Usage
+## 🚀 Usage
 
 ```bash
 # Initialize styling system
@@ -24,7 +30,7 @@ orient_ui add spinner
 orient_ui add
 ```
 
-## Features
+## ✨ Features
 
 ### ✅ Available Now
 - CLI tool for easy component installation
@@ -38,7 +44,7 @@ orient_ui add
 - Focus management
 - Keyboard navigation
 
-## Components
+## 🎨 Components
 
 ### Available Now
 - [x] Button
@@ -58,6 +64,10 @@ orient_ui add
 - [ ] Menu
 - [ ] Confirmation Dialog
 
-## License
+## 📄 License
 
-MIT
+[MIT](https://raw.githubusercontent.com/userorient/orient-ui/main/LICENSE)
+
+---
+
+Built by the team at [UserOrient](https://app.userorient.com)

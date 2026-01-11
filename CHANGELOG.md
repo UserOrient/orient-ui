@@ -1,3 +1,8 @@
+## 0.0.4
+
+* Added accessibility support, focus and keyboard navigation, disabled visual state to `Button`
+* Added semantics to `Spinner` for screen reader support
+
 ## 0.0.3
 
 * Improved CLI prints to be more helpful

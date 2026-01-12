@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Improved README documentation
+
 ## 0.0.4
 
 * Added accessibility support, focus and keyboard navigation, disabled visual state to `Button`

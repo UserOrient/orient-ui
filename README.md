@@ -4,7 +4,7 @@
   <img src="https://ui.userorient.com/_next/image?url=%2Fassets%2Fui%2Fhero.png&w=1920&q=75" alt="Orient UI Components" />
 </p>
 
-A design system for Flutter by [UserOrient](https://app.userorient.com). Copy-paste widgets that you own! 😍
+A design system for Flutter by [UserOrient](https://userorient.com) without any dependencies! 😍
 
 Cross-platform components that work perfectly on iOS, Android, Web, macOS, Windows, and Linux.
 

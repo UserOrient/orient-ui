@@ -1,6 +1,6 @@
 name: orient_ui
-description: "A design system for Flutter. Copy and paste widgets."
-version: 0.0.4
+description: "A design system for Flutter without any dependencies."
+version: 0.0.5
 homepage: https://userorient.com
 repository: https://github.com/userorient/orient-ui
 

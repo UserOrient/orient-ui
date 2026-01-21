@@ -101,8 +101,6 @@ class AppColors {
   final Color border;
   final Color accent;
   final Color link;
-  final Color text;
-  final Color textSecondary;
 
   // Navigation colors
   final NavigationColors navigation;
@@ -120,8 +118,6 @@ class AppColors {
     required this.border,
     required this.accent,
     required this.link,
-    required this.text,
-    required this.textSecondary,
     this.navigation = const NavigationColors(),
     this.toast = const ToastColors(),
   });
@@ -137,8 +133,6 @@ class AppColors {
     border: Color(0xFFE4E4E7),
     accent: Color(0xFFF4F4F5),
     link: Color(0xFF3B82F6),
-    text: Color(0xFF2A2A2A),
-    textSecondary: Color(0xFFBBBBBB),
     toast: ToastColors.light,
   );
 
@@ -153,8 +147,6 @@ class AppColors {
     border: Color(0xFF27272A),
     accent: Color(0xFF27272A),
     link: Color(0xFF60A5FA),
-    text: Color(0xFFFAFAFA),
-    textSecondary: Color(0xFF71717A),
     navigation: NavigationColors.dark,
     toast: ToastColors.dark,
   );

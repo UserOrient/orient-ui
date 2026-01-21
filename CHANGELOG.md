@@ -1,5 +1,10 @@
 ## 0.0.5
 
+* Added new widget: `NavBar`
+* Written tests for all current widgets.
+
+## 0.0.5
+
 * Improved README documentation
 
 ## 0.0.4

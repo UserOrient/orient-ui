@@ -52,38 +52,39 @@ class _ButtonState extends State<Button> {
   Widget build(BuildContext context) {
     final styling = Styling.of(context);
     final colors = styling.colors;
+    final buttonColors = colors.button;
     final isDisabled = widget.onPressed == null || widget.loading;
 
     // Select colors based on variant
     final (bg, fg, border) = switch (widget.variant) {
       ButtonVariant.primary => (
-        colors.primary,
-        colors.primaryForeground,
+        buttonColors.primary,
+        buttonColors.primaryForeground,
         colors.border,
       ),
       ButtonVariant.secondary => (
-        colors.secondary,
-        colors.secondaryForeground,
+        buttonColors.secondary,
+        buttonColors.secondaryForeground,
         colors.border,
       ),
       ButtonVariant.destructive => (
-        colors.destructive,
-        colors.destructiveForeground,
+        buttonColors.destructive,
+        buttonColors.destructiveForeground,
         colors.border,
       ),
       ButtonVariant.outline => (
         const Color(0x00000000),
-        colors.primary,
+        buttonColors.primary,
         colors.border,
       ),
       ButtonVariant.ghost => (
         const Color(0x00000000),
-        colors.primary,
+        buttonColors.primary,
         colors.border,
       ),
       ButtonVariant.link => (
         const Color(0x00000000),
-        colors.link,
+        buttonColors.link,
         const Color(0x00000000),
       ),
     };
@@ -133,7 +134,7 @@ class _ButtonState extends State<Button> {
                   boxShadow: _isFocused && !isDisabled
                       ? [
                           BoxShadow(
-                            color: colors.primary.withOpacity(0.4),
+                            color: buttonColors.primary.withOpacity(0.4),
                             spreadRadius: 2,
                           ),
                         ]
@@ -194,7 +195,7 @@ class _ButtonState extends State<Button> {
 
     // For transparent backgrounds (outline/ghost), use accent color
     if ((base.a * 255.0).round().clamp(0, 255) == 0) {
-      return styling.colors.accent;
+      return styling.colors.button.accent;
     }
 
     // For solid backgrounds, reduce opacity (shadcn approach)

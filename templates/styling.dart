@@ -47,21 +47,48 @@ class NavigationColors {
   final Color railBackground;
   final Color railItemBackgroundActive;
   final Color railItemBackgroundHover;
+  final Color railItemText;
   final Color bottomBarBackground;
+  final Color bottomBarItemActive;
+  final Color bottomBarItemInactive;
 
   const NavigationColors({
     this.railBackground = const Color(0xFFFAFAFA),
     this.railItemBackgroundActive = const Color(0xFFFFFFFF),
     this.railItemBackgroundHover = const Color(0xFFF2F2F2),
+    this.railItemText = const Color(0xFF2A2A2A),
     this.bottomBarBackground = const Color(0xFFFFFFFF),
+    this.bottomBarItemActive = const Color(0xFF121212),
+    this.bottomBarItemInactive = const Color(0xFFBBBBBB),
   });
 
   static const dark = NavigationColors(
     railBackground: Color(0xFF121212),
     railItemBackgroundActive: Color(0xFF2A2A2A),
     railItemBackgroundHover: Color(0xFF080808),
+    railItemText: Color(0xFFFAFAFA),
     bottomBarBackground: Color(0xFF121212),
+    bottomBarItemActive: Color(0xFFFAFAFA),
+    bottomBarItemInactive: Color(0xFF71717A),
   );
+}
+
+class ToastColors {
+  final Color success;
+  final Color error;
+  final Color info;
+  final Color warning;
+
+  const ToastColors({
+    this.success = const Color(0xFF52DF82),
+    this.error = const Color(0xFFFF6D62),
+    this.info = const Color(0xFF529BDF),
+    this.warning = const Color(0xFFFFB35A),
+  });
+
+  static const light = ToastColors();
+
+  static const dark = ToastColors();
 }
 
 class AppColors {
@@ -80,6 +107,9 @@ class AppColors {
   // Navigation colors
   final NavigationColors navigation;
 
+  // Toast colors
+  final ToastColors toast;
+
   const AppColors({
     required this.primary,
     required this.primaryForeground,
@@ -93,6 +123,7 @@ class AppColors {
     required this.text,
     required this.textSecondary,
     this.navigation = const NavigationColors(),
+    this.toast = const ToastColors(),
   });
 
   // Light mode defaults - CUSTOMIZE THESE
@@ -108,6 +139,7 @@ class AppColors {
     link: Color(0xFF3B82F6),
     text: Color(0xFF2A2A2A),
     textSecondary: Color(0xFFBBBBBB),
+    toast: ToastColors.light,
   );
 
   // Dark mode defaults - CUSTOMIZE THESE
@@ -124,5 +156,6 @@ class AppColors {
     text: Color(0xFFFAFAFA),
     textSecondary: Color(0xFF71717A),
     navigation: NavigationColors.dark,
+    toast: ToastColors.dark,
   );
 }

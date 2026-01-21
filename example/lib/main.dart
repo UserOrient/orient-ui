@@ -7,6 +7,7 @@ import 'package:example/widgets/nav_bar.dart';
 import 'package:example/pages/button_page.dart';
 import 'package:example/pages/spinner_page.dart';
 import 'package:example/pages/nav_bar_page.dart';
+import 'package:example/pages/toast_page.dart';
 
 final _brightnessNotifier = ValueNotifier(Brightness.light);
 
@@ -64,6 +65,7 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
     ),
     _PageInfo(title: 'Spinner', icon: Icons.refresh, page: SpinnerPage()),
     _PageInfo(title: 'NavBar', icon: Icons.menu, page: NavBarPage()),
+    _PageInfo(title: 'Toast', icon: Icons.notifications_outlined, page: ToastPage()),
   ];
 
   @override

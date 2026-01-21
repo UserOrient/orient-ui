@@ -91,9 +91,9 @@ orient_ui add <widget>  # Add a specific widget
 - [x] Button (6 variants)
 - [x] Spinner
 - [x] NavBar (Navigation Rail + Bottom Bar)
+- [x] Toast
 
 ### Coming Soon
-- [ ] Toast
 - [ ] TextField
 - [ ] Navigation Rail
 - [ ] Empty View

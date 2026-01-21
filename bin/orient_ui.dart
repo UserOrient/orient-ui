@@ -8,6 +8,7 @@ final components = {
   'button': ComponentInfo('button.dart', dependencies: ['spinner']),
   'spinner': ComponentInfo('spinner.dart'),
   'nav_bar': ComponentInfo('nav_bar.dart'),
+  'toast': ComponentInfo('toast.dart'),
 };
 
 void main(List<String> args) async {

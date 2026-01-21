@@ -90,11 +90,11 @@ orient_ui add <widget>  # Add a specific widget
 ### Available Now
 - [x] Button (6 variants)
 - [x] Spinner
+- [x] NavBar (Navigation Rail + Bottom Bar)
 
 ### Coming Soon
 - [ ] Toast
 - [ ] TextField
-- [ ] Bottom Navigation Bar
 - [ ] Navigation Rail
 - [ ] Empty View
 - [ ] Dialog
@@ -104,6 +104,12 @@ orient_ui add <widget>  # Add a specific widget
 - [ ] RadioListTile
 - [ ] Menu
 - [ ] Confirmation Dialog
+
+## ✅ Quality
+
+![Tests](https://github.com/userorient/orient-ui/actions/workflows/test.yml/badge.svg)
+
+All widgets are tested for rendering, interaction, accessibility, and theming.
 
 ## ✨ Customizing Colors
 

@@ -1,4 +1,5 @@
 import 'package:example/styling.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 class NavBarItem {
@@ -263,7 +264,11 @@ class _BottomBarItem extends StatelessWidget {
       selected: active,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: onTap,
+        onTap: () {
+          onTap.call();
+
+          HapticFeedback.selectionClick();
+        },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

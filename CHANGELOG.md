@@ -1,4 +1,4 @@
-## 0.0.5
+## 0.0.6
 
 * Added new widget: `NavBar`
 * Written tests for all current widgets.

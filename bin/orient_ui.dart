@@ -7,6 +7,7 @@ const baseUrl =
 final components = {
   'button': ComponentInfo('button.dart', dependencies: ['spinner']),
   'spinner': ComponentInfo('spinner.dart'),
+  'nav_bar': ComponentInfo('nav_bar.dart'),
 };
 
 void main(List<String> args) async {

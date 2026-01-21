@@ -28,8 +28,40 @@ class Styling extends InheritedWidget {
 class StylingData {
   final bool isDark;
   final AppColors colors;
+  final Breakpoints breakpoints;
 
-  StylingData({required this.isDark, required this.colors});
+  StylingData({
+    required this.isDark,
+    required this.colors,
+    this.breakpoints = const Breakpoints(),
+  });
+}
+
+class Breakpoints {
+  final double desktop;
+
+  const Breakpoints({this.desktop = 600});
+}
+
+class NavigationColors {
+  final Color railBackground;
+  final Color railItemBackgroundActive;
+  final Color railItemBackgroundHover;
+  final Color bottomBarBackground;
+
+  const NavigationColors({
+    this.railBackground = const Color(0xFFFAFAFA),
+    this.railItemBackgroundActive = const Color(0xFFFFFFFF),
+    this.railItemBackgroundHover = const Color(0xFFF2F2F2),
+    this.bottomBarBackground = const Color(0xFFFFFFFF),
+  });
+
+  static const dark = NavigationColors(
+    railBackground: Color(0xFF121212),
+    railItemBackgroundActive: Color(0xFF2A2A2A),
+    railItemBackgroundHover: Color(0xFF080808),
+    bottomBarBackground: Color(0xFF121212),
+  );
 }
 
 class AppColors {
@@ -42,6 +74,11 @@ class AppColors {
   final Color border;
   final Color accent;
   final Color link;
+  final Color text;
+  final Color textSecondary;
+
+  // Navigation colors
+  final NavigationColors navigation;
 
   const AppColors({
     required this.primary,
@@ -53,6 +90,9 @@ class AppColors {
     required this.border,
     required this.accent,
     required this.link,
+    required this.text,
+    required this.textSecondary,
+    this.navigation = const NavigationColors(),
   });
 
   // Light mode defaults - CUSTOMIZE THESE
@@ -64,8 +104,10 @@ class AppColors {
     destructive: Color(0xFFEF4444),
     destructiveForeground: Color(0xFFFAFAFA),
     border: Color(0xFFE4E4E7),
-    accent: Color(0xFFF4F4F5), // Light gray for hover
-    link: Color(0xFF3B82F6), // Standard blue link
+    accent: Color(0xFFF4F4F5),
+    link: Color(0xFF3B82F6),
+    text: Color(0xFF2A2A2A),
+    textSecondary: Color(0xFFBBBBBB),
   );
 
   // Dark mode defaults - CUSTOMIZE THESE
@@ -77,7 +119,10 @@ class AppColors {
     destructive: Color(0xFFEF4444),
     destructiveForeground: Color(0xFFFAFAFA),
     border: Color(0xFF27272A),
-    accent: Color(0xFF27272A), // Dark gray for hover
-    link: Color(0xFF60A5FA), // Lighter blue for dark mode
+    accent: Color(0xFF27272A),
+    link: Color(0xFF60A5FA),
+    text: Color(0xFFFAFAFA),
+    textSecondary: Color(0xFF71717A),
+    navigation: NavigationColors.dark,
   );
 }

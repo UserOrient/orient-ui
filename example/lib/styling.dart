@@ -28,8 +28,49 @@ class Styling extends InheritedWidget {
 class StylingData {
   final bool isDark;
   final AppColors colors;
+  final Breakpoints breakpoints;
 
-  StylingData({required this.isDark, required this.colors});
+  StylingData({
+    required this.isDark,
+    required this.colors,
+    this.breakpoints = const Breakpoints(),
+  });
+}
+
+class Breakpoints {
+  final double desktop;
+
+  const Breakpoints({this.desktop = 600});
+}
+
+class NavigationColors {
+  final Color railBackground;
+  final Color railItemBackgroundActive;
+  final Color railItemBackgroundHover;
+  final Color railItemText;
+  final Color bottomBarBackground;
+  final Color bottomBarItemActive;
+  final Color bottomBarItemInactive;
+
+  const NavigationColors({
+    this.railBackground = const Color(0xFFFAFAFA),
+    this.railItemBackgroundActive = const Color(0xFFFFFFFF),
+    this.railItemBackgroundHover = const Color(0xFFF2F2F2),
+    this.railItemText = const Color(0xFF2A2A2A),
+    this.bottomBarBackground = const Color(0xFFFFFFFF),
+    this.bottomBarItemActive = const Color(0xFF121212),
+    this.bottomBarItemInactive = const Color(0xFFBBBBBB),
+  });
+
+  static const dark = NavigationColors(
+    railBackground: Color(0xFF121212),
+    railItemBackgroundActive: Color(0xFF2A2A2A),
+    railItemBackgroundHover: Color(0xFF080808),
+    railItemText: Color(0xFFFAFAFA),
+    bottomBarBackground: Color(0xFF121212),
+    bottomBarItemActive: Color(0xFFFAFAFA),
+    bottomBarItemInactive: Color(0xFF71717A),
+  );
 }
 
 class AppColors {
@@ -43,6 +84,9 @@ class AppColors {
   final Color accent;
   final Color link;
 
+  // Navigation colors
+  final NavigationColors navigation;
+
   const AppColors({
     required this.primary,
     required this.primaryForeground,
@@ -53,6 +97,7 @@ class AppColors {
     required this.border,
     required this.accent,
     required this.link,
+    this.navigation = const NavigationColors(),
   });
 
   // Light mode defaults - CUSTOMIZE THESE
@@ -79,5 +124,6 @@ class AppColors {
     border: Color(0xFF27272A),
     accent: Color(0xFF27272A), // Dark gray for hover
     link: Color(0xFF60A5FA), // Lighter blue for dark mode
+    navigation: NavigationColors.dark,
   );
 }

@@ -95,7 +95,6 @@ orient_ui add <widget>  # Add a specific widget
 
 ### Coming Soon
 - [ ] TextField
-- [ ] Navigation Rail
 - [ ] Empty View
 - [ ] Dialog
 - [ ] ListTile

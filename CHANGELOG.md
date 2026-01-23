@@ -1,3 +1,8 @@
+## 0.0.8
+
+* Added new widget: `Empty`.
+* Refactored `Styling` class.
+
 ## 0.0.7
 
 * Added new widget: `Toast`.

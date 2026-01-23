@@ -1,8 +1,8 @@
-// TODO: import 'styling.dart';
-
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
+
+import 'styling.dart';
 
 enum ToastType { success, error, info, warning }
 

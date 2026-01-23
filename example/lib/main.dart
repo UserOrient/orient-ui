@@ -1,3 +1,4 @@
+import 'package:example/pages/empty_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -63,9 +64,26 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
       icon: Icons.smart_button_outlined,
       page: ButtonPage(),
     ),
-    _PageInfo(title: 'Spinner', icon: Icons.refresh, page: SpinnerPage()),
-    _PageInfo(title: 'NavBar', icon: Icons.menu, page: NavBarPage()),
-    _PageInfo(title: 'Toast', icon: Icons.notifications_outlined, page: ToastPage()),
+    _PageInfo(
+      title: 'Spinner',
+      icon: Icons.refresh,
+      page: SpinnerPage(),
+    ),
+    _PageInfo(
+      title: 'NavBar',
+      icon: Icons.menu,
+      page: NavBarPage(),
+    ),
+    _PageInfo(
+      title: 'Toast',
+      icon: Icons.notifications_outlined,
+      page: ToastPage(),
+    ),
+    _PageInfo(
+      title: 'Empty',
+      icon: Icons.inbox_outlined,
+      page: EmptyPage(),
+    ),
   ];
 
   @override
@@ -130,8 +148,9 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
 
             return Button.small(
               onPressed: () {
-                _brightnessNotifier.value =
-                    isDark ? Brightness.light : Brightness.dark;
+                _brightnessNotifier.value = isDark
+                    ? Brightness.light
+                    : Brightness.dark;
               },
               icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
               label: isDark ? 'Light mode' : 'Dark mode',
@@ -147,9 +166,7 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
     return IconButton(
       onPressed: () => launchUrl(Uri.parse(url)),
       icon: Icon(icon, size: 20),
-      style: IconButton.styleFrom(
-        foregroundColor: const Color(0xFF71717A),
-      ),
+      style: IconButton.styleFrom(foregroundColor: const Color(0xFF71717A)),
     );
   }
 }

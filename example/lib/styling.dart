@@ -1,28 +1,126 @@
 import 'package:flutter/widgets.dart';
 
+// GLOBALS
+final Breakpoints _breakpoints = Breakpoints(
+  desktop: 600,
+);
+
+// LIGHT
+const Color _borderLight = Color(0xFFE4E4E7);
+const Color _primaryTextLight = Color(0xff2A2A2A);
+const Color _secondaryTextLight = Color(0xffACAEAF);
+
+final ButtonColors _buttonColorsLight = ButtonColors(
+  primary: const Color(0xFF18181B),
+  primaryForeground: const Color(0xFFFAFAFA),
+  secondary: const Color(0xFFF4F4F5),
+  secondaryForeground: const Color(0xFF18181B),
+  destructive: const Color(0xFFEF4444),
+  destructiveForeground: const Color(0xFFFAFAFA),
+  link: const Color(0xFF3B82F6),
+  accent: const Color(0xFFF4F4F5),
+);
+
+final NavigationColors _navigationColorsLight = NavigationColors(
+  railBackground: const Color(0xFFFAFAFA),
+  railItemBackgroundActive: const Color(0xFFFFFFFF),
+  railItemBackgroundHover: const Color(0xFFF2F2F2),
+  railItemText: const Color(0xFF2A2A2A),
+  bottomBarBackground: const Color(0xFFFFFFFF),
+  bottomBarItemActive: const Color(0xFF121212),
+  bottomBarItemInactive: const Color(0xFFBBBBBB),
+);
+
+const ToastColors _toastColorsLight = ToastColors(
+  success: Color(0xFF52DF82),
+  error: Color(0xFFFF6D62),
+  info: Color(0xFF529BDF),
+  warning: Color(0xFFFFB35A),
+);
+
+// DARK
+const Color _borderDark = Color(0xFF27272A);
+const Color _primaryTextDark = Color(0xffFAFAFA);
+const Color _secondaryTextDark = Color(0xffB2B2B2);
+
+final ButtonColors _buttonColorsDark = ButtonColors(
+  primary: Color(0xFFFAFAFA),
+  primaryForeground: Color(0xFF18181B),
+  secondary: Color(0xFF27272A),
+  secondaryForeground: Color(0xFFFAFAFA),
+  destructive: Color(0xFFEF4444),
+  destructiveForeground: Color(0xFFFAFAFA),
+  link: Color(0xFF60A5FA),
+  accent: Color(0xFF27272A),
+);
+
+final NavigationColors _navigationColorsDark = NavigationColors(
+  railBackground: Color(0xFF121212),
+  railItemBackgroundActive: Color(0xFF2A2A2A),
+  railItemBackgroundHover: Color(0xFF080808),
+  railItemText: Color(0xFFFAFAFA),
+  bottomBarBackground: Color(0xFF121212),
+  bottomBarItemActive: Color(0xFFFAFAFA),
+  bottomBarItemInactive: Color(0xFF71717A),
+);
+
+const ToastColors _toastColorsDark = ToastColors(
+  success: Color(0xFF52DF82),
+  error: Color(0xFFFF6D62),
+  info: Color(0xFF529BDF),
+  warning: Color(0xFFFFB35A),
+);
+
+// NO TOUCHING
+final AppColors _appColorsLight = AppColors(
+  border: _borderLight,
+  primaryText: _primaryTextLight,
+  secondaryText: _secondaryTextLight,
+  navigation: _navigationColorsLight,
+  button: _buttonColorsLight,
+  toast: _toastColorsLight,
+);
+
+final AppColors _appColorsDark = AppColors(
+  border: _borderDark,
+  primaryText: _primaryTextDark,
+  secondaryText: _secondaryTextDark,
+  button: _buttonColorsDark,
+  navigation: _navigationColorsDark,
+  toast: _toastColorsDark,
+);
+
 class Styling extends InheritedWidget {
   final Brightness brightness;
 
-  const Styling({super.key, required this.brightness, required super.child});
+  const Styling({
+    super.key,
+    required this.brightness,
+    required super.child,
+  });
 
   static StylingData of(BuildContext context) {
-    final styling = context.dependOnInheritedWidgetOfExactType<Styling>();
+    final Styling? styling = context
+        .dependOnInheritedWidgetOfExactType<Styling>();
+
     assert(
       styling != null,
       'No Styling found in context. Wrap your app with Styling widget.',
     );
 
-    final isDark = styling!.brightness == Brightness.dark;
+    final bool isDark = styling!.brightness == Brightness.dark;
 
     return StylingData(
       isDark: isDark,
-      colors: isDark ? AppColors.dark : AppColors.light,
+      colors: isDark ? _appColorsDark : _appColorsLight,
+      breakpoints: _breakpoints,
     );
   }
 
   @override
-  bool updateShouldNotify(Styling oldWidget) =>
-      brightness != oldWidget.brightness;
+  bool updateShouldNotify(Styling oldWidget) {
+    return brightness != oldWidget.brightness;
+  }
 }
 
 class StylingData {
@@ -33,14 +131,16 @@ class StylingData {
   StylingData({
     required this.isDark,
     required this.colors,
-    this.breakpoints = const Breakpoints(),
+    required this.breakpoints,
   });
 }
 
 class Breakpoints {
   final double desktop;
 
-  const Breakpoints({this.desktop = 600});
+  const Breakpoints({
+    required this.desktop,
+  });
 }
 
 class ButtonColors {
@@ -54,26 +154,15 @@ class ButtonColors {
   final Color accent;
 
   const ButtonColors({
-    this.primary = const Color(0xFF18181B),
-    this.primaryForeground = const Color(0xFFFAFAFA),
-    this.secondary = const Color(0xFFF4F4F5),
-    this.secondaryForeground = const Color(0xFF18181B),
-    this.destructive = const Color(0xFFEF4444),
-    this.destructiveForeground = const Color(0xFFFAFAFA),
-    this.link = const Color(0xFF3B82F6),
-    this.accent = const Color(0xFFF4F4F5),
+    required this.primary,
+    required this.primaryForeground,
+    required this.secondary,
+    required this.secondaryForeground,
+    required this.destructive,
+    required this.destructiveForeground,
+    required this.link,
+    required this.accent,
   });
-
-  static const dark = ButtonColors(
-    primary: Color(0xFFFAFAFA),
-    primaryForeground: Color(0xFF18181B),
-    secondary: Color(0xFF27272A),
-    secondaryForeground: Color(0xFFFAFAFA),
-    destructive: Color(0xFFEF4444),
-    destructiveForeground: Color(0xFFFAFAFA),
-    link: Color(0xFF60A5FA),
-    accent: Color(0xFF27272A),
-  );
 }
 
 class NavigationColors {
@@ -86,24 +175,14 @@ class NavigationColors {
   final Color bottomBarItemInactive;
 
   const NavigationColors({
-    this.railBackground = const Color(0xFFFAFAFA),
-    this.railItemBackgroundActive = const Color(0xFFFFFFFF),
-    this.railItemBackgroundHover = const Color(0xFFF2F2F2),
-    this.railItemText = const Color(0xFF2A2A2A),
-    this.bottomBarBackground = const Color(0xFFFFFFFF),
-    this.bottomBarItemActive = const Color(0xFF121212),
-    this.bottomBarItemInactive = const Color(0xFFBBBBBB),
+    required this.railBackground,
+    required this.railItemBackgroundActive,
+    required this.railItemBackgroundHover,
+    required this.railItemText,
+    required this.bottomBarBackground,
+    required this.bottomBarItemActive,
+    required this.bottomBarItemInactive,
   });
-
-  static const dark = NavigationColors(
-    railBackground: Color(0xFF121212),
-    railItemBackgroundActive: Color(0xFF2A2A2A),
-    railItemBackgroundHover: Color(0xFF080808),
-    railItemText: Color(0xFFFAFAFA),
-    bottomBarBackground: Color(0xFF121212),
-    bottomBarItemActive: Color(0xFFFAFAFA),
-    bottomBarItemInactive: Color(0xFF71717A),
-  );
 }
 
 class ToastColors {
@@ -113,19 +192,17 @@ class ToastColors {
   final Color warning;
 
   const ToastColors({
-    this.success = const Color(0xFF52DF82),
-    this.error = const Color(0xFFFF6D62),
-    this.info = const Color(0xFF529BDF),
-    this.warning = const Color(0xFFFFB35A),
+    required this.success,
+    required this.error,
+    required this.info,
+    required this.warning,
   });
-
-  static const light = ToastColors();
-
-  static const dark = ToastColors();
 }
 
 class AppColors {
   final Color border;
+  final Color primaryText;
+  final Color secondaryText;
 
   // Component colors
   final ButtonColors button;
@@ -134,19 +211,10 @@ class AppColors {
 
   const AppColors({
     required this.border,
-    this.button = const ButtonColors(),
-    this.navigation = const NavigationColors(),
-    this.toast = const ToastColors(),
+    required this.primaryText,
+    required this.secondaryText,
+    required this.button,
+    required this.navigation,
+    required this.toast,
   });
-
-  // Light mode defaults - CUSTOMIZE THESE
-  static const light = AppColors(border: Color(0xFFE4E4E7));
-
-  // Dark mode defaults - CUSTOMIZE THESE
-  static const dark = AppColors(
-    border: Color(0xFF27272A),
-    button: ButtonColors.dark,
-    navigation: NavigationColors.dark,
-    toast: ToastColors.dark,
-  );
 }

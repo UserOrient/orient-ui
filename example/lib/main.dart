@@ -1,4 +1,4 @@
-import 'package:example/pages/empty_page.dart';
+import 'package:example/pages/empty_state_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -80,9 +80,9 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
       page: ToastPage(),
     ),
     _PageInfo(
-      title: 'Empty',
+      title: 'Empty State',
       icon: Icons.inbox_outlined,
-      page: EmptyPage(),
+      page: EmptyStatePage(),
     ),
   ];
 
@@ -91,13 +91,20 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
     return Scaffold(
       body: NavBar(
         currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
-        items: _pages
-            .map((p) => NavBarItem(icon: Icon(p.icon), label: p.title))
-            .toList(),
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: _pages.map((p) {
+          return NavBarItem(
+            icon: Icon(p.icon),
+            label: p.title,
+          );
+        }).toList(),
         railHeader: _buildHeader(),
-        railFooter: _buildFooter(),
         body: _pages[_currentIndex].page,
+        railFooter: _buildFooter(),
       ),
     );
   }
@@ -144,7 +151,7 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
         ValueListenableBuilder<Brightness>(
           valueListenable: _brightnessNotifier,
           builder: (context, brightness, _) {
-            final isDark = brightness == Brightness.dark;
+            final bool isDark = brightness == Brightness.dark;
 
             return Button.small(
               onPressed: () {
@@ -152,7 +159,9 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
                     ? Brightness.light
                     : Brightness.dark;
               },
-              icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
+              icon: Icon(
+                isDark ? Icons.light_mode : Icons.dark_mode,
+              ),
               label: isDark ? 'Light mode' : 'Dark mode',
               variant: ButtonVariant.ghost,
             );
@@ -162,11 +171,21 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
     );
   }
 
-  Widget _buildLinkButton({required IconData icon, required String url}) {
+  Widget _buildLinkButton({
+    required IconData icon,
+    required String url,
+  }) {
     return IconButton(
-      onPressed: () => launchUrl(Uri.parse(url)),
-      icon: Icon(icon, size: 20),
-      style: IconButton.styleFrom(foregroundColor: const Color(0xFF71717A)),
+      onPressed: () {
+        launchUrl(Uri.parse(url));
+      },
+      icon: Icon(
+        icon,
+        size: 20,
+      ),
+      style: IconButton.styleFrom(
+        foregroundColor: const Color(0xFF71717A),
+      ),
     );
   }
 }

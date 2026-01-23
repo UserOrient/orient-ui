@@ -1,9 +1,9 @@
 import 'package:example/widgets/button.dart';
-import 'package:example/widgets/empty.dart';
+import 'package:example/widgets/empty_state.dart';
 import 'package:flutter/material.dart';
 
-class EmptyPage extends StatelessWidget {
-  const EmptyPage({super.key});
+class EmptyStatePage extends StatelessWidget {
+  const EmptyStatePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class EmptyPage extends StatelessWidget {
         children: [
           _buildSection(
             title: 'Default',
-            child: Empty(
+            child: EmptyState(
               icon: Icon(
                 Icons.notifications_off_outlined,
                 size: 48,
@@ -27,7 +27,7 @@ class EmptyPage extends StatelessWidget {
           ),
           _buildSection(
             title: 'With Action',
-            child: Empty(
+            child: EmptyState(
               icon: Icon(
                 Icons.gps_off_outlined,
                 size: 48,

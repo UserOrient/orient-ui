@@ -1,14 +1,13 @@
+import 'package:example/styling.dart';
 import 'package:flutter/material.dart';
 
-import 'styling.dart';
-
-class Empty extends StatelessWidget {
+class EmptyState extends StatelessWidget {
   final Widget? icon;
   final String title;
   final String? description;
   final Widget? action;
 
-  const Empty({
+  const EmptyState({
     super.key,
     required this.title,
     this.description,

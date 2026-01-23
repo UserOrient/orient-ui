@@ -6,8 +6,9 @@ const baseUrl =
 
 final components = {
   'button': ComponentInfo('button.dart', dependencies: ['spinner']),
-  'spinner': ComponentInfo('spinner.dart'),
+  'empty_state': ComponentInfo('empty_state.dart'),
   'nav_bar': ComponentInfo('nav_bar.dart'),
+  'spinner': ComponentInfo('spinner.dart'),
   'toast': ComponentInfo('toast.dart'),
 };
 

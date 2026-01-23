@@ -1,3 +1,8 @@
+## 0.0.9
+
+* Renamed `Empty` to `EmptyState`.
+* Added tests for `EmptyState`.
+
 ## 0.0.8
 
 * Added new widget: `Empty`.

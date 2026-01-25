@@ -1,3 +1,8 @@
+## 0.1.0
+
+* Added new widget: `ConfirmationPopup`.
+* Updated README.
+
 ## 0.0.9
 
 * Renamed `Empty` to `EmptyState`.

@@ -1,9 +1,12 @@
 <p align="center">
   <h1 align="center">Orient UI</h1>
   <p align="center">Design system for Flutter without Material or Cupertino! 😍</p>
-  <p align="center">
-    <img src="https://ui.userorient.com/_next/image?url=%2Fassets%2Fui%2Fhero.png&w=1920&q=75" alt="Orient UI Components" />
-  </p>
+</p>
+
+<p align="center">
+  <a href="https://widgets.userorient.com">Live Demo</a> •
+  <a href="https://app.userorient.com">See in Production</a> •
+  <a href="https://pub.dev/packages/orient_ui">Pub.dev</a>
 </p>
 
 <p align="center">
@@ -15,6 +18,10 @@
   </a>
 </p>
 
+<p align="center">
+  <img src="https://ui.userorient.com/_next/image?url=%2Fassets%2Fui%2Fhero.png&w=1920&q=75" alt="Orient UI Components" />
+</p>
+
 ## Features
 
 - 🌍 **Cross-platform**. Works on iOS, Android, Web, macOS, Windows, and Linux.
@@ -22,9 +29,19 @@
 - 📦 **You own the code**. Generated files are yours to modify however you want.
 - 🔓 **No lock-in**. No dependency on a package, just plain Dart files in your project.
 
+## 💡 Why Orient UI?
+
+[UserOrient](https://userorient.com) is a feedback SDK for Flutter apps. 
+
+Its web dashboard and mobile app is built with this design system.
+
+Now it's yours to build web and desktop apps with Flutter easier (and also mobile apps).
+
+Want to say thanks? Use <a href="https://userorient.com">UserOrient</a> SDK in your Flutter apps, it's cool!
+
 > [!WARNING]
 > Early development. API may change.
-> Building in public on [X](https://x.com/kamranebkirovyz). Your feedback and contributions are welcomed!
+> Building in public on [X/Twitter](https://x.com/kamranebkirovyz). Your feedback and contributions are welcomed!
 
 ## 🎬 Getting Started
 

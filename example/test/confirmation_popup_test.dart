@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:example/widgets/confirmation_popup.dart';
@@ -9,7 +6,10 @@ import 'package:example/widgets/button.dart';
 import 'test_helper.dart';
 
 /// Wraps widget with Navigator for overlay tests
-Widget wrapWithNavigator(Widget child, {Brightness brightness = Brightness.light}) {
+Widget wrapWithNavigator(
+  Widget child, {
+  Brightness brightness = Brightness.light,
+}) {
   return Styling(
     brightness: brightness,
     child: Directionality(
@@ -17,9 +17,13 @@ Widget wrapWithNavigator(Widget child, {Brightness brightness = Brightness.light
       child: MediaQuery(
         data: const MediaQueryData(size: Size(800, 600)),
         child: Navigator(
-          onGenerateRoute: (_) => PageRouteBuilder(
-            pageBuilder: (_, __, ___) => child,
-          ),
+          onGenerateRoute: (_) {
+            return PageRouteBuilder(
+              pageBuilder: (_, _, _) {
+                return child;
+              },
+            );
+          },
         ),
       ),
     ),
@@ -30,18 +34,20 @@ void main() {
   group('ConfirmationPopup', () {
     group('rendering', () {
       testWidgets('renders with title only', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
-          ConfirmationPopup(
-            icon: null,
-            title: 'Are you sure?',
-            description: null,
-            confirmLabel: 'Yes',
-            cancelLabel: 'No',
-            onConfirm: () {},
-            onCancel: null,
-            destructive: false,
+        await tester.pumpWidget(
+          wrapWithStyling(
+            ConfirmationPopup(
+              icon: null,
+              title: 'Are you sure?',
+              description: null,
+              confirmLabel: 'Yes',
+              cancelLabel: 'No',
+              onConfirm: () {},
+              onCancel: null,
+              destructive: false,
+            ),
           ),
-        ));
+        );
 
         expect(find.text('Are you sure?'), findsOneWidget);
         expect(find.text('Yes'), findsOneWidget);
@@ -49,77 +55,91 @@ void main() {
       });
 
       testWidgets('renders with title and description', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
-          ConfirmationPopup(
-            icon: null,
-            title: 'Delete item?',
-            description: 'This action cannot be undone.',
-            confirmLabel: 'Delete',
-            cancelLabel: 'Cancel',
-            onConfirm: () {},
-            onCancel: null,
-            destructive: false,
+        await tester.pumpWidget(
+          wrapWithStyling(
+            ConfirmationPopup(
+              icon: null,
+              title: 'Delete item?',
+              description: 'This action cannot be undone.',
+              confirmLabel: 'Delete',
+              cancelLabel: 'Cancel',
+              onConfirm: () {},
+              onCancel: null,
+              destructive: false,
+            ),
           ),
-        ));
+        );
 
         expect(find.text('Delete item?'), findsOneWidget);
         expect(find.text('This action cannot be undone.'), findsOneWidget);
       });
 
       testWidgets('renders with icon', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
-          ConfirmationPopup(
-            icon: const SizedBox(key: Key('test-icon'), width: 24, height: 24),
-            title: 'With icon',
-            description: null,
-            confirmLabel: 'OK',
-            cancelLabel: 'Cancel',
-            onConfirm: () {},
-            onCancel: null,
-            destructive: false,
+        await tester.pumpWidget(
+          wrapWithStyling(
+            ConfirmationPopup(
+              icon: const SizedBox(
+                key: Key('test-icon'),
+                width: 24,
+                height: 24,
+              ),
+              title: 'With icon',
+              description: null,
+              confirmLabel: 'OK',
+              cancelLabel: 'Cancel',
+              onConfirm: () {},
+              onCancel: null,
+              destructive: false,
+            ),
           ),
-        ));
+        );
 
         expect(find.byKey(const Key('test-icon')), findsOneWidget);
       });
 
       testWidgets('renders with custom button labels', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
-          ConfirmationPopup(
-            icon: null,
-            title: 'Logout?',
-            description: null,
-            confirmLabel: 'Yes, logout',
-            cancelLabel: 'Stay here',
-            onConfirm: () {},
-            onCancel: null,
-            destructive: false,
+        await tester.pumpWidget(
+          wrapWithStyling(
+            ConfirmationPopup(
+              icon: null,
+              title: 'Logout?',
+              description: null,
+              confirmLabel: 'Yes, logout',
+              cancelLabel: 'Stay here',
+              onConfirm: () {},
+              onCancel: null,
+              destructive: false,
+            ),
           ),
-        ));
+        );
 
         expect(find.text('Yes, logout'), findsOneWidget);
         expect(find.text('Stay here'), findsOneWidget);
       });
 
       testWidgets('icon is constrained to 48x48', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
-          ConfirmationPopup(
-            icon: const SizedBox(width: 100, height: 100),
-            title: 'Test',
-            description: null,
-            confirmLabel: 'OK',
-            cancelLabel: 'Cancel',
-            onConfirm: () {},
-            onCancel: null,
-            destructive: false,
+        await tester.pumpWidget(
+          wrapWithStyling(
+            ConfirmationPopup(
+              icon: const SizedBox(width: 100, height: 100),
+              title: 'Test',
+              description: null,
+              confirmLabel: 'OK',
+              cancelLabel: 'Cancel',
+              onConfirm: () {},
+              onCancel: null,
+              destructive: false,
+            ),
           ),
-        ));
+        );
 
         final sizedBox = tester.widget<SizedBox>(
-          find.ancestor(
-            of: find.byType(FittedBox),
-            matching: find.byType(SizedBox),
-          ).first,
+          find
+              .ancestor(
+                of: find.byType(FittedBox),
+                matching: find.byType(SizedBox),
+              )
+              .first,
         );
 
         expect(sizedBox.width, 48);
@@ -129,18 +149,20 @@ void main() {
 
     group('states', () {
       testWidgets('destructive mode shows destructive button', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
-          ConfirmationPopup(
-            icon: null,
-            title: 'Delete?',
-            description: null,
-            confirmLabel: 'Delete',
-            cancelLabel: 'Cancel',
-            onConfirm: () {},
-            onCancel: null,
-            destructive: true,
+        await tester.pumpWidget(
+          wrapWithStyling(
+            ConfirmationPopup(
+              icon: null,
+              title: 'Delete?',
+              description: null,
+              confirmLabel: 'Delete',
+              cancelLabel: 'Cancel',
+              onConfirm: () {},
+              onCancel: null,
+              destructive: true,
+            ),
           ),
-        ));
+        );
 
         // Find the confirm button (second button in row)
         final buttons = tester.widgetList<Button>(find.byType(Button)).toList();
@@ -152,18 +174,20 @@ void main() {
       });
 
       testWidgets('non-destructive mode shows primary button', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
-          ConfirmationPopup(
-            icon: null,
-            title: 'Confirm?',
-            description: null,
-            confirmLabel: 'Confirm',
-            cancelLabel: 'Cancel',
-            onConfirm: () {},
-            onCancel: null,
-            destructive: false,
+        await tester.pumpWidget(
+          wrapWithStyling(
+            ConfirmationPopup(
+              icon: null,
+              title: 'Confirm?',
+              description: null,
+              confirmLabel: 'Confirm',
+              cancelLabel: 'Cancel',
+              onConfirm: () {},
+              onCancel: null,
+              destructive: false,
+            ),
           ),
-        ));
+        );
 
         final buttons = tester.widgetList<Button>(find.byType(Button)).toList();
         expect(buttons[1].variant, ButtonVariant.primary);
@@ -174,18 +198,20 @@ void main() {
       testWidgets('onConfirm fires when confirm button tapped', (tester) async {
         var confirmCalled = false;
 
-        await tester.pumpWidget(wrapWithStyling(
-          ConfirmationPopup(
-            icon: null,
-            title: 'Confirm?',
-            description: null,
-            confirmLabel: 'Yes',
-            cancelLabel: 'No',
-            onConfirm: () => confirmCalled = true,
-            onCancel: null,
-            destructive: false,
+        await tester.pumpWidget(
+          wrapWithStyling(
+            ConfirmationPopup(
+              icon: null,
+              title: 'Confirm?',
+              description: null,
+              confirmLabel: 'Yes',
+              cancelLabel: 'No',
+              onConfirm: () => confirmCalled = true,
+              onCancel: null,
+              destructive: false,
+            ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Yes'));
         await tester.pump();
@@ -196,18 +222,20 @@ void main() {
       testWidgets('onCancel fires when cancel button tapped', (tester) async {
         var cancelCalled = false;
 
-        await tester.pumpWidget(wrapWithStyling(
-          ConfirmationPopup(
-            icon: null,
-            title: 'Confirm?',
-            description: null,
-            confirmLabel: 'Yes',
-            cancelLabel: 'No',
-            onConfirm: () {},
-            onCancel: () => cancelCalled = true,
-            destructive: false,
+        await tester.pumpWidget(
+          wrapWithStyling(
+            ConfirmationPopup(
+              icon: null,
+              title: 'Confirm?',
+              description: null,
+              confirmLabel: 'Yes',
+              cancelLabel: 'No',
+              onConfirm: () {},
+              onCancel: () => cancelCalled = true,
+              destructive: false,
+            ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('No'));
         await tester.pump();
@@ -389,37 +417,41 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
-          ConfirmationPopup(
-            icon: null,
-            title: 'Light mode',
-            description: null,
-            confirmLabel: 'OK',
-            cancelLabel: 'Cancel',
-            onConfirm: () {},
-            onCancel: null,
-            destructive: false,
+        await tester.pumpWidget(
+          wrapWithStyling(
+            ConfirmationPopup(
+              icon: null,
+              title: 'Light mode',
+              description: null,
+              confirmLabel: 'OK',
+              cancelLabel: 'Cancel',
+              onConfirm: () {},
+              onCancel: null,
+              destructive: false,
+            ),
+            brightness: Brightness.light,
           ),
-          brightness: Brightness.light,
-        ));
+        );
 
         expect(find.text('Light mode'), findsOneWidget);
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
-          ConfirmationPopup(
-            icon: null,
-            title: 'Dark mode',
-            description: null,
-            confirmLabel: 'OK',
-            cancelLabel: 'Cancel',
-            onConfirm: () {},
-            onCancel: null,
-            destructive: false,
+        await tester.pumpWidget(
+          wrapWithStyling(
+            ConfirmationPopup(
+              icon: null,
+              title: 'Dark mode',
+              description: null,
+              confirmLabel: 'OK',
+              cancelLabel: 'Cancel',
+              onConfirm: () {},
+              onCancel: null,
+              destructive: false,
+            ),
+            brightness: Brightness.dark,
           ),
-          brightness: Brightness.dark,
-        ));
+        );
 
         expect(find.text('Dark mode'), findsOneWidget);
       });

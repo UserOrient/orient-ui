@@ -162,17 +162,21 @@ class _ButtonState extends State<Button> {
                         ),
                       SizedBox(width: iconSpacing),
                     ],
-                    Text(
-                      widget.label,
-                      style: TextStyle(
-                        color: fg,
-                        fontSize: fontSize,
-                        decorationColor: fg,
-                        fontWeight: FontWeight.w500,
-                        decoration:
-                            widget.variant == ButtonVariant.link && _isHovered
-                            ? TextDecoration.underline
-                            : TextDecoration.none,
+                    Flexible(
+                      child: Text(
+                        widget.label,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: fg,
+                          fontSize: fontSize,
+                          decorationColor: fg,
+                          fontWeight: FontWeight.w500,
+                          decoration:
+                              widget.variant == ButtonVariant.link && _isHovered
+                              ? TextDecoration.underline
+                              : TextDecoration.none,
+                        ),
                       ),
                     ),
                   ],

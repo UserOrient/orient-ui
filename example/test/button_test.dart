@@ -156,6 +156,24 @@ void main() {
       });
     });
 
+    group('text overflow', () {
+      testWidgets('truncates long text with ellipsis', (tester) async {
+        await tester.pumpWidget(wrapWithStyling(
+          SizedBox(
+            width: 100,
+            child: Button(
+              label: 'This is a very long button label that should overflow',
+              onPressed: () {},
+            ),
+          ),
+        ));
+
+        final text = tester.widget<Text>(find.byType(Text));
+        expect(text.maxLines, 1);
+        expect(text.overflow, TextOverflow.ellipsis);
+      });
+    });
+
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
         await tester.pumpWidget(wrapWithStyling(

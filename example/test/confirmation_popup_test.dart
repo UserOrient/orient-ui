@@ -415,6 +415,60 @@ void main() {
       });
     });
 
+    group('responsive padding', () {
+      testWidgets('uses mobile padding on small screens', (tester) async {
+        await tester.pumpWidget(
+          wrapWithStylingAndSize(
+            ConfirmationPopup(
+              icon: null,
+              title: 'Test',
+              description: null,
+              confirmLabel: 'OK',
+              cancelLabel: 'Cancel',
+              onConfirm: () {},
+              onCancel: null,
+              destructive: false,
+            ),
+            size: const Size(400, 800),
+          ),
+        );
+
+        final container = tester.widget<Container>(find.byType(Container).first);
+        final padding = container.padding as EdgeInsets;
+
+        expect(padding.left, 24);
+        expect(padding.right, 24);
+        expect(padding.top, 32);
+        expect(padding.bottom, 24);
+      });
+
+      testWidgets('uses desktop padding on large screens', (tester) async {
+        await tester.pumpWidget(
+          wrapWithStylingAndSize(
+            ConfirmationPopup(
+              icon: null,
+              title: 'Test',
+              description: null,
+              confirmLabel: 'OK',
+              cancelLabel: 'Cancel',
+              onConfirm: () {},
+              onCancel: null,
+              destructive: false,
+            ),
+            size: const Size(800, 600),
+          ),
+        );
+
+        final container = tester.widget<Container>(find.byType(Container).first);
+        final padding = container.padding as EdgeInsets;
+
+        expect(padding.left, 48);
+        expect(padding.right, 48);
+        expect(padding.top, 64);
+        expect(padding.bottom, 48);
+      });
+    });
+
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
         await tester.pumpWidget(

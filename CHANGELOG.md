@@ -1,3 +1,8 @@
+## 0.1.1
+
+* Fixed `ConfirmationPopup`'s mobile responsiveness.
+* Fixed `Button` text overflow.
+
 ## 0.1.0
 
 * Added new widget: `ConfirmationPopup`.

@@ -36,9 +36,39 @@ class Button extends StatefulWidget {
   State<Button> createState() => _ButtonState();
 }
 
-class _ButtonState extends State<Button> {
+class _ButtonState extends State<Button> with SingleTickerProviderStateMixin {
   bool _isHovered = false;
   bool _isFocused = false;
+
+  late final AnimationController _clickAnimationController;
+  late final Animation<double> _clickAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _clickAnimationController = AnimationController(
+      duration: const Duration(milliseconds: 100),
+      vsync: this,
+    );
+
+    _clickAnimation =
+        Tween<double>(
+          begin: 1.0,
+          end: 0.975,
+        ).animate(
+          CurvedAnimation(
+            parent: _clickAnimationController,
+            curve: Curves.easeInOut,
+          ),
+        );
+  }
+
+  @override
+  void dispose() {
+    _clickAnimationController.dispose();
+    super.dispose();
+  }
 
   // Handle Enter and Space keys to activate button
   KeyEventResult _handleKeyEvent(FocusNode node, KeyEvent event) {
@@ -120,67 +150,92 @@ class _ButtonState extends State<Button> {
               : SystemMouseCursors.click,
           child: GestureDetector(
             onTap: isDisabled ? null : widget.onPressed,
-            child: Opacity(
-              opacity: isDisabled ? 0.5 : 1.0,
-              child: Container(
-                padding: padding,
-                height: height,
-                width: widget._isSmall ? null : double.maxFinite,
-                decoration: BoxDecoration(
-                  color: _getBackgroundColor(bg),
-                  border: widget.variant == ButtonVariant.outline
-                      ? Border.all(color: border, width: 1)
-                      : null,
-                  borderRadius: widget.variant == ButtonVariant.link
-                      ? null
-                      : BorderRadius.circular(12),
-                  boxShadow: _isFocused && !isDisabled
-                      ? [
-                          BoxShadow(
-                            color: buttonColors.primary.withOpacity(0.4),
-                            spreadRadius: 2,
+            onTapDown: isDisabled
+                ? null
+                : (_) {
+                    _clickAnimationController.forward();
+                  },
+            onTapUp: isDisabled
+                ? null
+                : (_) {
+                    _clickAnimationController.reverse();
+                  },
+            onTapCancel: isDisabled
+                ? null
+                : () {
+                    _clickAnimationController.reverse();
+                  },
+            child: AnimatedBuilder(
+              animation: _clickAnimation,
+              builder: (context, child) {
+                return Transform.scale(
+                  scale: _clickAnimation.value,
+                  child: child,
+                );
+              },
+              child: Opacity(
+                opacity: isDisabled ? 0.5 : 1.0,
+                child: Container(
+                  padding: padding,
+                  height: height,
+                  width: widget._isSmall ? null : double.maxFinite,
+                  decoration: BoxDecoration(
+                    color: _getBackgroundColor(bg),
+                    border: widget.variant == ButtonVariant.outline
+                        ? Border.all(color: border, width: 1)
+                        : null,
+                    borderRadius: widget.variant == ButtonVariant.link
+                        ? null
+                        : BorderRadius.circular(12),
+                    boxShadow: _isFocused && !isDisabled
+                        ? [
+                            BoxShadow(
+                              color: buttonColors.primary.withOpacity(0.4),
+                              spreadRadius: 2,
+                            ),
+                          ]
+                        : null,
+                  ),
+                  child: Row(
+                    mainAxisSize: widget._isSmall
+                        ? MainAxisSize.min
+                        : MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (widget.icon != null || widget.loading) ...[
+                        if (widget.loading)
+                          SizedBox(
+                            height: iconSize,
+                            width: iconSize,
+                            child: Center(child: Spinner(color: fg)),
+                          )
+                        else if (widget.icon != null)
+                          IconTheme(
+                            data: IconThemeData(color: fg, size: iconSize),
+                            child: widget.icon!,
                           ),
-                        ]
-                      : null,
-                ),
-                child: Row(
-                  mainAxisSize: widget._isSmall
-                      ? MainAxisSize.min
-                      : MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (widget.icon != null || widget.loading) ...[
-                      if (widget.loading)
-                        SizedBox(
-                          height: iconSize,
-                          width: iconSize,
-                          child: Center(child: Spinner(color: fg)),
-                        )
-                      else if (widget.icon != null)
-                        IconTheme(
-                          data: IconThemeData(color: fg, size: iconSize),
-                          child: widget.icon!,
-                        ),
-                      SizedBox(width: iconSpacing),
-                    ],
-                    Flexible(
-                      child: Text(
-                        widget.label,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: fg,
-                          fontSize: fontSize,
-                          decorationColor: fg,
-                          fontWeight: FontWeight.w500,
-                          decoration:
-                              widget.variant == ButtonVariant.link && _isHovered
-                              ? TextDecoration.underline
-                              : TextDecoration.none,
+                        SizedBox(width: iconSpacing),
+                      ],
+                      Flexible(
+                        child: Text(
+                          widget.label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: fg,
+                            fontSize: fontSize,
+                            decorationColor: fg,
+                            fontWeight: FontWeight.w500,
+                            decoration:
+                                widget.variant == ButtonVariant.link &&
+                                    _isHovered
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

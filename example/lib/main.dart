@@ -115,7 +115,9 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
           );
         }).toList(),
         railHeader: _buildHeader(),
-        body: _pages[_currentIndex].page,
+        body: SafeArea(
+          child: _pages[_currentIndex].page,
+        ),
         railFooter: _buildFooter(),
       ),
     );

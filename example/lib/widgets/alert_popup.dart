@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 const double _maxWidth = 560;
-const Duration _animationDuration = Duration(milliseconds: 250);
+const Duration _animationDuration = Duration(milliseconds: 200);
 
 class AlertPopup extends StatelessWidget {
   final Widget? icon;

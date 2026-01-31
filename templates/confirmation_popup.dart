@@ -201,7 +201,7 @@ class _ConfirmationPopupOverlayState extends State<_ConfirmationPopupOverlay>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 250),
+      duration: Duration(milliseconds: 200),
     );
 
     _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(

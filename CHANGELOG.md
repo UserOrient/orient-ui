@@ -1,3 +1,8 @@
+## 0.1.4
+
+* Added `AlertPopup` widget.
+* Converted `ConfirmationPopup` from overlay to roue.
+
 ## 0.1.3
 
 * Added press animation to `Button`

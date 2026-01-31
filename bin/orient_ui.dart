@@ -1,17 +1,24 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
-const baseUrl =
+const String baseUrl =
     'https://raw.githubusercontent.com/userorient/orient-ui/main/templates';
 
-final components = {
-  'button': ComponentInfo('button.dart', dependencies: ['spinner']),
-  'confirmation_popup': ComponentInfo('confirmation_popup.dart', dependencies: ['button']),
+final Map<String, ComponentInfo> components = {
+  'button': ComponentInfo(
+    'button.dart',
+    dependencies: ['spinner'],
+  ),
+  'confirmation_popup': ComponentInfo(
+    'confirmation_popup.dart',
+    dependencies: ['button'],
+  ),
   'copy_button': ComponentInfo('copy_button.dart'),
   'empty_state': ComponentInfo('empty_state.dart'),
   'nav_bar': ComponentInfo('nav_bar.dart'),
   'spinner': ComponentInfo('spinner.dart'),
   'toast': ComponentInfo('toast.dart'),
+  'alert_popup': ComponentInfo('alert_popup.dart'),
 };
 
 void main(List<String> args) async {

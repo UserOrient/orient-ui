@@ -1,3 +1,4 @@
+import 'package:example/pages/alert_popup_page.dart';
 import 'package:example/pages/confirmation_popup_page.dart';
 import 'package:example/pages/copy_button_page.dart';
 import 'package:example/pages/empty_state_page.dart';
@@ -95,6 +96,11 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
       title: 'Copy Button',
       icon: Icons.copy,
       page: CopyButtonPage(),
+    ),
+    _PageInfo(
+      title: 'Alert Popup',
+      icon: Icons.campaign_outlined,
+      page: AlertPopupPage(),
     ),
   ];
 

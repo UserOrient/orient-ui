@@ -5,6 +5,9 @@ import 'package:example/widgets/button.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+const double _maxWidth = 560;
+const Duration _animationDuration = Duration(milliseconds: 200);
+
 class ConfirmationPopup extends StatelessWidget {
   final Widget? icon;
   final String title;
@@ -37,29 +40,19 @@ class ConfirmationPopup extends StatelessWidget {
     required VoidCallback onConfirm,
     VoidCallback? onCancel,
     bool destructive = false,
-  }) async {
-    final OverlayState overlayState = Navigator.of(context).overlay!;
-    late final OverlayEntry overlayEntry;
-
-    overlayEntry = OverlayEntry(
-      builder: (_) {
-        return _ConfirmationPopupOverlay(
-          icon: icon,
-          title: title,
-          description: description,
-          confirmLabel: confirmLabel,
-          destructive: destructive,
-          cancelLabel: cancelLabel,
-          onConfirm: onConfirm,
-          onCancel: onCancel,
-          onRemove: () {
-            overlayEntry.remove();
-          },
-        );
-      },
+  }) {
+    return Navigator.of(context).push(
+      _ConfirmationPopupRoute(
+        icon: icon,
+        title: title,
+        description: description,
+        confirmLabel: confirmLabel,
+        cancelLabel: cancelLabel,
+        onConfirm: onConfirm,
+        onCancel: onCancel,
+        destructive: destructive,
+      ),
     );
-
-    overlayState.insert(overlayEntry);
   }
 
   @override
@@ -160,154 +153,126 @@ class ConfirmationPopup extends StatelessWidget {
   }
 }
 
-class _ConfirmationPopupOverlay extends StatefulWidget {
+class _ConfirmationPopupRoute extends PageRouteBuilder {
   final Widget? icon;
   final String title;
   final String? description;
   final String confirmLabel;
   final String cancelLabel;
-  final bool destructive;
   final VoidCallback onConfirm;
   final VoidCallback? onCancel;
-  final VoidCallback onRemove;
+  final bool destructive;
 
-  const _ConfirmationPopupOverlay({
-    required this.icon,
+  _ConfirmationPopupRoute({
+    this.icon,
     required this.title,
-    required this.description,
+    this.description,
     required this.confirmLabel,
-    required this.destructive,
     required this.cancelLabel,
     required this.onConfirm,
-    required this.onCancel,
-    required this.onRemove,
-  });
+    this.onCancel,
+    this.destructive = false,
+  }) : super(
+         opaque: false,
+         barrierDismissible: true,
+         barrierColor: const Color(0x00000000),
+         transitionDuration: _animationDuration,
+         reverseTransitionDuration: _animationDuration,
+         pageBuilder: (_, __, ___) => const SizedBox.shrink(),
+       );
 
   @override
-  State<_ConfirmationPopupOverlay> createState() =>
-      _ConfirmationPopupOverlayState();
-}
-
-class _ConfirmationPopupOverlayState extends State<_ConfirmationPopupOverlay>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _fadeAnimation;
-  late final Animation<double> _scaleAnimation;
-  late final Animation<double> _blurAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 250),
-    );
-
-    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
-
-    _scaleAnimation = Tween<double>(begin: 0.95, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutBack),
-    );
-
-    _blurAnimation = Tween<double>(begin: 0, end: 8).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
-
-    _controller.forward();
-  }
-
-  void _exit() {
-    _controller.reverse();
-    widget.onRemove();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
     final bool reduceMotion = MediaQuery.of(context).disableAnimations;
 
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: KeyboardListener(
-        focusNode: FocusNode()..requestFocus(),
-        onKeyEvent: (event) {
-          if (event is KeyDownEvent &&
-              event.logicalKey == LogicalKeyboardKey.escape) {
-            _exit();
-          }
-        },
-        child: AnimatedBuilder(
-          animation: _controller,
-          builder: (context, child) {
-            final blur = reduceMotion ? 8.0 : _blurAnimation.value;
-            final fade = reduceMotion ? 1.0 : _fadeAnimation.value;
-            final scale = reduceMotion ? 1.0 : _scaleAnimation.value;
+    final double fade = reduceMotion
+        ? 1.0
+        : CurvedAnimation(parent: animation, curve: Curves.easeOut).value;
+    final double scale = reduceMotion
+        ? 1.0
+        : Tween<double>(begin: 0.95, end: 1.0)
+              .animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+              )
+              .value;
+    final double blur = reduceMotion
+        ? 8.0
+        : Tween<double>(begin: 0, end: 8.0)
+              .animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeOut),
+              )
+              .value;
 
-            return Stack(
-              children: [
-                // Barrier
-                Positioned.fill(
-                  child: GestureDetector(
-                    onTap: () {
-                      _exit();
-                    },
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
-                      child: ColoredBox(
-                        color: Color.fromRGBO(0, 0, 0, 0.5 * fade),
-                      ),
-                    ),
-                  ),
+    return KeyboardListener(
+      focusNode: FocusNode()..requestFocus(),
+      onKeyEvent: (event) {
+        if (event is KeyDownEvent &&
+            event.logicalKey == LogicalKeyboardKey.escape) {
+          Navigator.of(context).pop();
+        }
+      },
+      child: Stack(
+        children: [
+          // Barrier
+          Positioned.fill(
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
+                child: ColoredBox(
+                  color: Color.fromRGBO(0, 0, 0, 0.5 * fade),
                 ),
-                // Dialog
-                Positioned.fill(
-                  child: Padding(
-                    padding: const EdgeInsets.all(32),
-                    child: Center(
-                      child: Opacity(
-                        opacity: fade,
-                        child: Transform.scale(
-                          scale: scale,
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 560),
-                            child: Semantics(
-                              scopesRoute: true,
-                              explicitChildNodes: true,
-                              label: 'Confirmation dialog: ${widget.title}',
-                              child: ConfirmationPopup(
-                                icon: widget.icon,
-                                title: widget.title,
-                                description: widget.description,
-                                confirmLabel: widget.confirmLabel,
-                                cancelLabel: widget.cancelLabel,
-                                destructive: widget.destructive,
-                                onConfirm: () {
-                                  widget.onConfirm();
-                                  _exit();
-                                },
-                                onCancel: () {
-                                  widget.onCancel?.call();
-                                  _exit();
-                                },
-                              ),
-                            ),
-                          ),
+              ),
+            ),
+          ),
+          // Dialog
+          Positioned.fill(
+            child: Padding(
+              padding: const EdgeInsets.all(32),
+              child: Center(
+                child: Opacity(
+                  opacity: fade,
+                  child: Transform.scale(
+                    scale: scale,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxWidth: _maxWidth,
+                      ),
+                      child: Semantics(
+                        scopesRoute: true,
+                        explicitChildNodes: true,
+                        label: 'Confirmation dialog: $title',
+                        child: ConfirmationPopup(
+                          icon: icon,
+                          title: title,
+                          description: description,
+                          confirmLabel: confirmLabel,
+                          cancelLabel: cancelLabel,
+                          destructive: destructive,
+                          onConfirm: () {
+                            onConfirm();
+                            Navigator.of(context).pop();
+                          },
+                          onCancel: () {
+                            onCancel?.call();
+                            Navigator.of(context).pop();
+                          },
                         ),
                       ),
                     ),
                   ),
                 ),
-              ],
-            );
-          },
-        ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

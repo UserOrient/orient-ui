@@ -1,34 +1,24 @@
 import 'dart:ui';
 
+import 'package:example/styling.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-
-import 'button.dart';
-import 'styling.dart';
 
 const double _maxWidth = 560;
 const Duration _animationDuration = Duration(milliseconds: 200);
 
-class ConfirmationPopup extends StatelessWidget {
+class AlertPopup extends StatelessWidget {
   final Widget? icon;
   final String title;
   final String? description;
-  final String confirmLabel;
-  final String cancelLabel;
-  final VoidCallback onConfirm;
-  final VoidCallback? onCancel;
-  final bool destructive;
+  final Widget? action;
 
-  const ConfirmationPopup({
+  const AlertPopup({
     super.key,
     required this.icon,
     required this.title,
     required this.description,
-    required this.confirmLabel,
-    required this.cancelLabel,
-    required this.onConfirm,
-    required this.onCancel,
-    required this.destructive,
+    required this.action,
   });
 
   static Future<void> show({
@@ -36,22 +26,14 @@ class ConfirmationPopup extends StatelessWidget {
     Widget? icon,
     required String title,
     String? description,
-    required String confirmLabel,
-    required String cancelLabel,
-    required VoidCallback onConfirm,
-    VoidCallback? onCancel,
-    bool destructive = false,
+    Widget? action,
   }) {
     return Navigator.of(context).push(
-      _ConfirmationPopupRoute(
+      _AlertPopupRoute(
         icon: icon,
         title: title,
         description: description,
-        confirmLabel: confirmLabel,
-        cancelLabel: cancelLabel,
-        onConfirm: onConfirm,
-        onCancel: onCancel,
-        destructive: destructive,
+        action: action,
       ),
     );
   }
@@ -126,60 +108,36 @@ class ConfirmationPopup extends StatelessWidget {
               ),
             ),
           ],
-          const SizedBox(height: 32),
-          Row(
-            children: [
-              Expanded(
-                child: Button(
-                  label: cancelLabel,
-                  onPressed: onCancel,
-                  variant: ButtonVariant.secondary,
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Button(
-                  label: confirmLabel,
-                  onPressed: onConfirm,
-                  variant: destructive
-                      ? ButtonVariant.destructive
-                      : ButtonVariant.primary,
-                ),
-              ),
-            ],
-          ),
+          if (action != null) ...[
+            const SizedBox(height: 32),
+            action!,
+          ],
         ],
       ),
     );
   }
 }
 
-class _ConfirmationPopupRoute extends PageRouteBuilder {
+class _AlertPopupRoute extends PageRouteBuilder {
   final Widget? icon;
   final String title;
   final String? description;
-  final String confirmLabel;
-  final String cancelLabel;
-  final VoidCallback onConfirm;
-  final VoidCallback? onCancel;
-  final bool destructive;
+  final Widget? action;
 
-  _ConfirmationPopupRoute({
+  _AlertPopupRoute({
     this.icon,
     required this.title,
     this.description,
-    required this.confirmLabel,
-    required this.cancelLabel,
-    required this.onConfirm,
-    this.onCancel,
-    this.destructive = false,
+    this.action,
   }) : super(
          opaque: false,
          barrierDismissible: true,
          barrierColor: const Color(0x00000000),
          transitionDuration: _animationDuration,
          reverseTransitionDuration: _animationDuration,
-         pageBuilder: (_, __, ___) => const SizedBox.shrink(),
+         pageBuilder: (_, _, _) {
+           return const SizedBox.shrink();
+         },
        );
 
   @override
@@ -249,22 +207,12 @@ class _ConfirmationPopupRoute extends PageRouteBuilder {
                       child: Semantics(
                         scopesRoute: true,
                         explicitChildNodes: true,
-                        label: 'Confirmation dialog: $title',
-                        child: ConfirmationPopup(
+                        label: 'Alert popup: $title',
+                        child: AlertPopup(
                           icon: icon,
                           title: title,
                           description: description,
-                          confirmLabel: confirmLabel,
-                          cancelLabel: cancelLabel,
-                          destructive: destructive,
-                          onConfirm: () {
-                            onConfirm();
-                            Navigator.of(context).pop();
-                          },
-                          onCancel: () {
-                            onCancel?.call();
-                            Navigator.of(context).pop();
-                          },
+                          action: action,
                         ),
                       ),
                     ),

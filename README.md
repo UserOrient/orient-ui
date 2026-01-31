@@ -126,6 +126,7 @@ orient_ui add <widget>  # Add a specific widget
 - [x] EmptyState
 - [x] ConfirmationPopup
 - [x] CopyButton
+- [x] AlertPopup
 
 ### Coming Soon
 - [ ] Popup

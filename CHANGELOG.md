@@ -1,3 +1,7 @@
+## 0.1.5
+
+* Upps! Forgot to add `AlertPopup` to CLI commands. Done.
+
 ## 0.1.4
 
 * Added `AlertPopup` widget.

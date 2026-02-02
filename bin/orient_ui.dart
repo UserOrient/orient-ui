@@ -19,6 +19,7 @@ final Map<String, ComponentInfo> components = {
   'spinner': ComponentInfo('spinner.dart'),
   'toast': ComponentInfo('toast.dart'),
   'alert_popup': ComponentInfo('alert_popup.dart'),
+  'popup': ComponentInfo('popup.dart'),
 };
 
 void main(List<String> args) async {

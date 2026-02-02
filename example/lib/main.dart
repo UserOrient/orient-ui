@@ -1,4 +1,5 @@
 import 'package:example/pages/alert_popup_page.dart';
+import 'package:example/pages/popup_page.dart';
 import 'package:example/pages/confirmation_popup_page.dart';
 import 'package:example/pages/copy_button_page.dart';
 import 'package:example/pages/empty_state_page.dart';
@@ -101,6 +102,11 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
       title: 'Alert Popup',
       icon: Icons.campaign_outlined,
       page: AlertPopupPage(),
+    ),
+    _PageInfo(
+      title: 'Popup',
+      icon: Icons.web_asset_outlined,
+      page: PopupPage(),
     ),
   ];
 

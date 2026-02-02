@@ -6,6 +6,7 @@
 <p align="center">
   <a href="https://widgets.userorient.com">Live Demo</a> •
   <a href="https://app.userorient.com">See in Production</a> •
+  <a href="https://github.com/userorient/orient-ui">Github</a> •
   <a href="https://pub.dev/packages/orient_ui">Pub.dev</a>
 </p>
 
@@ -124,12 +125,12 @@ orient_ui add <widget>  # Add a specific widget
 - [x] NavBar (Navigation Rail + Bottom Bar)
 - [x] Toast
 - [x] EmptyState
-- [x] ConfirmationPopup
 - [x] CopyButton
+- [x] Popup
 - [x] AlertPopup
+- [x] ConfirmationPopup
 
 ### Coming Soon
-- [ ] Popup
 - [ ] TextField
 - [ ] ListTile
 - [ ] TabBar

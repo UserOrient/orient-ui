@@ -6,8 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'styling.dart';
 
 const double _maxWidth = 560;
-const Duration _animationDuration = Duration(milliseconds: 200);
-const Duration _tapScaleAnimationDuration = Duration(milliseconds: 100);
+final Duration _animationDuration = Styling.durations.normal;
+final Duration _tapScaleAnimationDuration = Styling.durations.fast;
 
 class Popup extends StatelessWidget {
   final String? title;
@@ -47,7 +47,7 @@ class Popup extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: styling.colors.background,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(Styling.radii.large),
         boxShadow: [
           BoxShadow(
             blurRadius: 24,

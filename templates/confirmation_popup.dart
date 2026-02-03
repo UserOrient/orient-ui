@@ -7,7 +7,7 @@ import 'button.dart';
 import 'styling.dart';
 
 const double _maxWidth = 560;
-const Duration _animationDuration = Duration(milliseconds: 200);
+final Duration _animationDuration = Styling.durations.normal;
 
 class ConfirmationPopup extends StatelessWidget {
   final Widget? icon;
@@ -71,7 +71,7 @@ class ConfirmationPopup extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: styling.colors.background,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(Styling.radii.large),
         boxShadow: [
           BoxShadow(
             blurRadius: 24,

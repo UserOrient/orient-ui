@@ -47,7 +47,7 @@ class _ButtonState extends State<Button> with SingleTickerProviderStateMixin {
     super.initState();
 
     _clickAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 100),
+      duration: Styling.durations.fast,
       vsync: this,
     );
 
@@ -185,7 +185,7 @@ class _ButtonState extends State<Button> with SingleTickerProviderStateMixin {
                         : null,
                     borderRadius: widget.variant == ButtonVariant.link
                         ? null
-                        : BorderRadius.circular(12),
+                        : BorderRadius.circular(Styling.radii.medium),
                     boxShadow: _isFocused && !isDisabled
                         ? [
                             BoxShadow(

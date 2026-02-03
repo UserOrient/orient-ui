@@ -170,7 +170,7 @@ class _RailItemState extends State<_RailItem> {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
             decoration: BoxDecoration(
               color: backgroundColor,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(Styling.radii.medium),
             ),
             child: Row(
               children: [

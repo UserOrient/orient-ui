@@ -172,6 +172,11 @@ class Styling extends InheritedWidget {
     required super.child,
   });
 
+  // Static - no context needed
+  static RadiusTokens get radii => _radii;
+  static DurationTokens get durations => _durations;
+  static BreakpointTokens get breakpoints => _breakpoints;
+
   static StylingData of(BuildContext context) {
     final Styling? styling =
         context.dependOnInheritedWidgetOfExactType<Styling>();

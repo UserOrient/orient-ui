@@ -109,7 +109,7 @@ class _ToastWidgetState extends State<_ToastWidget>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: Styling.durations.slow,
     );
 
     _fadeAnimation = Tween<double>(
@@ -179,7 +179,7 @@ class _ToastWidgetState extends State<_ToastWidget>
     return Directionality(
       textDirection: TextDirection.ltr,
       child: AnimatedPositioned(
-        duration: const Duration(milliseconds: 200),
+        duration: Styling.durations.normal,
         curve: Curves.easeOut,
         left: 0,
         right: 0,
@@ -204,7 +204,7 @@ class _ToastWidgetState extends State<_ToastWidget>
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       decoration: BoxDecoration(
                         color: bgColor,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(Styling.radii.medium),
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 10,

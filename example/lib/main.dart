@@ -1,4 +1,5 @@
 import 'package:example/pages/alert_popup_page.dart';
+import 'package:example/pages/search_field_page.dart';
 import 'package:example/pages/popup_page.dart';
 import 'package:example/pages/confirmation_popup_page.dart';
 import 'package:example/pages/copy_button_page.dart';
@@ -107,6 +108,11 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
       title: 'Popup',
       icon: Icons.web_asset_outlined,
       page: PopupPage(),
+    ),
+    _PageInfo(
+      title: 'Search Field',
+      icon: Icons.search,
+      page: SearchFieldPage(),
     ),
   ];
 

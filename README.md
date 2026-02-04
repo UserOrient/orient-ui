@@ -40,11 +40,8 @@ Now it's yours to build web and desktop apps with Flutter easier (and also mobil
 
 Want to say thanks? Use <a href="https://userorient.com">UserOrient</a> SDK in your Flutter apps, it's cool!
 
-> [!WARNING]
-> Early development. API may change.
-
 > [!NOTE]
-> Building in public on [X/Twitter](https://x.com/kamranebkirovyz). Your feedback and contributions are welcomed!
+> Early development. API may change. Building in public on [X/Twitter](https://x.com/kamranebkirovyz). Your feedback and contributions are welcomed!
 
 ## 🎬 Getting Started
 
@@ -129,13 +126,19 @@ orient_ui add <widget>  # Add a specific widget
 - [x] Popup
 - [x] AlertPopup
 - [x] ConfirmationPopup
+- [x] SearchField
+
+### In Progress
+- [ ] TextField
 
 ### Coming Soon
-- [ ] TextField
 - [ ] ListTile
-- [ ] TabBar
-- [ ] SwitchListTile
-- [ ] RadioListTile
+- [ ] Tabs
+- [ ] InlineTabs
+- [ ] Switch
+- [ ] SwitchTile
+- [ ] Radio
+- [ ] RadioTile
 - [ ] Menu
 
 ## ✅ Quality

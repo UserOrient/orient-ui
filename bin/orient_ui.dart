@@ -20,6 +20,7 @@ final Map<String, ComponentInfo> components = {
   'toast': ComponentInfo('toast.dart'),
   'alert_popup': ComponentInfo('alert_popup.dart'),
   'popup': ComponentInfo('popup.dart'),
+  'search_field': ComponentInfo('search_field.dart'),
 };
 
 void main(List<String> args) async {

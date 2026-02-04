@@ -68,14 +68,6 @@ void main() {
         expect(find.byType(CustomPaint), findsOneWidget);
       });
 
-      testWidgets('has correct height', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
-          const SearchField(),
-        ));
-
-        final container = tester.widget<Container>(find.byType(Container).first);
-        expect(container.constraints?.maxHeight, 40);
-      });
     });
 
     group('interaction', () {

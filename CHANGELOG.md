@@ -1,3 +1,8 @@
+## 0.2.1
+
+* Added new `SearchField` widget with keyboard action support
+* Two style presets: universal rounded pill (default) and compact Cupertino-like
+
 ## 0.2.0
 
 - **BREAKING**: refactor: `AppColors` renamed to `ColorTokens`                                                                                    

@@ -1,3 +1,9 @@
+## 0.2.2
+
+* Added new `Toggle` widget, which comes with haptic feedback, thumb-stretch animation and etc.
+* We are going to need an accent color for toggle, radio, checkbox and etc. widgets. So, added `accent` and `accentForeground` color tokens to `Styling`
+* Also, I couldn't held myself from making `NavBar`'s both mobile and web/desktop labels to have 1 max lines.
+
 ## 0.2.1
 
 * Added new `SearchField` widget with keyboard action support

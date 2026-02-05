@@ -1,5 +1,6 @@
 import 'package:example/pages/alert_popup_page.dart';
 import 'package:example/pages/search_field_page.dart';
+import 'package:example/pages/toggle_page.dart';
 import 'package:example/pages/popup_page.dart';
 import 'package:example/pages/confirmation_popup_page.dart';
 import 'package:example/pages/copy_button_page.dart';
@@ -113,6 +114,11 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
       title: 'Search Field',
       icon: Icons.search,
       page: SearchFieldPage(),
+    ),
+    _PageInfo(
+      title: 'Toggle',
+      icon: Icons.toggle_on_outlined,
+      page: TogglePage(),
     ),
   ];
 

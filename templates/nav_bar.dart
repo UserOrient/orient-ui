@@ -178,9 +178,10 @@ class _RailItemState extends State<_RailItem> {
                 const SizedBox(width: 16),
                 Text(
                   widget.label,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: navColors.railItemText,
                     fontSize: 16,
+                    color: navColors.railItemText,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -280,7 +281,12 @@ class _BottomBarItem extends StatelessWidget {
             const SizedBox(height: 2),
             Text(
               label,
-              style: TextStyle(color: color, fontSize: 12, height: 16 / 12),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: color,
+                fontSize: 12,
+                height: 16 / 12,
+              ),
             ),
           ],
         ),

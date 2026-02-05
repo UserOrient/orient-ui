@@ -22,6 +22,8 @@ const Color _lightBackground = Color(0xFFFFFFFF);
 const Color _lightBorder = Color(0xFFE4E4E7);
 const Color _lightPrimaryText = Color(0xFF2A2A2A);
 const Color _lightSecondaryText = Color(0xFFACAEAF);
+const Color _lightAccent = Color(0xFF18181B);
+const Color _lightAccentForeground = Color(0xFFFAFAFA);
 
 // Light Theme - Button
 const Color _lightButtonPrimary = Color(0xFF18181B);
@@ -53,6 +55,8 @@ const Color _darkBackground = Color(0xFF303030);
 const Color _darkBorder = Color(0xFF27272A);
 const Color _darkPrimaryText = Color(0xFFFAFAFA);
 const Color _darkSecondaryText = Color(0xFFB2B2B2);
+const Color _darkAccent = Color(0xFFFAFAFA);
+const Color _darkAccentForeground = Color(0xFF18181B);
 
 // Dark Theme - Button
 const Color _darkButtonPrimary = Color(0xFFFAFAFA);
@@ -104,6 +108,8 @@ final ColorTokens _colorsLight = ColorTokens(
   border: _lightBorder,
   primaryText: _lightPrimaryText,
   secondaryText: _lightSecondaryText,
+  accent: _lightAccent,
+  accentForeground: _lightAccentForeground,
   button: ButtonColors(
     primary: _lightButtonPrimary,
     primaryForeground: _lightButtonPrimaryForeground,
@@ -136,6 +142,8 @@ final ColorTokens _colorsDark = ColorTokens(
   border: _darkBorder,
   primaryText: _darkPrimaryText,
   secondaryText: _darkSecondaryText,
+  accent: _darkAccent,
+  accentForeground: _darkAccentForeground,
   button: ButtonColors(
     primary: _darkButtonPrimary,
     primaryForeground: _darkButtonPrimaryForeground,
@@ -178,8 +186,8 @@ class Styling extends InheritedWidget {
   static BreakpointTokens get breakpoints => _breakpoints;
 
   static StylingData of(BuildContext context) {
-    final Styling? styling =
-        context.dependOnInheritedWidgetOfExactType<Styling>();
+    final Styling? styling = context
+        .dependOnInheritedWidgetOfExactType<Styling>();
 
     assert(
       styling != null,
@@ -312,6 +320,8 @@ class ColorTokens {
   final Color border;
   final Color primaryText;
   final Color secondaryText;
+  final Color accent;
+  final Color accentForeground;
   final ButtonColors button;
   final NavigationColors navigation;
   final ToastColors toast;
@@ -321,6 +331,8 @@ class ColorTokens {
     required this.border,
     required this.primaryText,
     required this.secondaryText,
+    required this.accent,
+    required this.accentForeground,
     required this.button,
     required this.navigation,
     required this.toast,

@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:example/widgets/toggle.dart';
 
 class TogglePage extends StatefulWidget {
@@ -17,55 +16,52 @@ class _TogglePageState extends State<TogglePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildSection(
-            title: 'Default',
-            child: Row(
-              children: [
-                Toggle(
-                  value: _default1,
-                  onChanged: (v) => setState(() => _default1 = v),
-                ),
-                const SizedBox(width: 16),
-                Toggle(
-                  value: _default2,
-                  onChanged: (v) => setState(() => _default2 = v),
-                ),
-              ],
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSection(
+          title: 'Default',
+          child: Row(
+            children: [
+              Toggle(
+                value: _default1,
+                onChanged: (v) => setState(() => _default1 = v),
+              ),
+              const SizedBox(width: 16),
+              Toggle(
+                value: _default2,
+                onChanged: (v) => setState(() => _default2 = v),
+              ),
+            ],
           ),
-          _buildSection(
-            title: 'Small',
-            child: Row(
-              children: [
-                Toggle.small(
-                  value: _small1,
-                  onChanged: (v) => setState(() => _small1 = v),
-                ),
-                const SizedBox(width: 16),
-                Toggle.small(
-                  value: _small2,
-                  onChanged: (v) => setState(() => _small2 = v),
-                ),
-              ],
-            ),
+        ),
+        _buildSection(
+          title: 'Small',
+          child: Row(
+            children: [
+              Toggle.small(
+                value: _small1,
+                onChanged: (v) => setState(() => _small1 = v),
+              ),
+              const SizedBox(width: 16),
+              Toggle.small(
+                value: _small2,
+                onChanged: (v) => setState(() => _small2 = v),
+              ),
+            ],
           ),
-          _buildSection(
-            title: 'Disabled',
-            child: Row(
-              children: [
-                const Toggle(value: false),
-                const SizedBox(width: 16),
-                const Toggle(value: true),
-              ],
-            ),
+        ),
+        _buildSection(
+          title: 'Disabled',
+          child: Row(
+            children: [
+              const Toggle(value: false),
+              const SizedBox(width: 16),
+              const Toggle(value: true),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

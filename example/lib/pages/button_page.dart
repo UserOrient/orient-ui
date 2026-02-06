@@ -19,132 +19,144 @@ class _ButtonPageState extends State<ButtonPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildSection(
-            title: 'Variants',
-            child: Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: [
-                Button.small(
-                  onPressed: () {},
-                  label: 'Primary',
-                  variant: ButtonVariant.primary,
-                ),
-                Button.small(
-                  onPressed: () {},
-                  label: 'Secondary',
-                  variant: ButtonVariant.secondary,
-                ),
-                Button.small(
-                  onPressed: () {},
-                  label: 'Destructive',
-                  variant: ButtonVariant.destructive,
-                ),
-                Button.small(
-                  onPressed: () {},
-                  label: 'Outline',
-                  variant: ButtonVariant.outline,
-                ),
-                Button.small(
-                  onPressed: () {},
-                  label: 'Ghost',
-                  variant: ButtonVariant.ghost,
-                ),
-                Button.small(
-                  onPressed: () {},
-                  label: 'Link',
-                  variant: ButtonVariant.link,
-                ),
-              ],
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSection(
+          title: 'Variants',
+          child: Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            children: [
+              Button.small(
+                onPressed: () {},
+                label: 'Primary',
+                variant: ButtonVariant.primary,
+              ),
+              Button.small(
+                onPressed: () {},
+                label: 'Secondary',
+                variant: ButtonVariant.secondary,
+              ),
+              Button.small(
+                onPressed: () {},
+                label: 'Destructive',
+                variant: ButtonVariant.destructive,
+              ),
+              Button.small(
+                onPressed: () {},
+                label: 'Outline',
+                variant: ButtonVariant.outline,
+              ),
+              Button.small(
+                onPressed: () {},
+                label: 'Ghost',
+                variant: ButtonVariant.ghost,
+              ),
+              Button.small(
+                onPressed: () {},
+                label: 'Link',
+                variant: ButtonVariant.link,
+              ),
+            ],
           ),
-          _buildSection(
-            title: 'Sizes',
-            child: Row(
-              children: [
-                Expanded(
-                  child: Button(
-                    onPressed: () {},
-                    label: 'Default size',
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Button.small(
+        ),
+        _buildSection(
+          title: 'Sizes',
+          child: Row(
+            children: [
+              Expanded(
+                child: Button(
                   onPressed: () {},
-                  label: 'Small size',
+                  label: 'Default size',
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 12),
+              Button.small(
+                onPressed: () {},
+                label: 'Small size',
+              ),
+            ],
           ),
-          _buildSection(
-            title: 'With icon',
-            child: Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: [
-                Button.small(
-                  onPressed: () {},
-                  label: 'Settings',
-                  icon: const Icon(Icons.settings),
-                ),
-                Button.small(
-                  onPressed: () {},
-                  label: 'Delete',
-                  icon: const Icon(Icons.delete),
-                  variant: ButtonVariant.destructive,
-                ),
-                Button.small(
-                  onPressed: () {},
-                  label: 'Add new',
-                  icon: const Icon(Icons.add),
-                  variant: ButtonVariant.outline,
-                ),
-              ],
-            ),
+        ),
+        _buildSection(
+          title: 'With icon',
+          child: Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            children: [
+              Button.small(
+                onPressed: () {},
+                label: 'Settings',
+                icon: const Icon(Icons.settings),
+              ),
+              Button.small(
+                onPressed: () {},
+                label: 'Delete',
+                icon: const Icon(Icons.delete),
+                variant: ButtonVariant.destructive,
+              ),
+              Button.small(
+                onPressed: () {},
+                label: 'Add new',
+                icon: const Icon(Icons.add),
+                variant: ButtonVariant.outline,
+              ),
+            ],
           ),
-          _buildSection(
-            title: 'Loading state',
-            child: Row(
-              children: [
-                Button.small(
-                  onPressed: _simulateLoading,
-                  label: _loading ? 'Loading...' : 'Click to load',
-                  loading: _loading,
-                ),
-              ],
-            ),
+        ),
+        _buildSection(
+          title: 'Loading state',
+          child: Row(
+            children: [
+              Button.small(
+                onPressed: _simulateLoading,
+                label: _loading ? 'Loading...' : 'Click to load',
+                loading: _loading,
+              ),
+            ],
           ),
-          _buildSection(
-            title: 'Disabled state',
-            child: Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: [
-                Button.small(
-                  onPressed: null,
-                  label: 'Disabled primary',
-                  variant: ButtonVariant.primary,
-                ),
-                Button.small(
-                  onPressed: null,
-                  label: 'Disabled secondary',
-                  variant: ButtonVariant.secondary,
-                ),
-                Button.small(
-                  onPressed: null,
-                  label: 'Disabled outline',
-                  variant: ButtonVariant.outline,
-                ),
-              ],
-            ),
+        ),
+        _buildSection(
+          title: 'Disabled state',
+          child: Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            children: [
+              Button.small(
+                onPressed: null,
+                label: 'Primary',
+                variant: ButtonVariant.primary,
+              ),
+              Button.small(
+                onPressed: null,
+                label: 'Secondary',
+                variant: ButtonVariant.secondary,
+              ),
+              Button.small(
+                onPressed: null,
+                label: 'Destructive',
+                variant: ButtonVariant.destructive,
+              ),
+              Button.small(
+                onPressed: null,
+                label: 'Outline',
+                variant: ButtonVariant.outline,
+              ),
+              Button.small(
+                onPressed: null,
+                label: 'Ghost',
+                variant: ButtonVariant.ghost,
+              ),
+              Button.small(
+                onPressed: null,
+                label: 'Link',
+                variant: ButtonVariant.link,
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

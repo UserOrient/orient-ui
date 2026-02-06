@@ -10,37 +10,34 @@ class CopyButtonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final styling = Styling.of(context);
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildSection(
-            title: 'Default',
-            child: Row(
-              children: [
-                Text(
-                  'kamran@userorient.com',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: styling.colors.primaryText,
-                  ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSection(
+          title: 'Default',
+          child: Row(
+            children: [
+              Text(
+                'kamran@userorient.com',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: styling.colors.primaryText,
                 ),
-                const SizedBox(width: 8),
-                CopyButton(
-                  value: 'kamran@userorient.com',
-                  onCopied: () {
-                    showToast(
-                      context: context,
-                      message: 'Copied to clipboard',
-                    );
-                  },
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 8),
+              CopyButton(
+                value: 'kamran@userorient.com',
+                onCopied: () {
+                  showToast(
+                    context: context,
+                    message: 'Copied to clipboard',
+                  );
+                },
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

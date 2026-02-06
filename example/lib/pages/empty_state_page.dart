@@ -7,44 +7,41 @@ class EmptyStatePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildSection(
-            title: 'Default',
-            child: EmptyState(
-              icon: Icon(
-                Icons.notifications_off_outlined,
-                size: 48,
-                color: Colors.black26,
-              ),
-              title: 'No notifications',
-              description:
-                  'When we send you notifications, you\'ll be able to see them here.',
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSection(
+          title: 'Default',
+          child: EmptyState(
+            icon: Icon(
+              Icons.notifications_off_outlined,
+              size: 48,
+              color: Colors.black26,
+            ),
+            title: 'No notifications',
+            description:
+                'When we send you notifications, you\'ll be able to see them here.',
+          ),
+        ),
+        _buildSection(
+          title: 'With Action',
+          child: EmptyState(
+            icon: Icon(
+              Icons.gps_off_outlined,
+              size: 48,
+              color: Colors.black26,
+            ),
+            title: 'Location Disabled',
+            description:
+                'Please enable GPS services from settings of your device.',
+            action: Button.small(
+              onPressed: () {},
+              icon: Icon(Icons.settings),
+              label: 'Open Settings',
             ),
           ),
-          _buildSection(
-            title: 'With Action',
-            child: EmptyState(
-              icon: Icon(
-                Icons.gps_off_outlined,
-                size: 48,
-                color: Colors.black26,
-              ),
-              title: 'Location Disabled',
-              description:
-                  'Please enable GPS services from settings of your device.',
-              action: Button.small(
-                onPressed: () {},
-                icon: Icon(Icons.settings),
-                label: 'Open Settings',
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

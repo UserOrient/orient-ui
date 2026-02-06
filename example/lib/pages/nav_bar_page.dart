@@ -20,98 +20,95 @@ class _NavBarPageState extends State<NavBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildSection(
-            title: 'Mobile (Bottom Bar)',
-            child: _buildPreviewContainer(
-              width: 375,
-              height: 667,
-              child: NavBar(
-                currentIndex: _mobileIndex,
-                onTap: (i) => setState(() => _mobileIndex = i),
-                items: _demoItems,
-                body: _buildDemoBody('Mobile View', _mobileIndex),
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSection(
+          title: 'Mobile (Bottom Bar)',
+          child: _buildPreviewContainer(
+            width: 375,
+            height: 667,
+            child: NavBar(
+              currentIndex: _mobileIndex,
+              onTap: (i) => setState(() => _mobileIndex = i),
+              items: _demoItems,
+              body: _buildDemoBody('Mobile View', _mobileIndex),
             ),
           ),
-          _buildSection(
-            title: 'Desktop (Rail)',
-            child: _buildPreviewContainer(
-              width: 800,
-              height: 500,
-              child: NavBar(
-                currentIndex: _desktopIndex,
-                onTap: (i) => setState(() => _desktopIndex = i),
-                items: _demoItems,
-                railHeader: const Text(
-                  'Logo',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                ),
-                body: _buildDemoBody('Desktop View', _desktopIndex),
+        ),
+        _buildSection(
+          title: 'Desktop (Rail)',
+          child: _buildPreviewContainer(
+            width: 800,
+            height: 500,
+            child: NavBar(
+              currentIndex: _desktopIndex,
+              onTap: (i) => setState(() => _desktopIndex = i),
+              items: _demoItems,
+              railHeader: const Text(
+                'Logo',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
               ),
+              body: _buildDemoBody('Desktop View', _desktopIndex),
             ),
           ),
-          _buildSection(
-            title: 'With Header & Footer',
-            child: _buildPreviewContainer(
-              width: 800,
-              height: 500,
-              child: NavBar(
-                currentIndex: 0,
-                onTap: (_) {},
-                items: _demoItems,
-                railHeader: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF18181B),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Icon(Icons.bolt, color: Colors.white, size: 20),
+        ),
+        _buildSection(
+          title: 'With Header & Footer',
+          child: _buildPreviewContainer(
+            width: 800,
+            height: 500,
+            child: NavBar(
+              currentIndex: 0,
+              onTap: (_) {},
+              items: _demoItems,
+              railHeader: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF18181B),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Acme Inc',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    child: const Icon(Icons.bolt, color: Colors.white, size: 20),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Acme Inc',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+              railFooter: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF4F4F5),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 16,
+                      backgroundColor: Color(0xFFE4E4E7),
+                      child: Icon(Icons.person, size: 18, color: Color(0xFF71717A)),
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'John Doe',
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ],
                 ),
-                railFooter: Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF4F4F5),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 16,
-                        backgroundColor: Color(0xFFE4E4E7),
-                        child: Icon(Icons.person, size: 18, color: Color(0xFF71717A)),
-                      ),
-                      SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          'John Doe',
-                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                body: _buildDemoBody('With Header & Footer', 0),
               ),
+              body: _buildDemoBody('With Header & Footer', 0),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

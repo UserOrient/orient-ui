@@ -1,20 +1,11 @@
-import 'package:example/pages/alert_popup_page.dart';
-import 'package:example/pages/search_field_page.dart';
-import 'package:example/pages/toggle_page.dart';
-import 'package:example/pages/popup_page.dart';
-import 'package:example/pages/confirmation_popup_page.dart';
-import 'package:example/pages/copy_button_page.dart';
-import 'package:example/pages/empty_state_page.dart';
+import 'package:example/pages/components_page.dart';
+import 'package:example/pages/docs_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:example/styling.dart';
 import 'package:example/widgets/button.dart';
 import 'package:example/widgets/nav_bar.dart';
-import 'package:example/pages/button_page.dart';
-import 'package:example/pages/spinner_page.dart';
-import 'package:example/pages/nav_bar_page.dart';
-import 'package:example/pages/toast_page.dart';
 
 final _brightnessNotifier = ValueNotifier(Brightness.light);
 
@@ -66,59 +57,14 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
 
   static const _pages = [
     _PageInfo(
-      title: 'Button',
-      icon: Icons.smart_button_outlined,
-      page: ButtonPage(),
+      title: 'Components',
+      icon: TablerIcons.layout_dashboard,
+      page: ComponentsPage(),
     ),
     _PageInfo(
-      title: 'Spinner',
-      icon: Icons.refresh,
-      page: SpinnerPage(),
-    ),
-    _PageInfo(
-      title: 'NavBar',
-      icon: Icons.menu,
-      page: NavBarPage(),
-    ),
-    _PageInfo(
-      title: 'Toast',
-      icon: Icons.notifications_outlined,
-      page: ToastPage(),
-    ),
-    _PageInfo(
-      title: 'Empty State',
-      icon: Icons.inbox_outlined,
-      page: EmptyStatePage(),
-    ),
-    _PageInfo(
-      title: 'Confirmation',
-      icon: Icons.help_outline,
-      page: ConfirmationPopupPage(),
-    ),
-    _PageInfo(
-      title: 'Copy Button',
-      icon: Icons.copy,
-      page: CopyButtonPage(),
-    ),
-    _PageInfo(
-      title: 'Alert Popup',
-      icon: Icons.campaign_outlined,
-      page: AlertPopupPage(),
-    ),
-    _PageInfo(
-      title: 'Popup',
-      icon: Icons.web_asset_outlined,
-      page: PopupPage(),
-    ),
-    _PageInfo(
-      title: 'Search Field',
-      icon: Icons.search,
-      page: SearchFieldPage(),
-    ),
-    _PageInfo(
-      title: 'Toggle',
-      icon: Icons.toggle_on_outlined,
-      page: TogglePage(),
+      title: 'Docs',
+      icon: TablerIcons.book,
+      page: DocsPage(),
     ),
   ];
 
@@ -193,9 +139,8 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
 
             return Button.small(
               onPressed: () {
-                _brightnessNotifier.value = isDark
-                    ? Brightness.light
-                    : Brightness.dark;
+                _brightnessNotifier.value =
+                    isDark ? Brightness.light : Brightness.dark;
               },
               icon: Icon(
                 isDark ? Icons.light_mode : Icons.dark_mode,

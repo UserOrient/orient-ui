@@ -8,26 +8,23 @@ class PopupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildSection(
-            title: 'Comments',
-            child: Button.small(
-              onPressed: () {
-                Popup.show(
-                  context: context,
-                  title: 'Comments (3)',
-                  child: _CommentsList(),
-                );
-              },
-              label: 'Show Popup',
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSection(
+          title: 'Comments',
+          child: Button.small(
+            onPressed: () {
+              Popup.show(
+                context: context,
+                title: 'Comments (3)',
+                child: _CommentsList(),
+              );
+            },
+            label: 'Show Popup',
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

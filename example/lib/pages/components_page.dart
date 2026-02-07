@@ -23,22 +23,18 @@ class ComponentsPage extends StatelessWidget {
         MediaQuery.of(context).size.width >= Styling.breakpoints.desktop;
 
     final sections = [
-      _componentSection('Button', styling, const ButtonPage()),
-      _componentSection('Toggle', styling, const TogglePage()),
-      _componentSection('Toggle Tile', styling, const ToggleTilePage()),
-      _componentSection('Copy Button', styling, const CopyButtonPage()),
-      _componentSection('Search Field', styling, const SearchFieldPage()),
-      _componentSection('Spinner', styling, const SpinnerPage()),
-      _componentSection('Toast', styling, const ToastPage()),
-      _componentSection('Alert Popup', styling, const AlertPopupPage()),
-      _componentSection(
-        'Confirmation Popup',
-        styling,
-        const ConfirmationPopupPage(),
-      ),
-      _componentSection('Popup', styling, const PopupPage()),
-      _componentSection('Empty State', styling, const EmptyStatePage()),
-      _componentSection('NavBar', styling, const NavBarPage()),
+      _componentSection('Button', 'button', styling, const ButtonPage()),
+      _componentSection('Toggle', 'toggle', styling, const TogglePage()),
+      _componentSection('ToggleTile', 'toggle_tile', styling, const ToggleTilePage()),
+      _componentSection('SearchField', 'search_field', styling, const SearchFieldPage()),
+      _componentSection('Toast', 'toast', styling, const ToastPage()),
+      _componentSection('Spinner', 'spinner', styling, const SpinnerPage()),
+      _componentSection('AlertPopup', 'alert_popup', styling, const AlertPopupPage()),
+      _componentSection('CopyButton', 'copy_button', styling, const CopyButtonPage()),
+      _componentSection('ConfirmationPopup', 'confirmation_popup', styling, const ConfirmationPopupPage()),
+      _componentSection('Popup', 'popup', styling, const PopupPage()),
+      _componentSection('EmptyState', 'empty_state', styling, const EmptyStatePage()),
+      _componentSection('NavBar', 'nav_bar', styling, const NavBarPage()),
     ];
 
     if (!isDesktop) {
@@ -49,7 +45,7 @@ class ComponentsPage extends StatelessWidget {
           children: [
             for (int i = 0; i < sections.length; i++) ...[
               sections[i],
-              if (i < sections.length - 1) const SizedBox(height: 24),
+              if (i < sections.length - 1) const SizedBox(height: 32),
             ],
           ],
         ),
@@ -72,18 +68,18 @@ class ComponentsPage extends StatelessWidget {
               children: [
                 for (int i = 0; i < left.length; i++) ...[
                   left[i],
-                  if (i < left.length - 1) const SizedBox(height: 24),
+                  if (i < left.length - 1) const SizedBox(height: 32),
                 ],
               ],
             ),
           ),
-          const SizedBox(width: 24),
+          const SizedBox(width: 32),
           Expanded(
             child: Column(
               children: [
                 for (int i = 0; i < right.length; i++) ...[
                   right[i],
-                  if (i < right.length - 1) const SizedBox(height: 24),
+                  if (i < right.length - 1) const SizedBox(height: 32),
                 ],
               ],
             ),
@@ -95,19 +91,34 @@ class ComponentsPage extends StatelessWidget {
 
   Widget _componentSection(
     String title,
+    String cliName,
     StylingData styling,
     Widget child,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-            color: styling.colors.secondaryText,
-          ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: styling.colors.primaryText,
+              ),
+            ),
+            const SizedBox(width: 8),
+            Text(
+              cliName,
+              style: TextStyle(
+                fontSize: 14,
+                color: styling.colors.secondaryText,
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 8),
         Container(

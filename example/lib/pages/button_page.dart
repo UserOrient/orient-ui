@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:example/styling.dart';
 import 'package:example/widgets/button.dart';
-import 'package:example/widgets/demo_section.dart';
+import 'package:example/widgets/toggle.dart';
 
 class ButtonPage extends StatefulWidget {
   const ButtonPage({super.key});
@@ -10,155 +12,85 @@ class ButtonPage extends StatefulWidget {
 }
 
 class _ButtonPageState extends State<ButtonPage> {
+  bool _disabled = false;
   bool _loading = false;
+  bool _withIcon = false;
+  bool _small = true;
 
-  void _simulateLoading() async {
-    setState(() => _loading = true);
-    await Future.delayed(const Duration(seconds: 2));
-    setState(() => _loading = false);
-  }
+  static const _variantIcons = {
+    ButtonVariant.primary: TablerIcons.send,
+    ButtonVariant.secondary: TablerIcons.settings,
+    ButtonVariant.destructive: TablerIcons.trash,
+    ButtonVariant.outline: TablerIcons.download,
+    ButtonVariant.ghost: TablerIcons.dots,
+    ButtonVariant.link: TablerIcons.external_link,
+  };
 
   @override
   Widget build(BuildContext context) {
+    final styling = Styling.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DemoSection(
-          title: 'Variants',
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              Button.small(
-                onPressed: () {},
-                label: 'Primary',
-                variant: ButtonVariant.primary,
-              ),
-              Button.small(
-                onPressed: () {},
-                label: 'Secondary',
-                variant: ButtonVariant.secondary,
-              ),
-              Button.small(
-                onPressed: () {},
-                label: 'Destructive',
-                variant: ButtonVariant.destructive,
-              ),
-              Button.small(
-                onPressed: () {},
-                label: 'Outline',
-                variant: ButtonVariant.outline,
-              ),
-              Button.small(
-                onPressed: () {},
-                label: 'Ghost',
-                variant: ButtonVariant.ghost,
-              ),
-              Button.small(
-                onPressed: () {},
-                label: 'Link',
-                variant: ButtonVariant.link,
-              ),
-            ],
-          ),
+        Wrap(
+          spacing: 24,
+          runSpacing: 12,
+          children: [
+            _toggle('Small', _small, (v) => setState(() => _small = v), styling),
+            _toggle('Icon', _withIcon, (v) => setState(() => _withIcon = v), styling),
+            _toggle('Loading', _loading, (v) => setState(() => _loading = v), styling),
+            _toggle('Disabled', _disabled, (v) => setState(() => _disabled = v), styling),
+          ],
         ),
-        DemoSection(
-          title: 'Sizes',
-          child: Row(
-            children: [
-              Expanded(
-                child: Button(
-                  onPressed: () {},
-                  label: 'Default size',
-                ),
-              ),
-              const SizedBox(width: 12),
-              Button.small(
-                onPressed: () {},
-                label: 'Small size',
-              ),
-            ],
-          ),
-        ),
-        DemoSection(
-          title: 'With icon',
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              Button.small(
-                onPressed: () {},
-                label: 'Settings',
-                icon: const Icon(Icons.settings),
-              ),
-              Button.small(
-                onPressed: () {},
-                label: 'Delete',
-                icon: const Icon(Icons.delete),
-                variant: ButtonVariant.destructive,
-              ),
-              Button.small(
-                onPressed: () {},
-                label: 'Add new',
-                icon: const Icon(Icons.add),
-                variant: ButtonVariant.outline,
-              ),
-            ],
-          ),
-        ),
-        DemoSection(
-          title: 'Loading state',
-          child: Row(
-            children: [
-              Button.small(
-                onPressed: _simulateLoading,
-                label: _loading ? 'Loading...' : 'Click to load',
-                loading: _loading,
-              ),
-            ],
-          ),
-        ),
-        DemoSection(
-          title: 'Disabled state',
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              Button.small(
-                onPressed: null,
-                label: 'Primary',
-                variant: ButtonVariant.primary,
-              ),
-              Button.small(
-                onPressed: null,
-                label: 'Secondary',
-                variant: ButtonVariant.secondary,
-              ),
-              Button.small(
-                onPressed: null,
-                label: 'Destructive',
-                variant: ButtonVariant.destructive,
-              ),
-              Button.small(
-                onPressed: null,
-                label: 'Outline',
-                variant: ButtonVariant.outline,
-              ),
-              Button.small(
-                onPressed: null,
-                label: 'Ghost',
-                variant: ButtonVariant.ghost,
-              ),
-              Button.small(
-                onPressed: null,
-                label: 'Link',
-                variant: ButtonVariant.link,
-              ),
-            ],
-          ),
+        const SizedBox(height: 24),
+        Wrap(
+          spacing: 12,
+          runSpacing: 12,
+          children: [
+            for (final variant in ButtonVariant.values)
+              _small
+                  ? Button.small(
+                      onPressed: _disabled ? null : () {},
+                      label: variant.name[0].toUpperCase() +
+                          variant.name.substring(1),
+                      variant: variant,
+                      loading: _loading,
+                      icon: _withIcon ? Icon(_variantIcons[variant]) : null,
+                    )
+                  : Button(
+                      onPressed: _disabled ? null : () {},
+                      label: variant.name[0].toUpperCase() +
+                          variant.name.substring(1),
+                      variant: variant,
+                      loading: _loading,
+                      icon: _withIcon ? Icon(_variantIcons[variant]) : null,
+                    ),
+          ],
         ),
       ],
     );
   }
 
+  Widget _toggle(
+    String label,
+    bool value,
+    ValueChanged<bool> onChanged,
+    StylingData styling,
+  ) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Toggle.small(value: value, onChanged: onChanged),
+        const SizedBox(width: 8),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 13,
+            color: styling.colors.secondaryText,
+          ),
+        ),
+      ],
+    );
+  }
 }

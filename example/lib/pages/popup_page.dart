@@ -1,6 +1,5 @@
 import 'package:example/styling.dart';
 import 'package:example/widgets/button.dart';
-import 'package:example/widgets/demo_section.dart';
 import 'package:example/widgets/popup.dart';
 import 'package:flutter/material.dart';
 
@@ -12,18 +11,15 @@ class PopupPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DemoSection(
-          title: 'Comments',
-          child: Button.small(
-            onPressed: () {
-              Popup.show(
-                context: context,
-                title: 'Comments (3)',
-                child: _CommentsList(),
-              );
-            },
-            label: 'Show Popup',
-          ),
+        Button.small(
+          onPressed: () {
+            Popup.show(
+              context: context,
+              title: 'Comments (3)',
+              child: _CommentsList(),
+            );
+          },
+          label: 'Show Popup',
         ),
       ],
     );

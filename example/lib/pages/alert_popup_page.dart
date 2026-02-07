@@ -1,6 +1,5 @@
 import 'package:example/widgets/alert_popup.dart';
 import 'package:example/widgets/button.dart';
-import 'package:example/widgets/demo_section.dart';
 import 'package:flutter/material.dart';
 
 class AlertPopupPage extends StatelessWidget {
@@ -11,167 +10,82 @@ class AlertPopupPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DemoSection(
-          title: 'Success',
-          child: Button.small(
-            onPressed: () {
-              AlertPopup.show(
-                context: context,
-                icon: Icon(
-                  Icons.check_circle_outline,
-                  size: 48,
-                  color: Colors.green.shade300,
-                ),
-                title: 'Payment successful',
-                description:
-                    'Your payment of \$49.99 has been processed successfully.',
-                action: Button(
-                  label: 'Done',
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              );
-            },
-            label: 'Show Alert',
-          ),
-        ),
-        DemoSection(
-          title: 'Error',
-          child: Button.small(
-            onPressed: () {
-              AlertPopup.show(
-                context: context,
-                icon: Icon(
-                  Icons.error_outline,
-                  size: 48,
-                  color: Colors.red.shade300,
-                ),
-                title: 'Something went wrong',
-                description:
-                    'We couldn\'t process your request. Please try again later.',
-                action: Button(
-                  label: 'Try again',
-                  variant: ButtonVariant.destructive,
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              );
-            },
-            label: 'Show Alert',
-          ),
-        ),
-        DemoSection(
-          title: 'Warning',
-          child: Button.small(
-            onPressed: () {
-              AlertPopup.show(
-                context: context,
-                icon: Icon(
-                  Icons.warning_amber_rounded,
-                  size: 48,
-                  color: Colors.orange.shade300,
-                ),
-                title: 'Session expiring soon',
-                description:
-                    'Your session will expire in 5 minutes. Save your work to avoid losing progress.',
-                action: Button(
-                  label: 'Got it',
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              );
-            },
-            label: 'Show Alert',
-          ),
-        ),
-        DemoSection(
-          title: 'Info',
-          child: Button.small(
-            onPressed: () {
-              AlertPopup.show(
-                context: context,
-                icon: Icon(
-                  Icons.info_outline,
-                  size: 48,
-                  color: Colors.blue.shade300,
-                ),
-                title: 'New update available',
-                description:
-                    'Version 2.0 is available with new features and improvements.',
-                action: Button(
-                  label: 'Update now',
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              );
-            },
-            label: 'Show Alert',
-          ),
-        ),
-        DemoSection(
-          title: 'No icon',
-          child: Button.small(
-            onPressed: () {
-              AlertPopup.show(
-                context: context,
-                title: 'Terms updated',
-                description:
-                    'We\'ve updated our terms of service. Please review them at your convenience.',
-                action: Button(
-                  label: 'OK',
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              );
-            },
-            label: 'Show Alert',
-          ),
-        ),
-        DemoSection(
-          title: 'No description',
-          child: Button.small(
-            onPressed: () {
-              AlertPopup.show(
-                context: context,
-                icon: Icon(
-                  Icons.cloud_done_outlined,
-                  size: 48,
-                  color: Colors.green.shade300,
-                ),
-                title: 'All changes saved',
-                action: Button(
-                  label: 'OK',
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              );
-            },
-            label: 'Show Alert',
-          ),
-        ),
-        DemoSection(
-          title: 'No action (tap outside to dismiss)',
-          child: Button.small(
-            onPressed: () {
-              AlertPopup.show(
-                context: context,
-                icon: Icon(
-                  Icons.hourglass_bottom,
-                  size: 48,
-                  color: Colors.grey.shade400,
-                ),
-                title: 'Processing your request',
-                description: 'This may take a moment. Tap outside to dismiss.',
-              );
-            },
-            label: 'Show Alert',
-          ),
-        ),
-        DemoSection(
-          title: 'Minimal (title only)',
-          child: Button.small(
-            onPressed: () {
-              AlertPopup.show(
-                context: context,
-                title: 'Copied to clipboard',
-              );
-            },
-            label: 'Show Alert',
-          ),
+        Wrap(
+          spacing: 12,
+          runSpacing: 12,
+          children: [
+              Button.small(
+                onPressed: () {
+                  AlertPopup.show(
+                    context: context,
+                    icon: Icon(
+                      Icons.check_circle_outline,
+                      size: 48,
+                      color: Colors.green.shade300,
+                    ),
+                    title: 'Payment successful',
+                    description:
+                        'Your payment of \$49.99 has been processed successfully.',
+                    action: Button(
+                      label: 'Done',
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  );
+                },
+                label: 'Full',
+              ),
+              Button.small(
+                onPressed: () {
+                  AlertPopup.show(
+                    context: context,
+                    title: 'Terms updated',
+                    description:
+                        'We\'ve updated our terms of service. Please review them at your convenience.',
+                    action: Button(
+                      label: 'OK',
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  );
+                },
+                label: 'No icon',
+                variant: ButtonVariant.outline,
+              ),
+              Button.small(
+                onPressed: () {
+                  AlertPopup.show(
+                    context: context,
+                    icon: Icon(
+                      Icons.cloud_done_outlined,
+                      size: 48,
+                      color: Colors.green.shade300,
+                    ),
+                    title: 'All changes saved',
+                    action: Button(
+                      label: 'OK',
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  );
+                },
+                label: 'No description',
+                variant: ButtonVariant.outline,
+              ),
+              Button.small(
+                onPressed: () {
+                  AlertPopup.show(
+                    context: context,
+                    icon: Icon(
+                      Icons.hourglass_bottom,
+                      size: 48,
+                      color: Colors.grey.shade400,
+                    ),
+                    title: 'Processing your request',
+                    description: 'This may take a moment. Tap outside to dismiss.',
+                  );
+                },
+                label: 'No action',
+                variant: ButtonVariant.outline,
+              ),
+          ],
         ),
       ],
     );

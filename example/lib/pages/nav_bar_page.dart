@@ -1,163 +1,27 @@
-import 'package:flutter/material.dart';
-import 'package:example/widgets/demo_section.dart';
-import 'package:example/widgets/nav_bar.dart';
+import 'package:example/styling.dart';
+import 'package:flutter/widgets.dart';
 
-class NavBarPage extends StatefulWidget {
+class NavBarPage extends StatelessWidget {
   const NavBarPage({super.key});
 
   @override
-  State<NavBarPage> createState() => _NavBarPageState();
-}
-
-class _NavBarPageState extends State<NavBarPage> {
-  int _mobileIndex = 0;
-  int _desktopIndex = 0;
-
-  static final _demoItems = [
-    NavBarItem(icon: const Icon(Icons.home_outlined), label: 'Home'),
-    NavBarItem(icon: const Icon(Icons.search), label: 'Search'),
-    NavBarItem(icon: const Icon(Icons.person_outline), label: 'Profile'),
-  ];
-
-  @override
   Widget build(BuildContext context) {
+    final styling = Styling.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DemoSection(
-          title: 'Mobile (Bottom Bar)',
-          child: _buildPreviewContainer(
-            width: 375,
-            height: 667,
-            child: NavBar(
-              currentIndex: _mobileIndex,
-              onTap: (i) => setState(() => _mobileIndex = i),
-              items: _demoItems,
-              body: _buildDemoBody('Mobile View', _mobileIndex),
-            ),
-          ),
-        ),
-        DemoSection(
-          title: 'Desktop (Rail)',
-          child: _buildPreviewContainer(
-            width: 800,
-            height: 500,
-            child: NavBar(
-              currentIndex: _desktopIndex,
-              onTap: (i) => setState(() => _desktopIndex = i),
-              items: _demoItems,
-              railHeader: const Text(
-                'Logo',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-              ),
-              body: _buildDemoBody('Desktop View', _desktopIndex),
-            ),
-          ),
-        ),
-        DemoSection(
-          title: 'With Header & Footer',
-          child: _buildPreviewContainer(
-            width: 800,
-            height: 500,
-            child: NavBar(
-              currentIndex: 0,
-              onTap: (_) {},
-              items: _demoItems,
-              railHeader: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF18181B),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(Icons.bolt, color: Colors.white, size: 20),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Acme Inc',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
-                ],
-              ),
-              railFooter: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF4F4F5),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 16,
-                      backgroundColor: Color(0xFFE4E4E7),
-                      child: Icon(Icons.person, size: 18, color: Color(0xFF71717A)),
-                    ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        'John Doe',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              body: _buildDemoBody('With Header & Footer', 0),
-            ),
+        Text(
+          'This playground uses NavBar for its own navigation. '
+          'Resize your browser window to see it adapt — '
+          'a side rail on desktop, a bottom bar on mobile.',
+          style: TextStyle(
+            fontSize: 16,
+            height: 1.5,
+            color: styling.colors.secondaryText,
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildDemoBody(String title, int index) {
-    return Container(
-      color: const Color(0xFFFAFAFA),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Selected: ${_demoItems[index].label}',
-              style: const TextStyle(
-                fontSize: 14,
-                color: Color(0xFF71717A),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPreviewContainer({
-    required double width,
-    required double height,
-    required Widget child,
-  }) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        border: Border.all(color: const Color(0xFFE4E4E7)),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: MediaQuery(
-        data: MediaQueryData(size: Size(width, height)),
-        child: child,
-      ),
     );
   }
 }

@@ -129,9 +129,9 @@ orient_ui add <widget>  # Add a specific widget
 - [x] SearchField
 - [x] Toggle
 - [x] ToggleTile
+- [x] Tile
 
 ### In Progress
-- [ ] Tile
 - [ ] TextField
 
 ### Coming Soon

@@ -1,3 +1,7 @@
+## 0.2.4
+
+* Add new `Tile` widget with 3 variants: simple, bordered and filled.
+
 ## 0.2.3
 
 * Add new `ToggleTile` widget with 3 variants: simple, bordered and filled. 

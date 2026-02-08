@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+
+const String version = '0.2.4';
 
 const String baseUrl =
     'https://raw.githubusercontent.com/userorient/orient-ui/main/templates';
@@ -32,6 +35,7 @@ final Map<String, ComponentInfo> components = {
 void main(List<String> args) async {
   if (args.isEmpty) {
     _printUsage();
+    await _checkForUpdate();
     return;
   }
 
@@ -44,6 +48,7 @@ void main(List<String> args) async {
     case 'add':
       if (args.length < 2) {
         _listComponents();
+        await _checkForUpdate();
         return;
       }
       await _addCommand(args[1]);
@@ -51,6 +56,8 @@ void main(List<String> args) async {
     default:
       _printUsage();
   }
+
+  await _checkForUpdate();
 }
 
 void _log(String emoji, String message) => print('$emoji $message');
@@ -135,4 +142,45 @@ Future<void> _fetchAndSave(String filename, String destination) async {
   file.writeAsStringSync(response.body);
 
   _log('✨', 'Created $destination');
+}
+
+Future<void> _checkForUpdate() async {
+  try {
+    final response = await http
+        .get(Uri.parse('https://pub.dev/api/packages/orient_ui'))
+        .timeout(const Duration(seconds: 3));
+
+    if (response.statusCode != 200) return;
+
+    final data = jsonDecode(response.body);
+    final latest = data['latest']['version'] as String;
+
+    if (latest == version) return;
+
+    const dim = '\x1B[2m';
+    const green = '\x1B[32m';
+    const bold = '\x1B[1m';
+    const reset = '\x1B[0m';
+
+    print('');
+    _log(
+      '🆕',
+      '${bold}New version available!$reset  $dim$version$reset → $green$bold$latest$reset',
+    );
+    _log('  ', '${dim}Updating...$reset');
+
+    final result = await Process.run(
+      'dart',
+      ['pub', 'global', 'activate', 'orient_ui'],
+    );
+
+    if (result.exitCode == 0) {
+      _log('✅', '${green}Updated to $latest!$reset');
+    } else {
+      _log('⚠️ ', '${dim}Auto-update failed. Run manually:$reset');
+      print('   dart pub global activate orient_ui');
+    }
+  } catch (_) {
+    // Silently ignore - don't block CLI usage if check fails
+  }
 }

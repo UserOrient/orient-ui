@@ -1,5 +1,6 @@
 import 'package:example/pages/alert_popup_page.dart';
 import 'package:example/pages/button_page.dart';
+import 'package:example/pages/card_box_page.dart';
 import 'package:example/pages/confirmation_popup_page.dart';
 import 'package:example/pages/copy_button_page.dart';
 import 'package:example/pages/empty_state_page.dart';
@@ -24,6 +25,7 @@ class ComponentsPage extends StatelessWidget {
         MediaQuery.of(context).size.width >= Styling.breakpoints.desktop;
 
     final sections = [
+      _componentSection('CardBox', 'card_box', styling, const CardBoxPage()),
       _componentSection('Button', 'button', styling, const ButtonPage()),
       _componentSection('Toggle', 'toggle', styling, const TogglePage()),
       _componentSection('Tile', 'tile', styling, const TilePage()),

@@ -12,6 +12,7 @@ final Map<String, ComponentInfo> components = {
     'button.dart',
     dependencies: ['spinner'],
   ),
+  'card_box': ComponentInfo('card_box.dart'),
   'confirmation_popup': ComponentInfo(
     'confirmation_popup.dart',
     dependencies: ['button'],

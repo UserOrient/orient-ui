@@ -1,6 +1,10 @@
+## 0.2.6
+
+* Added new `CardBox` widget. It's what we know from Material as `Card`. Distinctively, it has two modes: bordered and filled (default). Filled looks pretty cool.
+
 ## 0.2.5
 
-* Added auto-update mechanisma for CLI.
+* Added auto-update mechanism for CLI.
 
 ## 0.2.4
 

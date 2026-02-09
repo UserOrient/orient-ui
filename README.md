@@ -130,6 +130,7 @@ orient_ui add <widget>  # Add a specific widget
 - [x] Toggle
 - [x] ToggleTile
 - [x] Tile
+- [x] CardBox
 
 ### In Progress
 - [ ] TextField

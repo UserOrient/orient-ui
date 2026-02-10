@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
-const String version = '0.2.4';
+const String version = '0.2.6';
 
 const String baseUrl =
     'https://raw.githubusercontent.com/userorient/orient-ui/main/templates';

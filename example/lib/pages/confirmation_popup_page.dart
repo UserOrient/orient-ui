@@ -30,7 +30,7 @@ class ConfirmationPopupPage extends StatelessWidget {
                   confirmLabel: 'Yes, approve',
                   cancelLabel: 'Cancel',
                   onConfirm: () {
-                    showToast(
+                    Toast.show(
                       context: context,
                       message: 'Feature approved.',
                     );
@@ -54,7 +54,7 @@ class ConfirmationPopupPage extends StatelessWidget {
                   cancelLabel: 'Keep it',
                   destructive: true,
                   onConfirm: () {
-                    showToast(
+                    Toast.show(
                       context: context,
                       message: 'Item deleted',
                     );
@@ -72,7 +72,7 @@ class ConfirmationPopupPage extends StatelessWidget {
                   confirmLabel: 'Yes',
                   cancelLabel: 'No',
                   onConfirm: () {
-                    showToast(
+                    Toast.show(
                       context: context,
                       message: 'Clicked yes',
                     );

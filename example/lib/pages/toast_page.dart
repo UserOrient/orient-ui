@@ -18,7 +18,7 @@ class ToastPage extends StatelessWidget {
             runSpacing: 12,
             children: [
               Button.small(
-                onPressed: () => showToast(
+                onPressed: () => Toast.show(
                   context: context,
                   message: 'Successfully saved!',
                   type: ToastType.success,
@@ -27,7 +27,7 @@ class ToastPage extends StatelessWidget {
                 variant: ButtonVariant.primary,
               ),
               Button.small(
-                onPressed: () => showToast(
+                onPressed: () => Toast.show(
                   context: context,
                   message: 'Something went wrong',
                   type: ToastType.error,
@@ -36,7 +36,7 @@ class ToastPage extends StatelessWidget {
                 variant: ButtonVariant.destructive,
               ),
               Button.small(
-                onPressed: () => showToast(
+                onPressed: () => Toast.show(
                   context: context,
                   message: 'Here is some info',
                   type: ToastType.info,
@@ -45,7 +45,7 @@ class ToastPage extends StatelessWidget {
                 variant: ButtonVariant.secondary,
               ),
               Button.small(
-                onPressed: () => showToast(
+                onPressed: () => Toast.show(
                   context: context,
                   message: 'Please be careful',
                   type: ToastType.warning,
@@ -63,7 +63,7 @@ class ToastPage extends StatelessWidget {
             runSpacing: 12,
             children: [
               Button.small(
-                onPressed: () => showToast(
+                onPressed: () => Toast.show(
                   context: context,
                   message: 'Toast at top',
                   position: ToastPosition.top,
@@ -72,7 +72,7 @@ class ToastPage extends StatelessWidget {
                 variant: ButtonVariant.secondary,
               ),
               Button.small(
-                onPressed: () => showToast(
+                onPressed: () => Toast.show(
                   context: context,
                   message: 'Toast at bottom',
                   position: ToastPosition.bottom,
@@ -91,19 +91,19 @@ class ToastPage extends StatelessWidget {
             children: [
               Button.small(
                 onPressed: () {
-                  showToast(context: context, message: 'First', type: ToastType.success);
+                  Toast.show(context: context, message: 'First', type: ToastType.success);
                   Future.delayed(const Duration(milliseconds: 200), () {
-                    showToast(context: context, message: 'Second', type: ToastType.info);
+                    Toast.show(context: context, message: 'Second', type: ToastType.info);
                   });
                   Future.delayed(const Duration(milliseconds: 400), () {
-                    showToast(context: context, message: 'Third', type: ToastType.warning);
+                    Toast.show(context: context, message: 'Third', type: ToastType.warning);
                   });
                 },
                 label: 'Show 3 toasts',
                 variant: ButtonVariant.primary,
               ),
               Button.small(
-                onPressed: () => dismissAllToasts(),
+                onPressed: () => Toast.dismissAll(),
                 label: 'Dismiss all',
                 variant: ButtonVariant.ghost,
               ),

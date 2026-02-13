@@ -29,7 +29,7 @@ void main() {
         await tester.pumpWidget(wrapWithNavigator(
           Builder(
             builder: (context) => GestureDetector(
-              onTap: () => showToast(context: context, message: 'Test message'),
+              onTap: () => Toast.show(context: context, message: 'Test message'),
               child: const Text('Trigger'),
             ),
           ),
@@ -42,7 +42,7 @@ void main() {
         expect(find.text('Test message'), findsOneWidget);
 
         // Dismiss and wait for cleanup
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
       });
 
@@ -53,22 +53,22 @@ void main() {
               children: [
                 GestureDetector(
                   key: const Key('success'),
-                  onTap: () => showToast(context: context, message: 'S', type: ToastType.success),
+                  onTap: () => Toast.show(context: context, message: 'S', type: ToastType.success),
                   child: const Text('Success'),
                 ),
                 GestureDetector(
                   key: const Key('error'),
-                  onTap: () => showToast(context: context, message: 'E', type: ToastType.error),
+                  onTap: () => Toast.show(context: context, message: 'E', type: ToastType.error),
                   child: const Text('Error'),
                 ),
                 GestureDetector(
                   key: const Key('info'),
-                  onTap: () => showToast(context: context, message: 'I', type: ToastType.info),
+                  onTap: () => Toast.show(context: context, message: 'I', type: ToastType.info),
                   child: const Text('Info'),
                 ),
                 GestureDetector(
                   key: const Key('warning'),
-                  onTap: () => showToast(context: context, message: 'W', type: ToastType.warning),
+                  onTap: () => Toast.show(context: context, message: 'W', type: ToastType.warning),
                   child: const Text('Warning'),
                 ),
               ],
@@ -81,7 +81,7 @@ void main() {
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 350));
         expect(find.text('S'), findsOneWidget);
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
 
         // Test error
@@ -89,7 +89,7 @@ void main() {
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 350));
         expect(find.text('E'), findsOneWidget);
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
 
         // Test info
@@ -97,7 +97,7 @@ void main() {
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 350));
         expect(find.text('I'), findsOneWidget);
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
 
         // Test warning
@@ -105,7 +105,7 @@ void main() {
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 350));
         expect(find.text('W'), findsOneWidget);
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
       });
 
@@ -113,7 +113,7 @@ void main() {
         await tester.pumpWidget(wrapWithNavigator(
           Builder(
             builder: (context) => GestureDetector(
-              onTap: () => showToast(
+              onTap: () => Toast.show(
                 context: context,
                 message: 'Top',
                 position: ToastPosition.top,
@@ -129,7 +129,7 @@ void main() {
 
         expect(find.text('Top'), findsOneWidget);
 
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
       });
 
@@ -137,7 +137,7 @@ void main() {
         await tester.pumpWidget(wrapWithNavigator(
           Builder(
             builder: (context) => GestureDetector(
-              onTap: () => showToast(
+              onTap: () => Toast.show(
                 context: context,
                 message: 'Bottom',
                 position: ToastPosition.bottom,
@@ -153,7 +153,7 @@ void main() {
 
         expect(find.text('Bottom'), findsOneWidget);
 
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
       });
 
@@ -161,7 +161,7 @@ void main() {
         await tester.pumpWidget(wrapWithNavigator(
           Builder(
             builder: (context) => GestureDetector(
-              onTap: () => showToast(context: context, message: 'With icon'),
+              onTap: () => Toast.show(context: context, message: 'With icon'),
               child: const Text('Trigger'),
             ),
           ),
@@ -174,7 +174,7 @@ void main() {
         // CustomPaint is used for icons
         expect(find.byType(CustomPaint), findsWidgets);
 
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
       });
     });
@@ -185,9 +185,9 @@ void main() {
           Builder(
             builder: (context) => GestureDetector(
               onTap: () {
-                showToast(context: context, message: 'First');
-                showToast(context: context, message: 'Second');
-                showToast(context: context, message: 'Third');
+                Toast.show(context: context, message: 'First');
+                Toast.show(context: context, message: 'Second');
+                Toast.show(context: context, message: 'Third');
               },
               child: const Text('Trigger'),
             ),
@@ -202,7 +202,7 @@ void main() {
         expect(find.text('Second'), findsOneWidget);
         expect(find.text('Third'), findsOneWidget);
 
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
       });
     });
@@ -213,8 +213,8 @@ void main() {
           Builder(
             builder: (context) => GestureDetector(
               onTap: () {
-                showToast(context: context, message: 'Toast 1');
-                showToast(context: context, message: 'Toast 2');
+                Toast.show(context: context, message: 'Toast 1');
+                Toast.show(context: context, message: 'Toast 2');
               },
               child: const Text('Show'),
             ),
@@ -228,7 +228,7 @@ void main() {
         expect(find.text('Toast 1'), findsOneWidget);
         expect(find.text('Toast 2'), findsOneWidget);
 
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pump();
 
         expect(find.text('Toast 1'), findsNothing);
@@ -239,7 +239,7 @@ void main() {
         await tester.pumpWidget(wrapWithNavigator(
           Builder(
             builder: (context) => GestureDetector(
-              onTap: () => showToast(
+              onTap: () => Toast.show(
                 context: context,
                 message: 'Swipe me',
                 position: ToastPosition.top,
@@ -267,7 +267,7 @@ void main() {
         await tester.pumpWidget(wrapWithNavigator(
           Builder(
             builder: (context) => GestureDetector(
-              onTap: () => showToast(
+              onTap: () => Toast.show(
                 context: context,
                 message: 'Accessible',
                 type: ToastType.error,
@@ -284,7 +284,7 @@ void main() {
         final semanticsFinder = find.bySemanticsLabel(RegExp(r'error.*Accessible'));
         expect(semanticsFinder, findsOneWidget);
 
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
       });
     });
@@ -294,7 +294,7 @@ void main() {
         await tester.pumpWidget(wrapWithNavigator(
           Builder(
             builder: (context) => GestureDetector(
-              onTap: () => showToast(context: context, message: 'Light'),
+              onTap: () => Toast.show(context: context, message: 'Light'),
               child: const Text('Trigger'),
             ),
           ),
@@ -307,7 +307,7 @@ void main() {
 
         expect(find.text('Light'), findsOneWidget);
 
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
       });
 
@@ -315,7 +315,7 @@ void main() {
         await tester.pumpWidget(wrapWithNavigator(
           Builder(
             builder: (context) => GestureDetector(
-              onTap: () => showToast(context: context, message: 'Dark'),
+              onTap: () => Toast.show(context: context, message: 'Dark'),
               child: const Text('Trigger'),
             ),
           ),
@@ -328,7 +328,7 @@ void main() {
 
         expect(find.text('Dark'), findsOneWidget);
 
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
       });
     });
@@ -338,7 +338,7 @@ void main() {
         await tester.pumpWidget(wrapWithNavigator(
           Builder(
             builder: (context) => GestureDetector(
-              onTap: () => showToast(context: context, message: 'Animated'),
+              onTap: () => Toast.show(context: context, message: 'Animated'),
               child: const Text('Trigger'),
             ),
           ),
@@ -354,7 +354,7 @@ void main() {
         await tester.pump(const Duration(milliseconds: 350));
         expect(find.text('Animated'), findsOneWidget);
 
-        dismissAllToasts();
+        Toast.dismissAll();
         await tester.pumpAndSettle();
       });
     });

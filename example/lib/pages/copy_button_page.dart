@@ -29,7 +29,7 @@ class CopyButtonPage extends StatelessWidget {
               CopyButton(
                 value: 'kamran@userorient.com',
                 onCopied: () {
-                  showToast(
+                  Toast.show(
                     context: context,
                     message: 'Copied to clipboard',
                   );

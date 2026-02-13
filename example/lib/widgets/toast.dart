@@ -3,10 +3,6 @@ import 'dart:async';
 import 'package:example/styling.dart';
 import 'package:flutter/widgets.dart';
 
-enum ToastType { success, error, info, warning }
-
-enum ToastPosition { top, bottom }
-
 const Duration _toastDuration = Duration(milliseconds: 3000);
 
 List<_ToastEntry> _activeToasts = [];
@@ -21,25 +17,27 @@ class Toast {
     ToastType type = ToastType.success,
     ToastPosition position = ToastPosition.top,
   }) {
-    final overlayState = Navigator.of(context).overlay;
+    final OverlayState? overlayState = Navigator.of(context).overlay;
     if (overlayState == null) return;
 
     late final _ToastEntry entry;
     late final OverlayEntry overlayEntry;
 
     overlayEntry = OverlayEntry(
-      builder: (_) => _ToastWidget(
-        key: entry.key,
-        message: message,
-        type: type,
-        position: position,
-        onRemove: () {
-          overlayEntry.remove();
-          _activeToasts.remove(entry);
-          _repositionToasts();
-        },
-        getOffset: () => _calculateOffset(entry),
-      ),
+      builder: (_) {
+        return _ToastWidget(
+          key: entry.key,
+          message: message,
+          type: type,
+          position: position,
+          onRemove: () {
+            overlayEntry.remove();
+            _activeToasts.remove(entry);
+            _repositionToasts();
+          },
+          getOffset: () => _calculateOffset(entry),
+        );
+      },
     );
 
     entry = _ToastEntry(
@@ -53,31 +51,41 @@ class Toast {
 
   /// Dismiss all active toasts
   static void dismissAll() {
-    for (final entry in _activeToasts) {
+    for (final _ToastEntry entry in _activeToasts) {
       entry.overlayEntry.remove();
     }
+
     _activeToasts.clear();
   }
 }
 
 double _calculateOffset(_ToastEntry self) {
-  final index = _activeToasts.indexOf(self);
+  final int index = _activeToasts.indexOf(self);
   if (index == -1) return 0;
-  final stackIndex = _activeToasts.length - 1 - index;
+
+  final int stackIndex = _activeToasts.length - 1 - index;
+
   return stackIndex * 8.0;
 }
 
 void _repositionToasts() {
-  for (final entry in _activeToasts) {
+  for (final _ToastEntry entry in _activeToasts) {
     entry.key.currentState?.updatePosition();
   }
 }
+
+enum ToastType { success, error, info, warning }
+
+enum ToastPosition { top, bottom }
 
 class _ToastEntry {
   final GlobalKey<_ToastWidgetState> key;
   final OverlayEntry overlayEntry;
 
-  _ToastEntry({required this.key, required this.overlayEntry});
+  _ToastEntry({
+    required this.key,
+    required this.overlayEntry,
+  });
 }
 
 class _ToastWidget extends StatefulWidget {
@@ -113,7 +121,7 @@ class _ToastWidgetState extends State<_ToastWidget>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Styling.durations.slow,
+      duration: Styling.durations.normal,
     );
 
     _fadeAnimation = Tween<double>(
@@ -208,7 +216,9 @@ class _ToastWidgetState extends State<_ToastWidget>
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       decoration: BoxDecoration(
                         color: bgColor,
-                        borderRadius: BorderRadius.circular(Styling.radii.medium),
+                        borderRadius: BorderRadius.circular(
+                          Styling.radii.medium,
+                        ),
                         boxShadow: [
                           BoxShadow(
                             blurRadius: 10,
@@ -249,7 +259,10 @@ class _ToastIcon extends StatelessWidget {
   final ToastType type;
   final Color color;
 
-  const _ToastIcon({required this.type, required this.color});
+  const _ToastIcon({
+    required this.type,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -257,7 +270,10 @@ class _ToastIcon extends StatelessWidget {
       width: 16,
       height: 16,
       child: CustomPaint(
-        painter: _ToastIconPainter(type: type, color: color),
+        painter: _ToastIconPainter(
+          type: type,
+          color: color,
+        ),
       ),
     );
   }
@@ -267,25 +283,28 @@ class _ToastIconPainter extends CustomPainter {
   final ToastType type;
   final Color color;
 
-  _ToastIconPainter({required this.type, required this.color});
+  _ToastIconPainter({
+    required this.type,
+    required this.color,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
-    final strokePaint = Paint()
+    final Paint strokePaint = Paint()
       ..color = color
       ..strokeWidth = 1.5
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
       ..style = PaintingStyle.stroke;
 
-    final fillPaint = Paint()
+    final Paint fillPaint = Paint()
       ..color = color
       ..style = PaintingStyle.fill;
 
-    final w = size.width;
-    final h = size.height;
-    final center = Offset(w / 2, h / 2);
-    final radius = w * 0.45;
+    final double w = size.width;
+    final double h = size.height;
+    final Offset center = Offset(w / 2, h / 2);
+    final double radius = w * 0.45;
 
     switch (type) {
       case ToastType.success:
@@ -326,7 +345,7 @@ class _ToastIconPainter extends CustomPainter {
 
       case ToastType.warning:
         // Triangle + "!"
-        final path = Path()
+        final Path path = Path()
           ..moveTo(w * 0.5, h * 0.08)
           ..lineTo(w * 0.92, h * 0.88)
           ..lineTo(w * 0.08, h * 0.88)

@@ -12,49 +12,53 @@ const Duration _toastDuration = Duration(milliseconds: 3000);
 
 List<_ToastEntry> _activeToasts = [];
 
-/// Show a toast notification
-void showToast({
-  required BuildContext context,
-  required String message,
-  ToastType type = ToastType.success,
-  ToastPosition position = ToastPosition.top,
-}) {
-  final overlayState = Navigator.of(context).overlay;
-  if (overlayState == null) return;
+class Toast {
+  Toast._();
 
-  late final _ToastEntry entry;
-  late final OverlayEntry overlayEntry;
+  /// Show a toast notification
+  static void show({
+    required BuildContext context,
+    required String message,
+    ToastType type = ToastType.success,
+    ToastPosition position = ToastPosition.top,
+  }) {
+    final overlayState = Navigator.of(context).overlay;
+    if (overlayState == null) return;
 
-  overlayEntry = OverlayEntry(
-    builder: (_) => _ToastWidget(
-      key: entry.key,
-      message: message,
-      type: type,
-      position: position,
-      onRemove: () {
-        overlayEntry.remove();
-        _activeToasts.remove(entry);
-        _repositionToasts();
-      },
-      getOffset: () => _calculateOffset(entry),
-    ),
-  );
+    late final _ToastEntry entry;
+    late final OverlayEntry overlayEntry;
 
-  entry = _ToastEntry(
-    key: GlobalKey<_ToastWidgetState>(),
-    overlayEntry: overlayEntry,
-  );
+    overlayEntry = OverlayEntry(
+      builder: (_) => _ToastWidget(
+        key: entry.key,
+        message: message,
+        type: type,
+        position: position,
+        onRemove: () {
+          overlayEntry.remove();
+          _activeToasts.remove(entry);
+          _repositionToasts();
+        },
+        getOffset: () => _calculateOffset(entry),
+      ),
+    );
 
-  _activeToasts.add(entry);
-  overlayState.insert(overlayEntry);
-}
+    entry = _ToastEntry(
+      key: GlobalKey<_ToastWidgetState>(),
+      overlayEntry: overlayEntry,
+    );
 
-/// Dismiss all active toasts
-void dismissAllToasts() {
-  for (final entry in _activeToasts) {
-    entry.overlayEntry.remove();
+    _activeToasts.add(entry);
+    overlayState.insert(overlayEntry);
   }
-  _activeToasts.clear();
+
+  /// Dismiss all active toasts
+  static void dismissAll() {
+    for (final entry in _activeToasts) {
+      entry.overlayEntry.remove();
+    }
+    _activeToasts.clear();
+  }
 }
 
 double _calculateOffset(_ToastEntry self) {

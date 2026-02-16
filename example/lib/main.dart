@@ -117,7 +117,7 @@ class _PlaygroundShellState extends State<PlaygroundShell> {
           children: [
             _buildLinkButton(
               icon: TablerIcons.world,
-              url: 'https://ui.userorient.com',
+              url: 'https://userorient.com',
             ),
             const SizedBox(width: 8),
             _buildLinkButton(

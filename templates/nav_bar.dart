@@ -3,22 +3,129 @@ import 'package:flutter/widgets.dart';
 
 import 'styling.dart';
 
+/// Represents a navigation item in the NavBar component.
+///
+/// Each item contains an icon and label that will be displayed
+/// in either the navigation rail (desktop) or bottom navigation bar (mobile).
 class NavBarItem {
+  /// The icon widget displayed for this navigation item.
+  ///
+  /// Typically an Icon widget. Should be sized appropriately for
+  /// the navigation context (24x24 for rail, 24x24 for bottom bar).
   final Widget icon;
+
+  /// The text label displayed for this navigation item.
+  ///
+  /// Used for accessibility labels and as text in the navigation
+  /// rail. Should be concise yet descriptive.
   final String label;
 
+  /// Creates a navigation item with the specified icon and label.
+  ///
+  /// Both [icon] and [label] are required.
   const NavBarItem({required this.icon, required this.label});
 }
 
+/// A responsive navigation component that adapts between rail and bottom bar layouts.
+///
+/// NavBar automatically switches between a side navigation rail on desktop
+/// (width >= 600px) and a bottom navigation bar on mobile devices.
+/// It provides a consistent navigation experience across all screen sizes
+/// with proper accessibility and responsive design.
+///
+/// ## Example
+///
+/// ```dart
+/// // Basic navigation
+/// int _currentIndex = 0;
+/// NavBar(
+///   currentIndex: _currentIndex,
+///   onTap: (index) => setState(() => _currentIndex = index),
+///   items: [
+///     NavBarItem(icon: Icon(Icons.home), label: 'Home'),
+///     NavBarItem(icon: Icon(Icons.search), label: 'Search'),
+///     NavBarItem(icon: Icon(Icons.profile), label: 'Profile'),
+///   ],
+///   body: _getCurrentPage(),
+/// )
+///
+/// // With header and footer (desktop only)
+/// NavBar(
+///   currentIndex: _currentIndex,
+///   onTap: (index) => setState(() => _currentIndex = index),
+///   items: _navItems,
+///   body: _getCurrentPage(),
+///   railHeader: UserAvatar(),
+///   railFooter: SettingsButton(),
+///   railWidth: 280,
+/// )
+/// ```
+///
+/// ## Behavior
+///
+/// - Automatically switches between rail and bottom bar based on screen width
+/// - Provides haptic feedback on mobile navigation
+/// - Maintains active state with proper visual indicators
+/// - Supports optional header and footer on desktop rail
+/// - Respects system safe areas and navigation bars
+///
+/// ## Accessibility
+///
+/// - Each navigation item is properly labeled for screen readers
+/// - Supports keyboard navigation and screen reader interaction
+/// - Provides semantic state information for active items
+/// - Includes proper focus management
 class NavBar extends StatelessWidget {
+  /// The index of the currently active navigation item.
+  ///
+  /// Determines which item appears as selected and receives
+  /// the active styling treatment.
   final int currentIndex;
+
+  /// Callback function called when a navigation item is tapped.
+  ///
+  /// Called with the index of the selected item. Use this to
+  /// update the current page or navigation state.
   final ValueChanged<int> onTap;
+
+  /// The list of navigation items to display.
+  ///
+  /// Must contain at least 2 items. Each item will be displayed
+  /// with its icon and label in the appropriate navigation layout.
   final List<NavBarItem> items;
+
+  /// The main content widget displayed alongside the navigation.
+  ///
+  /// This is typically a Scaffold or page content that occupies
+  /// the main area of the screen. Takes up all available space
+  /// next to the navigation rail or above the bottom bar.
   final Widget body;
+
+  /// Optional widget displayed at the top of the navigation rail (desktop only).
+  ///
+  /// Useful for user avatars, logos, or branding elements.
+  /// Only visible when the navigation rail is shown on desktop.
   final Widget? railHeader;
+
+  /// Optional widget displayed at the bottom of the navigation rail (desktop only).
+  ///
+  /// Useful for settings buttons, logout controls, or secondary actions.
+  /// Only visible when the navigation rail is shown on desktop.
   final Widget? railFooter;
+
+  /// The width of the navigation rail when displayed on desktop.
+  ///
+  /// Defaults to 240 pixels. Adjust this based on your content
+  /// needs and design requirements.
   final double railWidth;
 
+  /// Creates a responsive navigation bar.
+  ///
+  /// The [currentIndex], [onTap], [items], and [body] parameters are required.
+  /// The [railHeader], [railFooter], and [railWidth] parameters are optional
+  /// and only affect the desktop navigation rail appearance.
+  ///
+  /// Asserts that at least 2 navigation items are provided.
   const NavBar({
     super.key,
     required this.currentIndex,

@@ -4,16 +4,123 @@ import 'package:flutter/widgets.dart';
 import 'spinner.dart';
 import 'styling.dart';
 
-enum ButtonVariant { primary, secondary, ghost, destructive, outline, link }
+/// Defines the visual style variants for the Button component.
+///
+/// Each variant provides a different visual treatment while maintaining
+/// consistent sizing and behavior across all variants.
+enum ButtonVariant {
+  /// Primary button with solid background color for main actions
+  primary,
 
+  /// Secondary button with subtle background for secondary actions
+  secondary,
+
+  /// Ghost button with transparent background and hover effects
+  ghost,
+
+  /// Destructive button with red styling for dangerous actions
+  destructive,
+
+  /// Outline button with border and transparent background
+  outline,
+
+  /// Link button styled as a hyperlink for inline actions
+  link,
+}
+
+/// A versatile button component with multiple visual variants and interactive states.
+///
+/// The Button component provides a consistent way to create interactive elements
+/// throughout your application. It supports various visual styles, loading states,
+/// and accessibility features.
+///
+/// ## Example
+///
+/// ```dart
+/// // Basic primary button
+/// Button(
+///   onPressed: () => print('Button pressed'),
+///   label: 'Click me',
+/// )
+///
+/// // Button with icon and loading state
+/// Button(
+///   onPressed: () {},
+///   label: 'Save',
+///   icon: Icon(Icons.save),
+///   loading: isSaving,
+///   variant: ButtonVariant.secondary,
+/// )
+///
+/// // Small button for compact layouts
+/// Button.small(
+///   onPressed: () {},
+///   label: 'Delete',
+///   variant: ButtonVariant.destructive,
+/// )
+/// ```
+///
+/// ## Accessibility
+///
+/// - Automatically handles semantic labels for screen readers
+/// - Supports keyboard navigation (Enter and Space keys)
+/// - Provides focus management and visual focus indicators
+/// - Respects system reduced motion preferences
+///
+/// ## Behavior
+///
+/// - Disabled when `onPressed` is null or `loading` is true
+/// - Shows loading spinner when `loading` is true
+/// - Provides hover and focus visual feedback
+/// - Handles keyboard interactions automatically
+/// - Includes subtle scale animation on press
 class Button extends StatefulWidget {
+  /// Callback function called when the button is pressed.
+  ///
+  /// If null, the button will be disabled and not interactive.
+  /// The button is also automatically disabled when [loading] is true.
   final VoidCallback? onPressed;
+
+  /// The text label displayed on the button.
+  ///
+  /// This text is used for both display and accessibility purposes.
+  /// Should be concise and descriptive of the action.
   final String label;
+
+  /// Optional icon widget displayed before the label.
+  ///
+  /// The icon automatically inherits the button's text color and
+  /// appropriate sizing based on the button's size variant.
   final Widget? icon;
+
+  /// Whether to show a loading spinner and disable the button.
+  ///
+  /// When true, displays a [Spinner] in place of the icon and
+  /// prevents any interaction with the button.
+  ///
+  /// Defaults to `false`.
   final bool loading;
+
+  /// The visual style variant of the button.
+  ///
+  /// Determines the button's appearance including background color,
+  /// text color, and border styling. See [ButtonVariant] for available options.
+  ///
+  /// Defaults to [ButtonVariant.primary].
   final ButtonVariant variant;
+
+  /// Internal flag to indicate if this is a small button.
+  ///
+  /// This is set automatically based on which constructor is used.
+  /// Use the [Button.small] constructor for compact buttons.
   final bool _isSmall;
 
+  /// Creates a standard-sized button.
+  ///
+  /// Use this constructor for most button needs. The button will have
+  /// a height of 52px and full width by default.
+  ///
+  /// The [label] parameter is required. All other parameters are optional.
   const Button({
     super.key,
     this.onPressed,
@@ -23,6 +130,14 @@ class Button extends StatefulWidget {
     this.variant = ButtonVariant.primary,
   }) : _isSmall = false;
 
+  /// Creates a compact button variant.
+  ///
+  /// This constructor creates a smaller button suitable for tight spaces
+  /// or secondary actions. The button will have a height of 40px and
+  /// auto-sized width.
+  ///
+  /// The [onPressed] and [label] parameters are required. All other
+  /// parameters are optional.
   const Button.small({
     super.key,
     required this.onPressed,

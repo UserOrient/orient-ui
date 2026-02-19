@@ -9,16 +9,106 @@ import 'styling.dart';
 const double _maxWidth = 560;
 final Duration _animationDuration = Styling.durations.normal;
 
+/// A modal confirmation dialog for yes/no or confirm/cancel decisions.
+///
+/// ConfirmationPopup provides a standardized way to request user confirmation
+/// for potentially destructive or important actions. It features a centered
+/// layout with optional icon, title, description, and dual action buttons.
+///
+/// ## Example
+///
+/// ```dart
+/// // Delete confirmation
+/// ConfirmationPopup.show(
+///   context: context,
+///   icon: Icon(Icons.delete, color: Colors.red),
+///   title: 'Delete Item',
+///   description: 'This action cannot be undone. Are you sure?',
+///   confirmLabel: 'Delete',
+///   cancelLabel: 'Cancel',
+///   destructive: true,
+///   onConfirm: () => _deleteItem(),
+/// )
+///
+/// // Save confirmation
+/// ConfirmationPopup.show(
+///   context: context,
+///   title: 'Save Changes',
+///   description: 'Do you want to save your changes before leaving?',
+///   confirmLabel: 'Save',
+///   cancelLabel: 'Don\'t Save',
+///   onConfirm: () => _saveChanges(),
+/// )
+/// ```
+///
+/// ## Behavior
+///
+/// - Displays as a modal overlay with backdrop blur
+/// - Responsive padding based on screen size
+/// - Can be dismissed by tapping outside, pressing Escape, or cancel action
+/// - Respects system reduced motion preferences
+/// - Includes smooth scale and fade animations
+/// - Maximum width of 560px for readability
+///
+/// ## Accessibility
+///
+/// - Properly labeled for screen readers
+/// - Supports keyboard navigation and dismissal
+/// - Includes semantic route information
+/// - Maintains focus management
 class ConfirmationPopup extends StatelessWidget {
+  /// Optional icon displayed above the title.
+  ///
+  /// Typically an Icon widget sized 48x48. Used to provide
+  /// visual context for the confirmation (warning, info, etc.).
   final Widget? icon;
+
+  /// The main title text displayed prominently.
+  ///
+  /// Should be concise and clearly communicate the action requiring confirmation.
+  /// Uses centered alignment and bold typography.
   final String title;
+
+  /// Optional descriptive text below the title.
+  ///
+  /// Provides additional context or details about the action.
+  /// Uses smaller font size and secondary text color.
   final String? description;
+
+  /// The text label for the confirm/primary action button.
+  ///
+  /// Should be action-oriented and clear (e.g., "Delete", "Save", "Confirm").
   final String confirmLabel;
+
+  /// The text label for the cancel/secondary action button.
+  ///
+  /// Should clearly indicate cancellation (e.g., "Cancel", "Don't Save", "No").
   final String cancelLabel;
+
+  /// Callback function called when the confirm action is triggered.
+  ///
+  /// Called when the user taps the confirm button. The popup is
+  /// automatically dismissed after this callback executes.
   final VoidCallback onConfirm;
+
+  /// Optional callback function called when the cancel action is triggered.
+  ///
+  /// Called when the user taps the cancel button or dismisses the popup.
+  /// The popup is automatically dismissed after this callback executes.
   final VoidCallback? onCancel;
+
+  /// Whether the confirmation action is destructive.
+  ///
+  /// When true, the confirm button uses destructive styling
+  /// (red background) to indicate potential data loss or irreversible actions.
+  ///
+  /// Defaults to `false`.
   final bool destructive;
 
+  /// Creates a confirmation popup with the specified properties.
+  ///
+  /// All parameters except [onCancel] and [destructive] are required.
+  /// This constructor is typically used when creating custom confirmation types.
   const ConfirmationPopup({
     super.key,
     required this.icon,
@@ -31,6 +121,21 @@ class ConfirmationPopup extends StatelessWidget {
     required this.destructive,
   });
 
+  /// Displays a confirmation popup with the specified content.
+  ///
+  /// This is the preferred way to show confirmations. It handles the
+  /// navigation, animation, and overlay management automatically.
+  ///
+  /// [context] is required and must have a valid Navigator.
+  /// [icon] is optional and appears above the title.
+  /// [title] is required and appears prominently.
+  /// [description] is optional and provides additional context.
+  /// [confirmLabel] and [cancelLabel] are required for the action buttons.
+  /// [onConfirm] is required and called when confirmed.
+  /// [onCancel] is optional and called when cancelled.
+  /// [destructive] determines confirm button styling.
+  ///
+  /// Returns a Future that completes when the confirmation is handled.
   static Future<void> show({
     required BuildContext context,
     Widget? icon,

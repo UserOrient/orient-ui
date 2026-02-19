@@ -3,10 +3,74 @@ import 'package:flutter/widgets.dart';
 
 import 'styling.dart';
 
+/// A compact button for copying text to the clipboard with visual feedback.
+///
+/// CopyButton provides a simple way to allow users to copy text content
+/// with a single click. It shows a copy icon that transforms into a
+/// checkmark when the content is successfully copied, providing clear
+/// visual feedback of the action.
+///
+/// ## Example
+///
+/// ```dart
+/// // Basic copy button
+/// CopyButton(
+///   value: 'https://example.com/share-link',
+///   onCopied: () => showSnackBar('Link copied!'),
+/// )
+///
+/// // In a code block
+/// Row(
+///   children: [
+///     Expanded(child: Text(_codeSnippet)),
+///     CopyButton(value: _codeSnippet),
+///   ],
+/// )
+///
+/// // With custom styling
+/// Container(
+///   padding: EdgeInsets.all(8),
+///   child: CopyButton(
+///     value: _apiKey,
+///     onCopied: () => _trackCopyEvent(),
+///   ),
+/// )
+/// ```
+///
+/// ## Behavior
+///
+/// - Automatically copies text to system clipboard on click
+/// - Shows checkmark animation for 2 seconds after copying
+/// - Provides hover effects with color transitions
+/// - Prevents multiple rapid copies during animation
+/// - Uses theme-appropriate colors for different states
+///
+/// ## Accessibility
+///
+/// - Automatically labeled as a copy button for screen readers
+/// - Provides visual feedback for non-visual users through [onCopied]
+/// - Maintains proper touch target size (28x28)
+/// - Supports keyboard navigation when wrapped in focusable widget
 class CopyButton extends StatefulWidget {
+  /// The text content to copy to the clipboard.
+  ///
+  /// This string will be placed in the system clipboard when the button
+  /// is clicked. Can be any text content including URLs, codes,
+  /// IDs, or user-facing text.
   final String value;
+
+  /// Optional callback function called after content is copied.
+  ///
+  /// Called immediately after the content is successfully copied to
+  /// the clipboard. Use this to show additional feedback like
+  /// toast notifications, analytics tracking, or state updates.
   final VoidCallback? onCopied;
 
+  /// Creates a copy button with the specified properties.
+  ///
+  /// The [value] parameter is required and contains the text to copy.
+  /// The [onCopied] callback is optional but recommended for providing
+  /// additional user feedback when the copy action succeeds.
   const CopyButton({
     super.key,
     required this.value,
@@ -166,9 +230,15 @@ class _CopyIcon extends StatelessWidget {
   }
 }
 
+/// Custom painter that draws the copy icon.
+///
+/// Creates a two-rectangle icon representing copy functionality,
+/// with one rectangle appearing behind the other to suggest duplication.
 class _CopyIconPainter extends CustomPainter {
+  /// The color used to draw the copy icon.
   final Color color;
 
+  /// Creates a copy icon painter with the specified color.
   const _CopyIconPainter({
     required this.color,
   });
@@ -227,9 +297,15 @@ class _CheckIcon extends StatelessWidget {
   }
 }
 
+/// Custom painter that draws the checkmark icon.
+///
+/// Creates a simple checkmark that appears when content is successfully copied,
+/// providing clear visual confirmation of the action.
 class _CheckIconPainter extends CustomPainter {
+  /// The color used to draw the checkmark.
   final Color color;
 
+  /// Creates a checkmark painter with the specified color.
   const _CheckIconPainter({
     required this.color,
   });

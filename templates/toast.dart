@@ -3,14 +3,81 @@ import 'dart:async';
 import 'styling.dart';
 import 'package:flutter/widgets.dart';
 
+/// Duration for how long a toast remains visible before auto-dismissing.
 const Duration _toastDuration = Duration(milliseconds: 3000);
 
+/// Internal list tracking all currently active toast notifications.
 List<_ToastEntry> _activeToasts = [];
 
+/// A utility class for displaying non-intrusive toast notifications.
+///
+/// Toast provides a simple way to show temporary messages that appear
+/// briefly on screen and automatically dismiss. They're perfect for
+/// confirming actions, showing status updates, or providing brief feedback.
+///
+/// ## Example
+///
+/// ```dart
+/// // Basic success toast
+/// Toast.show(
+///   context: context,
+///   message: 'Settings saved successfully',
+///   type: ToastType.success,
+/// )
+///
+/// // Error toast at bottom
+/// Toast.show(
+///   context: context,
+///   message: 'Failed to connect to server',
+///   type: ToastType.error,
+///   position: ToastPosition.bottom,
+/// )
+///
+/// // Clear all active toasts
+/// Toast.dismissAll();
+/// ```
+///
+/// ## Behavior
+///
+/// - Auto-dismisses after 3 seconds
+/// - Supports stacking multiple toasts
+/// - Swipe to dismiss on supported platforms
+/// - Respects safe areas and system UI
+/// - Includes semantic labels for accessibility
+///
+/// ## Toast Types
+///
+/// - [ToastType.success] - Green checkmark for successful actions
+/// - [ToastType.error] - Red X for errors and failures
+/// - [ToastType.info] - Blue 'i' for informational messages
+/// - [ToastType.warning] - Orange triangle for warnings
+///
+/// ## Positioning
+///
+/// - [ToastPosition.top] - Appears below the status bar
+/// - [ToastPosition.bottom] - Appears above the navigation bar
+///
+/// ## Accessibility
+///
+/// - Automatically announced by screen readers
+/// - Includes semantic labels with toast type and message
+/// - Supports dismiss gestures for accessibility
 class Toast {
   Toast._();
 
-  /// Show a toast notification
+  /// Displays a toast notification with the specified message and styling.
+  ///
+  /// The toast will appear with a slide-in animation, remain visible for
+  /// 3 seconds, then dismiss with a slide-out animation. Multiple toasts
+  /// will stack vertically with 8px spacing.
+  ///
+  /// [context] is required and must have an accessible Overlay.
+  /// [message] is the text content to display in the toast.
+  /// [type] determines the icon and color scheme. Defaults to [ToastType.success].
+  /// [position] controls where the toast appears. Defaults to [ToastPosition.top].
+  ///
+  /// If no overlay is available (e.g., during navigation transitions),
+  /// the toast will not be displayed.
   static void show({
     required BuildContext context,
     required String message,
@@ -49,7 +116,12 @@ class Toast {
     overlayState.insert(overlayEntry);
   }
 
-  /// Dismiss all active toasts
+  /// Dismisses all currently active toast notifications.
+  ///
+  /// This method immediately removes all toasts from the screen,
+  /// canceling any ongoing animations. Use this to clear the
+  /// toast queue when navigating to a new screen or when
+  /// user action makes the toasts irrelevant.
   static void dismissAll() {
     for (final _ToastEntry entry in _activeToasts) {
       entry.overlayEntry.remove();
@@ -74,9 +146,35 @@ void _repositionToasts() {
   }
 }
 
-enum ToastType { success, error, info, warning }
+/// Defines the visual style and semantic meaning of a toast notification.
+///
+/// Each type includes a distinctive icon and color scheme that
+/// conveys the nature of the message to users.
+enum ToastType {
+  /// Green toast with checkmark icon for successful actions
+  success,
 
-enum ToastPosition { top, bottom }
+  /// Red toast with X icon for errors and failures
+  error,
+
+  /// Blue toast with 'i' icon for informational messages
+  info,
+
+  /// Orange toast with triangle icon for warnings
+  warning,
+}
+
+/// Defines the vertical position where toast notifications appear.
+///
+/// Position affects the animation direction and respects system UI
+/// elements like status bars and navigation bars.
+enum ToastPosition {
+  /// Toasts appear below the status bar and slide down from top
+  top,
+
+  /// Toasts appear above the navigation bar and slide up from bottom
+  bottom,
+}
 
 class _ToastEntry {
   final GlobalKey<_ToastWidgetState> key;

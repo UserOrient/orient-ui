@@ -21,17 +21,87 @@ const double _kSmallThumbPadding = 3;
 const double _kThumbExtension = 5;
 const double _kSmallThumbExtension = 3;
 
+/// A toggle switch component with smooth animations and haptic feedback.
+///
+/// Toggle provides a familiar on/off switch interface with drag-to-toggle
+/// functionality, smooth animations, and accessibility features. It supports
+/// both standard and small sizes for different use cases.
+///
+/// ## Example
+///
+/// ```dart
+/// // Basic toggle
+/// bool _isEnabled = false;
+/// Toggle(
+///   value: _isEnabled,
+///   onChanged: (value) => setState(() => _isEnabled = value),
+/// )
+///
+/// // Small toggle for compact layouts
+/// bool _notifications = true;
+/// Toggle.small(
+///   value: _notifications,
+///   onChanged: (value) => setState(() => _notifications = value),
+/// )
+///
+/// // Disabled toggle
+/// Toggle(
+///   value: true,
+///   onChanged: null, // Disabled
+/// )
+/// ```
+///
+/// ## Behavior
+///
+/// - Supports both tap and drag interactions
+/// - Provides haptic feedback on iOS devices
+/// - Smooth thumb animation with spring physics
+/// - Visual feedback on hover and focus
+/// - Maintains state when value changes programmatically
+///
+/// ## Accessibility
+///
+/// - Automatically labeled as a toggle for screen readers
+/// - Supports keyboard navigation (Space key)
+/// - Provides semantic state information
+/// - Includes focus management and visual indicators
 class Toggle extends StatefulWidget {
+  /// Whether the toggle is in the 'on' position.
+  ///
+  /// When true, the thumb is positioned at the right end of the track.
+  /// When false, the thumb is positioned at the left end.
   final bool value;
+
+  /// Callback function called when the toggle state changes.
+  ///
+  /// Called with the new boolean value when the user interacts with
+  /// the toggle. If null, the toggle is disabled and not interactive.
   final ValueChanged<bool>? onChanged;
+
+  /// Internal flag indicating if this is a small toggle.
+  ///
+  /// Set automatically based on which constructor is used.
+  /// Use the [Toggle.small] constructor for compact toggles.
   final bool _isSmall;
 
+  /// Creates a standard-sized toggle switch.
+  ///
+  /// The toggle will have dimensions of 48x26 pixels with a 20px thumb.
+  /// Use this constructor for most toggle needs.
+  ///
+  /// The [value] parameter is required. [onChanged] is optional.
   const Toggle({
     super.key,
     required this.value,
     this.onChanged,
   }) : _isSmall = false;
 
+  /// Creates a compact toggle switch.
+  ///
+  /// The toggle will have dimensions of 40x22 pixels with a 16px thumb.
+  /// Use this constructor for tight spaces or secondary toggles.
+  ///
+  /// The [value] parameter is required. [onChanged] is optional.
   const Toggle.small({
     super.key,
     required this.value,

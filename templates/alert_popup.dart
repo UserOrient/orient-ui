@@ -8,12 +8,86 @@ import 'styling.dart';
 const double _maxWidth = 560;
 final Duration _animationDuration = Styling.durations.normal;
 
+/// A modal alert popup for displaying important messages with optional actions.
+///
+/// AlertPopup provides a standardized way to show alerts, warnings, or
+/// informational messages to users. It features a centered layout with
+/// optional icon, title, description, and action button.
+///
+/// ## Example
+///
+/// ```dart
+/// // Basic alert
+/// AlertPopup.show(
+///   context: context,
+///   icon: Icon(Icons.warning, color: Colors.orange),
+///   title: 'Delete Item',
+///   description: 'This action cannot be undone. Are you sure?',
+///   action: Button(
+///     label: 'Delete',
+///     variant: ButtonVariant.destructive,
+///     onPressed: () => Navigator.pop(context),
+///   ),
+/// )
+///
+/// // Success message
+/// AlertPopup.show(
+///   context: context,
+///   icon: Icon(Icons.check_circle, color: Colors.green),
+///   title: 'Success!',
+///   description: 'Your changes have been saved.',
+///   action: Button(
+///     label: 'OK',
+///     onPressed: () => Navigator.pop(context),
+///   ),
+/// )
+/// ```
+///
+/// ## Behavior
+///
+/// - Displays as a modal overlay with backdrop blur
+/// - Responsive padding based on screen size
+/// - Can be dismissed by tapping outside or pressing Escape
+/// - Respects system reduced motion preferences
+/// - Includes smooth scale and fade animations
+/// - Maximum width of 560px for readability
+///
+/// ## Accessibility
+///
+/// - Properly labeled for screen readers
+/// - Supports keyboard navigation and dismissal
+/// - Includes semantic route information
+/// - Maintains focus management
 class AlertPopup extends StatelessWidget {
+  /// Optional icon displayed above the title.
+  ///
+  /// Typically an Icon widget sized 48x48. Used to provide
+  /// visual context for the alert (warning, success, error, etc.).
   final Widget? icon;
+
+  /// The main title text displayed prominently.
+  ///
+  /// Should be concise and clearly communicate the alert's purpose.
+  /// Uses centered alignment and bold typography.
   final String title;
+
+  /// Optional descriptive text below the title.
+  ///
+  /// Provides additional context or details about the alert.
+  /// Uses smaller font size and secondary text color.
   final String? description;
+
+  /// Optional action button displayed at the bottom.
+  ///
+  /// Typically a Button widget for the primary action.
+  /// When null, no action button is shown.
   final Widget? action;
 
+  /// Creates an alert popup with the specified properties.
+  ///
+  /// The [title] parameter is required. All other parameters are optional.
+  /// This constructor is typically used when creating custom alert types
+  /// or when embedding alert content in other components.
   const AlertPopup({
     super.key,
     required this.icon,
@@ -22,6 +96,18 @@ class AlertPopup extends StatelessWidget {
     required this.action,
   });
 
+  /// Displays an alert popup with the specified content.
+  ///
+  /// This is the preferred way to show alerts. It handles the
+  /// navigation, animation, and overlay management automatically.
+  ///
+  /// [context] is required and must have a valid Navigator.
+  /// [icon] is optional and appears above the title.
+  /// [title] is required and appears prominently.
+  /// [description] is optional and provides additional context.
+  /// [action] is optional and appears as the primary action button.
+  ///
+  /// Returns a Future that completes when the alert is dismissed.
   static Future<void> show({
     required BuildContext context,
     Widget? icon,

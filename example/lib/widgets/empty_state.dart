@@ -1,5 +1,5 @@
 import 'package:example/style.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class EmptyState extends StatelessWidget {
   final Widget? icon;

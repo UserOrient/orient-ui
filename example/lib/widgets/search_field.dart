@@ -156,6 +156,7 @@ class _SearchFieldState extends State<SearchField> {
                       child: CustomPaint(
                         size: const Size(20, 20),
                         painter: _ClearIconPainter(
+                          color: style.colors.secondaryText,
                           backgroundColor: style.colors.button.secondary,
                         ),
                       ),
@@ -211,9 +212,10 @@ class _SearchIconPainter extends CustomPainter {
 
 // Clear (X) icon with filled square background
 class _ClearIconPainter extends CustomPainter {
+  final Color color;
   final Color backgroundColor;
 
-  const _ClearIconPainter({required this.backgroundColor});
+  const _ClearIconPainter({required this.color, required this.backgroundColor});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -221,7 +223,7 @@ class _ClearIconPainter extends CustomPainter {
 
     // Filled rounded square background
     final bgPaint = Paint()
-      ..color = const Color(0xFFACAEAF)
+      ..color = color
       ..style = PaintingStyle.fill;
 
     canvas.drawRRect(
@@ -245,6 +247,7 @@ class _ClearIconPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _ClearIconPainter oldDelegate) {
-    return oldDelegate.backgroundColor != backgroundColor;
+    return oldDelegate.color != color ||
+        oldDelegate.backgroundColor != backgroundColor;
   }
 }

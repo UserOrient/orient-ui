@@ -111,7 +111,7 @@ class ComponentsPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: style.colors.primaryText,
+                color: style.colors.foreground,
               ),
             ),
             const SizedBox(width: 8),
@@ -119,7 +119,7 @@ class ComponentsPage extends StatelessWidget {
               cliName,
               style: TextStyle(
                 fontSize: 14,
-                color: style.colors.secondaryText,
+                color: style.colors.mutedForeground,
               ),
             ),
           ],

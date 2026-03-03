@@ -77,7 +77,7 @@ class Popup extends StatelessWidget {
                       fontSize: 28,
                       height: 36 / 28,
                       fontWeight: FontWeight.bold,
-                      color: style.colors.primaryText,
+                      color: style.colors.foreground,
                       decoration: TextDecoration.none,
                     ),
                   ),
@@ -85,7 +85,7 @@ class Popup extends StatelessWidget {
               else
                 const Spacer(),
               _CloseButton(
-                color: style.colors.secondaryText,
+                color: style.colors.mutedForeground,
               ),
             ],
           ),
@@ -227,7 +227,7 @@ class _CloseButtonState extends State<_CloseButton> {
           child: CustomPaint(
             size: const Size(20, 20),
             painter: _CloseIconPainter(
-              color: style.colors.primaryText,
+              color: style.colors.foreground,
             ),
           ),
         ),

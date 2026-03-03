@@ -105,7 +105,7 @@ class _SearchFieldState extends State<SearchField> {
               CustomPaint(
                 size: const Size(20, 20),
                 painter: _SearchIconPainter(
-                  color: style.colors.secondaryText,
+                  color: style.colors.mutedForeground,
                 ),
               ),
               const SizedBox(width: 8),
@@ -119,7 +119,7 @@ class _SearchFieldState extends State<SearchField> {
                         style: TextStyle(
                           fontSize: 16,
                           height: 16 / 16,
-                          color: style.colors.secondaryText,
+                          color: style.colors.mutedForeground,
                         ),
                       ),
                     EditableText(
@@ -129,9 +129,9 @@ class _SearchFieldState extends State<SearchField> {
                       style: TextStyle(
                         fontSize: 16,
                         height: 16 / 16,
-                        color: style.colors.primaryText,
+                        color: style.colors.foreground,
                       ),
-                      cursorColor: style.colors.primaryText,
+                      cursorColor: style.colors.foreground,
                       cursorHeight: 18,
                       backgroundCursorColor: const Color(0x00000000),
                       textInputAction: TextInputAction.search,
@@ -156,7 +156,7 @@ class _SearchFieldState extends State<SearchField> {
                       child: CustomPaint(
                         size: const Size(20, 20),
                         painter: _ClearIconPainter(
-                          color: style.colors.secondaryText,
+                          color: style.colors.mutedForeground,
                           backgroundColor: style.colors.button.secondary,
                         ),
                       ),

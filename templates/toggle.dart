@@ -252,7 +252,7 @@ class _ToggleState extends State<Toggle> with TickerProviderStateMixin {
                 final double travel = trackW - thumbH - pad * 2 - ext;
 
                 final Color inactiveTrack = _isHovered && !widget.value
-                    ? Color.lerp(colors.border, colors.primaryText, 0.1)!
+                    ? Color.lerp(colors.border, colors.foreground, 0.1)!
                     : colors.border;
 
                 final Color trackColor = Color.lerp(

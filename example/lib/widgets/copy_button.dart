@@ -97,9 +97,9 @@ class _CopyButtonState extends State<CopyButton>
       color = style.colors.toast.success;
     } else {
       if (_isHovered) {
-        color = style.colors.primaryText;
+        color = style.colors.foreground;
       } else {
-        color = style.colors.secondaryText;
+        color = style.colors.mutedForeground;
       }
     }
 

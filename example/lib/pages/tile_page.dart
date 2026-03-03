@@ -29,7 +29,7 @@ class TilePage extends StatelessWidget {
             subtitle: 'Control your privacy settings',
             trailing: Text(
               '\u203A',
-              style: TextStyle(fontSize: 20, color: colors.secondaryText),
+              style: TextStyle(fontSize: 20, color: colors.mutedForeground),
             ),
             onTap: () {},
           ),
@@ -75,7 +75,7 @@ class TilePage extends StatelessWidget {
             subtitle: 'App preferences',
             trailing: Text(
               '\u203A',
-              style: TextStyle(fontSize: 20, color: colors.secondaryText),
+              style: TextStyle(fontSize: 20, color: colors.mutedForeground),
             ),
             onTap: () {},
           ),

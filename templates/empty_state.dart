@@ -35,7 +35,7 @@ class EmptyState extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               height: 28 / 18,
-              color: style.colors.primaryText,
+              color: style.colors.foreground,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -47,7 +47,7 @@ class EmptyState extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 height: 20 / 14,
-                color: style.colors.secondaryText,
+                color: style.colors.mutedForeground,
               ),
             ),
           ],

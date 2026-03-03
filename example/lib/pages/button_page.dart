@@ -87,7 +87,7 @@ class _ButtonPageState extends State<ButtonPage> {
           label,
           style: TextStyle(
             fontSize: 13,
-            color: style.colors.secondaryText,
+            color: style.colors.mutedForeground,
           ),
         ),
       ],

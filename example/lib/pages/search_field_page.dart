@@ -83,7 +83,7 @@ class _PackageItem extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: style.colors.primaryText,
+              color: style.colors.foreground,
             ),
           ),
           const SizedBox(height: 4),
@@ -91,7 +91,7 @@ class _PackageItem extends StatelessWidget {
             description,
             style: TextStyle(
               fontSize: 14,
-              color: style.colors.secondaryText,
+              color: style.colors.mutedForeground,
             ),
           ),
         ],

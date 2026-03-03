@@ -117,7 +117,7 @@ class _TileState extends State<Tile> {
                             fontSize: 16,
                             height: 1.5,
                             fontWeight: FontWeight.w500,
-                            color: colors.primaryText,
+                            color: colors.foreground,
                           ),
                         ),
                         if (widget.subtitle != null)
@@ -128,7 +128,7 @@ class _TileState extends State<Tile> {
                             style: TextStyle(
                               fontSize: 14,
                               height: 20 / 14,
-                              color: colors.secondaryText,
+                              color: colors.mutedForeground,
                             ),
                           ),
                       ],

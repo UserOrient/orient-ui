@@ -25,7 +25,7 @@ class DemoSection extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: style.colors.secondaryText,
+              color: style.colors.mutedForeground,
             ),
           ),
           const SizedBox(height: 12),

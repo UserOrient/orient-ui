@@ -18,7 +18,7 @@ class NavBarPage extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             height: 1.5,
-            color: style.colors.secondaryText,
+            color: style.colors.mutedForeground,
           ),
         ),
       ],

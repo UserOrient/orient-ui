@@ -22,7 +22,7 @@ class CopyButtonPage extends StatelessWidget {
                 'kamran@userorient.com',
                 style: TextStyle(
                   fontSize: 14,
-                  color: style.colors.primaryText,
+                  color: style.colors.foreground,
                 ),
               ),
               const SizedBox(width: 8),

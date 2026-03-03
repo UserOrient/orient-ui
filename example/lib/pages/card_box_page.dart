@@ -32,7 +32,7 @@ class CardBoxPage extends StatelessWidget {
                     child: Icon(
                       TablerIcons.chart_bar,
                       size: 22,
-                      color: colors.primaryText,
+                      color: colors.foreground,
                     ),
                   ),
                 ),
@@ -45,7 +45,7 @@ class CardBoxPage extends StatelessWidget {
                         'Monthly Revenue',
                         style: TextStyle(
                           fontSize: 13,
-                          color: colors.secondaryText,
+                          color: colors.mutedForeground,
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -54,7 +54,7 @@ class CardBoxPage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
-                          color: colors.primaryText,
+                          color: colors.foreground,
                         ),
                       ),
                     ],
@@ -112,7 +112,7 @@ class CardBoxPage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w700,
-                        color: colors.primaryText,
+                        color: colors.foreground,
                       ),
                     ),
                     const SizedBox(height: 2),
@@ -120,7 +120,7 @@ class CardBoxPage extends StatelessWidget {
                       '\$29/mo',
                       style: TextStyle(
                         fontSize: 13,
-                        color: colors.secondaryText,
+                        color: colors.mutedForeground,
                       ),
                     ),
                     const SizedBox(height: 14),
@@ -146,7 +146,7 @@ class CardBoxPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w700,
-                            color: colors.primaryText,
+                            color: colors.foreground,
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -174,7 +174,7 @@ class CardBoxPage extends StatelessWidget {
                       '\$99/mo',
                       style: TextStyle(
                         fontSize: 13,
-                        color: colors.secondaryText,
+                        color: colors.mutedForeground,
                       ),
                     ),
                     const SizedBox(height: 14),
@@ -243,7 +243,7 @@ class CardBoxPage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: colors.primaryText,
+                          color: colors.foreground,
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -252,7 +252,7 @@ class CardBoxPage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 13,
                           height: 1.4,
-                          color: colors.secondaryText,
+                          color: colors.mutedForeground,
                         ),
                       ),
                     ],
@@ -261,7 +261,7 @@ class CardBoxPage extends StatelessWidget {
                 Icon(
                   TablerIcons.chevron_right,
                   size: 18,
-                  color: colors.secondaryText,
+                  color: colors.mutedForeground,
                 ),
               ],
             ),
@@ -274,14 +274,14 @@ class CardBoxPage extends StatelessWidget {
   Widget _featureRow(ColorTokens colors, IconData icon, String text) {
     return Row(
       children: [
-        Icon(icon, size: 16, color: colors.primaryText),
+        Icon(icon, size: 16, color: colors.foreground),
         const SizedBox(width: 8),
         Flexible(
           child: Text(
             text,
             style: TextStyle(
               fontSize: 14,
-              color: colors.primaryText,
+              color: colors.foreground,
             ),
           ),
         ),

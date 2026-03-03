@@ -108,8 +108,8 @@ final DurationTokens _durations = DurationTokens(
 final ColorTokens _colorsLight = ColorTokens(
   background: _lightBackground,
   border: _lightBorder,
-  primaryText: _lightPrimaryText,
-  secondaryText: _lightSecondaryText,
+  foreground: _lightPrimaryText,
+  mutedForeground: _lightSecondaryText,
   accent: _lightAccent,
   accentForeground: _lightAccentForeground,
   surfaceContainer: _lightSurfaceContainer,
@@ -143,8 +143,8 @@ final ColorTokens _colorsLight = ColorTokens(
 final ColorTokens _colorsDark = ColorTokens(
   background: _darkBackground,
   border: _darkBorder,
-  primaryText: _darkPrimaryText,
-  secondaryText: _darkSecondaryText,
+  foreground: _darkPrimaryText,
+  mutedForeground: _darkSecondaryText,
   accent: _darkAccent,
   accentForeground: _darkAccentForeground,
   surfaceContainer: _darkSurfaceContainer,
@@ -322,8 +322,8 @@ class ToastColors {
 class ColorTokens {
   final Color background;
   final Color border;
-  final Color primaryText;
-  final Color secondaryText;
+  final Color foreground;
+  final Color mutedForeground;
   final Color accent;
   final Color accentForeground;
   final Color surfaceContainer;
@@ -334,8 +334,8 @@ class ColorTokens {
   const ColorTokens({
     required this.background,
     required this.border,
-    required this.primaryText,
-    required this.secondaryText,
+    required this.foreground,
+    required this.mutedForeground,
     required this.accent,
     required this.accentForeground,
     required this.surfaceContainer,

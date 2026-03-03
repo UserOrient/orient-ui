@@ -19,7 +19,7 @@ class DocsPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w700,
-              color: style.colors.primaryText,
+              color: style.colors.foreground,
             ),
           ),
           const SizedBox(height: 8),
@@ -27,7 +27,7 @@ class DocsPage extends StatelessWidget {
             'Design system for Flutter without Material or Cupertino.',
             style: TextStyle(
               fontSize: 16,
-              color: style.colors.secondaryText,
+              color: style.colors.mutedForeground,
             ),
           ),
           const SizedBox(height: 32),
@@ -105,7 +105,7 @@ class DocsPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: style.colors.primaryText,
+              color: style.colors.foreground,
             ),
           ),
           const SizedBox(height: 16),
@@ -132,7 +132,7 @@ class DocsPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: style.colors.primaryText,
+              color: style.colors.foreground,
             ),
           ),
           const SizedBox(height: 8),
@@ -159,7 +159,7 @@ class DocsPage extends StatelessWidget {
         style: TextStyle(
           fontSize: 13,
           fontFamily: 'monospace',
-          color: style.colors.primaryText,
+          color: style.colors.foreground,
           height: 1.6,
         ),
       ),
@@ -176,7 +176,7 @@ class DocsPage extends StatelessWidget {
                   name,
                   style: TextStyle(
                     fontSize: 14,
-                    color: style.colors.primaryText,
+                    color: style.colors.foreground,
                   ),
                 ),
               ))

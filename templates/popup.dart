@@ -34,9 +34,9 @@ class Popup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StyleData style = Style.of(context);
+    final Style style = Style.of(context);
     final double screenWidth = MediaQuery.of(context).size.width;
-    final bool isDesktop = screenWidth >= style.breakpoints.desktop;
+    final bool isDesktop = screenWidth >= Style.breakpoints.desktop;
 
     final EdgeInsets padding = isDesktop
         ? const EdgeInsets.all(48)
@@ -196,7 +196,7 @@ class _CloseButtonState extends State<_CloseButton> {
 
   @override
   Widget build(BuildContext context) {
-    final StyleData style = Style.of(context);
+    final Style style = Style.of(context);
     final Color buttonColor = _getButtonColor(
       style.colors.button.secondary,
     );

@@ -57,11 +57,11 @@ class ConfirmationPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = Style.of(context);
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isDesktop = screenWidth >= style.breakpoints.desktop;
+    final Style style = Style.of(context);
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final bool isDesktop = screenWidth >= Style.breakpoints.desktop;
 
-    final padding = isDesktop
+    final EdgeInsets padding = isDesktop
         ? const EdgeInsets.only(top: 64, bottom: 48, left: 48, right: 48)
         : const EdgeInsets.only(top: 32, bottom: 24, left: 24, right: 24);
 
@@ -178,7 +178,9 @@ class _ConfirmationPopupRoute extends PageRouteBuilder {
          barrierColor: const Color(0x00000000),
          transitionDuration: _animationDuration,
          reverseTransitionDuration: _animationDuration,
-         pageBuilder: (_, __, ___) => const SizedBox.shrink(),
+         pageBuilder: (_, _, _) {
+           return const SizedBox.shrink();
+         },
        );
 
   @override

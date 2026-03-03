@@ -96,7 +96,7 @@ class ComponentsPage extends StatelessWidget {
   Widget _componentSection(
     String title,
     String cliName,
-    StyleData style,
+    Style style,
     Widget child,
   ) {
     return Column(

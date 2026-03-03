@@ -9,7 +9,7 @@ class CardBoxPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Style.of(context).colors;
+    final ColorTokens colors = Style.of(context).colors;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,8 +25,7 @@ class CardBoxPage extends StatelessWidget {
                   height: 44,
                   decoration: BoxDecoration(
                     color: colors.surfaceContainer,
-                    borderRadius:
-                        BorderRadius.circular(Style.radii.small),
+                    borderRadius: BorderRadius.circular(Style.radii.small),
                   ),
                   child: Center(
                     child: Icon(
@@ -61,12 +60,13 @@ class CardBoxPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF22C55E).withValues(alpha: 0.12),
-                    borderRadius:
-                        BorderRadius.circular(Style.radii.small),
+                    borderRadius: BorderRadius.circular(Style.radii.small),
                   ),
                   child: const Row(
                     mainAxisSize: MainAxisSize.min,
@@ -98,7 +98,8 @@ class CardBoxPage extends StatelessWidget {
           title: 'Filled',
           child: Builder(
             builder: (context) {
-              final isDesktop = MediaQuery.of(context).size.width >=
+              final isDesktop =
+                  MediaQuery.of(context).size.width >=
                   Style.breakpoints.desktop;
 
               final proCard = CardBox(
@@ -152,11 +153,14 @@ class CardBoxPage extends StatelessWidget {
                         const SizedBox(width: 8),
                         Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 6, vertical: 2),
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: colors.accent,
-                            borderRadius:
-                                BorderRadius.circular(Style.radii.small),
+                            borderRadius: BorderRadius.circular(
+                              Style.radii.small,
+                            ),
                           ),
                           child: Text(
                             'Popular',
@@ -178,7 +182,11 @@ class CardBoxPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 14),
-                    _featureRow(colors, TablerIcons.check, 'Unlimited projects'),
+                    _featureRow(
+                      colors,
+                      TablerIcons.check,
+                      'Unlimited projects',
+                    ),
                     const SizedBox(height: 6),
                     _featureRow(colors, TablerIcons.check, 'Priority support'),
                     const SizedBox(height: 6),
@@ -222,8 +230,7 @@ class CardBoxPage extends StatelessWidget {
                   height: 36,
                   decoration: BoxDecoration(
                     color: const Color(0xFF3B82F6).withValues(alpha: 0.12),
-                    borderRadius:
-                        BorderRadius.circular(Style.radii.small),
+                    borderRadius: BorderRadius.circular(Style.radii.small),
                   ),
                   child: const Center(
                     child: Icon(

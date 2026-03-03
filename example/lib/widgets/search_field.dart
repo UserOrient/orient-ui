@@ -79,7 +79,7 @@ class _SearchFieldState extends State<SearchField> {
 
   @override
   Widget build(BuildContext context) {
-    final StyleData style = Style.of(context);
+    final Style style = Style.of(context);
     final bool showPlaceholder =
         _controller.text.isEmpty && widget.placeholder != null;
 

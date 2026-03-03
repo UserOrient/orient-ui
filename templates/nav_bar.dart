@@ -32,9 +32,8 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StyleData style = Style.of(context);
     final bool isDesktop =
-        MediaQuery.of(context).size.width >= style.breakpoints.desktop;
+        MediaQuery.of(context).size.width >= Style.breakpoints.desktop;
 
     if (isDesktop) {
       return Row(
@@ -145,7 +144,7 @@ class _RailItemState extends State<_RailItem> {
 
   @override
   Widget build(BuildContext context) {
-    final StyleData style = Style.of(context);
+    final Style style = Style.of(context);
     final NavigationColors navColors = style.colors.navigation;
 
     Color? backgroundColor;

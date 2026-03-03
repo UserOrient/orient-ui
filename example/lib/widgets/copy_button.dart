@@ -90,7 +90,7 @@ class _CopyButtonState extends State<CopyButton>
 
   @override
   Widget build(BuildContext context) {
-    final StyleData style = Style.of(context);
+    final Style style = Style.of(context);
 
     final Color color;
     if (_hasCopied) {

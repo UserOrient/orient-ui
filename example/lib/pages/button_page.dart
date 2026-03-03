@@ -76,7 +76,7 @@ class _ButtonPageState extends State<ButtonPage> {
     String label,
     bool value,
     ValueChanged<bool> onChanged,
-    StyleData style,
+    Style style,
   ) {
     return Row(
       mainAxisSize: MainAxisSize.min,

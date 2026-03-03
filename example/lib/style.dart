@@ -184,45 +184,26 @@ class Style extends InheritedWidget {
     required super.child,
   });
 
-  // Static - no context needed
+  Style._fallback(this.brightness) : super(child: const SizedBox.shrink());
+
+  bool get isDark => brightness == Brightness.dark;
+  ColorTokens get colors => isDark ? _colorsDark : _colorsLight;
+
   static RadiusTokens get radii => _radii;
   static DurationTokens get durations => _durations;
   static BreakpointTokens get breakpoints => _breakpoints;
 
-  static StyleData of(BuildContext context) {
+  static Style of(BuildContext context) {
     final Style? style = context.dependOnInheritedWidgetOfExactType<Style>();
-
-    final bool isDark = style?.brightness == Brightness.dark;
-
-    return StyleData(
-      isDark: isDark,
-      colors: isDark ? _colorsDark : _colorsLight,
-      radii: _radii,
-      durations: _durations,
-      breakpoints: _breakpoints,
-    );
+    if (style != null) return style;
+    final Brightness brightness = MediaQuery.platformBrightnessOf(context);
+    return Style._fallback(brightness);
   }
 
   @override
   bool updateShouldNotify(Style oldWidget) {
     return brightness != oldWidget.brightness;
   }
-}
-
-class StyleData {
-  final bool isDark;
-  final ColorTokens colors;
-  final RadiusTokens radii;
-  final DurationTokens durations;
-  final BreakpointTokens breakpoints;
-
-  const StyleData({
-    required this.isDark,
-    required this.colors,
-    required this.radii,
-    required this.durations,
-    required this.breakpoints,
-  });
 }
 
 class BreakpointTokens {

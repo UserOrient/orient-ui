@@ -18,7 +18,7 @@ class EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StyleData style = Style.of(context);
+    final Style style = Style.of(context);
 
     return Container(
       alignment: Alignment.center,

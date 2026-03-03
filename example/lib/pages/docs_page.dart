@@ -91,7 +91,7 @@ class DocsPage extends StatelessWidget {
   }
 
   Widget _buildSection({
-    required StyleData style,
+    required Style style,
     required String title,
     required List<Widget> children,
   }) {
@@ -116,7 +116,7 @@ class DocsPage extends StatelessWidget {
   }
 
   Widget _buildStep(
-    StyleData style,
+    Style style,
     String number,
     String title,
     Color codeBackground,
@@ -144,7 +144,7 @@ class DocsPage extends StatelessWidget {
 
   Widget _buildCodeBlock(
     Color background,
-    StyleData style,
+    Style style,
     String code,
   ) {
     return Container(
@@ -166,7 +166,7 @@ class DocsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildComponentList(StyleData style, List<String> components) {
+  Widget _buildComponentList(Style style, List<String> components) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: components

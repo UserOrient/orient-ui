@@ -85,7 +85,9 @@ Future<void> _initCommand() async {
   try {
     await _fetchAndSave('style.dart', 'lib/style.dart');
 
-    _log('🎉', 'All set! Wrap your app:');
+    _log('🎉', 'All set! Created lib/style.dart');
+    _log('💡', 'Components follow system brightness by default.');
+    _log('  ', 'To control brightness manually, wrap your app:');
     print('   ┌─────────────────────────────────');
     print('   │ Style(');
     print('   │   brightness: Brightness.light,');

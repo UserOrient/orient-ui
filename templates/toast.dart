@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'styling.dart';
+import 'style.dart';
 import 'package:flutter/widgets.dart';
 
 const Duration _toastDuration = Duration(milliseconds: 3000);
@@ -121,7 +121,7 @@ class _ToastWidgetState extends State<_ToastWidget>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Styling.durations.normal,
+      duration: Style.durations.normal,
     );
 
     _fadeAnimation = Tween<double>(
@@ -171,8 +171,8 @@ class _ToastWidgetState extends State<_ToastWidget>
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
-    final toastColors = styling.colors.toast;
+    final style = Style.of(context);
+    final toastColors = style.colors.toast;
     final mediaQuery = MediaQuery.of(context);
     final topPadding = mediaQuery.padding.top;
     final bottomPadding = mediaQuery.padding.bottom;
@@ -191,7 +191,7 @@ class _ToastWidgetState extends State<_ToastWidget>
     return Directionality(
       textDirection: TextDirection.ltr,
       child: AnimatedPositioned(
-        duration: Styling.durations.normal,
+        duration: Style.durations.normal,
         curve: Curves.easeOut,
         left: 0,
         right: 0,
@@ -217,7 +217,7 @@ class _ToastWidgetState extends State<_ToastWidget>
                       decoration: BoxDecoration(
                         color: bgColor,
                         borderRadius: BorderRadius.circular(
-                          Styling.radii.medium,
+                          Style.radii.medium,
                         ),
                         boxShadow: [
                           BoxShadow(

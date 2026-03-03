@@ -18,7 +18,7 @@ void main() {
     Widget? railHeader,
     Widget? railFooter,
   }) {
-    return wrapWithStylingAndSize(
+    return wrapWithStyleAndSize(
       NavBar(
         currentIndex: currentIndex,
         onTap: onTap ?? (_) {},
@@ -184,7 +184,7 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithStylingAndSize(
+        await tester.pumpWidget(wrapWithStyleAndSize(
           NavBar(
             currentIndex: 0,
             onTap: (_) {},
@@ -199,7 +199,7 @@ void main() {
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithStylingAndSize(
+        await tester.pumpWidget(wrapWithStyleAndSize(
           NavBar(
             currentIndex: 0,
             onTap: (_) {},

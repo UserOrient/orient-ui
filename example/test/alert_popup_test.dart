@@ -10,7 +10,7 @@ Widget wrapWithNavigator(
   Widget child, {
   Brightness brightness = Brightness.light,
 }) {
-  return Styling(
+  return Style(
     brightness: brightness,
     child: Directionality(
       textDirection: TextDirection.ltr,
@@ -35,7 +35,7 @@ void main() {
     group('rendering', () {
       testWidgets('renders with title only', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             AlertPopup(
               icon: null,
               title: 'Something happened',
@@ -50,7 +50,7 @@ void main() {
 
       testWidgets('renders with title and description', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             AlertPopup(
               icon: null,
               title: 'Payment successful',
@@ -69,7 +69,7 @@ void main() {
 
       testWidgets('renders with icon', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             AlertPopup(
               icon: const SizedBox(
                 key: Key('test-icon'),
@@ -88,7 +88,7 @@ void main() {
 
       testWidgets('renders with action widget', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             AlertPopup(
               icon: null,
               title: 'Test',
@@ -103,7 +103,7 @@ void main() {
 
       testWidgets('does not render description when null', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             AlertPopup(
               icon: null,
               title: 'Title only',
@@ -120,7 +120,7 @@ void main() {
 
       testWidgets('does not render description when empty', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             AlertPopup(
               icon: null,
               title: 'Title only',
@@ -136,7 +136,7 @@ void main() {
 
       testWidgets('does not render action when null', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             AlertPopup(
               icon: null,
               title: 'No action',
@@ -151,7 +151,7 @@ void main() {
 
       testWidgets('icon is constrained to 48x48', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             AlertPopup(
               icon: const SizedBox(width: 100, height: 100),
               title: 'Test',
@@ -337,7 +337,7 @@ void main() {
     group('responsive padding', () {
       testWidgets('uses mobile padding on small screens', (tester) async {
         await tester.pumpWidget(
-          wrapWithStylingAndSize(
+          wrapWithStyleAndSize(
             AlertPopup(
               icon: null,
               title: 'Test',
@@ -360,7 +360,7 @@ void main() {
 
       testWidgets('uses desktop padding on large screens', (tester) async {
         await tester.pumpWidget(
-          wrapWithStylingAndSize(
+          wrapWithStyleAndSize(
             AlertPopup(
               icon: null,
               title: 'Test',
@@ -385,7 +385,7 @@ void main() {
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             AlertPopup(
               icon: null,
               title: 'Light mode',
@@ -401,7 +401,7 @@ void main() {
 
       testWidgets('renders in dark mode', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             AlertPopup(
               icon: null,
               title: 'Dark mode',

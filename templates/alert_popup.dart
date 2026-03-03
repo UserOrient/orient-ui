@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import 'styling.dart';
+import 'style.dart';
 
 const double _maxWidth = 560;
-final Duration _animationDuration = Styling.durations.normal;
+final Duration _animationDuration = Style.durations.normal;
 
 class AlertPopup extends StatelessWidget {
   final Widget? icon;
@@ -41,9 +41,9 @@ class AlertPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
+    final style = Style.of(context);
     final screenWidth = MediaQuery.of(context).size.width;
-    final isDesktop = screenWidth >= styling.breakpoints.desktop;
+    final isDesktop = screenWidth >= style.breakpoints.desktop;
 
     final padding = isDesktop
         ? const EdgeInsets.only(top: 64, bottom: 48, left: 48, right: 48)
@@ -53,8 +53,8 @@ class AlertPopup extends StatelessWidget {
       width: double.infinity,
       padding: padding,
       decoration: BoxDecoration(
-        color: styling.colors.background,
-        borderRadius: BorderRadius.circular(Styling.radii.large),
+        color: style.colors.background,
+        borderRadius: BorderRadius.circular(Style.radii.large),
         boxShadow: [
           BoxShadow(
             blurRadius: 24,
@@ -91,7 +91,7 @@ class AlertPopup extends StatelessWidget {
               fontSize: 18,
               height: 28 / 18,
               fontWeight: FontWeight.w600,
-              color: styling.colors.primaryText,
+              color: style.colors.primaryText,
               decoration: TextDecoration.none,
             ),
           ),
@@ -104,7 +104,7 @@ class AlertPopup extends StatelessWidget {
                 fontSize: 14,
                 height: 20 / 14,
                 fontWeight: FontWeight.w400,
-                color: styling.colors.secondaryText,
+                color: style.colors.secondaryText,
                 decoration: TextDecoration.none,
               ),
             ),

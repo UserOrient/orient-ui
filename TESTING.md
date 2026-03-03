@@ -70,11 +70,11 @@ void main() {
 Use `test_helper.dart` utilities:
 
 ```dart
-// Basic wrapper with Styling
-wrapWithStyling(widget, brightness: Brightness.light)
+// Basic wrapper with Style
+wrapWithStyle(widget, brightness: Brightness.light)
 
 // With custom screen size (for responsive tests)
-wrapWithStylingAndSize(widget, size: Size(800, 600), brightness: Brightness.light)
+wrapWithStyleAndSize(widget, size: Size(800, 600), brightness: Brightness.light)
 ```
 
 ## Naming Conventions
@@ -93,7 +93,7 @@ wrapWithStylingAndSize(widget, size: Size(800, 600), brightness: Brightness.ligh
 ### States
 - Loading: shows spinner, blocks interaction
 - Disabled: reduced opacity, blocks interaction
-- Active/Selected: correct styling applied
+- Active/Selected: correct style applied
 - Hover: only if critical to functionality
 
 ### Interaction
@@ -117,7 +117,7 @@ wrapWithStylingAndSize(widget, size: Size(800, 600), brightness: Brightness.ligh
 testWidgets('calls onPressed when tapped', (tester) async {
   var called = false;
 
-  await tester.pumpWidget(wrapWithStyling(
+  await tester.pumpWidget(wrapWithStyle(
     Button(
       label: 'Tap me',
       onPressed: () => called = true,

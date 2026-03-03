@@ -11,7 +11,7 @@ void main() {
   group('ToggleTile', () {
     group('rendering', () {
       testWidgets('renders title', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Notifications',
             value: false,
@@ -23,7 +23,7 @@ void main() {
       });
 
       testWidgets('renders subtitle', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Notifications',
             subtitle: 'Receive push notifications',
@@ -36,7 +36,7 @@ void main() {
       });
 
       testWidgets('renders without subtitle', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Notifications',
             value: false,
@@ -49,7 +49,7 @@ void main() {
       });
 
       testWidgets('renders Toggle widget', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Notifications',
             value: false,
@@ -61,7 +61,7 @@ void main() {
       });
 
       testWidgets('renders simple variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             value: false,
@@ -73,7 +73,7 @@ void main() {
       });
 
       testWidgets('renders bordered variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             variant: ToggleTileVariant.bordered,
             title: 'Test',
@@ -86,7 +86,7 @@ void main() {
       });
 
       testWidgets('renders filled variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             variant: ToggleTileVariant.filled,
             title: 'Test',
@@ -99,7 +99,7 @@ void main() {
       });
 
       testWidgets('renders with leading widget', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             leading: const Text('L'),
             title: 'Test',
@@ -112,7 +112,7 @@ void main() {
       });
 
       testWidgets('renders without leading widget', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             value: false,
@@ -127,7 +127,7 @@ void main() {
 
     group('variants', () {
       testWidgets('simple has no border or fill', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             value: false,
@@ -142,7 +142,7 @@ void main() {
       });
 
       testWidgets('bordered has border', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             variant: ToggleTileVariant.bordered,
             title: 'Test',
@@ -157,7 +157,7 @@ void main() {
       });
 
       testWidgets('filled has surfaceContainer color', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             variant: ToggleTileVariant.filled,
             title: 'Test',
@@ -172,7 +172,7 @@ void main() {
       });
 
       testWidgets('filled dark mode uses dark surfaceContainer', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             variant: ToggleTileVariant.filled,
             title: 'Test',
@@ -192,7 +192,7 @@ void main() {
       testWidgets('tap toggles value', (tester) async {
         bool? received;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             value: false,
@@ -209,7 +209,7 @@ void main() {
       testWidgets('tap on text area toggles', (tester) async {
         bool? received;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             subtitle: 'A subtitle',
@@ -227,7 +227,7 @@ void main() {
       testWidgets('tap on toggle area toggles', (tester) async {
         bool? received;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             value: false,
@@ -244,7 +244,7 @@ void main() {
       testWidgets('callback receives correct value when toggling off', (tester) async {
         bool? received;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             value: true,
@@ -259,7 +259,7 @@ void main() {
       });
 
       testWidgets('hover shows click cursor', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             value: false,
@@ -276,7 +276,7 @@ void main() {
 
     group('subtitle', () {
       testWidgets('supports max 2 lines with ellipsis', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             subtitle: 'This is a very long subtitle that should wrap to '
@@ -297,7 +297,7 @@ void main() {
       });
 
       testWidgets('renders single line subtitle', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             subtitle: 'Short',
@@ -312,7 +312,7 @@ void main() {
 
     group('accessibility', () {
       testWidgets('has toggled semantics when on', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             value: true,
@@ -325,7 +325,7 @@ void main() {
       });
 
       testWidgets('does not have toggled semantics when off', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             value: false,
@@ -340,7 +340,7 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             value: true,
@@ -353,7 +353,7 @@ void main() {
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
             value: true,
@@ -366,7 +366,7 @@ void main() {
       });
 
       testWidgets('filled uses surfaceContainer color', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             variant: ToggleTileVariant.filled,
             title: 'Test',

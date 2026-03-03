@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 
 // Customizable constants
 //
@@ -79,7 +79,7 @@ class _SearchFieldState extends State<SearchField> {
 
   @override
   Widget build(BuildContext context) {
-    final StylingData styling = Styling.of(context);
+    final StyleData style = Style.of(context);
     final bool showPlaceholder =
         _controller.text.isEmpty && widget.placeholder != null;
 
@@ -97,7 +97,7 @@ class _SearchFieldState extends State<SearchField> {
           padding: const EdgeInsets.symmetric(horizontal: _kHorizontalPadding),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: styling.colors.button.secondary,
+            color: style.colors.button.secondary,
             borderRadius: BorderRadius.circular(_kBorderRadius),
           ),
           child: Row(
@@ -105,7 +105,7 @@ class _SearchFieldState extends State<SearchField> {
               CustomPaint(
                 size: const Size(20, 20),
                 painter: _SearchIconPainter(
-                  color: styling.colors.secondaryText,
+                  color: style.colors.secondaryText,
                 ),
               ),
               const SizedBox(width: 8),
@@ -119,7 +119,7 @@ class _SearchFieldState extends State<SearchField> {
                         style: TextStyle(
                           fontSize: 16,
                           height: 16 / 16,
-                          color: styling.colors.secondaryText,
+                          color: style.colors.secondaryText,
                         ),
                       ),
                     EditableText(
@@ -129,9 +129,9 @@ class _SearchFieldState extends State<SearchField> {
                       style: TextStyle(
                         fontSize: 16,
                         height: 16 / 16,
-                        color: styling.colors.primaryText,
+                        color: style.colors.primaryText,
                       ),
-                      cursorColor: styling.colors.primaryText,
+                      cursorColor: style.colors.primaryText,
                       cursorHeight: 18,
                       backgroundCursorColor: const Color(0x00000000),
                       textInputAction: TextInputAction.search,
@@ -156,7 +156,7 @@ class _SearchFieldState extends State<SearchField> {
                       child: CustomPaint(
                         size: const Size(20, 20),
                         painter: _ClearIconPainter(
-                          backgroundColor: styling.colors.button.secondary,
+                          backgroundColor: style.colors.button.secondary,
                         ),
                       ),
                     ),

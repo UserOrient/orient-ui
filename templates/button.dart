@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'spinner.dart';
-import 'styling.dart';
+import 'style.dart';
 
 enum ButtonVariant { primary, secondary, ghost, destructive, outline, link }
 
@@ -48,7 +48,7 @@ class _ButtonState extends State<Button> with SingleTickerProviderStateMixin {
     super.initState();
 
     _clickAnimationController = AnimationController(
-      duration: Styling.durations.fast,
+      duration: Style.durations.fast,
       vsync: this,
     );
 
@@ -83,8 +83,8 @@ class _ButtonState extends State<Button> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
-    final colors = styling.colors;
+    final style = Style.of(context);
+    final colors = style.colors;
     final buttonColors = colors.button;
     final isDisabled = widget.onPressed == null || widget.loading;
 
@@ -186,7 +186,7 @@ class _ButtonState extends State<Button> with SingleTickerProviderStateMixin {
                         : null,
                     borderRadius: widget.variant == ButtonVariant.link
                         ? null
-                        : BorderRadius.circular(Styling.radii.medium),
+                        : BorderRadius.circular(Style.radii.medium),
                     boxShadow: _isFocused && !isDisabled
                         ? [
                             BoxShadow(
@@ -251,13 +251,13 @@ class _ButtonState extends State<Button> with SingleTickerProviderStateMixin {
   }
 
   Color _getHoverColor(Color base) {
-    final styling = Styling.of(context);
+    final style = Style.of(context);
     // Link variant stays transparent on hover
     if (widget.variant == ButtonVariant.link) return const Color(0x00000000);
 
     // For transparent backgrounds (outline/ghost), use accent color
     if ((base.a * 255.0).round().clamp(0, 255) == 0) {
-      return styling.colors.button.accent;
+      return style.colors.button.accent;
     }
 
     // For solid backgrounds, reduce opacity (shadcn approach)

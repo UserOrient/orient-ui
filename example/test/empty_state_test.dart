@@ -8,7 +8,7 @@ void main() {
   group('EmptyState', () {
     group('rendering', () {
       testWidgets('renders with title only', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           EmptyState(title: 'No items'),
         ));
 
@@ -16,7 +16,7 @@ void main() {
       });
 
       testWidgets('renders with icon', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           EmptyState(
             title: 'No items',
             icon: const SizedBox(key: Key('test-icon'), width: 48, height: 48),
@@ -28,7 +28,7 @@ void main() {
       });
 
       testWidgets('renders with description', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           EmptyState(
             title: 'No items',
             description: 'Add some items to get started.',
@@ -40,7 +40,7 @@ void main() {
       });
 
       testWidgets('does not render empty description', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           EmptyState(
             title: 'No items',
             description: '',
@@ -53,7 +53,7 @@ void main() {
       });
 
       testWidgets('renders with action', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           EmptyState(
             title: 'No items',
             action: const SizedBox(key: Key('test-action')),
@@ -65,7 +65,7 @@ void main() {
       });
 
       testWidgets('renders with all optional props', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           EmptyState(
             title: 'Location Disabled',
             description: 'Please enable GPS.',
@@ -83,7 +83,7 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           EmptyState(title: 'Light mode'),
           brightness: Brightness.light,
         ));
@@ -92,7 +92,7 @@ void main() {
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           EmptyState(title: 'Dark mode'),
           brightness: Brightness.dark,
         ));

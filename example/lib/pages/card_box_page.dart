@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:example/widgets/card_box.dart';
 import 'package:example/widgets/demo_section.dart';
 import 'package:flutter/widgets.dart';
@@ -9,7 +9,7 @@ class CardBoxPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Styling.of(context).colors;
+    final colors = Style.of(context).colors;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,7 +26,7 @@ class CardBoxPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: colors.surfaceContainer,
                     borderRadius:
-                        BorderRadius.circular(Styling.radii.small),
+                        BorderRadius.circular(Style.radii.small),
                   ),
                   child: Center(
                     child: Icon(
@@ -66,7 +66,7 @@ class CardBoxPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: const Color(0xFF22C55E).withValues(alpha: 0.12),
                     borderRadius:
-                        BorderRadius.circular(Styling.radii.small),
+                        BorderRadius.circular(Style.radii.small),
                   ),
                   child: const Row(
                     mainAxisSize: MainAxisSize.min,
@@ -99,7 +99,7 @@ class CardBoxPage extends StatelessWidget {
           child: Builder(
             builder: (context) {
               final isDesktop = MediaQuery.of(context).size.width >=
-                  Styling.breakpoints.desktop;
+                  Style.breakpoints.desktop;
 
               final proCard = CardBox(
                 variant: CardBoxVariant.filled,
@@ -156,7 +156,7 @@ class CardBoxPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: colors.accent,
                             borderRadius:
-                                BorderRadius.circular(Styling.radii.small),
+                                BorderRadius.circular(Style.radii.small),
                           ),
                           child: Text(
                             'Popular',
@@ -223,7 +223,7 @@ class CardBoxPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: const Color(0xFF3B82F6).withValues(alpha: 0.12),
                     borderRadius:
-                        BorderRadius.circular(Styling.radii.small),
+                        BorderRadius.circular(Style.radii.small),
                   ),
                   child: const Center(
                     child: Icon(

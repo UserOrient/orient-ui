@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:flutter/widgets.dart';
 
 class NavBarPage extends StatelessWidget {
@@ -6,7 +6,7 @@ class NavBarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
+    final style = Style.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -18,7 +18,7 @@ class NavBarPage extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             height: 1.5,
-            color: styling.colors.secondaryText,
+            color: style.colors.secondaryText,
           ),
         ),
       ],

@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:example/widgets/search_field.dart';
 import 'package:flutter/widgets.dart';
 
@@ -71,7 +71,7 @@ class _PackageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
+    final style = Style.of(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -83,7 +83,7 @@ class _PackageItem extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: styling.colors.primaryText,
+              color: style.colors.primaryText,
             ),
           ),
           const SizedBox(height: 4),
@@ -91,7 +91,7 @@ class _PackageItem extends StatelessWidget {
             description,
             style: TextStyle(
               fontSize: 14,
-              color: styling.colors.secondaryText,
+              color: style.colors.secondaryText,
             ),
           ),
         ],

@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:example/widgets/copy_button.dart';
 import 'package:example/widgets/demo_section.dart';
 import 'package:example/widgets/toast.dart';
@@ -9,7 +9,7 @@ class CopyButtonPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
+    final style = Style.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +22,7 @@ class CopyButtonPage extends StatelessWidget {
                 'kamran@userorient.com',
                 style: TextStyle(
                   fontSize: 14,
-                  color: styling.colors.primaryText,
+                  color: style.colors.primaryText,
                 ),
               ),
               const SizedBox(width: 8),

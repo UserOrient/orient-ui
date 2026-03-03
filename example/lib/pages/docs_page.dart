@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:flutter/widgets.dart';
 
 class DocsPage extends StatelessWidget {
@@ -6,8 +6,8 @@ class DocsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
-    final codeBackground = styling.colors.border.withValues(alpha: 0.3);
+    final style = Style.of(context);
+    final codeBackground = style.colors.border.withValues(alpha: 0.3);
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
@@ -19,7 +19,7 @@ class DocsPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w700,
-              color: styling.colors.primaryText,
+              color: style.colors.primaryText,
             ),
           ),
           const SizedBox(height: 8),
@@ -27,50 +27,50 @@ class DocsPage extends StatelessWidget {
             'Design system for Flutter without Material or Cupertino.',
             style: TextStyle(
               fontSize: 16,
-              color: styling.colors.secondaryText,
+              color: style.colors.secondaryText,
             ),
           ),
           const SizedBox(height: 32),
           _buildSection(
-            styling: styling,
+            style: style,
             title: 'Getting Started',
             children: [
-              _buildStep(styling, '1', 'Install the CLI', codeBackground,
+              _buildStep(style, '1', 'Install the CLI', codeBackground,
                   'dart pub global activate orient_ui'),
-              _buildStep(styling, '2', 'Initialize', codeBackground,
+              _buildStep(style, '2', 'Initialize', codeBackground,
                   'orient_ui init'),
               _buildStep(
-                  styling,
+                  style,
                   '3',
                   'Wrap your app',
                   codeBackground,
-                  'Styling(\n'
+                  'Style(\n'
                       '  brightness: Brightness.light,\n'
                       '  child: MaterialApp(\n'
                       '    home: MyHomePage(),\n'
                       '  ),\n'
                       ')'),
-              _buildStep(styling, '4', 'Add components', codeBackground,
+              _buildStep(style, '4', 'Add components', codeBackground,
                   'orient_ui add button'),
             ],
           ),
           _buildSection(
-            styling: styling,
+            style: style,
             title: 'Commands',
             children: [
               _buildCodeBlock(
                   codeBackground,
-                  styling,
-                  'orient_ui init          # Initialize styling\n'
+                  style,
+                  'orient_ui init          # Initialize style\n'
                       'orient_ui add           # List components\n'
                       'orient_ui add <widget>  # Add a component'),
             ],
           ),
           _buildSection(
-            styling: styling,
+            style: style,
             title: 'Components',
             children: [
-              _buildComponentList(styling, [
+              _buildComponentList(style, [
                 'Button (6 variants)',
                 'Toggle',
                 'CopyButton',
@@ -91,7 +91,7 @@ class DocsPage extends StatelessWidget {
   }
 
   Widget _buildSection({
-    required StylingData styling,
+    required StyleData style,
     required String title,
     required List<Widget> children,
   }) {
@@ -105,7 +105,7 @@ class DocsPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: styling.colors.primaryText,
+              color: style.colors.primaryText,
             ),
           ),
           const SizedBox(height: 16),
@@ -116,7 +116,7 @@ class DocsPage extends StatelessWidget {
   }
 
   Widget _buildStep(
-    StylingData styling,
+    StyleData style,
     String number,
     String title,
     Color codeBackground,
@@ -132,11 +132,11 @@ class DocsPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: styling.colors.primaryText,
+              color: style.colors.primaryText,
             ),
           ),
           const SizedBox(height: 8),
-          _buildCodeBlock(codeBackground, styling, code),
+          _buildCodeBlock(codeBackground, style, code),
         ],
       ),
     );
@@ -144,7 +144,7 @@ class DocsPage extends StatelessWidget {
 
   Widget _buildCodeBlock(
     Color background,
-    StylingData styling,
+    StyleData style,
     String code,
   ) {
     return Container(
@@ -152,21 +152,21 @@ class DocsPage extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: background,
-        borderRadius: BorderRadius.circular(Styling.radii.small),
+        borderRadius: BorderRadius.circular(Style.radii.small),
       ),
       child: Text(
         code,
         style: TextStyle(
           fontSize: 13,
           fontFamily: 'monospace',
-          color: styling.colors.primaryText,
+          color: style.colors.primaryText,
           height: 1.6,
         ),
       ),
     );
   }
 
-  Widget _buildComponentList(StylingData styling, List<String> components) {
+  Widget _buildComponentList(StyleData style, List<String> components) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: components
@@ -176,7 +176,7 @@ class DocsPage extends StatelessWidget {
                   name,
                   style: TextStyle(
                     fontSize: 14,
-                    color: styling.colors.primaryText,
+                    color: style.colors.primaryText,
                   ),
                 ),
               ))

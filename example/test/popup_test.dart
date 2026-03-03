@@ -10,7 +10,7 @@ Widget wrapWithNavigator(
   Brightness brightness = Brightness.light,
   Size size = const Size(800, 600),
 }) {
-  return Styling(
+  return Style(
     brightness: brightness,
     child: Directionality(
       textDirection: TextDirection.ltr,
@@ -34,7 +34,7 @@ void main() {
   group('Popup', () {
     group('rendering', () {
       testWidgets('renders without error', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Popup(
             title: 'Test',
             child: SizedBox(),
@@ -45,7 +45,7 @@ void main() {
       });
 
       testWidgets('renders with title', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Popup(
             title: 'My Title',
             child: SizedBox(),
@@ -56,7 +56,7 @@ void main() {
       });
 
       testWidgets('renders without title', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Popup(
             child: Text('Content only'),
           ),
@@ -66,7 +66,7 @@ void main() {
       });
 
       testWidgets('renders child widget', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Popup(
             title: 'Test',
             child: SizedBox(key: Key('child-widget')),
@@ -77,7 +77,7 @@ void main() {
       });
 
       testWidgets('renders close button', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Popup(
             title: 'Test',
             child: SizedBox(),
@@ -88,7 +88,7 @@ void main() {
       });
 
       testWidgets('renders close button even without title', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Popup(
             child: SizedBox(),
           ),
@@ -318,7 +318,7 @@ void main() {
     group('responsive padding', () {
       testWidgets('uses mobile padding on small screens', (tester) async {
         await tester.pumpWidget(
-          wrapWithStylingAndSize(
+          wrapWithStyleAndSize(
             Popup(
               title: 'Test',
               child: SizedBox(),
@@ -339,7 +339,7 @@ void main() {
 
       testWidgets('uses desktop padding on large screens', (tester) async {
         await tester.pumpWidget(
-          wrapWithStylingAndSize(
+          wrapWithStyleAndSize(
             Popup(
               title: 'Test',
               child: SizedBox(),
@@ -362,7 +362,7 @@ void main() {
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             Popup(
               title: 'Light mode',
               child: SizedBox(),
@@ -376,7 +376,7 @@ void main() {
 
       testWidgets('renders in dark mode', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             Popup(
               title: 'Dark mode',
               child: SizedBox(),

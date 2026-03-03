@@ -59,18 +59,18 @@ Navigate to your Flutter project and run:
 orient_ui init
 ```
 
-This creates `lib/styling.dart` in your project. **You own this file**: move it wherever you want (e.g., `lib/core/styling.dart`).
+This creates `lib/style.dart` in your project. **You own this file**: move it wherever you want (e.g., `lib/core/style.dart`).
 
 ### 3. Wrap Your App
 
-Wrap your `MaterialApp` with the `Styling` widget:
+Wrap your `MaterialApp` with the `Style` widget:
 
 ```dart
-import 'package:your_app/styling.dart'; // adjust path if you moved it
+import 'package:your_app/style.dart'; // adjust path if you moved it
 
 void main() {
   runApp(
-    Styling(
+    Style(
       brightness: Brightness.light, // or Brightness.dark
       child: MaterialApp(
         home: MyHomePage(),
@@ -88,11 +88,11 @@ orient_ui add button
 
 This creates `lib/button.dart`. Move it wherever you want (e.g., `lib/widgets/button.dart`).
 
-**Important:** Update the import inside the component file to match where you placed `styling.dart`:
+**Important:** Update the import inside the component file to match where you placed `style.dart`:
 
 ```dart
 // In button.dart, update this line:
-import 'package:your_app/styling.dart'; // adjust to your path
+import 'package:your_app/style.dart'; // adjust to your path
 ```
 
 ### 5. Use Components
@@ -109,7 +109,7 @@ Button(
 ## 📦 Available Commands
 
 ```bash
-orient_ui init          # Initialize styling system
+orient_ui init          # Initialize style system
 orient_ui add           # List available components
 orient_ui add <widget>  # Add a specific widget
 ```
@@ -152,7 +152,7 @@ All widgets are tested for rendering, interaction, accessibility, and theming.
 
 ## ✨ Customizing Colors
 
-The `styling.dart` file contains `AppColors` with light and dark theme defaults. Edit them to match your brand:
+The `style.dart` file contains `AppColors` with light and dark theme defaults. Edit them to match your brand:
 
 ```dart
 static const light = AppColors(

@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:flutter/widgets.dart';
 
 class DemoSection extends StatelessWidget {
@@ -13,7 +13,7 @@ class DemoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
+    final style = Style.of(context);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 32),
@@ -25,7 +25,7 @@ class DemoSection extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: styling.colors.secondaryText,
+              color: style.colors.secondaryText,
             ),
           ),
           const SizedBox(height: 12),

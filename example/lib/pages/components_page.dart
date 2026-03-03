@@ -12,7 +12,7 @@ import 'package:example/pages/toast_page.dart';
 import 'package:example/pages/toggle_page.dart';
 import 'package:example/pages/tile_page.dart';
 import 'package:example/pages/toggle_tile_page.dart';
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:flutter/widgets.dart';
 
 class ComponentsPage extends StatelessWidget {
@@ -20,25 +20,25 @@ class ComponentsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
+    final style = Style.of(context);
     final isDesktop =
-        MediaQuery.of(context).size.width >= Styling.breakpoints.desktop;
+        MediaQuery.of(context).size.width >= Style.breakpoints.desktop;
 
     final sections = [
-      _componentSection('CardBox', 'card_box', styling, const CardBoxPage()),
-      _componentSection('Button', 'button', styling, const ButtonPage()),
-      _componentSection('Toggle', 'toggle', styling, const TogglePage()),
-      _componentSection('Tile', 'tile', styling, const TilePage()),
-      _componentSection('ToggleTile', 'toggle_tile', styling, const ToggleTilePage()),
-      _componentSection('SearchField', 'search_field', styling, const SearchFieldPage()),
-      _componentSection('Toast', 'toast', styling, const ToastPage()),
-      _componentSection('Spinner', 'spinner', styling, const SpinnerPage()),
-      _componentSection('AlertPopup', 'alert_popup', styling, const AlertPopupPage()),
-      _componentSection('CopyButton', 'copy_button', styling, const CopyButtonPage()),
-      _componentSection('ConfirmationPopup', 'confirmation_popup', styling, const ConfirmationPopupPage()),
-      _componentSection('Popup', 'popup', styling, const PopupPage()),
-      _componentSection('EmptyState', 'empty_state', styling, const EmptyStatePage()),
-      _componentSection('NavBar', 'nav_bar', styling, const NavBarPage()),
+      _componentSection('CardBox', 'card_box', style, const CardBoxPage()),
+      _componentSection('Button', 'button', style, const ButtonPage()),
+      _componentSection('Toggle', 'toggle', style, const TogglePage()),
+      _componentSection('Tile', 'tile', style, const TilePage()),
+      _componentSection('ToggleTile', 'toggle_tile', style, const ToggleTilePage()),
+      _componentSection('SearchField', 'search_field', style, const SearchFieldPage()),
+      _componentSection('Toast', 'toast', style, const ToastPage()),
+      _componentSection('Spinner', 'spinner', style, const SpinnerPage()),
+      _componentSection('AlertPopup', 'alert_popup', style, const AlertPopupPage()),
+      _componentSection('CopyButton', 'copy_button', style, const CopyButtonPage()),
+      _componentSection('ConfirmationPopup', 'confirmation_popup', style, const ConfirmationPopupPage()),
+      _componentSection('Popup', 'popup', style, const PopupPage()),
+      _componentSection('EmptyState', 'empty_state', style, const EmptyStatePage()),
+      _componentSection('NavBar', 'nav_bar', style, const NavBarPage()),
     ];
 
     if (!isDesktop) {
@@ -96,7 +96,7 @@ class ComponentsPage extends StatelessWidget {
   Widget _componentSection(
     String title,
     String cliName,
-    StylingData styling,
+    StyleData style,
     Widget child,
   ) {
     return Column(
@@ -111,7 +111,7 @@ class ComponentsPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: styling.colors.primaryText,
+                color: style.colors.primaryText,
               ),
             ),
             const SizedBox(width: 8),
@@ -119,7 +119,7 @@ class ComponentsPage extends StatelessWidget {
               cliName,
               style: TextStyle(
                 fontSize: 14,
-                color: styling.colors.secondaryText,
+                color: style.colors.secondaryText,
               ),
             ),
           ],
@@ -129,8 +129,8 @@ class ComponentsPage extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            border: Border.all(color: styling.colors.border),
-            borderRadius: BorderRadius.circular(Styling.radii.medium),
+            border: Border.all(color: style.colors.border),
+            borderRadius: BorderRadius.circular(Style.radii.medium),
           ),
           child: child,
         ),

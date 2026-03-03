@@ -66,7 +66,7 @@ void _log(String emoji, String message) => print('$emoji $message');
 void _printUsage() {
   print('Orient UI - Design system for Flutter');
   print('Usage:');
-  print('  orient_ui init           Initialize styling');
+  print('  orient_ui init           Initialize style');
   print('  orient_ui add            List available components');
   print('  orient_ui add <widget>   Add a widget');
 }
@@ -83,11 +83,11 @@ Future<void> _initCommand() async {
   _log('🎨', 'Initializing Orient UI...');
 
   try {
-    await _fetchAndSave('styling.dart', 'lib/styling.dart');
+    await _fetchAndSave('style.dart', 'lib/style.dart');
 
     _log('🎉', 'All set! Wrap your app:');
     print('   ┌─────────────────────────────────');
-    print('   │ Styling(');
+    print('   │ Style(');
     print('   │   brightness: Brightness.light,');
     print('   │   child: MaterialApp(...)');
     print('   │ )');
@@ -111,7 +111,7 @@ Future<void> _addCommand(String widget) async {
 
   try {
     await _fetchAndSave(component.filename, 'lib/$widget.dart');
-    _log('📝', 'Don\'t forget to import styling.dart in $widget.dart');
+    _log('📝', 'Don\'t forget to import style.dart in $widget.dart');
 
     if (component.dependencies.isNotEmpty) {
       _log('⚠️ ', 'Depends on: ${component.dependencies.join(', ')}');

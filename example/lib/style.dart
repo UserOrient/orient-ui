@@ -175,10 +175,10 @@ final ColorTokens _colorsDark = ColorTokens(
   ),
 );
 
-class Styling extends InheritedWidget {
+class Style extends InheritedWidget {
   final Brightness brightness;
 
-  const Styling({
+  const Style({
     super.key,
     required this.brightness,
     required super.child,
@@ -189,18 +189,18 @@ class Styling extends InheritedWidget {
   static DurationTokens get durations => _durations;
   static BreakpointTokens get breakpoints => _breakpoints;
 
-  static StylingData of(BuildContext context) {
-    final Styling? styling = context
-        .dependOnInheritedWidgetOfExactType<Styling>();
+  static StyleData of(BuildContext context) {
+    final Style? style = context
+        .dependOnInheritedWidgetOfExactType<Style>();
 
     assert(
-      styling != null,
-      'No Styling found in context. Wrap your app with Styling widget.',
+      style != null,
+      'No Style found in context. Wrap your app with Style widget.',
     );
 
-    final bool isDark = styling!.brightness == Brightness.dark;
+    final bool isDark = style!.brightness == Brightness.dark;
 
-    return StylingData(
+    return StyleData(
       isDark: isDark,
       colors: isDark ? _colorsDark : _colorsLight,
       radii: _radii,
@@ -210,19 +210,19 @@ class Styling extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(Styling oldWidget) {
+  bool updateShouldNotify(Style oldWidget) {
     return brightness != oldWidget.brightness;
   }
 }
 
-class StylingData {
+class StyleData {
   final bool isDark;
   final ColorTokens colors;
   final RadiusTokens radii;
   final DurationTokens durations;
   final BreakpointTokens breakpoints;
 
-  const StylingData({
+  const StyleData({
     required this.isDark,
     required this.colors,
     required this.radii,

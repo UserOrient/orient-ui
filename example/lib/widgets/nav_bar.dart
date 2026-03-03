@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -31,9 +31,9 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StylingData styling = Styling.of(context);
+    final StyleData style = Style.of(context);
     final bool isDesktop =
-        MediaQuery.of(context).size.width >= styling.breakpoints.desktop;
+        MediaQuery.of(context).size.width >= style.breakpoints.desktop;
 
     if (isDesktop) {
       return Row(
@@ -83,8 +83,8 @@ class _NavigationRail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
-    final navColors = styling.colors.navigation;
+    final style = Style.of(context);
+    final navColors = style.colors.navigation;
 
     return Container(
       width: width,
@@ -144,8 +144,8 @@ class _RailItemState extends State<_RailItem> {
 
   @override
   Widget build(BuildContext context) {
-    final StylingData styling = Styling.of(context);
-    final NavigationColors navColors = styling.colors.navigation;
+    final StyleData style = Style.of(context);
+    final NavigationColors navColors = style.colors.navigation;
 
     Color? backgroundColor;
     if (widget.active) {
@@ -169,7 +169,7 @@ class _RailItemState extends State<_RailItem> {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
             decoration: BoxDecoration(
               color: backgroundColor,
-              borderRadius: BorderRadius.circular(Styling.radii.medium),
+              borderRadius: BorderRadius.circular(Style.radii.medium),
             ),
             child: Row(
               children: [
@@ -206,14 +206,14 @@ class _BottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
-    final navColors = styling.colors.navigation;
+    final style = Style.of(context);
+    final navColors = style.colors.navigation;
     final bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return Container(
       decoration: BoxDecoration(
         color: navColors.bottomBarBackground,
-        border: Border(top: BorderSide(color: styling.colors.border, width: 1)),
+        border: Border(top: BorderSide(color: style.colors.border, width: 1)),
       ),
       padding: EdgeInsets.only(bottom: bottomPadding),
       child: SizedBox(
@@ -252,8 +252,8 @@ class _BottomBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
-    final navColors = styling.colors.navigation;
+    final style = Style.of(context);
+    final navColors = style.colors.navigation;
 
     final Color color = active
         ? navColors.bottomBarItemActive

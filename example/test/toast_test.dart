@@ -6,7 +6,7 @@ import 'test_helper.dart';
 
 /// Wraps widget with Navigator for overlay support
 Widget wrapWithNavigator(Widget child, {Brightness brightness = Brightness.light}) {
-  return Styling(
+  return Style(
     brightness: brightness,
     child: Directionality(
       textDirection: TextDirection.ltr,

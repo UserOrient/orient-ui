@@ -10,7 +10,7 @@ void main() {
   group('CardBox', () {
     group('rendering', () {
       testWidgets('renders child', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const CardBox(
             child: Text('Hello'),
           ),
@@ -20,7 +20,7 @@ void main() {
       });
 
       testWidgets('renders bordered variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const CardBox(
             variant: CardBoxVariant.bordered,
             child: Text('Bordered'),
@@ -35,7 +35,7 @@ void main() {
       });
 
       testWidgets('renders filled variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const CardBox(
             variant: CardBoxVariant.filled,
             child: Text('Filled'),
@@ -50,7 +50,7 @@ void main() {
       });
 
       testWidgets('uses default padding', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const CardBox(
             child: Text('Default'),
           ),
@@ -62,7 +62,7 @@ void main() {
       });
 
       testWidgets('uses custom padding', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const CardBox(
             padding: EdgeInsets.all(32),
             child: Text('Custom'),
@@ -79,7 +79,7 @@ void main() {
       testWidgets('tap triggers onTap', (tester) async {
         bool tapped = false;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CardBox(
             onTap: () => tapped = true,
             child: const Text('Tap me'),
@@ -93,7 +93,7 @@ void main() {
       });
 
       testWidgets('shows click cursor when tappable', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CardBox(
             onTap: () {},
             child: const Text('Clickable'),
@@ -107,7 +107,7 @@ void main() {
       });
 
       testWidgets('no MouseRegion when not tappable', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const CardBox(
             child: Text('Static'),
           ),
@@ -119,7 +119,7 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const CardBox(
             child: Text('Light'),
           ),
@@ -130,7 +130,7 @@ void main() {
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const CardBox(
             child: Text('Dark'),
           ),

@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:example/widgets/demo_section.dart';
 import 'package:example/widgets/tile.dart';
 import 'package:flutter/widgets.dart';
@@ -8,7 +8,7 @@ class TilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Styling.of(context).colors;
+    final colors = Style.of(context).colors;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

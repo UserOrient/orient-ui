@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:flutter/material.dart';
 
 class EmptyState extends StatelessWidget {
@@ -17,7 +17,7 @@ class EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StylingData styling = Styling.of(context);
+    final StyleData style = Style.of(context);
 
     return Container(
       alignment: Alignment.center,
@@ -34,7 +34,7 @@ class EmptyState extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               height: 28 / 18,
-              color: styling.colors.primaryText,
+              color: style.colors.primaryText,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -46,7 +46,7 @@ class EmptyState extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 height: 20 / 14,
-                color: styling.colors.secondaryText,
+                color: style.colors.secondaryText,
               ),
             ),
           ],

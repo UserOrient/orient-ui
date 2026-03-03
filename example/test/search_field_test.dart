@@ -10,7 +10,7 @@ void main() {
   group('SearchField', () {
     group('rendering', () {
       testWidgets('renders without error', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const SearchField(),
         ));
 
@@ -18,7 +18,7 @@ void main() {
       });
 
       testWidgets('renders placeholder when empty', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const SearchField(placeholder: 'Search...'),
         ));
 
@@ -28,7 +28,7 @@ void main() {
       testWidgets('hides placeholder when text entered', (tester) async {
         final controller = TextEditingController(text: 'hello');
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           SearchField(
             controller: controller,
             placeholder: 'Search...',
@@ -40,7 +40,7 @@ void main() {
       });
 
       testWidgets('renders search icon', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const SearchField(),
         ));
 
@@ -51,7 +51,7 @@ void main() {
       testWidgets('renders clear button when text entered', (tester) async {
         final controller = TextEditingController(text: 'hello');
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           SearchField(controller: controller),
         ));
 
@@ -60,7 +60,7 @@ void main() {
       });
 
       testWidgets('does not render clear button when empty', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const SearchField(),
         ));
 
@@ -74,7 +74,7 @@ void main() {
       testWidgets('calls onChanged when text changes', (tester) async {
         String? changedValue;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           SearchField(
             onChanged: (value) => changedValue = value,
           ),
@@ -89,7 +89,7 @@ void main() {
       testWidgets('calls onSubmitted when submitted', (tester) async {
         String? submittedValue;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           SearchField(
             onSubmitted: (value) => submittedValue = value,
           ),
@@ -106,7 +106,7 @@ void main() {
         final controller = TextEditingController(text: 'hello');
         String? changedValue;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           SearchField(
             controller: controller,
             onChanged: (value) => changedValue = value,
@@ -123,7 +123,7 @@ void main() {
       });
 
       testWidgets('focuses when tapped', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const SearchField(),
         ));
 
@@ -135,7 +135,7 @@ void main() {
       });
 
       testWidgets('autofocus works', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const SearchField(autofocus: true),
         ));
 
@@ -151,7 +151,7 @@ void main() {
       testWidgets('uses provided controller', (tester) async {
         final controller = TextEditingController(text: 'initial');
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           SearchField(controller: controller),
         ));
 
@@ -161,7 +161,7 @@ void main() {
       testWidgets('updates when controller changes externally', (tester) async {
         final controller = TextEditingController();
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           SearchField(controller: controller),
         ));
 
@@ -172,7 +172,7 @@ void main() {
       });
 
       testWidgets('creates internal controller when not provided', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const SearchField(),
         ));
 
@@ -185,7 +185,7 @@ void main() {
 
     group('accessibility', () {
       testWidgets('has textField semantics', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const SearchField(placeholder: 'Search...'),
         ));
 
@@ -196,7 +196,7 @@ void main() {
       testWidgets('clear button has button semantics', (tester) async {
         final controller = TextEditingController(text: 'hello');
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           SearchField(controller: controller),
         ));
 
@@ -208,7 +208,7 @@ void main() {
       });
 
       testWidgets('has hint from placeholder', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const SearchField(placeholder: 'Search packages...'),
         ));
 
@@ -219,7 +219,7 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const SearchField(placeholder: 'Light mode'),
           brightness: Brightness.light,
         ));
@@ -228,7 +228,7 @@ void main() {
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const SearchField(placeholder: 'Dark mode'),
           brightness: Brightness.dark,
         ));

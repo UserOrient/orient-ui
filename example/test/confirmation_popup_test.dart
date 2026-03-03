@@ -10,7 +10,7 @@ Widget wrapWithNavigator(
   Widget child, {
   Brightness brightness = Brightness.light,
 }) {
-  return Styling(
+  return Style(
     brightness: brightness,
     child: Directionality(
       textDirection: TextDirection.ltr,
@@ -35,7 +35,7 @@ void main() {
     group('rendering', () {
       testWidgets('renders with title only', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             ConfirmationPopup(
               icon: null,
               title: 'Are you sure?',
@@ -56,7 +56,7 @@ void main() {
 
       testWidgets('renders with title and description', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             ConfirmationPopup(
               icon: null,
               title: 'Delete item?',
@@ -76,7 +76,7 @@ void main() {
 
       testWidgets('renders with icon', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             ConfirmationPopup(
               icon: const SizedBox(
                 key: Key('test-icon'),
@@ -99,7 +99,7 @@ void main() {
 
       testWidgets('renders with custom button labels', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             ConfirmationPopup(
               icon: null,
               title: 'Logout?',
@@ -119,7 +119,7 @@ void main() {
 
       testWidgets('icon is constrained to 48x48', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             ConfirmationPopup(
               icon: const SizedBox(width: 100, height: 100),
               title: 'Test',
@@ -150,7 +150,7 @@ void main() {
     group('states', () {
       testWidgets('destructive mode shows destructive button', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             ConfirmationPopup(
               icon: null,
               title: 'Delete?',
@@ -175,7 +175,7 @@ void main() {
 
       testWidgets('non-destructive mode shows primary button', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             ConfirmationPopup(
               icon: null,
               title: 'Confirm?',
@@ -199,7 +199,7 @@ void main() {
         var confirmCalled = false;
 
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             ConfirmationPopup(
               icon: null,
               title: 'Confirm?',
@@ -223,7 +223,7 @@ void main() {
         var cancelCalled = false;
 
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             ConfirmationPopup(
               icon: null,
               title: 'Confirm?',
@@ -418,7 +418,7 @@ void main() {
     group('responsive padding', () {
       testWidgets('uses mobile padding on small screens', (tester) async {
         await tester.pumpWidget(
-          wrapWithStylingAndSize(
+          wrapWithStyleAndSize(
             ConfirmationPopup(
               icon: null,
               title: 'Test',
@@ -444,7 +444,7 @@ void main() {
 
       testWidgets('uses desktop padding on large screens', (tester) async {
         await tester.pumpWidget(
-          wrapWithStylingAndSize(
+          wrapWithStyleAndSize(
             ConfirmationPopup(
               icon: null,
               title: 'Test',
@@ -472,7 +472,7 @@ void main() {
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             ConfirmationPopup(
               icon: null,
               title: 'Light mode',
@@ -492,7 +492,7 @@ void main() {
 
       testWidgets('renders in dark mode', (tester) async {
         await tester.pumpWidget(
-          wrapWithStyling(
+          wrapWithStyle(
             ConfirmationPopup(
               icon: null,
               title: 'Dark mode',

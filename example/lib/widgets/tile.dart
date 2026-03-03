@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -50,7 +50,7 @@ class _TileState extends State<Tile> {
 
   @override
   Widget build(BuildContext context) {
-    final ColorTokens colors = Styling.of(context).colors;
+    final ColorTokens colors = Style.of(context).colors;
 
     // Decoration based on variant
     BoxDecoration decoration = switch (widget.variant) {
@@ -59,11 +59,11 @@ class _TileState extends State<Tile> {
       ),
       TileVariant.bordered => BoxDecoration(
         border: Border.all(color: colors.border, width: 1),
-        borderRadius: BorderRadius.circular(Styling.radii.medium),
+        borderRadius: BorderRadius.circular(Style.radii.medium),
       ),
       TileVariant.filled => BoxDecoration(
         color: colors.surfaceContainer,
-        borderRadius: BorderRadius.circular(Styling.radii.medium),
+        borderRadius: BorderRadius.circular(Style.radii.medium),
       ),
     };
 

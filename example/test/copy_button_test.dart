@@ -9,7 +9,7 @@ void main() {
   group('CopyButton', () {
     group('rendering', () {
       testWidgets('renders without error', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CopyButton(value: 'test'),
         ));
 
@@ -17,7 +17,7 @@ void main() {
       });
 
       testWidgets('renders copy icon initially', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CopyButton(value: 'test'),
         ));
 
@@ -25,7 +25,7 @@ void main() {
       });
 
       testWidgets('has correct size', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CopyButton(value: 'test'),
         ));
 
@@ -37,7 +37,7 @@ void main() {
 
     group('states', () {
       testWidgets('shows check icon after copying', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CopyButton(value: 'test'),
         ));
 
@@ -53,7 +53,7 @@ void main() {
       });
 
       testWidgets('returns to copy icon after delay', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CopyButton(value: 'test'),
         ));
 
@@ -70,7 +70,7 @@ void main() {
       testWidgets('prevents double tap during copied state', (tester) async {
         var callCount = 0;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CopyButton(
             value: 'test',
             onCopied: () => callCount++,
@@ -95,7 +95,7 @@ void main() {
       testWidgets('calls onCopied when tapped', (tester) async {
         var called = false;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CopyButton(
             value: 'test',
             onCopied: () => called = true,
@@ -121,7 +121,7 @@ void main() {
           },
         );
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CopyButton(value: 'hello world'),
         ));
 
@@ -132,7 +132,7 @@ void main() {
       });
 
       testWidgets('works without onCopied callback', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CopyButton(value: 'test'),
         ));
 
@@ -150,7 +150,7 @@ void main() {
 
     group('animation', () {
       testWidgets('animates on copy', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CopyButton(value: 'test'),
         ));
 
@@ -167,7 +167,7 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CopyButton(value: 'test'),
           brightness: Brightness.light,
         ));
@@ -176,7 +176,7 @@ void main() {
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           CopyButton(value: 'test'),
           brightness: Brightness.dark,
         ));

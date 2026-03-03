@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -90,16 +90,16 @@ class _CopyButtonState extends State<CopyButton>
 
   @override
   Widget build(BuildContext context) {
-    final StylingData styling = Styling.of(context);
+    final StyleData style = Style.of(context);
 
     final Color color;
     if (_hasCopied) {
-      color = styling.colors.toast.success;
+      color = style.colors.toast.success;
     } else {
       if (_isHovered) {
-        color = styling.colors.primaryText;
+        color = style.colors.primaryText;
       } else {
-        color = styling.colors.secondaryText;
+        color = style.colors.secondaryText;
       }
     }
 

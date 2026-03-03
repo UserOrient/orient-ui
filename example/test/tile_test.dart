@@ -10,7 +10,7 @@ void main() {
   group('Tile', () {
     group('rendering', () {
       testWidgets('renders title', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Account',
             onTap: () {},
@@ -21,7 +21,7 @@ void main() {
       });
 
       testWidgets('renders subtitle', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Account',
             subtitle: 'Manage your account',
@@ -33,7 +33,7 @@ void main() {
       });
 
       testWidgets('renders without subtitle', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Account',
             onTap: () {},
@@ -45,7 +45,7 @@ void main() {
       });
 
       testWidgets('renders trailing widget', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Account',
             trailing: const Text('T'),
@@ -57,7 +57,7 @@ void main() {
       });
 
       testWidgets('renders without trailing widget', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Account',
             onTap: () {},
@@ -68,7 +68,7 @@ void main() {
       });
 
       testWidgets('renders simple variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Test',
             onTap: () {},
@@ -79,7 +79,7 @@ void main() {
       });
 
       testWidgets('renders bordered variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             variant: TileVariant.bordered,
             title: 'Test',
@@ -91,7 +91,7 @@ void main() {
       });
 
       testWidgets('renders filled variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             variant: TileVariant.filled,
             title: 'Test',
@@ -103,7 +103,7 @@ void main() {
       });
 
       testWidgets('renders with leading widget', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             leading: const Text('L'),
             title: 'Test',
@@ -115,7 +115,7 @@ void main() {
       });
 
       testWidgets('renders without leading widget', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Test',
             onTap: () {},
@@ -128,7 +128,7 @@ void main() {
 
     group('variants', () {
       testWidgets('simple has no border or fill', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Test',
             onTap: () {},
@@ -142,7 +142,7 @@ void main() {
       });
 
       testWidgets('bordered has border', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             variant: TileVariant.bordered,
             title: 'Test',
@@ -156,7 +156,7 @@ void main() {
       });
 
       testWidgets('filled has surfaceContainer color', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             variant: TileVariant.filled,
             title: 'Test',
@@ -170,7 +170,7 @@ void main() {
       });
 
       testWidgets('filled dark mode uses dark surfaceContainer', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             variant: TileVariant.filled,
             title: 'Test',
@@ -189,7 +189,7 @@ void main() {
       testWidgets('tap triggers onTap', (tester) async {
         bool tapped = false;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Test',
             onTap: () => tapped = true,
@@ -205,7 +205,7 @@ void main() {
       testWidgets('tap on text area triggers onTap', (tester) async {
         bool tapped = false;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Test',
             subtitle: 'A subtitle',
@@ -222,7 +222,7 @@ void main() {
       testWidgets('tap on trailing area triggers onTap', (tester) async {
         bool tapped = false;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Test',
             trailing: const Text('T'),
@@ -237,7 +237,7 @@ void main() {
       });
 
       testWidgets('hover shows click cursor', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Test',
             onTap: () {},
@@ -251,7 +251,7 @@ void main() {
       });
 
       testWidgets('disabled shows basic cursor', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const Tile(
             title: 'Test',
           ),
@@ -266,7 +266,7 @@ void main() {
 
     group('subtitle', () {
       testWidgets('supports max 2 lines with ellipsis', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Test',
             subtitle: 'This is a very long subtitle that should wrap to '
@@ -286,7 +286,7 @@ void main() {
       });
 
       testWidgets('renders single line subtitle', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Test',
             subtitle: 'Short',
@@ -300,7 +300,7 @@ void main() {
 
     group('accessibility', () {
       testWidgets('has button semantics', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Test',
             onTap: () {},
@@ -314,7 +314,7 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Test',
             onTap: () {},
@@ -326,7 +326,7 @@ void main() {
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             title: 'Test',
             onTap: () {},
@@ -338,7 +338,7 @@ void main() {
       });
 
       testWidgets('filled uses surfaceContainer color', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Tile(
             variant: TileVariant.filled,
             title: 'Test',

@@ -3,7 +3,7 @@ import 'package:example/pages/docs_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:example/widgets/button.dart';
 import 'package:example/widgets/nav_bar.dart';
 
@@ -23,7 +23,7 @@ class OrientUIPlayground extends StatelessWidget {
       builder: (context, brightness, _) {
         final isDark = brightness == Brightness.dark;
 
-        return Styling(
+        return Style(
           brightness: brightness,
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

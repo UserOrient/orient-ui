@@ -11,7 +11,7 @@ void main() {
   group('Toggle', () {
     group('rendering', () {
       testWidgets('renders without error', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(value: false, onChanged: (v) {}),
         ));
 
@@ -19,7 +19,7 @@ void main() {
       });
 
       testWidgets('renders in on state', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(value: true, onChanged: (v) {}),
         ));
 
@@ -27,7 +27,7 @@ void main() {
       });
 
       testWidgets('renders small variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle.small(value: false, onChanged: (v) {}),
         ));
 
@@ -35,7 +35,7 @@ void main() {
       });
 
       testWidgets('renders small variant in on state', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle.small(value: true, onChanged: (v) {}),
         ));
 
@@ -45,7 +45,7 @@ void main() {
 
     group('states', () {
       testWidgets('has reduced opacity when disabled', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const Toggle(value: false),
         ));
 
@@ -54,7 +54,7 @@ void main() {
       });
 
       testWidgets('has full opacity when enabled', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(value: false, onChanged: (v) {}),
         ));
 
@@ -65,7 +65,7 @@ void main() {
       testWidgets('animates when value changes', (tester) async {
         bool value = false;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           StatefulBuilder(
             builder: (context, setState) {
               return Toggle(
@@ -91,7 +91,7 @@ void main() {
       testWidgets('calls onChanged with toggled value on tap', (tester) async {
         bool? received;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(
             value: false,
             onChanged: (v) => received = v,
@@ -107,7 +107,7 @@ void main() {
       testWidgets('calls onChanged with false when toggling off', (tester) async {
         bool? received;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(
             value: true,
             onChanged: (v) => received = v,
@@ -123,7 +123,7 @@ void main() {
       testWidgets('does not call onChanged when disabled', (tester) async {
         bool called = false;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const Toggle(value: false),
         ));
 
@@ -134,7 +134,7 @@ void main() {
       });
 
       testWidgets('has Focus widget for keyboard support', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(value: false, onChanged: (v) {}),
         ));
 
@@ -144,7 +144,7 @@ void main() {
       testWidgets('supports horizontal drag to toggle on', (tester) async {
         bool? received;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(
             value: false,
             onChanged: (v) => received = v,
@@ -164,7 +164,7 @@ void main() {
       testWidgets('supports horizontal drag to toggle off', (tester) async {
         bool? received;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(
             value: true,
             onChanged: (v) => received = v,
@@ -184,7 +184,7 @@ void main() {
 
     group('accessibility', () {
       testWidgets('has toggled semantics when on', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(value: true, onChanged: (v) {}),
         ));
 
@@ -193,7 +193,7 @@ void main() {
       });
 
       testWidgets('does not have toggled semantics when off', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(value: false, onChanged: (v) {}),
         ));
 
@@ -202,7 +202,7 @@ void main() {
       });
 
       testWidgets('has enabled semantics when interactive', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(value: false, onChanged: (v) {}),
         ));
 
@@ -211,7 +211,7 @@ void main() {
       });
 
       testWidgets('has disabled semantics when not interactive', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const Toggle(value: false),
         ));
 
@@ -222,7 +222,7 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(value: true, onChanged: (v) {}),
           brightness: Brightness.light,
         ));
@@ -231,7 +231,7 @@ void main() {
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Toggle(value: true, onChanged: (v) {}),
           brightness: Brightness.dark,
         ));

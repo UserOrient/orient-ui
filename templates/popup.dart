@@ -3,11 +3,11 @@ import 'dart:ui';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import 'styling.dart';
+import 'style.dart';
 
 const double _maxWidth = 560;
-final Duration _animationDuration = Styling.durations.normal;
-final Duration _tapScaleAnimationDuration = Styling.durations.fast;
+final Duration _animationDuration = Style.durations.normal;
+final Duration _tapScaleAnimationDuration = Style.durations.fast;
 
 class Popup extends StatelessWidget {
   final String? title;
@@ -34,9 +34,9 @@ class Popup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StylingData styling = Styling.of(context);
+    final StyleData style = Style.of(context);
     final double screenWidth = MediaQuery.of(context).size.width;
-    final bool isDesktop = screenWidth >= styling.breakpoints.desktop;
+    final bool isDesktop = screenWidth >= style.breakpoints.desktop;
 
     final EdgeInsets padding = isDesktop
         ? const EdgeInsets.all(48)
@@ -46,8 +46,8 @@ class Popup extends StatelessWidget {
       width: double.infinity,
       padding: padding,
       decoration: BoxDecoration(
-        color: styling.colors.background,
-        borderRadius: BorderRadius.circular(Styling.radii.large),
+        color: style.colors.background,
+        borderRadius: BorderRadius.circular(Style.radii.large),
         boxShadow: [
           BoxShadow(
             blurRadius: 24,
@@ -78,7 +78,7 @@ class Popup extends StatelessWidget {
                       fontSize: 28,
                       height: 36 / 28,
                       fontWeight: FontWeight.bold,
-                      color: styling.colors.primaryText,
+                      color: style.colors.primaryText,
                       decoration: TextDecoration.none,
                     ),
                   ),
@@ -86,7 +86,7 @@ class Popup extends StatelessWidget {
               else
                 const Spacer(),
               _CloseButton(
-                color: styling.colors.secondaryText,
+                color: style.colors.secondaryText,
               ),
             ],
           ),
@@ -196,9 +196,9 @@ class _CloseButtonState extends State<_CloseButton> {
 
   @override
   Widget build(BuildContext context) {
-    final StylingData styling = Styling.of(context);
+    final StyleData style = Style.of(context);
     final Color buttonColor = _getButtonColor(
-      styling.colors.button.secondary,
+      style.colors.button.secondary,
     );
 
     return _TapScale(
@@ -228,7 +228,7 @@ class _CloseButtonState extends State<_CloseButton> {
           child: CustomPaint(
             size: const Size(20, 20),
             painter: _CloseIconPainter(
-              color: styling.colors.primaryText,
+              color: style.colors.primaryText,
             ),
           ),
         ),

@@ -8,7 +8,7 @@ void main() {
   group('Spinner', () {
     group('rendering', () {
       testWidgets('renders without error', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const Spinner(color: Color(0xFF000000)),
         ));
 
@@ -18,7 +18,7 @@ void main() {
       testWidgets('renders with custom color', (tester) async {
         const testColor = Color(0xFFFF0000);
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const Spinner(color: testColor),
         ));
 
@@ -28,7 +28,7 @@ void main() {
 
     group('animation', () {
       testWidgets('animation controller is running', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const Spinner(color: Color(0xFF000000)),
         ));
 
@@ -43,7 +43,7 @@ void main() {
       });
 
       testWidgets('rotates over time', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const Spinner(color: Color(0xFF000000)),
         ));
 
@@ -57,7 +57,7 @@ void main() {
 
     group('accessibility', () {
       testWidgets('has loading semantics label', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const Spinner(color: Color(0xFF000000)),
         ));
 
@@ -68,12 +68,12 @@ void main() {
 
     group('disposal', () {
       testWidgets('disposes animation controller without error', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const Spinner(color: Color(0xFF000000)),
         ));
 
         // Remove the spinner from the tree
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           const SizedBox(),
         ));
 

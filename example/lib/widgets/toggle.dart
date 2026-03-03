@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
@@ -55,7 +55,7 @@ class _ToggleState extends State<Toggle> with TickerProviderStateMixin {
     super.initState();
 
     _positionController = AnimationController(
-      duration: Styling.durations.normal,
+      duration: Style.durations.normal,
       vsync: this,
       value: widget.value ? 1.0 : 0.0,
     );
@@ -67,7 +67,7 @@ class _ToggleState extends State<Toggle> with TickerProviderStateMixin {
     );
 
     _reactionController = AnimationController(
-      duration: Styling.durations.normal,
+      duration: Style.durations.normal,
       vsync: this,
     );
   }
@@ -193,7 +193,7 @@ class _ToggleState extends State<Toggle> with TickerProviderStateMixin {
           : _positionController.reverse();
     }
 
-    final ColorTokens colors = Styling.of(context).colors;
+    final ColorTokens colors = Style.of(context).colors;
 
     final double trackW = widget._isSmall ? _kSmallTrackWidth : _kTrackWidth;
     final double trackH = widget._isSmall ? _kSmallTrackHeight : _kTrackHeight;

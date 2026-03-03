@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 
-export 'package:example/styling.dart';
+export 'package:example/style.dart';
 
-/// Wraps a widget with Styling for testing
-Widget wrapWithStyling(Widget child, {Brightness brightness = Brightness.light}) {
-  return Styling(
+/// Wraps a widget with Style for testing
+Widget wrapWithStyle(Widget child, {Brightness brightness = Brightness.light}) {
+  return Style(
     brightness: brightness,
     child: Directionality(
       textDirection: TextDirection.ltr,
@@ -17,13 +17,13 @@ Widget wrapWithStyling(Widget child, {Brightness brightness = Brightness.light})
   );
 }
 
-/// Wraps a widget with Styling and custom screen size
-Widget wrapWithStylingAndSize(
+/// Wraps a widget with Style and custom screen size
+Widget wrapWithStyleAndSize(
   Widget child, {
   Brightness brightness = Brightness.light,
   Size size = const Size(800, 600),
 }) {
-  return Styling(
+  return Style(
     brightness: brightness,
     child: Directionality(
       textDirection: TextDirection.ltr,

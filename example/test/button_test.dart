@@ -11,7 +11,7 @@ void main() {
   group('Button', () {
     group('rendering', () {
       testWidgets('renders with label', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button(label: 'Click me', onPressed: () {}),
         ));
 
@@ -20,7 +20,7 @@ void main() {
 
       testWidgets('renders all variants without error', (tester) async {
         for (final variant in ButtonVariant.values) {
-          await tester.pumpWidget(wrapWithStyling(
+          await tester.pumpWidget(wrapWithStyle(
             Button(
               label: 'Test',
               variant: variant,
@@ -33,7 +33,7 @@ void main() {
       });
 
       testWidgets('renders small variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button.small(label: 'Small', onPressed: () {}),
         ));
 
@@ -41,7 +41,7 @@ void main() {
       });
 
       testWidgets('renders with icon', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button(
             label: 'With Icon',
             icon: const SizedBox(width: 20, height: 20),
@@ -55,7 +55,7 @@ void main() {
 
     group('loading state', () {
       testWidgets('shows spinner when loading', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button(label: 'Loading', loading: true, onPressed: () {}),
         ));
 
@@ -65,7 +65,7 @@ void main() {
       testWidgets('does not call onPressed when loading', (tester) async {
         var called = false;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button(
             label: 'Loading',
             loading: true,
@@ -84,7 +84,7 @@ void main() {
       testWidgets('does not call onPressed when disabled', (tester) async {
         var called = false;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button(
             label: 'Disabled',
             onPressed: null,
@@ -98,7 +98,7 @@ void main() {
       });
 
       testWidgets('has reduced opacity when disabled', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button(label: 'Disabled', onPressed: null),
         ));
 
@@ -107,7 +107,7 @@ void main() {
       });
 
       testWidgets('has full opacity when enabled', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button(label: 'Enabled', onPressed: () {}),
         ));
 
@@ -120,7 +120,7 @@ void main() {
       testWidgets('calls onPressed when tapped', (tester) async {
         var called = false;
 
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button(
             label: 'Tap me',
             onPressed: () => called = true,
@@ -136,7 +136,7 @@ void main() {
 
     group('accessibility', () {
       testWidgets('has correct semantics', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button(label: 'Accessible', onPressed: () {}),
         ));
 
@@ -147,7 +147,7 @@ void main() {
       });
 
       testWidgets('semantics shows disabled when onPressed is null', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button(label: 'Disabled', onPressed: null),
         ));
 
@@ -158,7 +158,7 @@ void main() {
 
     group('text overflow', () {
       testWidgets('truncates long text with ellipsis', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           SizedBox(
             width: 100,
             child: Button(
@@ -176,7 +176,7 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button(label: 'Light', onPressed: () {}),
           brightness: Brightness.light,
         ));
@@ -185,7 +185,7 @@ void main() {
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyling(
+        await tester.pumpWidget(wrapWithStyle(
           Button(label: 'Dark', onPressed: () {}),
           brightness: Brightness.dark,
         ));

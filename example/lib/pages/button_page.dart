@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:example/widgets/button.dart';
 import 'package:example/widgets/toggle.dart';
 
@@ -28,7 +28,7 @@ class _ButtonPageState extends State<ButtonPage> {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
+    final style = Style.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,10 +37,10 @@ class _ButtonPageState extends State<ButtonPage> {
           spacing: 24,
           runSpacing: 12,
           children: [
-            _toggle('Small', _small, (v) => setState(() => _small = v), styling),
-            _toggle('Icon', _withIcon, (v) => setState(() => _withIcon = v), styling),
-            _toggle('Loading', _loading, (v) => setState(() => _loading = v), styling),
-            _toggle('Disabled', _disabled, (v) => setState(() => _disabled = v), styling),
+            _toggle('Small', _small, (v) => setState(() => _small = v), style),
+            _toggle('Icon', _withIcon, (v) => setState(() => _withIcon = v), style),
+            _toggle('Loading', _loading, (v) => setState(() => _loading = v), style),
+            _toggle('Disabled', _disabled, (v) => setState(() => _disabled = v), style),
           ],
         ),
         const SizedBox(height: 24),
@@ -76,7 +76,7 @@ class _ButtonPageState extends State<ButtonPage> {
     String label,
     bool value,
     ValueChanged<bool> onChanged,
-    StylingData styling,
+    StyleData style,
   ) {
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -87,7 +87,7 @@ class _ButtonPageState extends State<ButtonPage> {
           label,
           style: TextStyle(
             fontSize: 13,
-            color: styling.colors.secondaryText,
+            color: style.colors.secondaryText,
           ),
         ),
       ],

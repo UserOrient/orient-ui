@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:example/widgets/button.dart';
 import 'package:example/widgets/popup.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class PopupPage extends StatelessWidget {
 class _CommentsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
+    final style = Style.of(context);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -60,7 +60,7 @@ class _CommentsList extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           decoration: BoxDecoration(
-            color: styling.colors.border.withValues(alpha: 0.3),
+            color: style.colors.border.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Text(
@@ -69,7 +69,7 @@ class _CommentsList extends StatelessWidget {
               fontSize: 16,
               height: 24 / 16,
               fontWeight: FontWeight.w400,
-              color: styling.colors.secondaryText,
+              color: style.colors.secondaryText,
               decoration: TextDecoration.none,
             ),
           ),
@@ -94,7 +94,7 @@ class _CommentTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styling = Styling.of(context);
+    final style = Style.of(context);
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +104,7 @@ class _CommentTile extends StatelessWidget {
           height: 40,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: styling.colors.border,
+            color: style.colors.border,
           ),
           alignment: Alignment.center,
           child: Text(
@@ -112,7 +112,7 @@ class _CommentTile extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: styling.colors.secondaryText,
+              color: style.colors.secondaryText,
               decoration: TextDecoration.none,
             ),
           ),
@@ -130,7 +130,7 @@ class _CommentTile extends StatelessWidget {
                       fontSize: 15,
                       height: 20 / 15,
                       fontWeight: FontWeight.w600,
-                      color: styling.colors.primaryText,
+                      color: style.colors.primaryText,
                       decoration: TextDecoration.none,
                     ),
                   ),
@@ -141,7 +141,7 @@ class _CommentTile extends StatelessWidget {
                       fontSize: 14,
                       height: 20 / 14,
                       fontWeight: FontWeight.w400,
-                      color: styling.colors.secondaryText,
+                      color: style.colors.secondaryText,
                       decoration: TextDecoration.none,
                     ),
                   ),
@@ -153,7 +153,7 @@ class _CommentTile extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   height: 24 / 16,
-                  color: styling.colors.primaryText,
+                  color: style.colors.primaryText,
                   fontWeight: FontWeight.w400,
                   decoration: TextDecoration.none,
                 ),

@@ -1,4 +1,4 @@
-import 'package:example/styling.dart';
+import 'package:example/style.dart';
 import 'package:flutter/widgets.dart';
 
 enum CardBoxVariant { bordered, filled }
@@ -19,16 +19,16 @@ class CardBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorTokens colors = Styling.of(context).colors;
+    final ColorTokens colors = Style.of(context).colors;
 
     final BoxDecoration decoration = switch (variant) {
       CardBoxVariant.bordered => BoxDecoration(
         border: Border.all(color: colors.border, width: 1),
-        borderRadius: BorderRadius.circular(Styling.radii.medium),
+        borderRadius: BorderRadius.circular(Style.radii.medium),
       ),
       CardBoxVariant.filled => BoxDecoration(
         color: colors.surfaceContainer,
-        borderRadius: BorderRadius.circular(Styling.radii.medium),
+        borderRadius: BorderRadius.circular(Style.radii.medium),
       ),
     };
 

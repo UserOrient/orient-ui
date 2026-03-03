@@ -15,13 +15,95 @@ const double _kBorderRadius = 22;
 // const double _kHorizontalPadding = 8;
 // const double _kBorderRadius = 10;
 
+/// A search input field with built-in styling and accessibility features.
+///
+/// SearchField provides a consistent, accessible search input that integrates
+/// seamlessly with the Orient UI design system. It features a pill-shaped
+/// design, focus management, and semantic labels for screen readers.
+///
+/// ## Example
+///
+/// ```dart
+/// // Basic search field
+/// SearchField(
+///   placeholder: 'Search items...',
+///   onChanged: (query) => performSearch(query),
+/// )
+///
+/// // With controller and submission handling
+/// final controller = TextEditingController();
+/// SearchField(
+///   controller: controller,
+///   placeholder: 'Search users',
+///   onSubmitted: (query) => submitSearch(query),
+///   autofocus: true,
+/// )
+///
+/// // In an app bar or header
+/// AppBar(
+///   title: SearchField(
+///     placeholder: 'Search products',
+///     onChanged: _onSearchChanged,
+///   ),
+/// )
+/// ```
+///
+/// ## Behavior
+///
+/// - Automatically manages focus state and visual feedback
+/// - Provides clear button when text is entered
+/// - Supports keyboard navigation and submission
+/// - Uses theme-appropriate colors and styling
+/// - Maintains consistent pill-shaped design across platforms
+///
+/// ## Accessibility
+///
+/// - Automatically labeled as a text field for screen readers
+/// - Provides placeholder text as accessibility hint
+/// - Supports keyboard navigation and screen reader interaction
+/// - Maintains proper focus management
 class SearchField extends StatefulWidget {
+  /// Optional controller for managing the text input.
+  ///
+  /// If not provided, a TextEditingController will be created internally.
+  /// Use this when you need to programmatically control the text value
+  /// or when sharing the controller between multiple widgets.
   final TextEditingController? controller;
+
+  /// Placeholder text displayed when the field is empty.
+  ///
+  /// This text is also used as the accessibility hint for screen readers.
+  /// Should be descriptive of what the user should search for.
   final String? placeholder;
+
+  /// Callback function called when the text content changes.
+  ///
+  /// This is called for every change to the text, including individual
+  /// character additions and deletions. Use this for real-time search
+  /// filtering or validation.
   final ValueChanged<String>? onChanged;
+
+  /// Callback function called when the user submits the search.
+  ///
+  /// This is called when the user presses Enter or taps the search
+  /// button on the keyboard. Use this to trigger the actual search
+  /// operation or navigation.
   final ValueChanged<String>? onSubmitted;
+
+  /// Whether the field should automatically receive focus when created.
+  ///
+  /// When true, the field will request focus after the first frame.
+  /// Useful for search interfaces where the user is expected to
+  /// immediately start typing.
+  ///
+  /// Defaults to `false`.
   final bool autofocus;
 
+  /// Creates a search field with the specified properties.
+  ///
+  /// All parameters are optional. The field will use sensible defaults
+  /// for styling and behavior. Provide callbacks to handle user input
+  /// and search operations.
   const SearchField({
     super.key,
     this.controller,

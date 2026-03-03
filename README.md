@@ -61,26 +61,7 @@ orient_ui init
 
 This creates `lib/style.dart` in your project. **You own this file**: move it wherever you want (e.g., `lib/core/style.dart`).
 
-### 3. Wrap Your App
-
-Wrap your `MaterialApp` with the `Style` widget:
-
-```dart
-import 'package:your_app/style.dart'; // adjust path if you moved it
-
-void main() {
-  runApp(
-    Style(
-      brightness: Brightness.light, // or Brightness.dark
-      child: MaterialApp(
-        home: MyHomePage(),
-      ),
-    ),
-  );
-}
-```
-
-### 4. Add Components
+### 3. Add Components
 
 ```bash
 orient_ui add button
@@ -95,14 +76,25 @@ This creates `lib/button.dart`. Move it wherever you want (e.g., `lib/widgets/bu
 import 'package:your_app/style.dart'; // adjust to your path
 ```
 
-### 5. Use Components
+### 4. Use
 
 ```dart
-import 'package:your_app/button.dart'; // your path
-
 Button(
   label: 'Click me',
   onPressed: () {},
+)
+```
+
+Components follow system brightness by default. No wrapping needed.
+
+To control dark mode manually, wrap your app with `Style`:
+
+```dart
+Style(
+  brightness: Brightness.dark,
+  child: MaterialApp(
+    home: MyHomePage(),
+  ),
 )
 ```
 
@@ -152,14 +144,14 @@ All widgets are tested for rendering, interaction, accessibility, and theming.
 
 ## ✨ Customizing Colors
 
-The `style.dart` file contains `AppColors` with light and dark theme defaults. Edit them to match your brand:
+Open `style.dart` and edit the constants at the top. That's it. You own the file.
 
 ```dart
-static const light = AppColors(
-  primary: Color(0xFF18181B),       // your primary color
-  primaryForeground: Color(0xFFFAFAFA),
-  // ... customize all colors
-);
+// Light Theme - Base
+const Color _lightBackground = Color(0xFFFFFFFF);
+const Color _lightBorder = Color(0xFFE4E4E7);
+const Color _lightForeground = Color(0xFF2A2A2A);
+// ... change these to match your brand
 ```
 
 ## 📄 License

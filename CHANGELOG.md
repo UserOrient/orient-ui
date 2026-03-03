@@ -1,3 +1,12 @@
+## 0.3.0
+
+* **BREAKING**: `Styling` renamed to `Style`. One word. Clean.
+* **BREAKING**: `StyleData` removed. `Style.of(context)` now returns `Style` itself. One class, not two.
+* **BREAKING**: `primaryText`/`secondaryText` color tokens renamed to `foreground`/`mutedForeground` (shadcn naming)
+* `Style` wrapping is now optional. Components fall back to system brightness via `MediaQuery.platformBrightnessOf` when no `Style` widget is in the tree. No crash, no assert.
+* `empty_state.dart` no longer imports `material.dart`. All templates are now pure `widgets.dart`.
+* SearchField clear button now uses style tokens instead of hardcoded color.
+
 ## 0.2.7
 
 * Change API from `showToast()` to `Toast.show()` to make it same with other widgets

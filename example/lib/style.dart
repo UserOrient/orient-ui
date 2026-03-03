@@ -20,8 +20,8 @@ const Duration _durationSlow = Duration(milliseconds: 300);
 // Light Theme - Base
 const Color _lightBackground = Color(0xFFFFFFFF);
 const Color _lightBorder = Color(0xFFE4E4E7);
-const Color _lightPrimaryText = Color(0xFF2A2A2A);
-const Color _lightSecondaryText = Color(0xFFACAEAF);
+const Color _lightForeground = Color(0xFF2A2A2A);
+const Color _lightMutedForeground = Color(0xFFACAEAF);
 const Color _lightAccent = Color(0xFF18181B);
 const Color _lightAccentForeground = Color(0xFFFAFAFA);
 const Color _lightSurfaceContainer = Color(0xFFFAFAFA);
@@ -54,8 +54,8 @@ const Color _lightToastWarning = Color(0xFFFFB35A);
 // Dark Theme - Base
 const Color _darkBackground = Color(0xFF303030);
 const Color _darkBorder = Color(0xFF27272A);
-const Color _darkPrimaryText = Color(0xFFFAFAFA);
-const Color _darkSecondaryText = Color(0xFFB2B2B2);
+const Color _darkForeground = Color(0xFFFAFAFA);
+const Color _darkMutedForeground = Color(0xFFB2B2B2);
 const Color _darkAccent = Color(0xFFFAFAFA);
 const Color _darkAccentForeground = Color(0xFF18181B);
 const Color _darkSurfaceContainer = Color(0xFF121212);
@@ -108,8 +108,8 @@ final DurationTokens _durations = DurationTokens(
 final ColorTokens _colorsLight = ColorTokens(
   background: _lightBackground,
   border: _lightBorder,
-  foreground: _lightPrimaryText,
-  mutedForeground: _lightSecondaryText,
+  foreground: _lightForeground,
+  mutedForeground: _lightMutedForeground,
   accent: _lightAccent,
   accentForeground: _lightAccentForeground,
   surfaceContainer: _lightSurfaceContainer,
@@ -143,8 +143,8 @@ final ColorTokens _colorsLight = ColorTokens(
 final ColorTokens _colorsDark = ColorTokens(
   background: _darkBackground,
   border: _darkBorder,
-  foreground: _darkPrimaryText,
-  mutedForeground: _darkSecondaryText,
+  foreground: _darkForeground,
+  mutedForeground: _darkMutedForeground,
   accent: _darkAccent,
   accentForeground: _darkAccentForeground,
   surfaceContainer: _darkSurfaceContainer,

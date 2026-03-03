@@ -190,15 +190,9 @@ class Style extends InheritedWidget {
   static BreakpointTokens get breakpoints => _breakpoints;
 
   static StyleData of(BuildContext context) {
-    final Style? style = context
-        .dependOnInheritedWidgetOfExactType<Style>();
+    final Style? style = context.dependOnInheritedWidgetOfExactType<Style>();
 
-    assert(
-      style != null,
-      'No Style found in context. Wrap your app with Style widget.',
-    );
-
-    final bool isDark = style!.brightness == Brightness.dark;
+    final bool isDark = style?.brightness == Brightness.dark;
 
     return StyleData(
       isDark: isDark,

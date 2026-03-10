@@ -7,21 +7,23 @@ import 'package:example/style.dart';
 import 'package:example/widgets/button.dart';
 import 'package:example/widgets/nav_bar.dart';
 
-final _brightnessNotifier = ValueNotifier(Brightness.light);
+final ValueNotifier<Brightness> _brightnessNotifier = ValueNotifier(
+  Brightness.light,
+);
 
 void main() {
-  runApp(const OrientUIPlayground());
+  runApp(const App());
 }
 
-class OrientUIPlayground extends StatelessWidget {
-  const OrientUIPlayground({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Brightness>(
       valueListenable: _brightnessNotifier,
       builder: (context, brightness, _) {
-        final isDark = brightness == Brightness.dark;
+        final bool isDark = brightness == Brightness.dark;
 
         return Style(
           brightness: brightness,
@@ -37,7 +39,7 @@ class OrientUIPlayground extends StatelessWidget {
               brightness: Brightness.dark,
               scaffoldBackgroundColor: const Color(0xFF09090B),
             ),
-            home: const PlaygroundShell(),
+            home: const RootPage(),
           ),
         );
       },
@@ -45,14 +47,14 @@ class OrientUIPlayground extends StatelessWidget {
   }
 }
 
-class PlaygroundShell extends StatefulWidget {
-  const PlaygroundShell({super.key});
+class RootPage extends StatefulWidget {
+  const RootPage({super.key});
 
   @override
-  State<PlaygroundShell> createState() => _PlaygroundShellState();
+  State<RootPage> createState() => _RootPageState();
 }
 
-class _PlaygroundShellState extends State<PlaygroundShell> {
+class _RootPageState extends State<RootPage> {
   int _currentIndex = 0;
 
   static const _pages = [

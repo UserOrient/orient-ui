@@ -56,6 +56,7 @@ class ToastPage extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'Position',
           child: Wrap(
@@ -83,6 +84,7 @@ class ToastPage extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'Stacking',
           child: Wrap(
@@ -91,12 +93,24 @@ class ToastPage extends StatelessWidget {
             children: [
               Button.small(
                 onPressed: () {
-                  Toast.show(context: context, message: 'First', type: ToastType.success);
+                  Toast.show(
+                    context: context,
+                    message: 'First',
+                    type: ToastType.success,
+                  );
                   Future.delayed(const Duration(milliseconds: 200), () {
-                    Toast.show(context: context, message: 'Second', type: ToastType.info);
+                    Toast.show(
+                      context: context,
+                      message: 'Second',
+                      type: ToastType.info,
+                    );
                   });
                   Future.delayed(const Duration(milliseconds: 400), () {
-                    Toast.show(context: context, message: 'Third', type: ToastType.warning);
+                    Toast.show(
+                      context: context,
+                      message: 'Third',
+                      type: ToastType.warning,
+                    );
                   });
                 },
                 label: 'Show 3 toasts',

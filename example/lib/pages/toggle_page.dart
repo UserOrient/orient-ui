@@ -36,6 +36,7 @@ class _TogglePageState extends State<TogglePage> {
             ],
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'Small',
           child: Row(
@@ -52,6 +53,7 @@ class _TogglePageState extends State<TogglePage> {
             ],
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'Disabled',
           child: Row(

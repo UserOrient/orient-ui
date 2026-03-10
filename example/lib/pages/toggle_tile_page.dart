@@ -30,6 +30,7 @@ class _ToggleTilePageState extends State<ToggleTilePage> {
             onChanged: (v) => setState(() => _simple = v),
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'Bordered',
           child: ToggleTile(
@@ -40,6 +41,7 @@ class _ToggleTilePageState extends State<ToggleTilePage> {
             onChanged: (v) => setState(() => _bordered = v),
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'Filled',
           child: ToggleTile(
@@ -50,6 +52,7 @@ class _ToggleTilePageState extends State<ToggleTilePage> {
             onChanged: (v) => setState(() => _filled = v),
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'Title Only',
           child: ToggleTile(
@@ -59,6 +62,7 @@ class _ToggleTilePageState extends State<ToggleTilePage> {
             onChanged: (v) => setState(() => _titleOnly = v),
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'With Leading',
           child: ToggleTile(

@@ -24,6 +24,7 @@ class SpinnerPage extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'Sizes',
           child: Row(

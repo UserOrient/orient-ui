@@ -24,6 +24,7 @@ class EmptyStatePage extends StatelessWidget {
                 'When we send you notifications, you\'ll be able to see them here.',
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'With Action',
           child: EmptyState(

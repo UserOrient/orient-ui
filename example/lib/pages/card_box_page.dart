@@ -92,7 +92,7 @@ class CardBoxPage extends StatelessWidget {
             ),
           ),
         ),
-
+        const SizedBox(height: 24),
         // Pricing cards — row on desktop, column on mobile
         DemoSection(
           title: 'Filled',
@@ -215,7 +215,7 @@ class CardBoxPage extends StatelessWidget {
             },
           ),
         ),
-
+        const SizedBox(height: 24),
         // Clickable notification card
         DemoSection(
           title: 'Clickable',

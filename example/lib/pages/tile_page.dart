@@ -21,6 +21,7 @@ class TilePage extends StatelessWidget {
             onTap: () {},
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'Bordered',
           child: Tile(
@@ -34,6 +35,7 @@ class TilePage extends StatelessWidget {
             onTap: () {},
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'Filled',
           child: Tile(
@@ -58,6 +60,7 @@ class TilePage extends StatelessWidget {
             onTap: () {},
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'Title Only',
           child: Tile(
@@ -66,6 +69,7 @@ class TilePage extends StatelessWidget {
             onTap: () {},
           ),
         ),
+        const SizedBox(height: 24),
         DemoSection(
           title: 'With Leading',
           child: Tile(

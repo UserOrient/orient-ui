@@ -1,3 +1,9 @@
+## 0.3.1
+
+* Added `SingleChoice` and `SingleChoiceTile` widgets (`Radio` and `RadioListTile` equivalent from Material).
+* Added `MultiChoice` and `MultiChoiceTile` widgets (`Checbox` and `CheckboxListTile` equivalent from Material). 
+* Fixed `FocusNode` disposal in popup routes to prevent memory leak.
+
 ## 0.3.0
 
 * **BREAKING**: `Styling` renamed to `Style`. One word. Clean.

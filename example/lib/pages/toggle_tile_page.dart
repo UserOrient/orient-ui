@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:example/widgets/demo_section.dart';
+import 'package:example/widgets/tile.dart';
 import 'package:example/widgets/toggle_tile.dart';
 
 class ToggleTilePage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _ToggleTilePageState extends State<ToggleTilePage> {
         DemoSection(
           title: 'Bordered',
           child: ToggleTile(
-            variant: ToggleTileVariant.bordered,
+            variant: TileVariant.bordered,
             title: 'Dark Mode',
             subtitle: 'Use dark theme across the app',
             value: _bordered,
@@ -45,7 +46,7 @@ class _ToggleTilePageState extends State<ToggleTilePage> {
         DemoSection(
           title: 'Filled',
           child: ToggleTile(
-            variant: ToggleTileVariant.filled,
+            variant: TileVariant.filled,
             title: 'Auto Update',
             subtitle: 'Automatically install updates',
             value: _filled,
@@ -56,7 +57,7 @@ class _ToggleTilePageState extends State<ToggleTilePage> {
         DemoSection(
           title: 'Title Only',
           child: ToggleTile(
-            variant: ToggleTileVariant.bordered,
+            variant: TileVariant.bordered,
             title: 'Enable Feature',
             value: _titleOnly,
             onChanged: (v) => setState(() => _titleOnly = v),
@@ -66,7 +67,7 @@ class _ToggleTilePageState extends State<ToggleTilePage> {
         DemoSection(
           title: 'With Leading',
           child: ToggleTile(
-            variant: ToggleTileVariant.bordered,
+            variant: TileVariant.bordered,
             leading: const Text('\u2699', style: TextStyle(fontSize: 24)),
             title: 'Settings',
             subtitle: 'Manage your preferences',

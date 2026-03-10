@@ -31,7 +31,7 @@ final Map<String, ComponentInfo> components = {
   'toggle': ComponentInfo('toggle.dart'),
   'toggle_tile': ComponentInfo(
     'toggle_tile.dart',
-    dependencies: ['toggle'],
+    dependencies: ['toggle', 'tile'],
   ),
 };
 

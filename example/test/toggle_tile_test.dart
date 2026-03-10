@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:example/widgets/tile.dart';
 import 'package:example/widgets/toggle.dart';
 import 'package:example/widgets/toggle_tile.dart';
 
@@ -60,7 +61,7 @@ void main() {
         expect(find.byType(Toggle), findsOneWidget);
       });
 
-      testWidgets('renders simple variant', (tester) async {
+      testWidgets('composes Tile internally', (tester) async {
         await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
@@ -69,33 +70,7 @@ void main() {
           ),
         ));
 
-        expect(find.byType(ToggleTile), findsOneWidget);
-      });
-
-      testWidgets('renders bordered variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          ToggleTile(
-            variant: ToggleTileVariant.bordered,
-            title: 'Test',
-            value: false,
-            onChanged: (v) {},
-          ),
-        ));
-
-        expect(find.byType(ToggleTile), findsOneWidget);
-      });
-
-      testWidgets('renders filled variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          ToggleTile(
-            variant: ToggleTileVariant.filled,
-            title: 'Test',
-            value: false,
-            onChanged: (v) {},
-          ),
-        ));
-
-        expect(find.byType(ToggleTile), findsOneWidget);
+        expect(find.byType(Tile), findsOneWidget);
       });
 
       testWidgets('renders with leading widget', (tester) async {
@@ -109,19 +84,6 @@ void main() {
         ));
 
         expect(find.text('L'), findsOneWidget);
-      });
-
-      testWidgets('renders without leading widget', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          ToggleTile(
-            title: 'Test',
-            value: false,
-            onChanged: (v) {},
-          ),
-        ));
-
-        // No leading, no 12px gap SizedBox before text
-        expect(find.text('Test'), findsOneWidget);
       });
     });
 
@@ -144,7 +106,7 @@ void main() {
       testWidgets('bordered has border', (tester) async {
         await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
-            variant: ToggleTileVariant.bordered,
+            variant: TileVariant.bordered,
             title: 'Test',
             value: false,
             onChanged: (v) {},
@@ -159,7 +121,7 @@ void main() {
       testWidgets('filled has surfaceContainer color', (tester) async {
         await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
-            variant: ToggleTileVariant.filled,
+            variant: TileVariant.filled,
             title: 'Test',
             value: false,
             onChanged: (v) {},
@@ -174,7 +136,7 @@ void main() {
       testWidgets('filled dark mode uses dark surfaceContainer', (tester) async {
         await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
-            variant: ToggleTileVariant.filled,
+            variant: TileVariant.filled,
             title: 'Test',
             value: false,
             onChanged: (v) {},
@@ -258,7 +220,24 @@ void main() {
         expect(received, isFalse);
       });
 
-      testWidgets('hover shows click cursor', (tester) async {
+      testWidgets('disabled tile does not fire onChanged', (tester) async {
+        bool called = false;
+
+        await tester.pumpWidget(wrapWithStyle(
+          ToggleTile(
+            title: 'Test',
+            value: false,
+            onChanged: null,
+          ),
+        ));
+
+        await tester.tap(find.byType(ToggleTile));
+        await tester.pump();
+
+        expect(called, isFalse);
+      });
+
+      testWidgets('hover shows click cursor when enabled', (tester) async {
         await tester.pumpWidget(wrapWithStyle(
           ToggleTile(
             title: 'Test',
@@ -271,6 +250,21 @@ void main() {
           find.byType(MouseRegion).first,
         );
         expect(mouseRegion.cursor, SystemMouseCursors.click);
+      });
+
+      testWidgets('hover shows basic cursor when disabled', (tester) async {
+        await tester.pumpWidget(wrapWithStyle(
+          ToggleTile(
+            title: 'Test',
+            value: false,
+            onChanged: null,
+          ),
+        ));
+
+        final mouseRegion = tester.widget<MouseRegion>(
+          find.byType(MouseRegion).first,
+        );
+        expect(mouseRegion.cursor, SystemMouseCursors.basic);
       });
     });
 
@@ -294,19 +288,6 @@ void main() {
         ));
         expect(subtitleWidget.maxLines, 2);
         expect(subtitleWidget.overflow, TextOverflow.ellipsis);
-      });
-
-      testWidgets('renders single line subtitle', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          ToggleTile(
-            title: 'Test',
-            subtitle: 'Short',
-            value: false,
-            onChanged: (v) {},
-          ),
-        ));
-
-        expect(find.text('Short'), findsOneWidget);
       });
     });
 
@@ -336,6 +317,47 @@ void main() {
         final semantics = tester.getSemantics(find.byType(ToggleTile));
         expect(semantics.hasFlag(SemanticsFlag.isToggled), isFalse);
       });
+
+      testWidgets('has title as semantics label', (tester) async {
+        await tester.pumpWidget(wrapWithStyle(
+          ToggleTile(
+            title: 'Notifications',
+            value: false,
+            onChanged: (v) {},
+          ),
+        ));
+
+        final semantics = tester.getSemantics(find.byType(ToggleTile));
+        expect(semantics.label, 'Notifications');
+      });
+
+      testWidgets('has enabled semantics when interactive', (tester) async {
+        await tester.pumpWidget(wrapWithStyle(
+          ToggleTile(
+            title: 'Test',
+            value: false,
+            onChanged: (v) {},
+          ),
+        ));
+
+        final semantics = tester.getSemantics(find.byType(ToggleTile));
+        expect(semantics.hasFlag(SemanticsFlag.hasEnabledState), isTrue);
+        expect(semantics.hasFlag(SemanticsFlag.isEnabled), isTrue);
+      });
+
+      testWidgets('has disabled semantics when non-interactive', (tester) async {
+        await tester.pumpWidget(wrapWithStyle(
+          ToggleTile(
+            title: 'Test',
+            value: false,
+            onChanged: null,
+          ),
+        ));
+
+        final semantics = tester.getSemantics(find.byType(ToggleTile));
+        expect(semantics.hasFlag(SemanticsFlag.hasEnabledState), isTrue);
+        expect(semantics.hasFlag(SemanticsFlag.isEnabled), isFalse);
+      });
     });
 
     group('theming', () {
@@ -363,21 +385,6 @@ void main() {
         ));
 
         expect(find.byType(ToggleTile), findsOneWidget);
-      });
-
-      testWidgets('filled uses surfaceContainer color', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          ToggleTile(
-            variant: ToggleTileVariant.filled,
-            title: 'Test',
-            value: false,
-            onChanged: (v) {},
-          ),
-        ));
-
-        final container = tester.widget<Container>(find.byType(Container).first);
-        final decoration = container.decoration as BoxDecoration;
-        expect(decoration.color, isNotNull);
       });
     });
   });

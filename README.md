@@ -1,12 +1,12 @@
 <p align="center">
   <h1 align="center">Orient UI</h1>
-  <p align="center">Design system for Flutter without Material or Cupertino! 😍</p>
+  <p align="center">The missing pieces for Flutter Web & Desktop. Finally!</p>
+  <p align="center">Beautiful widgets with zero dependencies.</p>
 </p>
 
 <p align="center">
   <a href="https://widgets.userorient.com">Live Demo</a> •
   <a href="https://app.userorient.com">See in Production</a> •
-  <a href="https://github.com/userorient/orient-ui">Github</a> •
   <a href="https://pub.dev/packages/orient_ui">Pub.dev</a>
 </p>
 
@@ -25,23 +25,11 @@
 
 ## Features
 
-- 🌍 **Cross-platform**. Works on iOS, Android, Web, macOS, Windows, and Linux.
-- 🎨 **No Material or Cupertino**. Neutral design system with total freedom to customize.
-- 📦 **You own the code**. Generated files are yours to modify however you want.
-- 🔓 **No lock-in**. No dependency on a package, just plain Dart files in your project.
-
-## 💡 Why Orient UI?
-
-[UserOrient](https://userorient.com) is a feedback SDK for Flutter apps. 
-
-Its web dashboard and mobile app is built with this design system.
-
-Now it's yours to build web and desktop apps with Flutter easier (and also mobile apps).
-
-Want to say thanks? Use <a href="https://userorient.com">UserOrient</a> SDK in your Flutter apps, it's cool!
-
-> [!NOTE]
-> Early development. API may change. Building in public on [X/Twitter](https://x.com/kamranebkirovyz). Your feedback and contributions are welcomed!
+- 🧩 **Works alongside Material.** Add one widget today. No rewrite needed.
+- 📦 **You own the code.** Every widget is a file in your project. Edit it however you want.
+- 🖥️ **Built for web & desktop.** Hover states, keyboard navigation, responsive out of the box.
+- 🔓 **Zero dependencies.** Nothing in your pubspec. No lock-in.
+- 🎨 **14 widgets and growing.** Buttons, toggles, popups, navigation, toasts, and more.
 
 ## 🎬 Getting Started
 
@@ -85,7 +73,9 @@ Button(
 )
 ```
 
-Components follow system brightness by default. No wrapping needed.
+Widgets follow system brightness by default. No wrapping needed.
+
+### Dark Mode
 
 To control dark mode manually, wrap your app with `Style`:
 
@@ -96,14 +86,6 @@ Style(
     home: MyHomePage(),
   ),
 )
-```
-
-## 📦 Available Commands
-
-```bash
-orient_ui init          # Initialize style system
-orient_ui add           # List available components
-orient_ui add <widget>  # Add a specific widget
 ```
 
 ## 🎨 Components
@@ -124,10 +106,8 @@ orient_ui add <widget>  # Add a specific widget
 - [x] Tile
 - [x] CardBox
 
-### In Progress
-- [ ] TextField
-
 ### Coming Soon
+- [ ] TextField
 - [ ] Tabs
 - [ ] InlineTabs
 - [ ] Radio
@@ -140,7 +120,7 @@ Check them out at [interactive web demo](https://widgets.userorient.com).
 
 ![Tests](https://github.com/userorient/orient-ui/actions/workflows/test.yml/badge.svg?branch=main)
 
-All widgets are tested for rendering, interaction, accessibility, and theming.
+All widgets are tested.
 
 ## ✨ Customizing Colors
 

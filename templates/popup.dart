@@ -269,6 +269,8 @@ class _PopupRoute extends PageRouteBuilder {
   final String? title;
   final Widget child;
 
+  final FocusNode _focusNode = FocusNode();
+
   _PopupRoute({
     this.title,
     required this.child,
@@ -282,6 +284,12 @@ class _PopupRoute extends PageRouteBuilder {
            return const SizedBox.shrink();
          },
        );
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget buildTransitions(
@@ -313,7 +321,7 @@ class _PopupRoute extends PageRouteBuilder {
 
     // Close on Escape key
     return KeyboardListener(
-      focusNode: FocusNode()..requestFocus(),
+      focusNode: _focusNode..requestFocus(),
       onKeyEvent: (event) {
         if (event is KeyDownEvent &&
             event.logicalKey == LogicalKeyboardKey.escape) {

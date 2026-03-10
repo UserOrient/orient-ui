@@ -163,6 +163,8 @@ class _ConfirmationPopupRoute extends PageRouteBuilder {
   final VoidCallback? onCancel;
   final bool destructive;
 
+  final FocusNode _focusNode = FocusNode();
+
   _ConfirmationPopupRoute({
     this.icon,
     required this.title,
@@ -182,6 +184,12 @@ class _ConfirmationPopupRoute extends PageRouteBuilder {
            return const SizedBox.shrink();
          },
        );
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget buildTransitions(
@@ -211,7 +219,7 @@ class _ConfirmationPopupRoute extends PageRouteBuilder {
               .value;
 
     return KeyboardListener(
-      focusNode: FocusNode()..requestFocus(),
+      focusNode: _focusNode..requestFocus(),
       onKeyEvent: (event) {
         if (event is KeyDownEvent &&
             event.logicalKey == LogicalKeyboardKey.escape) {

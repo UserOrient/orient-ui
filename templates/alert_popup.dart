@@ -125,6 +125,8 @@ class _AlertPopupRoute extends PageRouteBuilder {
   final String? description;
   final Widget? action;
 
+  final FocusNode _focusNode = FocusNode();
+
   _AlertPopupRoute({
     this.icon,
     required this.title,
@@ -140,6 +142,12 @@ class _AlertPopupRoute extends PageRouteBuilder {
            return const SizedBox.shrink();
          },
        );
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget buildTransitions(
@@ -169,7 +177,7 @@ class _AlertPopupRoute extends PageRouteBuilder {
               .value;
 
     return KeyboardListener(
-      focusNode: FocusNode()..requestFocus(),
+      focusNode: _focusNode..requestFocus(),
       onKeyEvent: (event) {
         if (event is KeyDownEvent &&
             event.logicalKey == LogicalKeyboardKey.escape) {

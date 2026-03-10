@@ -13,25 +13,22 @@ class DemoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = Style.of(context);
+    final Style style = Style.of(context);
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 32),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: style.colors.mutedForeground,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: style.colors.mutedForeground,
           ),
-          const SizedBox(height: 12),
-          child,
-        ],
-      ),
+        ),
+        const SizedBox(height: 12),
+        child,
+      ],
     );
   }
 }

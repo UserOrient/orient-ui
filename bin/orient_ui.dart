@@ -15,6 +15,11 @@ final Map<String, ComponentInfo> components = {
     dependencies: ['spinner'],
   ),
   'card_box': ComponentInfo('card_box.dart'),
+  'multi_choice': ComponentInfo('multi_choice.dart'),
+  'multi_choice_tile': ComponentInfo(
+    'multi_choice_tile.dart',
+    dependencies: ['multi_choice', 'tile'],
+  ),
   'single_choice': ComponentInfo('single_choice.dart'),
   'single_choice_tile': ComponentInfo(
     'single_choice_tile.dart',

@@ -107,6 +107,8 @@ Style(
 - [x] ToggleTile
 - [x] SingleChoice
 - [x] SingleChoiceTile
+- [x] MultiChoice
+- [x] MultiChoiceTile
 
 ### Coming Soon
 - [ ] Typography

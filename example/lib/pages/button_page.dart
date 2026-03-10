@@ -15,7 +15,7 @@ class _ButtonPageState extends State<ButtonPage> {
   bool _disabled = false;
   bool _loading = false;
   bool _withIcon = false;
-  bool _small = true;
+  bool _small = false;
 
   static const _variantIcons = {
     ButtonVariant.primary: TablerIcons.send,

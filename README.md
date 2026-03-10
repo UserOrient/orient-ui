@@ -107,12 +107,21 @@ Style(
 - [x] CardBox
 
 ### Coming Soon
+- [ ] Typography
 - [ ] TextField
+- [ ] Dropdown
 - [ ] Tabs
 - [ ] InlineTabs
+- [ ] Checkbox
 - [ ] Radio
 - [ ] RadioTile
-- [ ] Menu
+- [ ] Label
+- [ ] Tip
+- [ ] PopoverMenu
+- [ ] PickerPopup
+- [ ] VerticalTile
+- [ ] SocialButton
+- [ ] AdaptivePageTransition
 
 Check them out at [interactive web demo](https://widgets.userorient.com).
 

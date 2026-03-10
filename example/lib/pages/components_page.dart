@@ -1,6 +1,8 @@
 import 'package:example/pages/alert_popup_page.dart';
 import 'package:example/pages/button_page.dart';
 import 'package:example/pages/card_box_page.dart';
+import 'package:example/pages/single_choice_page.dart';
+import 'package:example/pages/single_choice_tile_page.dart';
 import 'package:example/pages/confirmation_popup_page.dart';
 import 'package:example/pages/copy_button_page.dart';
 import 'package:example/pages/empty_state_page.dart';
@@ -28,8 +30,10 @@ class ComponentsPage extends StatelessWidget {
       _componentSection('CardBox', 'card_box', style, const CardBoxPage()),
       _componentSection('Button', 'button', style, const ButtonPage()),
       _componentSection('Toggle', 'toggle', style, const TogglePage()),
+      _componentSection('SingleChoice', 'single_choice', style, const SingleChoicePage()),
       _componentSection('Tile', 'tile', style, const TilePage()),
       _componentSection('ToggleTile', 'toggle_tile', style, const ToggleTilePage()),
+      _componentSection('SingleChoiceTile', 'single_choice_tile', style, const SingleChoiceTilePage()),
       _componentSection('SearchField', 'search_field', style, const SearchFieldPage()),
       _componentSection('Toast', 'toast', style, const ToastPage()),
       _componentSection('Spinner', 'spinner', style, const SpinnerPage()),

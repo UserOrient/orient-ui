@@ -101,10 +101,12 @@ Style(
 - [x] AlertPopup
 - [x] ConfirmationPopup
 - [x] SearchField
+- [x] CardBox
+- [x] Tile
 - [x] Toggle
 - [x] ToggleTile
-- [x] Tile
-- [x] CardBox
+- [x] SingleChoice
+- [x] SingleChoiceTile
 
 ### Coming Soon
 - [ ] Typography
@@ -113,8 +115,6 @@ Style(
 - [ ] Tabs
 - [ ] InlineTabs
 - [ ] Checkbox
-- [ ] Radio
-- [ ] RadioTile
 - [ ] Label
 - [ ] Tip
 - [ ] PopoverMenu

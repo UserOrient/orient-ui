@@ -49,12 +49,26 @@ class ComponentsPage extends StatelessWidget {
       _componentSection('NavBar', 'nav_bar', style, const NavBarPage()),
     ];
 
+    final header = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Components', style: context.typography.heading),
+        const SizedBox(height: 8),
+        Text(
+          '${sections.length} ready-to-use widgets. No Material, no Cupertino.',
+          style: context.typography.body.muted(context),
+        ),
+        const SizedBox(height: 32),
+      ],
+    );
+
     if (!isDesktop) {
       return SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            header,
             for (int i = 0; i < sections.length; i++) ...[
               sections[i],
               if (i < sections.length - 1) const SizedBox(height: 32),
@@ -72,29 +86,35 @@ class ComponentsPage extends StatelessWidget {
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Column(
-              children: [
-                for (int i = 0; i < left.length; i++) ...[
-                  left[i],
-                  if (i < left.length - 1) const SizedBox(height: 32),
-                ],
-              ],
-            ),
-          ),
-          const SizedBox(width: 32),
-          Expanded(
-            child: Column(
-              children: [
-                for (int i = 0; i < right.length; i++) ...[
-                  right[i],
-                  if (i < right.length - 1) const SizedBox(height: 32),
-                ],
-              ],
-            ),
+          header,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    for (int i = 0; i < left.length; i++) ...[
+                      left[i],
+                      if (i < left.length - 1) const SizedBox(height: 32),
+                    ],
+                  ],
+                ),
+              ),
+              const SizedBox(width: 32),
+              Expanded(
+                child: Column(
+                  children: [
+                    for (int i = 0; i < right.length; i++) ...[
+                      right[i],
+                      if (i < right.length - 1) const SizedBox(height: 32),
+                    ],
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),

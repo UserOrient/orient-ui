@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:example/widgets/search_field.dart';
@@ -10,17 +8,21 @@ void main() {
   group('SearchField', () {
     group('rendering', () {
       testWidgets('renders without error', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const SearchField(),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const SearchField(),
+          ),
+        );
 
         expect(find.byType(SearchField), findsOneWidget);
       });
 
       testWidgets('renders placeholder when empty', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const SearchField(placeholder: 'Search...'),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const SearchField(placeholder: 'Search...'),
+          ),
+        );
 
         expect(find.text('Search...'), findsOneWidget);
       });
@@ -28,21 +30,25 @@ void main() {
       testWidgets('hides placeholder when text entered', (tester) async {
         final controller = TextEditingController(text: 'hello');
 
-        await tester.pumpWidget(wrapWithStyle(
-          SearchField(
-            controller: controller,
-            placeholder: 'Search...',
+        await tester.pumpWidget(
+          wrapWithStyle(
+            SearchField(
+              controller: controller,
+              placeholder: 'Search...',
+            ),
           ),
-        ));
+        );
 
         expect(find.text('Search...'), findsNothing);
         expect(find.text('hello'), findsOneWidget);
       });
 
       testWidgets('renders search icon', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const SearchField(),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const SearchField(),
+          ),
+        );
 
         // Search icon is rendered via CustomPaint
         expect(find.byType(CustomPaint), findsWidgets);
@@ -51,34 +57,39 @@ void main() {
       testWidgets('renders clear button when text entered', (tester) async {
         final controller = TextEditingController(text: 'hello');
 
-        await tester.pumpWidget(wrapWithStyle(
-          SearchField(controller: controller),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            SearchField(controller: controller),
+          ),
+        );
 
         // Should have 2 CustomPaint: search icon + clear button
         expect(find.byType(CustomPaint), findsNWidgets(2));
       });
 
       testWidgets('does not render clear button when empty', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const SearchField(),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const SearchField(),
+          ),
+        );
 
         // Should have only 1 CustomPaint: search icon
         expect(find.byType(CustomPaint), findsOneWidget);
       });
-
     });
 
     group('interaction', () {
       testWidgets('calls onChanged when text changes', (tester) async {
         String? changedValue;
 
-        await tester.pumpWidget(wrapWithStyle(
-          SearchField(
-            onChanged: (value) => changedValue = value,
+        await tester.pumpWidget(
+          wrapWithStyle(
+            SearchField(
+              onChanged: (value) => changedValue = value,
+            ),
           ),
-        ));
+        );
 
         await tester.enterText(find.byType(EditableText), 'test');
         await tester.pump();
@@ -89,11 +100,13 @@ void main() {
       testWidgets('calls onSubmitted when submitted', (tester) async {
         String? submittedValue;
 
-        await tester.pumpWidget(wrapWithStyle(
-          SearchField(
-            onSubmitted: (value) => submittedValue = value,
+        await tester.pumpWidget(
+          wrapWithStyle(
+            SearchField(
+              onSubmitted: (value) => submittedValue = value,
+            ),
           ),
-        ));
+        );
 
         await tester.enterText(find.byType(EditableText), 'search query');
         await tester.testTextInput.receiveAction(TextInputAction.search);
@@ -106,12 +119,14 @@ void main() {
         final controller = TextEditingController(text: 'hello');
         String? changedValue;
 
-        await tester.pumpWidget(wrapWithStyle(
-          SearchField(
-            controller: controller,
-            onChanged: (value) => changedValue = value,
+        await tester.pumpWidget(
+          wrapWithStyle(
+            SearchField(
+              controller: controller,
+              onChanged: (value) => changedValue = value,
+            ),
           ),
-        ));
+        );
 
         // Find and tap the clear button (second CustomPaint wrapped in GestureDetector)
         final clearButton = find.byType(GestureDetector).last;
@@ -123,26 +138,34 @@ void main() {
       });
 
       testWidgets('focuses when tapped', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const SearchField(),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const SearchField(),
+          ),
+        );
 
         await tester.tap(find.byType(SearchField));
         await tester.pump();
 
-        final editableText = tester.widget<EditableText>(find.byType(EditableText));
+        final editableText = tester.widget<EditableText>(
+          find.byType(EditableText),
+        );
         expect(editableText.focusNode.hasFocus, isTrue);
       });
 
       testWidgets('autofocus works', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const SearchField(autofocus: true),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const SearchField(autofocus: true),
+          ),
+        );
 
         await tester.pump();
         await tester.pump();
 
-        final editableText = tester.widget<EditableText>(find.byType(EditableText));
+        final editableText = tester.widget<EditableText>(
+          find.byType(EditableText),
+        );
         expect(editableText.focusNode.hasFocus, isTrue);
       });
     });
@@ -151,9 +174,11 @@ void main() {
       testWidgets('uses provided controller', (tester) async {
         final controller = TextEditingController(text: 'initial');
 
-        await tester.pumpWidget(wrapWithStyle(
-          SearchField(controller: controller),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            SearchField(controller: controller),
+          ),
+        );
 
         expect(find.text('initial'), findsOneWidget);
       });
@@ -161,9 +186,11 @@ void main() {
       testWidgets('updates when controller changes externally', (tester) async {
         final controller = TextEditingController();
 
-        await tester.pumpWidget(wrapWithStyle(
-          SearchField(controller: controller),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            SearchField(controller: controller),
+          ),
+        );
 
         controller.text = 'external update';
         await tester.pump();
@@ -171,10 +198,14 @@ void main() {
         expect(find.text('external update'), findsOneWidget);
       });
 
-      testWidgets('creates internal controller when not provided', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const SearchField(),
-        ));
+      testWidgets('creates internal controller when not provided', (
+        tester,
+      ) async {
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const SearchField(),
+          ),
+        );
 
         await tester.enterText(find.byType(EditableText), 'typed');
         await tester.pump();
@@ -185,9 +216,11 @@ void main() {
 
     group('accessibility', () {
       testWidgets('has textField semantics', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const SearchField(placeholder: 'Search...'),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const SearchField(placeholder: 'Search...'),
+          ),
+        );
 
         final semantics = tester.getSemantics(find.byType(Semantics).first);
         expect(semantics.flagsCollection.isTextField, isTrue);
@@ -196,9 +229,11 @@ void main() {
       testWidgets('clear button has button semantics', (tester) async {
         final controller = TextEditingController(text: 'hello');
 
-        await tester.pumpWidget(wrapWithStyle(
-          SearchField(controller: controller),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            SearchField(controller: controller),
+          ),
+        );
 
         // Find the clear button semantics
         final clearButtonSemantics = tester.getSemantics(
@@ -208,9 +243,11 @@ void main() {
       });
 
       testWidgets('has hint from placeholder', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const SearchField(placeholder: 'Search packages...'),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const SearchField(placeholder: 'Search packages...'),
+          ),
+        );
 
         final semantics = tester.getSemantics(find.byType(Semantics).first);
         expect(semantics.hint, 'Search packages...');
@@ -219,19 +256,23 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const SearchField(placeholder: 'Light mode'),
-          brightness: Brightness.light,
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const SearchField(placeholder: 'Light mode'),
+            brightness: Brightness.light,
+          ),
+        );
 
         expect(find.text('Light mode'), findsOneWidget);
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const SearchField(placeholder: 'Dark mode'),
-          brightness: Brightness.dark,
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const SearchField(placeholder: 'Dark mode'),
+            brightness: Brightness.dark,
+          ),
+        );
 
         expect(find.text('Dark mode'), findsOneWidget);
       });

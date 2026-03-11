@@ -1,179 +1,98 @@
 import 'package:flutter/widgets.dart';
 
-// ============================================================================
-// CUSTOMIZE THESE VALUES
-// ============================================================================
+// Light Theme
 
-// Breakpoints
-const double _desktopBreakpoint = 600;
-
-// Radii
-const double _radiusSmall = 8;
-const double _radiusMedium = 12;
-const double _radiusLarge = 24;
-
-// Durations
-const Duration _durationFast = Duration(milliseconds: 100);
-const Duration _durationNormal = Duration(milliseconds: 200);
-const Duration _durationSlow = Duration(milliseconds: 300);
-
-// Light Theme - Base
-const Color _lightBackground = Color(0xFFFFFFFF);
-const Color _lightBorder = Color(0xFFE4E4E7);
-const Color _lightForeground = Color(0xFF2A2A2A);
-const Color _lightMutedForeground = Color(0xFFACAEAF);
-const Color _lightAccent = Color(0xFF18181B);
-const Color _lightAccentForeground = Color(0xFFFAFAFA);
-const Color _lightSurfaceContainer = Color(0xFFFAFAFA);
-
-// Light Theme - Button
-const Color _lightButtonPrimary = Color(0xFF18181B);
-const Color _lightButtonPrimaryForeground = Color(0xFFFAFAFA);
-const Color _lightButtonSecondary = Color(0xFFF4F4F5);
-const Color _lightButtonSecondaryForeground = Color(0xFF18181B);
-const Color _lightButtonDestructive = Color(0xFFEF4444);
-const Color _lightButtonDestructiveForeground = Color(0xFFFAFAFA);
-const Color _lightButtonLink = Color(0xFF3B82F6);
-const Color _lightButtonAccent = Color(0xFFF4F4F5);
-
-// Light Theme - Navigation
-const Color _lightNavRailBackground = Color(0xFFFAFAFA);
-const Color _lightNavRailItemBackgroundActive = Color(0xFFFFFFFF);
-const Color _lightNavRailItemBackgroundHover = Color(0xFFF2F2F2);
-const Color _lightNavRailItemText = Color(0xFF2A2A2A);
-const Color _lightNavBottomBarBackground = Color(0xFFFFFFFF);
-const Color _lightNavBottomBarItemActive = Color(0xFF121212);
-const Color _lightNavBottomBarItemInactive = Color(0xFFBBBBBB);
-
-// Light Theme - Toast
-const Color _lightToastSuccess = Color(0xFF52DF82);
-const Color _lightToastError = Color(0xFFFF6D62);
-const Color _lightToastInfo = Color(0xFF529BDF);
-const Color _lightToastWarning = Color(0xFFFFB35A);
-
-// Dark Theme - Base
-const Color _darkBackground = Color(0xFF303030);
-const Color _darkBorder = Color(0xFF27272A);
-const Color _darkForeground = Color(0xFFFAFAFA);
-const Color _darkMutedForeground = Color(0xFFB2B2B2);
-const Color _darkAccent = Color(0xFFFAFAFA);
-const Color _darkAccentForeground = Color(0xFF18181B);
-const Color _darkSurfaceContainer = Color(0xFF121212);
-
-// Dark Theme - Button
-const Color _darkButtonPrimary = Color(0xFFFAFAFA);
-const Color _darkButtonPrimaryForeground = Color(0xFF18181B);
-const Color _darkButtonSecondary = Color(0xFF27272A);
-const Color _darkButtonSecondaryForeground = Color(0xFFFAFAFA);
-const Color _darkButtonDestructive = Color(0xFFEF4444);
-const Color _darkButtonDestructiveForeground = Color(0xFFFAFAFA);
-const Color _darkButtonLink = Color(0xFF60A5FA);
-const Color _darkButtonAccent = Color(0xFF27272A);
-
-// Dark Theme - Navigation
-const Color _darkNavRailBackground = Color(0xFF121212);
-const Color _darkNavRailItemBackgroundActive = Color(0xFF2A2A2A);
-const Color _darkNavRailItemBackgroundHover = Color(0xFF080808);
-const Color _darkNavRailItemText = Color(0xFFFAFAFA);
-const Color _darkNavBottomBarBackground = Color(0xFF121212);
-const Color _darkNavBottomBarItemActive = Color(0xFFFAFAFA);
-const Color _darkNavBottomBarItemInactive = Color(0xFF71717A);
-
-// Dark Theme - Toast
-const Color _darkToastSuccess = Color(0xFF52DF82);
-const Color _darkToastError = Color(0xFFFF6D62);
-const Color _darkToastInfo = Color(0xFF529BDF);
-const Color _darkToastWarning = Color(0xFFFFB35A);
-
-// ============================================================================
-// INTERNAL - NO NEED TO EDIT BELOW
-// ============================================================================
-
-final BreakpointTokens _breakpoints = BreakpointTokens(
-  desktop: _desktopBreakpoint,
+final ColorTokens _colorsLight = ColorTokens(
+  background: Color(0xFFFFFFFF),
+  border: Color(0xFFE4E4E7),
+  foreground: Color(0xFF2A2A2A),
+  mutedForeground: Color(0xFFACAEAF),
+  accent: Color(0xFF18181B),
+  accentForeground: Color(0xFFFAFAFA),
+  surfaceContainer: Color(0xFFFAFAFA),
+  button: ButtonColors(
+    primary: Color(0xFF18181B),
+    primaryForeground: Color(0xFFFAFAFA),
+    secondary: Color(0xFFF4F4F5),
+    secondaryForeground: Color(0xFF18181B),
+    destructive: Color(0xFFEF4444),
+    destructiveForeground: Color(0xFFFAFAFA),
+    link: Color(0xFF3B82F6),
+    accent: Color(0xFFF4F4F5),
+  ),
+  navigation: NavigationColors(
+    railBackground: Color(0xFFFAFAFA),
+    railItemBackgroundActive: Color(0xFFFFFFFF),
+    railItemBackgroundHover: Color(0xFFF2F2F2),
+    railItemText: Color(0xFF2A2A2A),
+    bottomBarBackground: Color(0xFFFFFFFF),
+    bottomBarItemActive: Color(0xFF121212),
+    bottomBarItemInactive: Color(0xFFBBBBBB),
+  ),
+  toast: ToastColors(
+    success: Color(0xFF52DF82),
+    error: Color(0xFFFF6D62),
+    info: Color(0xFF529BDF),
+    warning: Color(0xFFFFB35A),
+  ),
 );
 
+// Dark Theme
+
+final ColorTokens _colorsDark = ColorTokens(
+  background: Color(0xFF303030),
+  border: Color(0xFF27272A),
+  foreground: Color(0xFFFAFAFA),
+  mutedForeground: Color(0xFFB2B2B2),
+  accent: Color(0xFFFAFAFA),
+  accentForeground: Color(0xFF18181B),
+  surfaceContainer: Color(0xFF121212),
+  button: ButtonColors(
+    primary: Color(0xFFFAFAFA),
+    primaryForeground: Color(0xFF18181B),
+    secondary: Color(0xFF27272A),
+    secondaryForeground: Color(0xFFFAFAFA),
+    destructive: Color(0xFFEF4444),
+    destructiveForeground: Color(0xFFFAFAFA),
+    link: Color(0xFF60A5FA),
+    accent: Color(0xFF27272A),
+  ),
+  navigation: NavigationColors(
+    railBackground: Color(0xFF121212),
+    railItemBackgroundActive: Color(0xFF2A2A2A),
+    railItemBackgroundHover: Color(0xFF080808),
+    railItemText: Color(0xFFFAFAFA),
+    bottomBarBackground: Color(0xFF121212),
+    bottomBarItemActive: Color(0xFFFAFAFA),
+    bottomBarItemInactive: Color(0xFF71717A),
+  ),
+  toast: ToastColors(
+    success: Color(0xFF52DF82),
+    error: Color(0xFFFF6D62),
+    info: Color(0xFF529BDF),
+    warning: Color(0xFFFFB35A),
+  ),
+);
+
+// Tokens
+
 final RadiusTokens _radii = RadiusTokens(
-  small: _radiusSmall,
-  medium: _radiusMedium,
-  large: _radiusLarge,
+  small: 8,
+  medium: 12,
+  large: 24,
 );
 
 final DurationTokens _durations = DurationTokens(
-  fast: _durationFast,
-  normal: _durationNormal,
-  slow: _durationSlow,
+  fast: Duration(milliseconds: 100),
+  normal: Duration(milliseconds: 200),
+  slow: Duration(milliseconds: 300),
 );
 
-final ColorTokens _colorsLight = ColorTokens(
-  background: _lightBackground,
-  border: _lightBorder,
-  foreground: _lightForeground,
-  mutedForeground: _lightMutedForeground,
-  accent: _lightAccent,
-  accentForeground: _lightAccentForeground,
-  surfaceContainer: _lightSurfaceContainer,
-  button: ButtonColors(
-    primary: _lightButtonPrimary,
-    primaryForeground: _lightButtonPrimaryForeground,
-    secondary: _lightButtonSecondary,
-    secondaryForeground: _lightButtonSecondaryForeground,
-    destructive: _lightButtonDestructive,
-    destructiveForeground: _lightButtonDestructiveForeground,
-    link: _lightButtonLink,
-    accent: _lightButtonAccent,
-  ),
-  navigation: NavigationColors(
-    railBackground: _lightNavRailBackground,
-    railItemBackgroundActive: _lightNavRailItemBackgroundActive,
-    railItemBackgroundHover: _lightNavRailItemBackgroundHover,
-    railItemText: _lightNavRailItemText,
-    bottomBarBackground: _lightNavBottomBarBackground,
-    bottomBarItemActive: _lightNavBottomBarItemActive,
-    bottomBarItemInactive: _lightNavBottomBarItemInactive,
-  ),
-  toast: ToastColors(
-    success: _lightToastSuccess,
-    error: _lightToastError,
-    info: _lightToastInfo,
-    warning: _lightToastWarning,
-  ),
+final BreakpointTokens _breakpoints = BreakpointTokens(
+  desktop: 600,
 );
 
-final ColorTokens _colorsDark = ColorTokens(
-  background: _darkBackground,
-  border: _darkBorder,
-  foreground: _darkForeground,
-  mutedForeground: _darkMutedForeground,
-  accent: _darkAccent,
-  accentForeground: _darkAccentForeground,
-  surfaceContainer: _darkSurfaceContainer,
-  button: ButtonColors(
-    primary: _darkButtonPrimary,
-    primaryForeground: _darkButtonPrimaryForeground,
-    secondary: _darkButtonSecondary,
-    secondaryForeground: _darkButtonSecondaryForeground,
-    destructive: _darkButtonDestructive,
-    destructiveForeground: _darkButtonDestructiveForeground,
-    link: _darkButtonLink,
-    accent: _darkButtonAccent,
-  ),
-  navigation: NavigationColors(
-    railBackground: _darkNavRailBackground,
-    railItemBackgroundActive: _darkNavRailItemBackgroundActive,
-    railItemBackgroundHover: _darkNavRailItemBackgroundHover,
-    railItemText: _darkNavRailItemText,
-    bottomBarBackground: _darkNavBottomBarBackground,
-    bottomBarItemActive: _darkNavBottomBarItemActive,
-    bottomBarItemInactive: _darkNavBottomBarItemInactive,
-  ),
-  toast: ToastColors(
-    success: _darkToastSuccess,
-    error: _darkToastError,
-    info: _darkToastInfo,
-    warning: _darkToastWarning,
-  ),
-);
+// Style
 
 class Style extends InheritedWidget {
   final Brightness brightness;
@@ -194,9 +113,9 @@ class Style extends InheritedWidget {
   static BreakpointTokens get breakpoints => _breakpoints;
 
   static Style of(BuildContext context) {
-    final Style? style = context.dependOnInheritedWidgetOfExactType<Style>();
+    final style = context.dependOnInheritedWidgetOfExactType<Style>();
     if (style != null) return style;
-    final Brightness brightness = MediaQuery.platformBrightnessOf(context);
+    final brightness = MediaQuery.platformBrightnessOf(context);
     return Style._fallback(brightness);
   }
 
@@ -206,35 +125,31 @@ class Style extends InheritedWidget {
   }
 }
 
-class BreakpointTokens {
-  final double desktop;
+// Token Definitions
 
-  const BreakpointTokens({
-    required this.desktop,
-  });
-}
+class ColorTokens {
+  final Color background;
+  final Color border;
+  final Color foreground;
+  final Color mutedForeground;
+  final Color accent;
+  final Color accentForeground;
+  final Color surfaceContainer;
+  final ButtonColors button;
+  final NavigationColors navigation;
+  final ToastColors toast;
 
-class RadiusTokens {
-  final double small;
-  final double medium;
-  final double large;
-
-  const RadiusTokens({
-    required this.small,
-    required this.medium,
-    required this.large,
-  });
-}
-
-class DurationTokens {
-  final Duration fast;
-  final Duration normal;
-  final Duration slow;
-
-  const DurationTokens({
-    required this.fast,
-    required this.normal,
-    required this.slow,
+  const ColorTokens({
+    required this.background,
+    required this.border,
+    required this.foreground,
+    required this.mutedForeground,
+    required this.accent,
+    required this.accentForeground,
+    required this.surfaceContainer,
+    required this.button,
+    required this.navigation,
+    required this.toast,
   });
 }
 
@@ -294,28 +209,34 @@ class ToastColors {
   });
 }
 
-class ColorTokens {
-  final Color background;
-  final Color border;
-  final Color foreground;
-  final Color mutedForeground;
-  final Color accent;
-  final Color accentForeground;
-  final Color surfaceContainer;
-  final ButtonColors button;
-  final NavigationColors navigation;
-  final ToastColors toast;
+class RadiusTokens {
+  final double small;
+  final double medium;
+  final double large;
 
-  const ColorTokens({
-    required this.background,
-    required this.border,
-    required this.foreground,
-    required this.mutedForeground,
-    required this.accent,
-    required this.accentForeground,
-    required this.surfaceContainer,
-    required this.button,
-    required this.navigation,
-    required this.toast,
+  const RadiusTokens({
+    required this.small,
+    required this.medium,
+    required this.large,
+  });
+}
+
+class DurationTokens {
+  final Duration fast;
+  final Duration normal;
+  final Duration slow;
+
+  const DurationTokens({
+    required this.fast,
+    required this.normal,
+    required this.slow,
+  });
+}
+
+class BreakpointTokens {
+  final double desktop;
+
+  const BreakpointTokens({
+    required this.desktop,
   });
 }

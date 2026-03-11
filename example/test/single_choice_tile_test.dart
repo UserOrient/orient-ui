@@ -322,7 +322,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(SingleChoiceTile<String>));
-        expect(semantics.hasFlag(SemanticsFlag.isChecked), isTrue);
+        expect(semantics.flagsCollection.isChecked, CheckedState.isTrue);
       });
 
       testWidgets('does not have checked semantics when unselected', (tester) async {
@@ -336,7 +336,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(SingleChoiceTile<String>));
-        expect(semantics.hasFlag(SemanticsFlag.isChecked), isFalse);
+        expect(semantics.flagsCollection.isChecked, CheckedState.isFalse);
       });
 
       testWidgets('has title as semantics label', (tester) async {
@@ -364,8 +364,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(SingleChoiceTile<String>));
-        expect(semantics.hasFlag(SemanticsFlag.hasEnabledState), isTrue);
-        expect(semantics.hasFlag(SemanticsFlag.isEnabled), isTrue);
+        expect(semantics.flagsCollection.isEnabled, Tristate.isTrue);
       });
 
       testWidgets('has disabled semantics when non-interactive', (tester) async {
@@ -379,8 +378,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(SingleChoiceTile<String>));
-        expect(semantics.hasFlag(SemanticsFlag.hasEnabledState), isTrue);
-        expect(semantics.hasFlag(SemanticsFlag.isEnabled), isFalse);
+        expect(semantics.flagsCollection.isEnabled, Tristate.isFalse);
       });
     });
 

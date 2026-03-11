@@ -188,7 +188,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(MultiChoice));
-        expect(semantics.hasFlag(SemanticsFlag.isChecked), isTrue);
+        expect(semantics.flagsCollection.isChecked, CheckedState.isTrue);
       });
 
       testWidgets('does not have checked semantics when unchecked', (tester) async {
@@ -200,7 +200,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(MultiChoice));
-        expect(semantics.hasFlag(SemanticsFlag.isChecked), isFalse);
+        expect(semantics.flagsCollection.isChecked, CheckedState.isFalse);
       });
 
       testWidgets('has enabled semantics when interactive', (tester) async {
@@ -212,7 +212,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(MultiChoice));
-        expect(semantics.hasFlag(SemanticsFlag.isEnabled), isTrue);
+        expect(semantics.flagsCollection.isEnabled, Tristate.isTrue);
       });
 
       testWidgets('has disabled semantics when not interactive', (tester) async {
@@ -223,7 +223,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(MultiChoice));
-        expect(semantics.hasFlag(SemanticsFlag.isEnabled), isFalse);
+        expect(semantics.flagsCollection.isEnabled, Tristate.isFalse);
       });
     });
 

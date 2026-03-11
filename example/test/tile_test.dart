@@ -308,7 +308,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(Tile));
-        expect(semantics.hasFlag(SemanticsFlag.isButton), isTrue);
+        expect(semantics.flagsCollection.isButton, isTrue);
       });
     });
 

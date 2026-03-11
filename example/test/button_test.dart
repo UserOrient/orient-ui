@@ -142,8 +142,8 @@ void main() {
 
         final semantics = tester.getSemantics(find.byType(Button));
         expect(semantics.label, 'Accessible');
-        expect(semantics.hasFlag(SemanticsFlag.isButton), isTrue);
-        expect(semantics.hasFlag(SemanticsFlag.isEnabled), isTrue);
+        expect(semantics.flagsCollection.isButton, isTrue);
+        expect(semantics.flagsCollection.isEnabled, Tristate.isTrue);
       });
 
       testWidgets('semantics shows disabled when onPressed is null', (tester) async {
@@ -152,7 +152,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(Button));
-        expect(semantics.hasFlag(SemanticsFlag.isEnabled), isFalse);
+        expect(semantics.flagsCollection.isEnabled, Tristate.isFalse);
       });
     });
 

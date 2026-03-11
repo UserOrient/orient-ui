@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:example/widgets/toggle.dart';
@@ -11,33 +10,41 @@ void main() {
   group('Toggle', () {
     group('rendering', () {
       testWidgets('renders without error', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(value: false, onChanged: (v) {}),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(value: false, onChanged: (v) {}),
+          ),
+        );
 
         expect(find.byType(Toggle), findsOneWidget);
       });
 
       testWidgets('renders in on state', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(value: true, onChanged: (v) {}),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(value: true, onChanged: (v) {}),
+          ),
+        );
 
         expect(find.byType(Toggle), findsOneWidget);
       });
 
       testWidgets('renders small variant', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle.small(value: false, onChanged: (v) {}),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle.small(value: false, onChanged: (v) {}),
+          ),
+        );
 
         expect(find.byType(Toggle), findsOneWidget);
       });
 
       testWidgets('renders small variant in on state', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle.small(value: true, onChanged: (v) {}),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle.small(value: true, onChanged: (v) {}),
+          ),
+        );
 
         expect(find.byType(Toggle), findsOneWidget);
       });
@@ -45,18 +52,22 @@ void main() {
 
     group('states', () {
       testWidgets('has reduced opacity when disabled', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const Toggle(value: false),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const Toggle(value: false),
+          ),
+        );
 
         final opacity = tester.widget<Opacity>(find.byType(Opacity));
         expect(opacity.opacity, 0.5);
       });
 
       testWidgets('has full opacity when enabled', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(value: false, onChanged: (v) {}),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(value: false, onChanged: (v) {}),
+          ),
+        );
 
         final opacity = tester.widget<Opacity>(find.byType(Opacity));
         expect(opacity.opacity, 1.0);
@@ -65,16 +76,18 @@ void main() {
       testWidgets('animates when value changes', (tester) async {
         bool value = false;
 
-        await tester.pumpWidget(wrapWithStyle(
-          StatefulBuilder(
-            builder: (context, setState) {
-              return Toggle(
-                value: value,
-                onChanged: (v) => setState(() => value = v),
-              );
-            },
+        await tester.pumpWidget(
+          wrapWithStyle(
+            StatefulBuilder(
+              builder: (context, setState) {
+                return Toggle(
+                  value: value,
+                  onChanged: (v) => setState(() => value = v),
+                );
+              },
+            ),
           ),
-        ));
+        );
 
         await tester.tap(find.byType(Toggle));
         await tester.pump();
@@ -91,12 +104,14 @@ void main() {
       testWidgets('calls onChanged with toggled value on tap', (tester) async {
         bool? received;
 
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(
-            value: false,
-            onChanged: (v) => received = v,
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(
+              value: false,
+              onChanged: (v) => received = v,
+            ),
           ),
-        ));
+        );
 
         await tester.tap(find.byType(Toggle));
         await tester.pump();
@@ -104,15 +119,19 @@ void main() {
         expect(received, isTrue);
       });
 
-      testWidgets('calls onChanged with false when toggling off', (tester) async {
+      testWidgets('calls onChanged with false when toggling off', (
+        tester,
+      ) async {
         bool? received;
 
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(
-            value: true,
-            onChanged: (v) => received = v,
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(
+              value: true,
+              onChanged: (v) => received = v,
+            ),
           ),
-        ));
+        );
 
         await tester.tap(find.byType(Toggle));
         await tester.pump();
@@ -123,9 +142,11 @@ void main() {
       testWidgets('does not call onChanged when disabled', (tester) async {
         bool called = false;
 
-        await tester.pumpWidget(wrapWithStyle(
-          const Toggle(value: false),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const Toggle(value: false),
+          ),
+        );
 
         await tester.tap(find.byType(Toggle));
         await tester.pump();
@@ -134,9 +155,11 @@ void main() {
       });
 
       testWidgets('has Focus widget for keyboard support', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(value: false, onChanged: (v) {}),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(value: false, onChanged: (v) {}),
+          ),
+        );
 
         expect(find.byType(Focus), findsWidgets);
       });
@@ -144,12 +167,14 @@ void main() {
       testWidgets('supports horizontal drag to toggle on', (tester) async {
         bool? received;
 
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(
-            value: false,
-            onChanged: (v) => received = v,
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(
+              value: false,
+              onChanged: (v) => received = v,
+            ),
           ),
-        ));
+        );
 
         await tester.timedDrag(
           find.byType(Toggle),
@@ -164,12 +189,14 @@ void main() {
       testWidgets('supports horizontal drag to toggle off', (tester) async {
         bool? received;
 
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(
-            value: true,
-            onChanged: (v) => received = v,
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(
+              value: true,
+              onChanged: (v) => received = v,
+            ),
           ),
-        ));
+        );
 
         await tester.timedDrag(
           find.byType(Toggle),
@@ -184,57 +211,71 @@ void main() {
 
     group('accessibility', () {
       testWidgets('has toggled semantics when on', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(value: true, onChanged: (v) {}),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(value: true, onChanged: (v) {}),
+          ),
+        );
 
         final semantics = tester.getSemantics(find.byType(Toggle));
-        expect(semantics.hasFlag(SemanticsFlag.isToggled), isTrue);
+        expect(semantics.flagsCollection.isToggled, Tristate.isTrue);
       });
 
       testWidgets('does not have toggled semantics when off', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(value: false, onChanged: (v) {}),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(value: false, onChanged: (v) {}),
+          ),
+        );
 
         final semantics = tester.getSemantics(find.byType(Toggle));
-        expect(semantics.hasFlag(SemanticsFlag.isToggled), isFalse);
+        expect(semantics.flagsCollection.isToggled, Tristate.isFalse);
       });
 
       testWidgets('has enabled semantics when interactive', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(value: false, onChanged: (v) {}),
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(value: false, onChanged: (v) {}),
+          ),
+        );
 
         final semantics = tester.getSemantics(find.byType(Toggle));
-        expect(semantics.hasFlag(SemanticsFlag.isEnabled), isTrue);
+        expect(semantics.flagsCollection.isEnabled, Tristate.isTrue);
       });
 
-      testWidgets('has disabled semantics when not interactive', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          const Toggle(value: false),
-        ));
+      testWidgets('has disabled semantics when not interactive', (
+        tester,
+      ) async {
+        await tester.pumpWidget(
+          wrapWithStyle(
+            const Toggle(value: false),
+          ),
+        );
 
         final semantics = tester.getSemantics(find.byType(Toggle));
-        expect(semantics.hasFlag(SemanticsFlag.isEnabled), isFalse);
+        expect(semantics.flagsCollection.isEnabled, Tristate.isFalse);
       });
     });
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(value: true, onChanged: (v) {}),
-          brightness: Brightness.light,
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(value: true, onChanged: (v) {}),
+            brightness: Brightness.light,
+          ),
+        );
 
         expect(find.byType(Toggle), findsOneWidget);
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithStyle(
-          Toggle(value: true, onChanged: (v) {}),
-          brightness: Brightness.dark,
-        ));
+        await tester.pumpWidget(
+          wrapWithStyle(
+            Toggle(value: true, onChanged: (v) {}),
+            brightness: Brightness.dark,
+          ),
+        );
 
         expect(find.byType(Toggle), findsOneWidget);
       });

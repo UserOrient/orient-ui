@@ -190,7 +190,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(Semantics).first);
-        expect(semantics.hasFlag(SemanticsFlag.isTextField), isTrue);
+        expect(semantics.flagsCollection.isTextField, isTrue);
       });
 
       testWidgets('clear button has button semantics', (tester) async {
@@ -204,7 +204,7 @@ void main() {
         final clearButtonSemantics = tester.getSemantics(
           find.bySemanticsLabel('Clear search'),
         );
-        expect(clearButtonSemantics.hasFlag(SemanticsFlag.isButton), isTrue);
+        expect(clearButtonSemantics.flagsCollection.isButton, isTrue);
       });
 
       testWidgets('has hint from placeholder', (tester) async {

@@ -302,7 +302,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(ToggleTile));
-        expect(semantics.hasFlag(SemanticsFlag.isToggled), isTrue);
+        expect(semantics.flagsCollection.isToggled, Tristate.isTrue);
       });
 
       testWidgets('does not have toggled semantics when off', (tester) async {
@@ -315,7 +315,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(ToggleTile));
-        expect(semantics.hasFlag(SemanticsFlag.isToggled), isFalse);
+        expect(semantics.flagsCollection.isToggled, Tristate.isFalse);
       });
 
       testWidgets('has title as semantics label', (tester) async {
@@ -341,8 +341,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(ToggleTile));
-        expect(semantics.hasFlag(SemanticsFlag.hasEnabledState), isTrue);
-        expect(semantics.hasFlag(SemanticsFlag.isEnabled), isTrue);
+        expect(semantics.flagsCollection.isEnabled, Tristate.isTrue);
       });
 
       testWidgets('has disabled semantics when non-interactive', (tester) async {
@@ -355,8 +354,7 @@ void main() {
         ));
 
         final semantics = tester.getSemantics(find.byType(ToggleTile));
-        expect(semantics.hasFlag(SemanticsFlag.hasEnabledState), isTrue);
-        expect(semantics.hasFlag(SemanticsFlag.isEnabled), isFalse);
+        expect(semantics.flagsCollection.isEnabled, Tristate.isFalse);
       });
     });
 

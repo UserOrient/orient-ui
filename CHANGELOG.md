@@ -1,3 +1,11 @@
+## 0.4.0
+
+* Added typography tokens: `display`, `heading`, `title`, `subtitle`, `body`, `bodySmall`, `caption`.
+* Added `TextStyle` extensions: `.muted()`, `.withColor(color)`, `.withHeight(height)`, `.bold` and weight getters (`.w100`–`.w900`).
+* Added `context.style` and `context.typography` extensions.
+* Widgets now use typography tokens instead of raw `TextStyle` constructors.
+* Fixed deprecated `withOpacity` and `hasFlag` API usages.
+
 ## 0.3.1
 
 * Added `SingleChoice` and `SingleChoiceTile` widgets (`Radio` and `RadioListTile` equivalent from Material).

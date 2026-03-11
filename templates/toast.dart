@@ -223,7 +223,9 @@ class _ToastWidgetState extends State<_ToastWidget>
                           BoxShadow(
                             blurRadius: 10,
                             spreadRadius: 2,
-                            color: const Color(0xFF000000).withOpacity(0.08),
+                            color: const Color(0xFF000000).withValues(
+                              alpha: 0.08 * 255,
+                            ),
                           ),
                         ],
                       ),
@@ -234,9 +236,11 @@ class _ToastWidgetState extends State<_ToastWidget>
                           const SizedBox(width: 8),
                           Text(
                             widget.message,
-                            style: context.typography.body.withColor(fgColor).copyWith(
-                              decoration: TextDecoration.none,
-                            ),
+                            style: context.typography.body
+                                .withColor(fgColor)
+                                .copyWith(
+                                  decoration: TextDecoration.none,
+                                ),
                           ),
                         ],
                       ),

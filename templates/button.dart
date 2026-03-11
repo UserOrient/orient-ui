@@ -190,7 +190,9 @@ class _ButtonState extends State<Button> with SingleTickerProviderStateMixin {
                     boxShadow: _isFocused && !isDisabled
                         ? [
                             BoxShadow(
-                              color: buttonColors.primary.withOpacity(0.4),
+                              color: buttonColors.primary.withValues(
+                                alpha: 0.4 * 255,
+                              ),
                               spreadRadius: 2,
                             ),
                           ]

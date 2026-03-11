@@ -92,6 +92,44 @@ final BreakpointTokens _breakpoints = BreakpointTokens(
   desktop: 600,
 );
 
+final TypographyTokens _typography = TypographyTokens(
+  display: TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    height: 40 / 32,
+  ),
+  heading: TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+    height: 32 / 24,
+  ),
+  title: TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    height: 26 / 18,
+  ),
+  subtitle: TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    height: 24 / 16,
+  ),
+  body: TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    height: 20 / 14,
+  ),
+  bodySmall: TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    height: 16 / 12,
+  ),
+  caption: TextStyle(
+    fontSize: 11,
+    fontWeight: FontWeight.w400,
+    height: 15 / 11,
+  ),
+);
+
 // Style
 
 class Style extends InheritedWidget {
@@ -103,7 +141,10 @@ class Style extends InheritedWidget {
     required super.child,
   });
 
-  Style._fallback(this.brightness) : super(child: const SizedBox.shrink());
+  const Style._fallback(this.brightness)
+    : super(
+        child: const SizedBox.shrink(),
+      );
 
   bool get isDark => brightness == Brightness.dark;
   ColorTokens get colors => isDark ? _colorsDark : _colorsLight;
@@ -111,11 +152,14 @@ class Style extends InheritedWidget {
   static RadiusTokens get radii => _radii;
   static DurationTokens get durations => _durations;
   static BreakpointTokens get breakpoints => _breakpoints;
+  static TypographyTokens get typography => _typography;
 
   static Style of(BuildContext context) {
-    final style = context.dependOnInheritedWidgetOfExactType<Style>();
+    final Style? style = context.dependOnInheritedWidgetOfExactType<Style>();
     if (style != null) return style;
-    final brightness = MediaQuery.platformBrightnessOf(context);
+
+    final Brightness brightness = MediaQuery.platformBrightnessOf(context);
+
     return Style._fallback(brightness);
   }
 
@@ -241,8 +285,55 @@ class BreakpointTokens {
   });
 }
 
+class TypographyTokens {
+  final TextStyle display;
+  final TextStyle heading;
+  final TextStyle title;
+  final TextStyle subtitle;
+  final TextStyle body;
+  final TextStyle bodySmall;
+  final TextStyle caption;
+
+  const TypographyTokens({
+    required this.display,
+    required this.heading,
+    required this.title,
+    required this.subtitle,
+    required this.body,
+    required this.bodySmall,
+    required this.caption,
+  });
+}
+
 // Extensions
 
 extension StyleX on BuildContext {
   Style get style => Style.of(this);
+}
+
+extension TextStyleX on TextStyle {
+  TextStyle withColor(Color color) {
+    return copyWith(color: color);
+  }
+
+  TextStyle muted(BuildContext context) {
+    return copyWith(
+      color: Style.of(context).colors.mutedForeground,
+    );
+  }
+
+  TextStyle withHeight(double pixels) {
+    return copyWith(height: pixels / fontSize!);
+  }
+
+  TextStyle get w100 => copyWith(fontWeight: FontWeight.w100);
+  TextStyle get w200 => copyWith(fontWeight: FontWeight.w200);
+  TextStyle get w300 => copyWith(fontWeight: FontWeight.w300);
+  TextStyle get w400 => copyWith(fontWeight: FontWeight.w400);
+  TextStyle get w500 => copyWith(fontWeight: FontWeight.w500);
+  TextStyle get w600 => copyWith(fontWeight: FontWeight.w600);
+  TextStyle get w700 => copyWith(fontWeight: FontWeight.w700);
+  TextStyle get w800 => copyWith(fontWeight: FontWeight.w800);
+  TextStyle get w900 => copyWith(fontWeight: FontWeight.w900);
+  TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
 }

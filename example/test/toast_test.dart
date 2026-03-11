@@ -5,7 +5,10 @@ import 'package:example/widgets/toast.dart';
 import 'test_helper.dart';
 
 /// Wraps widget with Navigator for overlay support
-Widget wrapWithNavigator(Widget child, {Brightness brightness = Brightness.light}) {
+Widget wrapWithNavigator(
+  Widget child, {
+  Brightness brightness = Brightness.light,
+}) {
   return Style(
     brightness: brightness,
     child: Directionality(
@@ -13,9 +16,18 @@ Widget wrapWithNavigator(Widget child, {Brightness brightness = Brightness.light
       child: MediaQuery(
         data: const MediaQueryData(),
         child: Navigator(
-          onGenerateRoute: (_) => PageRouteBuilder(
-            pageBuilder: (_, __, ___) => child,
-          ),
+          onGenerateRoute: (_) {
+            return PageRouteBuilder(
+              pageBuilder:
+                  (
+                    BuildContext context,
+                    Animation<double> animation,
+                    Animation<double> secondaryAnimation,
+                  ) {
+                    return child;
+                  },
+            );
+          },
         ),
       ),
     ),
@@ -26,14 +38,17 @@ void main() {
   group('Toast', () {
     group('rendering', () {
       testWidgets('shows toast with message', (tester) async {
-        await tester.pumpWidget(wrapWithNavigator(
-          Builder(
-            builder: (context) => GestureDetector(
-              onTap: () => Toast.show(context: context, message: 'Test message'),
-              child: const Text('Trigger'),
+        await tester.pumpWidget(
+          wrapWithNavigator(
+            Builder(
+              builder: (context) => GestureDetector(
+                onTap: () =>
+                    Toast.show(context: context, message: 'Test message'),
+                child: const Text('Trigger'),
+              ),
             ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Trigger'));
         await tester.pump();
@@ -47,34 +62,52 @@ void main() {
       });
 
       testWidgets('renders all toast types', (tester) async {
-        await tester.pumpWidget(wrapWithNavigator(
-          Builder(
-            builder: (context) => Column(
-              children: [
-                GestureDetector(
-                  key: const Key('success'),
-                  onTap: () => Toast.show(context: context, message: 'S', type: ToastType.success),
-                  child: const Text('Success'),
-                ),
-                GestureDetector(
-                  key: const Key('error'),
-                  onTap: () => Toast.show(context: context, message: 'E', type: ToastType.error),
-                  child: const Text('Error'),
-                ),
-                GestureDetector(
-                  key: const Key('info'),
-                  onTap: () => Toast.show(context: context, message: 'I', type: ToastType.info),
-                  child: const Text('Info'),
-                ),
-                GestureDetector(
-                  key: const Key('warning'),
-                  onTap: () => Toast.show(context: context, message: 'W', type: ToastType.warning),
-                  child: const Text('Warning'),
-                ),
-              ],
+        await tester.pumpWidget(
+          wrapWithNavigator(
+            Builder(
+              builder: (context) => Column(
+                children: [
+                  GestureDetector(
+                    key: const Key('success'),
+                    onTap: () => Toast.show(
+                      context: context,
+                      message: 'S',
+                      type: ToastType.success,
+                    ),
+                    child: const Text('Success'),
+                  ),
+                  GestureDetector(
+                    key: const Key('error'),
+                    onTap: () => Toast.show(
+                      context: context,
+                      message: 'E',
+                      type: ToastType.error,
+                    ),
+                    child: const Text('Error'),
+                  ),
+                  GestureDetector(
+                    key: const Key('info'),
+                    onTap: () => Toast.show(
+                      context: context,
+                      message: 'I',
+                      type: ToastType.info,
+                    ),
+                    child: const Text('Info'),
+                  ),
+                  GestureDetector(
+                    key: const Key('warning'),
+                    onTap: () => Toast.show(
+                      context: context,
+                      message: 'W',
+                      type: ToastType.warning,
+                    ),
+                    child: const Text('Warning'),
+                  ),
+                ],
+              ),
             ),
           ),
-        ));
+        );
 
         // Test success
         await tester.tap(find.byKey(const Key('success')));
@@ -110,18 +143,20 @@ void main() {
       });
 
       testWidgets('renders at top position', (tester) async {
-        await tester.pumpWidget(wrapWithNavigator(
-          Builder(
-            builder: (context) => GestureDetector(
-              onTap: () => Toast.show(
-                context: context,
-                message: 'Top',
-                position: ToastPosition.top,
+        await tester.pumpWidget(
+          wrapWithNavigator(
+            Builder(
+              builder: (context) => GestureDetector(
+                onTap: () => Toast.show(
+                  context: context,
+                  message: 'Top',
+                  position: ToastPosition.top,
+                ),
+                child: const Text('Trigger'),
               ),
-              child: const Text('Trigger'),
             ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Trigger'));
         await tester.pump();
@@ -134,18 +169,20 @@ void main() {
       });
 
       testWidgets('renders at bottom position', (tester) async {
-        await tester.pumpWidget(wrapWithNavigator(
-          Builder(
-            builder: (context) => GestureDetector(
-              onTap: () => Toast.show(
-                context: context,
-                message: 'Bottom',
-                position: ToastPosition.bottom,
+        await tester.pumpWidget(
+          wrapWithNavigator(
+            Builder(
+              builder: (context) => GestureDetector(
+                onTap: () => Toast.show(
+                  context: context,
+                  message: 'Bottom',
+                  position: ToastPosition.bottom,
+                ),
+                child: const Text('Trigger'),
               ),
-              child: const Text('Trigger'),
             ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Trigger'));
         await tester.pump();
@@ -158,14 +195,16 @@ void main() {
       });
 
       testWidgets('renders icon', (tester) async {
-        await tester.pumpWidget(wrapWithNavigator(
-          Builder(
-            builder: (context) => GestureDetector(
-              onTap: () => Toast.show(context: context, message: 'With icon'),
-              child: const Text('Trigger'),
+        await tester.pumpWidget(
+          wrapWithNavigator(
+            Builder(
+              builder: (context) => GestureDetector(
+                onTap: () => Toast.show(context: context, message: 'With icon'),
+                child: const Text('Trigger'),
+              ),
             ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Trigger'));
         await tester.pump();
@@ -181,18 +220,20 @@ void main() {
 
     group('stacking', () {
       testWidgets('shows multiple toasts', (tester) async {
-        await tester.pumpWidget(wrapWithNavigator(
-          Builder(
-            builder: (context) => GestureDetector(
-              onTap: () {
-                Toast.show(context: context, message: 'First');
-                Toast.show(context: context, message: 'Second');
-                Toast.show(context: context, message: 'Third');
-              },
-              child: const Text('Trigger'),
+        await tester.pumpWidget(
+          wrapWithNavigator(
+            Builder(
+              builder: (context) => GestureDetector(
+                onTap: () {
+                  Toast.show(context: context, message: 'First');
+                  Toast.show(context: context, message: 'Second');
+                  Toast.show(context: context, message: 'Third');
+                },
+                child: const Text('Trigger'),
+              ),
             ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Trigger'));
         await tester.pump();
@@ -209,17 +250,19 @@ void main() {
 
     group('dismissal', () {
       testWidgets('dismissAllToasts removes all toasts', (tester) async {
-        await tester.pumpWidget(wrapWithNavigator(
-          Builder(
-            builder: (context) => GestureDetector(
-              onTap: () {
-                Toast.show(context: context, message: 'Toast 1');
-                Toast.show(context: context, message: 'Toast 2');
-              },
-              child: const Text('Show'),
+        await tester.pumpWidget(
+          wrapWithNavigator(
+            Builder(
+              builder: (context) => GestureDetector(
+                onTap: () {
+                  Toast.show(context: context, message: 'Toast 1');
+                  Toast.show(context: context, message: 'Toast 2');
+                },
+                child: const Text('Show'),
+              ),
             ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Show'));
         await tester.pump();
@@ -236,18 +279,20 @@ void main() {
       });
 
       testWidgets('swipe dismisses toast', (tester) async {
-        await tester.pumpWidget(wrapWithNavigator(
-          Builder(
-            builder: (context) => GestureDetector(
-              onTap: () => Toast.show(
-                context: context,
-                message: 'Swipe me',
-                position: ToastPosition.top,
+        await tester.pumpWidget(
+          wrapWithNavigator(
+            Builder(
+              builder: (context) => GestureDetector(
+                onTap: () => Toast.show(
+                  context: context,
+                  message: 'Swipe me',
+                  position: ToastPosition.top,
+                ),
+                child: const Text('Trigger'),
               ),
-              child: const Text('Trigger'),
             ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Trigger'));
         await tester.pump();
@@ -264,24 +309,28 @@ void main() {
 
     group('accessibility', () {
       testWidgets('has semantics label with type and message', (tester) async {
-        await tester.pumpWidget(wrapWithNavigator(
-          Builder(
-            builder: (context) => GestureDetector(
-              onTap: () => Toast.show(
-                context: context,
-                message: 'Accessible',
-                type: ToastType.error,
+        await tester.pumpWidget(
+          wrapWithNavigator(
+            Builder(
+              builder: (context) => GestureDetector(
+                onTap: () => Toast.show(
+                  context: context,
+                  message: 'Accessible',
+                  type: ToastType.error,
+                ),
+                child: const Text('Trigger'),
               ),
-              child: const Text('Trigger'),
             ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Trigger'));
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 350));
 
-        final semanticsFinder = find.bySemanticsLabel(RegExp(r'error.*Accessible'));
+        final semanticsFinder = find.bySemanticsLabel(
+          RegExp(r'error.*Accessible'),
+        );
         expect(semanticsFinder, findsOneWidget);
 
         Toast.dismissAll();
@@ -291,15 +340,17 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(wrapWithNavigator(
-          Builder(
-            builder: (context) => GestureDetector(
-              onTap: () => Toast.show(context: context, message: 'Light'),
-              child: const Text('Trigger'),
+        await tester.pumpWidget(
+          wrapWithNavigator(
+            Builder(
+              builder: (context) => GestureDetector(
+                onTap: () => Toast.show(context: context, message: 'Light'),
+                child: const Text('Trigger'),
+              ),
             ),
+            brightness: Brightness.light,
           ),
-          brightness: Brightness.light,
-        ));
+        );
 
         await tester.tap(find.text('Trigger'));
         await tester.pump();
@@ -312,15 +363,17 @@ void main() {
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(wrapWithNavigator(
-          Builder(
-            builder: (context) => GestureDetector(
-              onTap: () => Toast.show(context: context, message: 'Dark'),
-              child: const Text('Trigger'),
+        await tester.pumpWidget(
+          wrapWithNavigator(
+            Builder(
+              builder: (context) => GestureDetector(
+                onTap: () => Toast.show(context: context, message: 'Dark'),
+                child: const Text('Trigger'),
+              ),
             ),
+            brightness: Brightness.dark,
           ),
-          brightness: Brightness.dark,
-        ));
+        );
 
         await tester.tap(find.text('Trigger'));
         await tester.pump();
@@ -335,14 +388,16 @@ void main() {
 
     group('animation', () {
       testWidgets('uses fade and slide transitions', (tester) async {
-        await tester.pumpWidget(wrapWithNavigator(
-          Builder(
-            builder: (context) => GestureDetector(
-              onTap: () => Toast.show(context: context, message: 'Animated'),
-              child: const Text('Trigger'),
+        await tester.pumpWidget(
+          wrapWithNavigator(
+            Builder(
+              builder: (context) => GestureDetector(
+                onTap: () => Toast.show(context: context, message: 'Animated'),
+                child: const Text('Trigger'),
+              ),
             ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Trigger'));
         await tester.pump();

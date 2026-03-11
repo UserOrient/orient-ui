@@ -98,19 +98,25 @@ class ToastPage extends StatelessWidget {
                     message: 'First',
                     type: ToastType.success,
                   );
+
                   Future.delayed(const Duration(milliseconds: 200), () {
-                    Toast.show(
-                      context: context,
-                      message: 'Second',
-                      type: ToastType.info,
-                    );
+                    if (context.mounted) {
+                      Toast.show(
+                        context: context,
+                        message: 'Second',
+                        type: ToastType.info,
+                      );
+                    }
                   });
+
                   Future.delayed(const Duration(milliseconds: 400), () {
-                    Toast.show(
-                      context: context,
-                      message: 'Third',
-                      type: ToastType.warning,
-                    );
+                    if (context.mounted) {
+                      Toast.show(
+                        context: context,
+                        message: 'Third',
+                        type: ToastType.warning,
+                      );
+                    }
                   });
                 },
                 label: 'Show 3 toasts',

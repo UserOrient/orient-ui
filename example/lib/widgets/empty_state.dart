@@ -17,8 +17,6 @@ class EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Style style = Style.of(context);
-
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -31,23 +29,14 @@ class EmptyState extends StatelessWidget {
           ],
           Text(
             title,
-            style: TextStyle(
-              fontSize: 18,
-              height: 28 / 18,
-              color: style.colors.foreground,
-              fontWeight: FontWeight.bold,
-            ),
+            style: context.typography.title.bold,
           ),
           if (description != null && description!.isNotEmpty) ...[
             const SizedBox(height: 8.0),
             Text(
               description!,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                height: 20 / 14,
-                color: style.colors.mutedForeground,
-              ),
+              style: context.typography.body.muted(context),
             ),
           ],
           if (action != null) ...[

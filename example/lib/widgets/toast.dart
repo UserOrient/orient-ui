@@ -234,10 +234,7 @@ class _ToastWidgetState extends State<_ToastWidget>
                           const SizedBox(width: 8),
                           Text(
                             widget.message,
-                            style: TextStyle(
-                              color: fgColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
+                            style: context.typography.body.withColor(fgColor).copyWith(
                               decoration: TextDecoration.none,
                             ),
                           ),

@@ -104,11 +104,7 @@ class ConfirmationPopup extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-              height: 28 / 18,
-              fontWeight: FontWeight.w600,
-              color: style.colors.foreground,
+            style: context.typography.title.copyWith(
               decoration: TextDecoration.none,
             ),
           ),
@@ -117,11 +113,7 @@ class ConfirmationPopup extends StatelessWidget {
             Text(
               description!,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                height: 20 / 14,
-                fontWeight: FontWeight.w400,
-                color: style.colors.mutedForeground,
+              style: context.typography.body.muted(context).copyWith(
                 decoration: TextDecoration.none,
               ),
             ),

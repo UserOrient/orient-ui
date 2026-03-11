@@ -112,23 +112,14 @@ class _TileState extends State<Tile> {
                       children: [
                         Text(
                           widget.title,
-                          style: TextStyle(
-                            fontSize: 16,
-                            height: 1.5,
-                            fontWeight: FontWeight.w500,
-                            color: colors.foreground,
-                          ),
+                          style: context.typography.subtitle,
                         ),
                         if (widget.subtitle != null)
                           Text(
                             widget.subtitle!,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 14,
-                              height: 20 / 14,
-                              color: colors.mutedForeground,
-                            ),
+                            style: context.typography.body.muted(context),
                           ),
                       ],
                     ),

@@ -177,11 +177,7 @@ class _RailItemState extends State<_RailItem> {
                 Text(
                   widget.label,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: navColors.railItemText,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: context.typography.subtitle.withColor(navColors.railItemText),
                 ),
               ],
             ),
@@ -280,11 +276,7 @@ class _BottomBarItem extends StatelessWidget {
             Text(
               label,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: color,
-                fontSize: 12,
-                height: 16 / 12,
-              ),
+              style: context.typography.bodySmall.withColor(color),
             ),
           ],
         ),

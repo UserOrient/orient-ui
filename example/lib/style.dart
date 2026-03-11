@@ -92,42 +92,59 @@ final BreakpointTokens _breakpoints = BreakpointTokens(
   desktop: 600,
 );
 
-final TypographyTokens _typography = TypographyTokens(
+// Typography
+
+TypographyTokens _buildTypography(Color foreground) => TypographyTokens(
   display: TextStyle(
     fontSize: 32,
     fontWeight: FontWeight.w700,
     height: 40 / 32,
+    color: foreground,
   ),
   heading: TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.w600,
     height: 32 / 24,
+    color: foreground,
   ),
   title: TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w600,
     height: 26 / 18,
+    color: foreground,
   ),
   subtitle: TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,
     height: 24 / 16,
+    color: foreground,
   ),
   body: TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
     height: 20 / 14,
+    color: foreground,
   ),
   bodySmall: TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
     height: 16 / 12,
+    color: foreground,
   ),
   caption: TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.w400,
     height: 15 / 11,
+    color: foreground,
   ),
+);
+
+final TypographyTokens _typographyLight = _buildTypography(
+  _colorsLight.foreground,
+);
+
+final TypographyTokens _typographyDark = _buildTypography(
+  _colorsDark.foreground,
 );
 
 // Style
@@ -152,7 +169,8 @@ class Style extends InheritedWidget {
   static RadiusTokens get radii => _radii;
   static DurationTokens get durations => _durations;
   static BreakpointTokens get breakpoints => _breakpoints;
-  static TypographyTokens get typography => _typography;
+  TypographyTokens get typography =>
+      isDark ? _typographyDark : _typographyLight;
 
   static Style of(BuildContext context) {
     final Style? style = context.dependOnInheritedWidgetOfExactType<Style>();
@@ -309,6 +327,7 @@ class TypographyTokens {
 
 extension StyleX on BuildContext {
   Style get style => Style.of(this);
+  TypographyTokens get typography => Style.of(this).typography;
 }
 
 extension TextStyleX on TextStyle {

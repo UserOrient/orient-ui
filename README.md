@@ -71,6 +71,9 @@ Button(
   label: 'Click me',
   onPressed: () {},
 )
+
+// Access your theme anywhere
+final ColorTokens colors = context.style.colors;
 ```
 
 Widgets follow system brightness by default. No wrapping needed.
@@ -135,14 +138,16 @@ All widgets are tested.
 
 ## ✨ Customizing Colors
 
-Open `style.dart` and edit the constants at the top. That's it. You own the file.
+Open `style.dart` and edit the values at the top. That's it. You own the file.
 
 ```dart
-// Light Theme - Base
-const Color _lightBackground = Color(0xFFFFFFFF);
-const Color _lightBorder = Color(0xFFE4E4E7);
-const Color _lightForeground = Color(0xFF2A2A2A);
-// ... change these to match your brand
+// Light Theme
+final ColorTokens _colorsLight = ColorTokens(
+  background: Color(0xFFFFFFFF),
+  border: Color(0xFFE4E4E7),
+  foreground: Color(0xFF2A2A2A),
+  // ... change these to match your brand
+);
 ```
 
 ## 📄 License

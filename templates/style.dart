@@ -240,3 +240,9 @@ class BreakpointTokens {
     required this.desktop,
   });
 }
+
+// Extensions
+
+extension StyleX on BuildContext {
+  Style get style => Style.of(this);
+}

@@ -30,12 +30,10 @@ final ColorTokens _colorsLight = ColorTokens(
     bottomBarItemActive: Color(0xFF121212),
     bottomBarItemInactive: Color(0xFFBBBBBB),
   ),
-  toast: ToastColors(
-    success: Color(0xFF52DF82),
-    error: Color(0xFFFF6D62),
-    info: Color(0xFF529BDF),
-    warning: Color(0xFFFFB35A),
-  ),
+  success: Color(0xFF52DF82),
+  error: Color(0xFFFF6D62),
+  info: Color(0xFF529BDF),
+  warning: Color(0xFFFFB35A),
 );
 
 // Dark Theme
@@ -68,12 +66,10 @@ final ColorTokens _colorsDark = ColorTokens(
     bottomBarItemActive: Color(0xFFFAFAFA),
     bottomBarItemInactive: Color(0xFF71717A),
   ),
-  toast: ToastColors(
-    success: Color(0xFF52DF82),
-    error: Color(0xFFFF6D62),
-    info: Color(0xFF529BDF),
-    warning: Color(0xFFFFB35A),
-  ),
+  success: Color(0xFF52DF82),
+  error: Color(0xFFFF6D62),
+  info: Color(0xFF529BDF),
+  warning: Color(0xFFFFB35A),
 );
 
 // Tokens
@@ -202,7 +198,10 @@ class ColorTokens {
   final Color surfaceContainer;
   final ButtonColors button;
   final NavigationColors navigation;
-  final ToastColors toast;
+  final Color success;
+  final Color error;
+  final Color info;
+  final Color warning;
 
   const ColorTokens({
     required this.background,
@@ -215,7 +214,10 @@ class ColorTokens {
     required this.surfaceContainer,
     required this.button,
     required this.navigation,
-    required this.toast,
+    required this.success,
+    required this.error,
+    required this.info,
+    required this.warning,
   });
 }
 
@@ -258,20 +260,6 @@ class NavigationColors {
     required this.bottomBarBackground,
     required this.bottomBarItemActive,
     required this.bottomBarItemInactive,
-  });
-}
-
-class ToastColors {
-  final Color success;
-  final Color error;
-  final Color info;
-  final Color warning;
-
-  const ToastColors({
-    required this.success,
-    required this.error,
-    required this.info,
-    required this.warning,
   });
 }
 

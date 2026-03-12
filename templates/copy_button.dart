@@ -95,7 +95,7 @@ class _CopyButtonState extends State<CopyButton>
 
     final Color color;
     if (_hasCopied) {
-      color = style.colors.toast.success;
+      color = style.colors.success;
     } else {
       if (_isHovered) {
         color = style.colors.foreground;

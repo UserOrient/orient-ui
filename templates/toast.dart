@@ -172,7 +172,7 @@ class _ToastWidgetState extends State<_ToastWidget>
   @override
   Widget build(BuildContext context) {
     final style = Style.of(context);
-    final toastColors = style.colors.toast;
+    final colors = style.colors;
     final mediaQuery = MediaQuery.of(context);
     final topPadding = mediaQuery.padding.top;
     final bottomPadding = mediaQuery.padding.bottom;
@@ -182,10 +182,10 @@ class _ToastWidgetState extends State<_ToastWidget>
 
     const fgColor = Color(0xFFFFFFFF);
     final bgColor = switch (widget.type) {
-      ToastType.success => toastColors.success,
-      ToastType.error => toastColors.error,
-      ToastType.info => toastColors.info,
-      ToastType.warning => toastColors.warning,
+      ToastType.success => colors.success,
+      ToastType.error => colors.error,
+      ToastType.info => colors.info,
+      ToastType.warning => colors.warning,
     };
 
     return Directionality(

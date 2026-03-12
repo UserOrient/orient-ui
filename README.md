@@ -1,7 +1,6 @@
 <p align="center">
   <h1 align="center">Orient UI</h1>
-  <p align="center">The missing pieces for Flutter Web & Desktop. Finally!</p>
-  <p align="center">Beautiful widgets with zero dependencies.</p>
+  <p align="center">Theming and components for Flutter. Works with Material, Cupertino, or on its own.</p>
 </p>
 
 <p align="center">
@@ -23,15 +22,23 @@
   <img src="https://ui.userorient.com/_next/image?url=%2Fassets%2Fui%2Fhero.png&w=1920&q=75" alt="Orient UI Components" />
 </p>
 
-## Features
+## 🧩 What is Orient UI?
 
-- 🧩 **Works alongside Material.** Add one widget today. No rewrite needed.
-- 📦 **You own the code.** Every widget is a file in your project. Edit it however you want.
-- 🖥️ **Built for web & desktop.** Hover states, keyboard navigation, responsive out of the box.
-- 🔓 **Zero dependencies.** Nothing in your pubspec. No lock-in.
-- 🎨 **14 widgets and growing.** Buttons, toggles, popups, navigation, toasts, and more.
+Orient UI gives you two things:
 
-## 🎬 Getting Started
+1. **`Style`** is a simple, Material-independent theming system. Colors, typography, radii, durations, breakpoints. All in one file you own. No `ThemeExtension`, no boilerplate.
+2. **Components** are neutral widgets (buttons, toggles, popovers, navigation, and more) that work on mobile, web, and desktop.
+
+Use both, or just the theming. Your call.
+
+## 🪩 Why Orient UI?
+
+- **Nothing to replace.** Keep your `MaterialApp`, your `Scaffold`, your existing widgets. Orient UI sits alongside them.
+- **You own the code.** Every file lives in your project. Change anything you want. No package lock-in.
+- **Cross-platform.** Responsive layouts, hover states, keyboard navigation. Mobile, web, and desktop.
+- **Zero dependencies.** Nothing added to your pubspec.
+
+## 🏁 Getting Started
 
 ### 1. Install the CLI
 
@@ -39,48 +46,45 @@
 dart pub global activate orient_ui
 ```
 
-### 2. Initialize
-
-Navigate to your Flutter project and run:
+### 2. Add theming
 
 ```bash
 orient_ui init
 ```
 
-This creates `lib/style.dart` in your project. **You own this file**: move it wherever you want (e.g., `lib/core/style.dart`).
+This creates `lib/style.dart` with light/dark colors, typography, radii, durations, and breakpoints. **You own this file.** Move it, rename it, extend it.
 
-### 3. Add Components
+Use it anywhere:
+
+```dart
+final ColorTokens colors = context.style.colors;
+final TextStyle heading = context.typography.heading;
+```
+
+That's it. If all you need is theming, you're done.
+
+### 3. Add components (optional)
 
 ```bash
 orient_ui add button
 ```
 
-This creates `lib/button.dart`. Move it wherever you want (e.g., `lib/widgets/button.dart`).
-
-**Important:** Update the import inside the component file to match where you placed `style.dart`:
+This creates `lib/button.dart`. Update the style import to match where you placed `style.dart`:
 
 ```dart
-// In button.dart, update this line:
 import 'package:your_app/style.dart'; // adjust to your path
 ```
-
-### 4. Use
 
 ```dart
 Button(
   label: 'Click me',
   onPressed: () {},
 )
-
-// Access your theme anywhere
-final ColorTokens colors = context.style.colors;
 ```
-
-Widgets follow system brightness by default. No wrapping needed.
 
 ### Dark Mode
 
-To control dark mode manually, wrap your app with `Style`:
+Widgets follow system brightness by default. To control it manually:
 
 ```dart
 Style(
@@ -91,7 +95,20 @@ Style(
 )
 ```
 
-## 🛣️ Roadmap
+## 🧬 Customizing
+
+Open `style.dart` and make it yours. Add color tokens, change typography scales, adjust breakpoints.
+
+```dart
+final ColorTokens _colorsLight = ColorTokens(
+  background: Color(0xFFFFFFFF),
+  foreground: Color(0xFF2A2A2A),
+  accent: Color(0xFF18181B),
+  // ... change these to match your brand
+);
+```
+
+## 🗺️ Roadmap
 
 ### Available Now
 - [x] Button (6 variants)
@@ -128,32 +145,18 @@ Style(
 - [ ] SocialButton
 - [ ] AdaptivePageTransition
 
-Check them out at [interactive web demo](https://widgets.userorient.com).
+Try them at the [interactive demo](https://widgets.userorient.com).
 
-## ✅ Quality
+## 🧪 Quality
 
 ![Tests](https://github.com/userorient/orient-ui/actions/workflows/test.yml/badge.svg?branch=main)
 
-All widgets are tested.
+All components are tested.
 
-## ✨ Customizing Colors
-
-Open `style.dart` and edit the values at the top. That's it. You own the file.
-
-```dart
-// Light Theme
-final ColorTokens _colorsLight = ColorTokens(
-  background: Color(0xFFFFFFFF),
-  border: Color(0xFFE4E4E7),
-  foreground: Color(0xFF2A2A2A),
-  // ... change these to match your brand
-);
-```
-
-## 📄 License
+## License
 
 [MIT](https://raw.githubusercontent.com/userorient/orient-ui/main/LICENSE)
 
 ---
 
-Built by the team at [UserOrient](https://app.userorient.com)
+Built by [UserOrient](https://app.userorient.com)

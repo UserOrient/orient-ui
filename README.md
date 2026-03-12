@@ -91,7 +91,7 @@ Style(
 )
 ```
 
-## 🎨 Components
+## 🛣️ Roadmap
 
 ### Available Now
 - [x] Button (6 variants)
@@ -112,9 +112,9 @@ Style(
 - [x] SingleChoiceTile
 - [x] MultiChoice
 - [x] MultiChoiceTile
+- [x] Typography
 
 ### Coming Soon
-- [ ] Typography
 - [ ] TextField
 - [ ] Dropdown
 - [ ] Tabs

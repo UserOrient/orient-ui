@@ -131,6 +131,7 @@ final ColorTokens _colorsLight = ColorTokens(
 - [x] MultiChoiceTile (CheckboxListTile)
 - [x] Typography
 - [x] Picker (Dropdown)
+- [x] InfoBanner (MaterialBanner)
 
 ### Coming Soon
 - [ ] TextField
@@ -138,7 +139,6 @@ final ColorTokens _colorsLight = ColorTokens(
 - [ ] InlineTabs
 - [ ] Checkbox
 - [ ] Label
-- [ ] Tip
 - [ ] PopoverMenu
 - [ ] PickerPopup
 - [ ] VerticalTile

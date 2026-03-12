@@ -1,4 +1,5 @@
 import 'package:example/pages/alert_popup_page.dart';
+import 'package:example/pages/info_banner_page.dart';
 import 'package:example/pages/picker_page.dart';
 import 'package:example/pages/button_page.dart';
 import 'package:example/pages/card_box_page.dart';
@@ -30,6 +31,12 @@ class ComponentsPage extends StatelessWidget {
         MediaQuery.of(context).size.width >= Style.breakpoints.desktop;
 
     final sections = [
+      _componentSection(
+        'InfoBanner',
+        'info_banner',
+        style,
+        const InfoBannerPage(),
+      ),
       _componentSection('Picker', 'picker', style, const PickerPage()),
       _componentSection('CardBox', 'card_box', style, const CardBoxPage()),
       _componentSection('Button', 'button', style, const ButtonPage()),

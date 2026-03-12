@@ -1,7 +1,9 @@
-import 'package:flutter/widgets.dart';
-import 'package:example/widgets/demo_section.dart';
-import 'package:example/widgets/tile.dart';
+import 'package:example/style.dart';
 import 'package:example/widgets/single_choice_tile.dart';
+import 'package:example/widgets/tile.dart';
+import 'package:example/widgets/toggle.dart';
+import 'package:example/widgets/variant_tabs.dart';
+import 'package:flutter/widgets.dart';
 
 class SingleChoiceTilePage extends StatefulWidget {
   const SingleChoiceTilePage({super.key});
@@ -11,147 +13,114 @@ class SingleChoiceTilePage extends StatefulWidget {
 }
 
 class _SingleChoiceTilePageState extends State<SingleChoiceTilePage> {
-  String _simple = 'email';
-  String _bordered = 'dark';
-  String _filled = 'monthly';
-  String _withLeading = 'home';
+  TileVariant _variant = TileVariant.simple;
+  bool _withSubtitle = true;
+  bool _withLeading = false;
+  String _selected = 'email';
 
   @override
   Widget build(BuildContext context) {
+    final Style style = Style.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DemoSection(
-          title: 'Simple',
-          child: Column(
-            children: [
-              SingleChoiceTile<String>(
-                title: 'Email',
-                subtitle: 'Receive notifications via email',
-                value: 'email',
-                groupValue: _simple,
-                onChanged: (v) => setState(() => _simple = v),
-              ),
-              SingleChoiceTile<String>(
-                title: 'SMS',
-                subtitle: 'Receive notifications via text',
-                value: 'sms',
-                groupValue: _simple,
-                onChanged: (v) => setState(() => _simple = v),
-              ),
-              SingleChoiceTile<String>(
-                title: 'Push',
-                subtitle: 'Receive push notifications',
-                value: 'push',
-                groupValue: _simple,
-                onChanged: (v) => setState(() => _simple = v),
-              ),
-            ],
-          ),
+        Wrap(
+          spacing: 24,
+          runSpacing: 12,
+          children: [
+            _toggle('Subtitle', _withSubtitle, (v) {
+              setState(() => _withSubtitle = v);
+            }, style),
+            _toggle('Leading', _withLeading, (v) {
+              setState(() => _withLeading = v);
+            }, style),
+          ],
+        ),
+        const SizedBox(height: 16),
+        VariantTabs<TileVariant>(
+          values: TileVariant.values,
+          selected: _variant,
+          onChanged: (v) {
+            setState(() => _variant = v);
+          },
         ),
         const SizedBox(height: 24),
-        DemoSection(
-          title: 'Bordered',
-          child: Column(
-            children: [
-              SingleChoiceTile<String>(
-                variant: TileVariant.bordered,
-                title: 'Light',
-                subtitle: 'Use light theme',
-                value: 'light',
-                groupValue: _bordered,
-                onChanged: (v) => setState(() => _bordered = v),
-              ),
+        Column(
+          children: [
+            SingleChoiceTile<String>(
+              variant: _variant,
+              leading: _withLeading
+                  ? const Text('\u2709', style: TextStyle(fontSize: 24))
+                  : null,
+              title: 'Email',
+              subtitle: _withSubtitle
+                  ? 'Receive notifications via email'
+                  : null,
+              value: 'email',
+              groupValue: _selected,
+              onChanged: (v) {
+                setState(() => _selected = v);
+              },
+            ),
+            if (_variant == TileVariant.bordered ||
+                _variant == TileVariant.filled)
               const SizedBox(height: 8),
-              SingleChoiceTile<String>(
-                variant: TileVariant.bordered,
-                title: 'Dark',
-                subtitle: 'Use dark theme',
-                value: 'dark',
-                groupValue: _bordered,
-                onChanged: (v) => setState(() => _bordered = v),
-              ),
+            SingleChoiceTile<String>(
+              variant: _variant,
+              leading: _withLeading
+                  ? const Text('\u{1F4AC}', style: TextStyle(fontSize: 24))
+                  : null,
+              title: 'SMS',
+              subtitle: _withSubtitle
+                  ? 'Receive notifications via text'
+                  : null,
+              value: 'sms',
+              groupValue: _selected,
+              onChanged: (v) {
+                setState(() => _selected = v);
+              },
+            ),
+            if (_variant == TileVariant.bordered ||
+                _variant == TileVariant.filled)
               const SizedBox(height: 8),
-              SingleChoiceTile<String>(
-                variant: TileVariant.bordered,
-                title: 'System',
-                subtitle: 'Follow system setting',
-                value: 'system',
-                groupValue: _bordered,
-                onChanged: (v) => setState(() => _bordered = v),
-              ),
-            ],
-          ),
+            SingleChoiceTile<String>(
+              variant: _variant,
+              leading: _withLeading
+                  ? const Text('\u{1F514}', style: TextStyle(fontSize: 24))
+                  : null,
+              title: 'Push',
+              subtitle: _withSubtitle
+                  ? 'Receive push notifications'
+                  : null,
+              value: 'push',
+              groupValue: _selected,
+              onChanged: (v) {
+                setState(() => _selected = v);
+              },
+            ),
+          ],
         ),
-        const SizedBox(height: 24),
-        DemoSection(
-          title: 'Filled',
-          child: Column(
-            children: [
-              SingleChoiceTile<String>(
-                variant: TileVariant.filled,
-                title: 'Monthly',
-                value: 'monthly',
-                groupValue: _filled,
-                onChanged: (v) => setState(() => _filled = v),
-              ),
-              const SizedBox(height: 8),
-              SingleChoiceTile<String>(
-                variant: TileVariant.filled,
-                title: 'Yearly',
-                value: 'yearly',
-                groupValue: _filled,
-                onChanged: (v) => setState(() => _filled = v),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 24),
-        DemoSection(
-          title: 'With Leading',
-          child: Column(
-            children: [
-              SingleChoiceTile<String>(
-                variant: TileVariant.bordered,
-                leading: const Text('\u{1F3E0}', style: TextStyle(fontSize: 24)),
-                title: 'Home',
-                subtitle: 'Your home address',
-                value: 'home',
-                groupValue: _withLeading,
-                onChanged: (v) => setState(() => _withLeading = v),
-              ),
-              const SizedBox(height: 8),
-              SingleChoiceTile<String>(
-                variant: TileVariant.bordered,
-                leading: const Text('\u{1F3E2}', style: TextStyle(fontSize: 24)),
-                title: 'Office',
-                subtitle: 'Your work address',
-                value: 'office',
-                groupValue: _withLeading,
-                onChanged: (v) => setState(() => _withLeading = v),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 24),
-        DemoSection(
-          title: 'Disabled',
-          child: Column(
-            children: [
-              SingleChoiceTile<String>(
-                variant: TileVariant.bordered,
-                title: 'Option A',
-                value: 'a',
-                groupValue: 'a',
-              ),
-              const SizedBox(height: 8),
-              SingleChoiceTile<String>(
-                variant: TileVariant.bordered,
-                title: 'Option B',
-                value: 'b',
-                groupValue: 'a',
-              ),
-            ],
+      ],
+    );
+  }
+
+  Widget _toggle(
+    String label,
+    bool value,
+    ValueChanged<bool> onChanged,
+    Style style,
+  ) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Toggle.small(value: value, onChanged: onChanged),
+        const SizedBox(width: 8),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 13,
+            color: style.colors.mutedForeground,
           ),
         ),
       ],

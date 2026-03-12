@@ -4,6 +4,7 @@ import 'package:example/widgets/toggle.dart';
 import 'package:example/widgets/toggle_tile.dart';
 import 'package:example/widgets/variant_tabs.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
 class ToggleTilePage extends StatefulWidget {
   const ToggleTilePage({super.key});
@@ -49,7 +50,7 @@ class _ToggleTilePageState extends State<ToggleTilePage> {
         ToggleTile(
           variant: _variant,
           leading: _withLeading
-              ? const Text('\u2699', style: TextStyle(fontSize: 24))
+              ? Icon(TablerIcons.bell, size: 24, color: style.colors.foreground)
               : null,
           title: 'Notifications',
           subtitle: _withSubtitle ? 'Receive push notifications' : null,

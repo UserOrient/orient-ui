@@ -3,6 +3,7 @@ import 'package:example/widgets/tile.dart';
 import 'package:example/widgets/toggle.dart';
 import 'package:example/widgets/variant_tabs.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
 class TilePage extends StatefulWidget {
   const TilePage({super.key});
@@ -52,7 +53,7 @@ class _TilePageState extends State<TilePage> {
         Tile(
           variant: _variant,
           leading: _withLeading
-              ? const Text('\u2699', style: TextStyle(fontSize: 24))
+              ? Icon(TablerIcons.user, size: 24, color: style.colors.foreground)
               : null,
           title: 'Account',
           subtitle: _withSubtitle ? 'Manage your account settings' : null,

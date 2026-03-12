@@ -1,87 +1,90 @@
 import 'package:example/style.dart';
-import 'package:example/widgets/demo_section.dart';
 import 'package:example/widgets/tile.dart';
+import 'package:example/widgets/toggle.dart';
+import 'package:example/widgets/variant_tabs.dart';
 import 'package:flutter/widgets.dart';
 
-class TilePage extends StatelessWidget {
+class TilePage extends StatefulWidget {
   const TilePage({super.key});
 
   @override
+  State<TilePage> createState() => _TilePageState();
+}
+
+class _TilePageState extends State<TilePage> {
+  TileVariant _variant = TileVariant.simple;
+  bool _withSubtitle = true;
+  bool _withLeading = false;
+  bool _withTrailing = false;
+
+  @override
   Widget build(BuildContext context) {
-    final colors = Style.of(context).colors;
+    final Style style = Style.of(context);
+    final ColorTokens colors = style.colors;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DemoSection(
-          title: 'Simple',
-          child: Tile(
-            title: 'Account',
-            subtitle: 'Manage your account settings',
-            onTap: () {},
-          ),
+        Wrap(
+          spacing: 24,
+          runSpacing: 12,
+          children: [
+            _toggle('Subtitle', _withSubtitle, (v) {
+              setState(() => _withSubtitle = v);
+            }, style),
+            _toggle('Leading', _withLeading, (v) {
+              setState(() => _withLeading = v);
+            }, style),
+            _toggle('Trailing', _withTrailing, (v) {
+              setState(() => _withTrailing = v);
+            }, style),
+          ],
+        ),
+        const SizedBox(height: 16),
+        VariantTabs<TileVariant>(
+          values: TileVariant.values,
+          selected: _variant,
+          onChanged: (v) {
+            setState(() => _variant = v);
+          },
         ),
         const SizedBox(height: 24),
-        DemoSection(
-          title: 'Bordered',
-          child: Tile(
-            variant: TileVariant.bordered,
-            title: 'Privacy',
-            subtitle: 'Control your privacy settings',
-            trailing: Text(
-              '\u203A',
-              style: TextStyle(fontSize: 20, color: colors.mutedForeground),
-            ),
-            onTap: () {},
-          ),
+        Tile(
+          variant: _variant,
+          leading: _withLeading
+              ? const Text('\u2699', style: TextStyle(fontSize: 24))
+              : null,
+          title: 'Account',
+          subtitle: _withSubtitle ? 'Manage your account settings' : null,
+          trailing: _withTrailing
+              ? Text(
+                  '\u203A',
+                  style:
+                      TextStyle(fontSize: 20, color: colors.mutedForeground),
+                )
+              : null,
+          onTap: () {},
         ),
-        const SizedBox(height: 24),
-        DemoSection(
-          title: 'Filled',
-          child: Tile(
-            variant: TileVariant.filled,
-            title: 'Notifications',
-            subtitle: 'You have 3 unread notifications',
-            trailing: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-              decoration: BoxDecoration(
-                color: colors.accent,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Text(
-                '3',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFFFFFFFF),
-                ),
-              ),
-            ),
-            onTap: () {},
-          ),
-        ),
-        const SizedBox(height: 24),
-        DemoSection(
-          title: 'Title Only',
-          child: Tile(
-            variant: TileVariant.bordered,
-            title: 'Help Center',
-            onTap: () {},
-          ),
-        ),
-        const SizedBox(height: 24),
-        DemoSection(
-          title: 'With Leading',
-          child: Tile(
-            variant: TileVariant.bordered,
-            leading: const Text('\u2699', style: TextStyle(fontSize: 24)),
-            title: 'Settings',
-            subtitle: 'App preferences',
-            trailing: Text(
-              '\u203A',
-              style: TextStyle(fontSize: 20, color: colors.mutedForeground),
-            ),
-            onTap: () {},
+      ],
+    );
+  }
+
+  Widget _toggle(
+    String label,
+    bool value,
+    ValueChanged<bool> onChanged,
+    Style style,
+  ) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Toggle.small(value: value, onChanged: onChanged),
+        const SizedBox(width: 8),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 13,
+            color: style.colors.mutedForeground,
           ),
         ),
       ],

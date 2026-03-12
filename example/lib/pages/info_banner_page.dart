@@ -3,6 +3,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:example/style.dart';
 import 'package:example/widgets/info_banner.dart';
 import 'package:example/widgets/toggle.dart';
+import 'package:example/widgets/variant_tabs.dart';
 
 class InfoBannerPage extends StatefulWidget {
   const InfoBannerPage({super.key});
@@ -63,36 +64,12 @@ class _InfoBannerPageState extends State<InfoBannerPage> {
           ],
         ),
         const SizedBox(height: 16),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: [
-            for (final variant in InfoBannerVariant.values)
-              GestureDetector(
-                onTap: () => setState(() => _variant = variant),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: _variant == variant
-                        ? style.colors.accent
-                        : style.colors.surfaceContainer,
-                    borderRadius: BorderRadius.circular(Style.radii.small),
-                  ),
-                  child: Text(
-                    variant.name,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: _variant == variant
-                          ? style.colors.accentForeground
-                          : style.colors.mutedForeground,
-                    ),
-                  ),
-                ),
-              ),
-          ],
+        VariantTabs<InfoBannerVariant>(
+          values: InfoBannerVariant.values,
+          selected: _variant,
+          onChanged: (v) {
+            setState(() => _variant = v);
+          },
         ),
         const SizedBox(height: 24),
         InfoBanner(

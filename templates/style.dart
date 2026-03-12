@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 final ColorTokens _colorsLight = ColorTokens(
   background: Color(0xFFFFFFFF),
   border: Color(0xFFE4E4E7),
+  borderSubtle: Color(0xFFF2F2F2),
   foreground: Color(0xFF2A2A2A),
   mutedForeground: Color(0xFFACAEAF),
   accent: Color(0xFF18181B),
@@ -42,6 +43,7 @@ final ColorTokens _colorsLight = ColorTokens(
 final ColorTokens _colorsDark = ColorTokens(
   background: Color(0xFF303030),
   border: Color(0xFF27272A),
+  borderSubtle: Color(0xFF303030),
   foreground: Color(0xFFFAFAFA),
   mutedForeground: Color(0xFFB2B2B2),
   accent: Color(0xFFFAFAFA),
@@ -192,6 +194,7 @@ class Style extends InheritedWidget {
 class ColorTokens {
   final Color background;
   final Color border;
+  final Color borderSubtle;
   final Color foreground;
   final Color mutedForeground;
   final Color accent;
@@ -204,6 +207,7 @@ class ColorTokens {
   const ColorTokens({
     required this.background,
     required this.border,
+    required this.borderSubtle,
     required this.foreground,
     required this.mutedForeground,
     required this.accent,

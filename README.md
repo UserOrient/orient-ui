@@ -130,10 +130,10 @@ final ColorTokens _colorsLight = ColorTokens(
 - [x] MultiChoice
 - [x] MultiChoiceTile
 - [x] Typography
+- [x] Picker
 
 ### Coming Soon
 - [ ] TextField
-- [ ] Dropdown
 - [ ] Tabs
 - [ ] InlineTabs
 - [ ] Checkbox

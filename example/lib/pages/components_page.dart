@@ -1,4 +1,5 @@
 import 'package:example/pages/alert_popup_page.dart';
+import 'package:example/pages/picker_page.dart';
 import 'package:example/pages/button_page.dart';
 import 'package:example/pages/card_box_page.dart';
 import 'package:example/pages/multi_choice_page.dart';
@@ -29,23 +30,74 @@ class ComponentsPage extends StatelessWidget {
         MediaQuery.of(context).size.width >= Style.breakpoints.desktop;
 
     final sections = [
+      _componentSection('Picker', 'picker', style, const PickerPage()),
       _componentSection('CardBox', 'card_box', style, const CardBoxPage()),
       _componentSection('Button', 'button', style, const ButtonPage()),
       _componentSection('Toggle', 'toggle', style, const TogglePage()),
-      _componentSection('SingleChoice', 'single_choice', style, const SingleChoicePage()),
+      _componentSection(
+        'SingleChoice',
+        'single_choice',
+        style,
+        const SingleChoicePage(),
+      ),
       _componentSection('Tile', 'tile', style, const TilePage()),
-      _componentSection('ToggleTile', 'toggle_tile', style, const ToggleTilePage()),
-      _componentSection('SingleChoiceTile', 'single_choice_tile', style, const SingleChoiceTilePage()),
-      _componentSection('MultiChoice', 'multi_choice', style, const MultiChoicePage()),
-      _componentSection('MultiChoiceTile', 'multi_choice_tile', style, const MultiChoiceTilePage()),
-      _componentSection('SearchField', 'search_field', style, const SearchFieldPage()),
+      _componentSection(
+        'ToggleTile',
+        'toggle_tile',
+        style,
+        const ToggleTilePage(),
+      ),
+      _componentSection(
+        'SingleChoiceTile',
+        'single_choice_tile',
+        style,
+        const SingleChoiceTilePage(),
+      ),
+      _componentSection(
+        'MultiChoice',
+        'multi_choice',
+        style,
+        const MultiChoicePage(),
+      ),
+      _componentSection(
+        'MultiChoiceTile',
+        'multi_choice_tile',
+        style,
+        const MultiChoiceTilePage(),
+      ),
+      _componentSection(
+        'SearchField',
+        'search_field',
+        style,
+        const SearchFieldPage(),
+      ),
       _componentSection('Toast', 'toast', style, const ToastPage()),
       _componentSection('Spinner', 'spinner', style, const SpinnerPage()),
-      _componentSection('AlertPopup', 'alert_popup', style, const AlertPopupPage()),
-      _componentSection('CopyButton', 'copy_button', style, const CopyButtonPage()),
-      _componentSection('ConfirmationPopup', 'confirmation_popup', style, const ConfirmationPopupPage()),
+      _componentSection(
+        'AlertPopup',
+        'alert_popup',
+        style,
+        const AlertPopupPage(),
+      ),
+      _componentSection(
+        'CopyButton',
+        'copy_button',
+        style,
+        const CopyButtonPage(),
+      ),
+      _componentSection(
+        'ConfirmationPopup',
+        'confirmation_popup',
+        style,
+        const ConfirmationPopupPage(),
+      ),
       _componentSection('Popup', 'popup', style, const PopupPage()),
-      _componentSection('EmptyState', 'empty_state', style, const EmptyStatePage()),
+      _componentSection(
+        'EmptyState',
+        'empty_state',
+        style,
+        const EmptyStatePage(),
+      ),
       _componentSection('NavBar', 'nav_bar', style, const NavBarPage()),
     ];
 

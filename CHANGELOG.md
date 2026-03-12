@@ -1,3 +1,9 @@
+## 0.4.2
+
+* Added `Picker` component. Generic dropdown with position-aware menu (opens upward when space is limited).
+* Added `borderSubtle` color token for softer container borders (overlays, floating panels).
+* Updated package description.
+
 ## 0.4.1
 
 * Reshaped README: theming-first narrative, clearer messaging.

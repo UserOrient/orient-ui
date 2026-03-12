@@ -1,3 +1,8 @@
+## 0.4.1
+
+* Reshaped README: theming-first narrative, clearer messaging.
+* Fixed CLI version.
+
 ## 0.4.0
 
 * Added typography tokens: `display`, `heading`, `title`, `subtitle`, `body`, `bodySmall`, `caption`.

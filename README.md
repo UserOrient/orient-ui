@@ -121,16 +121,16 @@ final ColorTokens _colorsLight = ColorTokens(
 - [x] AlertPopup
 - [x] ConfirmationPopup
 - [x] SearchField
-- [x] CardBox
-- [x] Tile
+- [x] CardBox (Card)
+- [x] Tile (ListTile)
 - [x] Toggle
-- [x] ToggleTile
-- [x] SingleChoice
-- [x] SingleChoiceTile
-- [x] MultiChoice
-- [x] MultiChoiceTile
+- [x] ToggleTile (SwitchListTile)
+- [x] SingleChoice (Radio)
+- [x] SingleChoiceTile (RadioListTile)
+- [x] MultiChoice (Checkbox)
+- [x] MultiChoiceTile (CheckboxListTile)
 - [x] Typography
-- [x] Picker
+- [x] Picker (Dropdown)
 
 ### Coming Soon
 - [ ] TextField

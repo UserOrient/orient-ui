@@ -120,7 +120,7 @@ TypographyTokens _buildTypography(Color foreground) => TypographyTokens(
   body: TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
-    height: 18 / 14,
+    height: 20 / 14,
     color: foreground,
   ),
   bodySmall: TextStyle(

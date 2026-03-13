@@ -133,6 +133,7 @@ final ColorTokens _colorsLight = ColorTokens(
 - [x] Picker (Dropdown)
 - [x] InfoBanner (MaterialBanner)
 - [x] PopoverMenu (PopupMenuButton)
+- [x] TappableIcon (IconButton)
 
 ### Coming Soon
 - [ ] TextField
@@ -144,7 +145,6 @@ final ColorTokens _colorsLight = ColorTokens(
 - [ ] SocialButton
 - [ ] AdaptivePageTransition
 - [ ] DashedBorder
-- [ ] IconButton
 
 Try them at the [interactive demo](https://widgets.userorient.com).
 

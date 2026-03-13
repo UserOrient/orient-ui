@@ -12,6 +12,7 @@ import 'package:example/pages/copy_button_page.dart';
 import 'package:example/pages/empty_state_page.dart';
 import 'package:example/pages/nav_bar_page.dart';
 import 'package:example/pages/popover_menu_page.dart';
+import 'package:example/pages/tappable_icon_page.dart';
 import 'package:example/pages/popup_page.dart';
 import 'package:example/pages/search_field_page.dart';
 import 'package:example/pages/spinner_page.dart';
@@ -65,8 +66,9 @@ class ComponentsPage extends StatelessWidget {
       // L: CopyButton (short)             R: NavBar (short)
       _componentSection(context, 'CopyButton', 'copy_button', style, const CopyButtonPage()),
       _componentSection(context, 'NavBar', 'nav_bar', style, const NavBarPage()),
-      // L: EmptyState (med)
+      // L: EmptyState (med)               R: TappableIcon (short)
       _componentSection(context, 'EmptyState', 'empty_state', style, const EmptyStatePage()),
+      _componentSection(context, 'TappableIcon', 'tappable_icon', style, const TappableIconPage()),
     ];
 
     final header = Column(

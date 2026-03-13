@@ -1,6 +1,5 @@
 import 'package:example/pages/colors_page.dart';
 import 'package:example/pages/components_page.dart';
-import 'package:example/pages/docs_page.dart';
 import 'package:example/pages/typography_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
@@ -74,11 +73,6 @@ class _RootPageState extends State<RootPage> {
       title: 'Typography',
       icon: TablerIcons.typography,
       page: TypographyPage(),
-    ),
-    _PageInfo(
-      title: 'Docs',
-      icon: TablerIcons.book,
-      page: DocsPage(),
     ),
   ];
 

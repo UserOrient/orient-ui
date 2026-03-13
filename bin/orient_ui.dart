@@ -44,6 +44,7 @@ final Map<String, ComponentInfo> components = {
     dependencies: ['toggle', 'tile'],
   ),
   'picker': ComponentInfo('picker.dart'),
+  'popover_menu': ComponentInfo('popover_menu.dart'),
 };
 
 void main(List<String> args) async {

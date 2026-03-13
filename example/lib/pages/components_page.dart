@@ -11,6 +11,7 @@ import 'package:example/pages/confirmation_popup_page.dart';
 import 'package:example/pages/copy_button_page.dart';
 import 'package:example/pages/empty_state_page.dart';
 import 'package:example/pages/nav_bar_page.dart';
+import 'package:example/pages/popover_menu_page.dart';
 import 'package:example/pages/popup_page.dart';
 import 'package:example/pages/search_field_page.dart';
 import 'package:example/pages/spinner_page.dart';
@@ -58,11 +59,13 @@ class ComponentsPage extends StatelessWidget {
       // L: AlertPopup (med)               R: ConfirmationPopup (med)
       _componentSection(context, 'AlertPopup', 'alert_popup', style, const AlertPopupPage()),
       _componentSection(context, 'ConfirmationPopup', 'confirmation_popup', style, const ConfirmationPopupPage()),
-      // L: Popup (short)                  R: CopyButton (short)
+      // L: Popup (short)                  R: PopoverMenu (short)
       _componentSection(context, 'Popup', 'popup', style, const PopupPage()),
+      _componentSection(context, 'PopoverMenu', 'popover_menu', style, const PopoverMenuPage()),
+      // L: CopyButton (short)             R: NavBar (short)
       _componentSection(context, 'CopyButton', 'copy_button', style, const CopyButtonPage()),
-      // L: NavBar (short)                  R: EmptyState (med)
       _componentSection(context, 'NavBar', 'nav_bar', style, const NavBarPage()),
+      // L: EmptyState (med)
       _componentSection(context, 'EmptyState', 'empty_state', style, const EmptyStatePage()),
     ];
 

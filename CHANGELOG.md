@@ -1,3 +1,8 @@
+## 0.5.2
+
+* Added `PopoverMenu`: floating menu anchored to any widget with smart positioning (flips up/down, shifts left/right). Both declarative (`PopoverMenu(child:)`) and imperative (`PopoverMenu.show()`) APIs.
+* Added `TappableIcon`: clean `IconButton` alternative with circle hover highlight, tap scale animation, keyboard support, and semantics. No Material splash.
+
 ## 0.5.0
 
 * **BREAKING**: `ToastColors` class removed. `success`, `error`, `info`, `warning` are now direct color tokens on `ColorTokens`. 

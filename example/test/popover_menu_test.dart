@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:example/widgets/popover_menu.dart';
@@ -46,23 +44,27 @@ void main() {
   group('PopoverMenu', () {
     group('widget version', () {
       testWidgets('renders trigger child', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          PopoverMenu(
-            items: _testItems,
-            child: const Text('Open'),
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            PopoverMenu(
+              items: _testItems,
+              child: const Text('Open'),
+            ),
           ),
-        ));
+        );
 
         expect(find.text('Open'), findsOneWidget);
       });
 
       testWidgets('opens menu on tap', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          PopoverMenu(
-            items: _testItems,
-            child: const Text('Open'),
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            PopoverMenu(
+              items: _testItems,
+              child: const Text('Open'),
+            ),
           ),
-        ));
+        );
 
         expect(find.text('Copy'), findsNothing);
 
@@ -75,12 +77,14 @@ void main() {
       });
 
       testWidgets('closes on item tap', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          PopoverMenu(
-            items: _testItems,
-            child: const Text('Open'),
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            PopoverMenu(
+              items: _testItems,
+              child: const Text('Open'),
+            ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Open'));
         await tester.pump();
@@ -94,19 +98,21 @@ void main() {
       testWidgets('calls item onTap callback', (tester) async {
         var called = false;
 
-        await tester.pumpWidget(_wrapWithOverlay(
-          PopoverMenu(
-            items: [
-              PopoverMenuItem(
-                label: 'Action',
-                onTap: () {
-                  called = true;
-                },
-              ),
-            ],
-            child: const Text('Open'),
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            PopoverMenu(
+              items: [
+                PopoverMenuItem(
+                  label: 'Action',
+                  onTap: () {
+                    called = true;
+                  },
+                ),
+              ],
+              child: const Text('Open'),
+            ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Open'));
         await tester.pump();
@@ -118,14 +124,16 @@ void main() {
       });
 
       testWidgets('closes on outside tap', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          Center(
-            child: PopoverMenu(
-              items: _testItems,
-              child: const Text('Open'),
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            Center(
+              child: PopoverMenu(
+                items: _testItems,
+                child: const Text('Open'),
+              ),
             ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Open'));
         await tester.pump();
@@ -140,12 +148,14 @@ void main() {
       });
 
       testWidgets('toggles on repeated trigger taps', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          PopoverMenu(
-            items: _testItems,
-            child: const Text('Open'),
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            PopoverMenu(
+              items: _testItems,
+              child: const Text('Open'),
+            ),
           ),
-        ));
+        );
 
         // First tap opens
         await tester.tap(find.text('Open'));
@@ -161,103 +171,9 @@ void main() {
 
     group('PopoverMenu.show', () {
       testWidgets('opens menu imperatively', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          Builder(
-            builder: (BuildContext context) {
-              return GestureDetector(
-                onTap: () {
-                  PopoverMenu.show(context: context, items: _testItems);
-                },
-                child: const SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: Text('Trigger'),
-                ),
-              );
-            },
-          ),
-        ));
-
-        expect(find.text('Copy'), findsNothing);
-
-        await tester.tap(find.text('Trigger'));
-        await tester.pump();
-
-        expect(find.text('Copy'), findsOneWidget);
-        expect(find.text('Paste'), findsOneWidget);
-        expect(find.text('Delete'), findsOneWidget);
-      });
-
-      testWidgets('closes on item tap', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          Builder(
-            builder: (BuildContext context) {
-              return GestureDetector(
-                onTap: () {
-                  PopoverMenu.show(context: context, items: _testItems);
-                },
-                child: const SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: Text('Trigger'),
-                ),
-              );
-            },
-          ),
-        ));
-
-        await tester.tap(find.text('Trigger'));
-        await tester.pump();
-
-        await tester.tap(find.text('Paste'));
-        await tester.pump();
-
-        expect(find.text('Paste'), findsNothing);
-      });
-
-      testWidgets('calls item onTap callback', (tester) async {
-        var called = false;
-
-        await tester.pumpWidget(_wrapWithOverlay(
-          Builder(
-            builder: (BuildContext context) {
-              return GestureDetector(
-                onTap: () {
-                  PopoverMenu.show(
-                    context: context,
-                    items: [
-                      PopoverMenuItem(
-                        label: 'Action',
-                        onTap: () {
-                          called = true;
-                        },
-                      ),
-                    ],
-                  );
-                },
-                child: const SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: Text('Trigger'),
-                ),
-              );
-            },
-          ),
-        ));
-
-        await tester.tap(find.text('Trigger'));
-        await tester.pump();
-
-        await tester.tap(find.text('Action'));
-        await tester.pump();
-
-        expect(called, isTrue);
-      });
-
-      testWidgets('closes on outside tap', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          Center(
-            child: Builder(
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            Builder(
               builder: (BuildContext context) {
                 return GestureDetector(
                   onTap: () {
@@ -272,7 +188,109 @@ void main() {
               },
             ),
           ),
-        ));
+        );
+
+        expect(find.text('Copy'), findsNothing);
+
+        await tester.tap(find.text('Trigger'));
+        await tester.pump();
+
+        expect(find.text('Copy'), findsOneWidget);
+        expect(find.text('Paste'), findsOneWidget);
+        expect(find.text('Delete'), findsOneWidget);
+      });
+
+      testWidgets('closes on item tap', (tester) async {
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            Builder(
+              builder: (BuildContext context) {
+                return GestureDetector(
+                  onTap: () {
+                    PopoverMenu.show(context: context, items: _testItems);
+                  },
+                  child: const SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: Text('Trigger'),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('Trigger'));
+        await tester.pump();
+
+        await tester.tap(find.text('Paste'));
+        await tester.pump();
+
+        expect(find.text('Paste'), findsNothing);
+      });
+
+      testWidgets('calls item onTap callback', (tester) async {
+        var called = false;
+
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            Builder(
+              builder: (BuildContext context) {
+                return GestureDetector(
+                  onTap: () {
+                    PopoverMenu.show(
+                      context: context,
+                      items: [
+                        PopoverMenuItem(
+                          label: 'Action',
+                          onTap: () {
+                            called = true;
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                  child: const SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: Text('Trigger'),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('Trigger'));
+        await tester.pump();
+
+        await tester.tap(find.text('Action'));
+        await tester.pump();
+
+        expect(called, isTrue);
+      });
+
+      testWidgets('closes on outside tap', (tester) async {
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            Center(
+              child: Builder(
+                builder: (BuildContext context) {
+                  return GestureDetector(
+                    onTap: () {
+                      PopoverMenu.show(context: context, items: _testItems);
+                    },
+                    child: const SizedBox(
+                      width: 40,
+                      height: 40,
+                      child: Text('Trigger'),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
 
         await tester.tap(find.text('Trigger'));
         await tester.pump();
@@ -288,17 +306,19 @@ void main() {
 
     group('menu items', () {
       testWidgets('renders items with icons', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          PopoverMenu(
-            items: const [
-              PopoverMenuItem(
-                icon: SizedBox(width: 24, height: 24),
-                label: 'With icon',
-              ),
-            ],
-            child: const Text('Open'),
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            PopoverMenu(
+              items: const [
+                PopoverMenuItem(
+                  icon: SizedBox(width: 24, height: 24),
+                  label: 'With icon',
+                ),
+              ],
+              child: const Text('Open'),
+            ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Open'));
         await tester.pump();
@@ -307,14 +327,16 @@ void main() {
       });
 
       testWidgets('renders items without icons', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          PopoverMenu(
-            items: const [
-              PopoverMenuItem(label: 'No icon'),
-            ],
-            child: const Text('Open'),
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            PopoverMenu(
+              items: const [
+                PopoverMenuItem(label: 'No icon'),
+              ],
+              child: const Text('Open'),
+            ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Open'));
         await tester.pump();
@@ -330,12 +352,14 @@ void main() {
           },
         );
 
-        await tester.pumpWidget(_wrapWithOverlay(
-          PopoverMenu(
-            items: items,
-            child: const Text('Open'),
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            PopoverMenu(
+              items: items,
+              child: const Text('Open'),
+            ),
           ),
-        ));
+        );
 
         await tester.tap(find.text('Open'));
         await tester.pump();
@@ -348,37 +372,43 @@ void main() {
 
     group('theming', () {
       testWidgets('renders in light mode', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          PopoverMenu(
-            items: _testItems,
-            child: const Text('Open'),
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            PopoverMenu(
+              items: _testItems,
+              child: const Text('Open'),
+            ),
+            brightness: Brightness.light,
           ),
-          brightness: Brightness.light,
-        ));
+        );
 
         expect(find.text('Open'), findsOneWidget);
       });
 
       testWidgets('renders in dark mode', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          PopoverMenu(
-            items: _testItems,
-            child: const Text('Open'),
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            PopoverMenu(
+              items: _testItems,
+              child: const Text('Open'),
+            ),
+            brightness: Brightness.dark,
           ),
-          brightness: Brightness.dark,
-        ));
+        );
 
         expect(find.text('Open'), findsOneWidget);
       });
 
       testWidgets('menu renders in dark mode', (tester) async {
-        await tester.pumpWidget(_wrapWithOverlay(
-          PopoverMenu(
-            items: _testItems,
-            child: const Text('Open'),
+        await tester.pumpWidget(
+          _wrapWithOverlay(
+            PopoverMenu(
+              items: _testItems,
+              child: const Text('Open'),
+            ),
+            brightness: Brightness.dark,
           ),
-          brightness: Brightness.dark,
-        ));
+        );
 
         await tester.tap(find.text('Open'));
         await tester.pump();

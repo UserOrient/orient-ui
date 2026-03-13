@@ -1,3 +1,10 @@
+## 0.5.0
+
+* **BREAKING**: `ToastColors` class removed. `success`, `error`, `info`, `warning` are now direct color tokens on `ColorTokens`. 
+* Added `InfoBanner`: inline info indicator with info, warning, error, success, neutral variants and optional icon/description.
+* Updated `body` typography line height from 18 to 20.
+* Redesigned example app pages with interactive controls (toggles, variant tabs) instead of repetitive demos.
+
 ## 0.4.2
 
 * Added `Picker` component. Generic dropdown with position-aware menu (opens upward when space is limited).

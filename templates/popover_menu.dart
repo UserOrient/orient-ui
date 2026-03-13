@@ -14,6 +14,8 @@ const double _gap = 4.0;
 /// Wraps a trigger widget. Tapping the trigger opens a floating
 /// menu anchored to it. The menu auto-positions itself to stay
 /// on screen (flips up/down, shifts left/right).
+///
+/// Can also be used imperatively via [PopoverMenu.show].
 class PopoverMenu extends StatefulWidget {
   final Widget child;
   final List<PopoverMenuItem> items;
@@ -24,10 +26,130 @@ class PopoverMenu extends StatefulWidget {
     required this.items,
   });
 
+  /// Opens a popover menu anchored to the widget at [context].
+  /// Call this from any tap handler — no wrapper widget needed.
+  static void show({
+    required BuildContext context,
+    required List<PopoverMenuItem> items,
+  }) {
+    final RenderBox renderBox = context.findRenderObject() as RenderBox;
+    final Size triggerSize = renderBox.size;
+    final Offset triggerPos = renderBox.localToGlobal(Offset.zero);
+    final Size screenSize = MediaQuery.of(context).size;
+
+    final double menuWidth = _measureMenuWidth(items);
+    final double menuHeight = _measureMenuHeight(items);
+    final Offset position = _calculatePosition(
+      triggerSize: triggerSize,
+      triggerPos: triggerPos,
+      screenSize: screenSize,
+      menuWidth: menuWidth,
+      menuHeight: menuHeight,
+    );
+
+    late OverlayEntry entry;
+    entry = OverlayEntry(
+      builder: (BuildContext overlayContext) {
+        final ColorTokens colors = Style.of(overlayContext).colors;
+
+        return DefaultTextStyle(
+          style: Style.of(overlayContext).typography.body,
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: GestureDetector(
+                  onTap: () {
+                    entry.remove();
+                  },
+                  behavior: HitTestBehavior.translucent,
+                ),
+              ),
+              Positioned(
+                left: position.dx,
+                top: position.dy,
+                child: _MenuPanel(
+                  width: menuWidth,
+                  colors: colors,
+                  items: items,
+                  onItemTap: (PopoverMenuItem item) {
+                    item.onTap?.call();
+                    entry.remove();
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    Overlay.of(context).insert(entry);
+  }
+
   @override
   State<PopoverMenu> createState() {
     return _PopoverMenuState();
   }
+}
+
+// Uses TextPainter to find the widest label, then adds
+// icon space + padding + breathing room.
+double _measureMenuWidth(List<PopoverMenuItem> items) {
+  const TextStyle labelStyle = TextStyle(fontSize: 16, height: 1);
+  double maxLabelWidth = 0;
+
+  for (final PopoverMenuItem item in items) {
+    final TextPainter tp = TextPainter(
+      text: TextSpan(text: item.label, style: labelStyle),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    if (tp.width > maxLabelWidth) maxLabelWidth = tp.width;
+  }
+
+  final bool hasIcons = items.any((PopoverMenuItem i) {
+    return i.icon != null;
+  });
+  final double iconSpace = hasIcons ? _iconSize + _iconLabelGap : 0;
+  final double intrinsic =
+      _horizontalPadding +
+      iconSpace +
+      maxLabelWidth +
+      _rightBreathing +
+      _horizontalPadding;
+
+  return intrinsic < _minWidth ? _minWidth : intrinsic;
+}
+
+double _measureMenuHeight(List<PopoverMenuItem> items) {
+  return items.length * _itemHeight + _verticalPadding * 2;
+}
+
+// Computes absolute screen position for the menu.
+// Prefers below + left-aligned. Flips up if clipped at bottom,
+// shifts left if clipped at right edge.
+Offset _calculatePosition({
+  required Size triggerSize,
+  required Offset triggerPos,
+  required Size screenSize,
+  required double menuWidth,
+  required double menuHeight,
+}) {
+  final double spaceBelow =
+      screenSize.height - triggerPos.dy - triggerSize.height;
+  final double spaceAbove = triggerPos.dy;
+  final bool openUpward =
+      spaceBelow < menuHeight + _gap && spaceAbove > spaceBelow;
+
+  final double top = openUpward
+      ? triggerPos.dy - menuHeight - _gap
+      : triggerPos.dy + triggerSize.height + _gap;
+
+  double left = triggerPos.dx;
+  if (left + menuWidth > screenSize.width - 8) {
+    left = triggerPos.dx + triggerSize.width - menuWidth;
+  }
+
+  return Offset(left, top);
 }
 
 class _PopoverMenuState extends State<PopoverMenu> {
@@ -38,7 +160,8 @@ class _PopoverMenuState extends State<PopoverMenu> {
 
   @override
   void dispose() {
-    _close();
+    _overlayEntry?.remove();
+    _overlayEntry = null;
     super.dispose();
   }
 
@@ -47,92 +170,14 @@ class _PopoverMenuState extends State<PopoverMenu> {
   }
 
   void _open() {
-    _overlayEntry = _buildOverlay();
-    Overlay.of(context).insert(_overlayEntry!);
-    setState(() {
-      _isOpen = true;
-    });
-  }
-
-  void _close() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
-    if (mounted) {
-      setState(() {
-        _isOpen = false;
-      });
-    }
-  }
-
-  // Uses TextPainter to find the widest label, then adds
-  // icon space + padding + breathing room. Must stay in sync
-  // with _MenuItemWidget's padding/icon layout.
-  double _measureMenuWidth() {
-    const TextStyle labelStyle = TextStyle(fontSize: 16, height: 1);
-    double maxLabelWidth = 0;
-
-    for (final PopoverMenuItem item in widget.items) {
-      final TextPainter tp = TextPainter(
-        text: TextSpan(text: item.label, style: labelStyle),
-        textDirection: TextDirection.ltr,
-      )..layout();
-      if (tp.width > maxLabelWidth) maxLabelWidth = tp.width;
-    }
-
-    final bool hasIcons = widget.items.any((PopoverMenuItem i) {
-      return i.icon != null;
-    });
-    final double iconSpace = hasIcons ? _iconSize + _iconLabelGap : 0;
-    final double intrinsic =
-        _horizontalPadding +
-        iconSpace +
-        maxLabelWidth +
-        _rightBreathing +
-        _horizontalPadding;
-
-    return intrinsic < _minWidth ? _minWidth : intrinsic;
-  }
-
-  double _measureMenuHeight() {
-    return widget.items.length * _itemHeight + _verticalPadding * 2;
-  }
-
-  // Decides where to place the menu relative to the trigger.
-  // Prefers below + left-aligned. Flips up if clipped at bottom,
-  // shifts left if clipped at right edge.
-  Offset _calculateOffset({
-    required Size triggerSize,
-    required Offset triggerPos,
-    required Size screenSize,
-    required double menuWidth,
-    required double menuHeight,
-  }) {
-    final double spaceBelow =
-        screenSize.height - triggerPos.dy - triggerSize.height;
-    final double spaceAbove = triggerPos.dy;
-    final bool openUpward =
-        spaceBelow < menuHeight + _gap && spaceAbove > spaceBelow;
-    final double dy = openUpward
-        ? -menuHeight - _gap
-        : triggerSize.height + _gap;
-
-    double dx = 0;
-    if (triggerPos.dx + menuWidth > screenSize.width - 8) {
-      dx = triggerSize.width - menuWidth;
-    }
-
-    return Offset(dx, dy);
-  }
-
-  OverlayEntry _buildOverlay() {
     final RenderBox renderBox =
         _triggerKey.currentContext!.findRenderObject() as RenderBox;
     final Size triggerSize = renderBox.size;
     final Offset triggerPos = renderBox.localToGlobal(Offset.zero);
     final Size screenSize = MediaQuery.of(context).size;
 
-    final double menuWidth = _measureMenuWidth();
-    final double menuHeight = _measureMenuHeight();
+    final double menuWidth = _measureMenuWidth(widget.items);
+    final double menuHeight = _measureMenuHeight(widget.items);
     final Offset offset = _calculateOffset(
       triggerSize: triggerSize,
       triggerPos: triggerPos,
@@ -141,7 +186,7 @@ class _PopoverMenuState extends State<PopoverMenu> {
       menuHeight: menuHeight,
     );
 
-    return OverlayEntry(
+    _overlayEntry = OverlayEntry(
       builder: (BuildContext context) {
         final ColorTokens colors = Style.of(context).colors;
 
@@ -178,6 +223,46 @@ class _PopoverMenuState extends State<PopoverMenu> {
         );
       },
     );
+
+    Overlay.of(context).insert(_overlayEntry!);
+    setState(() {
+      _isOpen = true;
+    });
+  }
+
+  // Offset relative to the LayerLink anchor.
+  Offset _calculateOffset({
+    required Size triggerSize,
+    required Offset triggerPos,
+    required Size screenSize,
+    required double menuWidth,
+    required double menuHeight,
+  }) {
+    final double spaceBelow =
+        screenSize.height - triggerPos.dy - triggerSize.height;
+    final double spaceAbove = triggerPos.dy;
+    final bool openUpward =
+        spaceBelow < menuHeight + _gap && spaceAbove > spaceBelow;
+    final double dy = openUpward
+        ? -menuHeight - _gap
+        : triggerSize.height + _gap;
+
+    double dx = 0;
+    if (triggerPos.dx + menuWidth > screenSize.width - 8) {
+      dx = triggerSize.width - menuWidth;
+    }
+
+    return Offset(dx, dy);
+  }
+
+  void _close() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+    if (mounted) {
+      setState(() {
+        _isOpen = false;
+      });
+    }
   }
 
   @override

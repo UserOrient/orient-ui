@@ -1,3 +1,4 @@
+import 'package:example/pages/colors_page.dart';
 import 'package:example/pages/components_page.dart';
 import 'package:example/pages/docs_page.dart';
 import 'package:example/pages/typography_page.dart';
@@ -63,6 +64,11 @@ class _RootPageState extends State<RootPage> {
       title: 'Components',
       icon: TablerIcons.layout_dashboard,
       page: ComponentsPage(),
+    ),
+    _PageInfo(
+      title: 'Colors',
+      icon: TablerIcons.palette,
+      page: ColorsPage(),
     ),
     _PageInfo(
       title: 'Typography',

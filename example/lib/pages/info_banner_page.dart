@@ -3,7 +3,6 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:example/style.dart';
 import 'package:example/widgets/info_banner.dart';
 import 'package:example/widgets/toggle.dart';
-import 'package:example/widgets/variant_tabs.dart';
 
 class InfoBannerPage extends StatefulWidget {
   const InfoBannerPage({super.key});
@@ -13,7 +12,6 @@ class InfoBannerPage extends StatefulWidget {
 }
 
 class _InfoBannerPageState extends State<InfoBannerPage> {
-  InfoBannerVariant _variant = InfoBannerVariant.info;
   bool _withDescription = false;
   bool _withIcon = true;
 
@@ -36,6 +34,13 @@ class _InfoBannerPageState extends State<InfoBannerPage> {
     InfoBannerVariant.success:
         'All modifications have been saved and will take effect immediately.',
     InfoBannerVariant.neutral: 'No action is required at this time.',
+  };
+
+  static const _variantIcons = {
+    InfoBannerVariant.info: TablerIcons.info_circle,
+    InfoBannerVariant.warning: TablerIcons.alert_triangle,
+    InfoBannerVariant.error: TablerIcons.circle_x,
+    InfoBannerVariant.success: TablerIcons.circle_check,
   };
 
   @override
@@ -63,36 +68,25 @@ class _InfoBannerPageState extends State<InfoBannerPage> {
             ),
           ],
         ),
-        const SizedBox(height: 16),
-        VariantTabs<InfoBannerVariant>(
-          values: InfoBannerVariant.values,
-          selected: _variant,
-          onChanged: (v) {
-            setState(() => _variant = v);
-          },
-        ),
         const SizedBox(height: 24),
-        InfoBanner(
-          title: _titles[_variant]!,
-          description: _withDescription ? _descriptions[_variant] : null,
-          variant: _variant,
-          icon: _withIcon ? _buildIcon(style) : null,
-        ),
+        for (final variant in InfoBannerVariant.values) ...[
+          InfoBanner(
+            title: _titles[variant]!,
+            description:
+                _withDescription ? _descriptions[variant] : null,
+            variant: variant,
+            icon: _withIcon ? _buildIcon(variant, style) : null,
+          ),
+          const SizedBox(height: 12),
+        ],
       ],
     );
   }
 
-  static const _variantIcons = {
-    InfoBannerVariant.info: TablerIcons.info_circle,
-    InfoBannerVariant.warning: TablerIcons.alert_triangle,
-    InfoBannerVariant.error: TablerIcons.circle_x,
-    InfoBannerVariant.success: TablerIcons.circle_check,
-  };
+  Widget? _buildIcon(InfoBannerVariant variant, Style style) {
+    if (variant == InfoBannerVariant.neutral) return null;
 
-  Widget? _buildIcon(Style style) {
-    if (_variant == InfoBannerVariant.neutral) return null;
-
-    final Color color = switch (_variant) {
+    final Color color = switch (variant) {
       InfoBannerVariant.info => style.colors.info,
       InfoBannerVariant.warning => style.colors.warning,
       InfoBannerVariant.error => style.colors.error,
@@ -101,7 +95,7 @@ class _InfoBannerPageState extends State<InfoBannerPage> {
     };
 
     return Icon(
-      _variantIcons[_variant],
+      _variantIcons[variant],
       color: color,
     );
   }

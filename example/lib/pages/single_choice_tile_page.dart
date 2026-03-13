@@ -1,8 +1,8 @@
 import 'package:example/style.dart';
+import 'package:example/widgets/demo_section.dart';
 import 'package:example/widgets/single_choice_tile.dart';
 import 'package:example/widgets/tile.dart';
 import 'package:example/widgets/toggle.dart';
-import 'package:example/widgets/variant_tabs.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
@@ -14,10 +14,17 @@ class SingleChoiceTilePage extends StatefulWidget {
 }
 
 class _SingleChoiceTilePageState extends State<SingleChoiceTilePage> {
-  TileVariant _variant = TileVariant.simple;
   bool _withSubtitle = true;
   bool _withLeading = false;
-  String _selected = 'email';
+  final Map<TileVariant, String> _selected = {
+    for (final v in TileVariant.values) v: 'email',
+  };
+
+  static const _items = [
+    ('email', 'Email', 'Receive notifications via email', TablerIcons.mail),
+    ('sms', 'SMS', 'Receive notifications via text', TablerIcons.message),
+    ('push', 'Push', 'Receive push notifications', TablerIcons.bell),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -38,70 +45,37 @@ class _SingleChoiceTilePageState extends State<SingleChoiceTilePage> {
             }, style),
           ],
         ),
-        const SizedBox(height: 16),
-        VariantTabs<TileVariant>(
-          values: TileVariant.values,
-          selected: _variant,
-          onChanged: (v) {
-            setState(() => _variant = v);
-          },
-        ),
         const SizedBox(height: 24),
-        Column(
-          children: [
-            SingleChoiceTile<String>(
-              variant: _variant,
-              leading: _withLeading
-                  ? Icon(TablerIcons.mail, size: 24, color: style.colors.foreground)
-                  : null,
-              title: 'Email',
-              subtitle: _withSubtitle
-                  ? 'Receive notifications via email'
-                  : null,
-              value: 'email',
-              groupValue: _selected,
-              onChanged: (v) {
-                setState(() => _selected = v);
-              },
+        for (final variant in TileVariant.values) ...[
+          DemoSection(
+            title: variant.name,
+            child: Column(
+              children: [
+                for (int i = 0; i < _items.length; i++) ...[
+                  SingleChoiceTile<String>(
+                    variant: variant,
+                    leading: _withLeading
+                        ? Icon(_items[i].$4,
+                            size: 24, color: style.colors.foreground)
+                        : null,
+                    title: _items[i].$2,
+                    subtitle: _withSubtitle ? _items[i].$3 : null,
+                    value: _items[i].$1,
+                    groupValue: _selected[variant]!,
+                    onChanged: (v) {
+                      setState(() => _selected[variant] = v);
+                    },
+                  ),
+                  if (i < _items.length - 1 &&
+                      (variant == TileVariant.bordered ||
+                          variant == TileVariant.filled))
+                    const SizedBox(height: 8),
+                ],
+              ],
             ),
-            if (_variant == TileVariant.bordered ||
-                _variant == TileVariant.filled)
-              const SizedBox(height: 8),
-            SingleChoiceTile<String>(
-              variant: _variant,
-              leading: _withLeading
-                  ? Icon(TablerIcons.message, size: 24, color: style.colors.foreground)
-                  : null,
-              title: 'SMS',
-              subtitle: _withSubtitle
-                  ? 'Receive notifications via text'
-                  : null,
-              value: 'sms',
-              groupValue: _selected,
-              onChanged: (v) {
-                setState(() => _selected = v);
-              },
-            ),
-            if (_variant == TileVariant.bordered ||
-                _variant == TileVariant.filled)
-              const SizedBox(height: 8),
-            SingleChoiceTile<String>(
-              variant: _variant,
-              leading: _withLeading
-                  ? Icon(TablerIcons.bell, size: 24, color: style.colors.foreground)
-                  : null,
-              title: 'Push',
-              subtitle: _withSubtitle
-                  ? 'Receive push notifications'
-                  : null,
-              value: 'push',
-              groupValue: _selected,
-              onChanged: (v) {
-                setState(() => _selected = v);
-              },
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 24),
+        ],
       ],
     );
   }

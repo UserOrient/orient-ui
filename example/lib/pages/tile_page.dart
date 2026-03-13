@@ -1,7 +1,7 @@
 import 'package:example/style.dart';
+import 'package:example/widgets/demo_section.dart';
 import 'package:example/widgets/tile.dart';
 import 'package:example/widgets/toggle.dart';
-import 'package:example/widgets/variant_tabs.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
@@ -13,7 +13,6 @@ class TilePage extends StatefulWidget {
 }
 
 class _TilePageState extends State<TilePage> {
-  TileVariant _variant = TileVariant.simple;
   bool _withSubtitle = true;
   bool _withLeading = false;
   bool _withTrailing = false;
@@ -41,31 +40,30 @@ class _TilePageState extends State<TilePage> {
             }, style),
           ],
         ),
-        const SizedBox(height: 16),
-        VariantTabs<TileVariant>(
-          values: TileVariant.values,
-          selected: _variant,
-          onChanged: (v) {
-            setState(() => _variant = v);
-          },
-        ),
         const SizedBox(height: 24),
-        Tile(
-          variant: _variant,
-          leading: _withLeading
-              ? Icon(TablerIcons.user, size: 24, color: style.colors.foreground)
-              : null,
-          title: 'Account',
-          subtitle: _withSubtitle ? 'Manage your account settings' : null,
-          trailing: _withTrailing
-              ? Text(
-                  '\u203A',
-                  style:
-                      TextStyle(fontSize: 20, color: colors.mutedForeground),
-                )
-              : null,
-          onTap: () {},
-        ),
+        for (final variant in TileVariant.values) ...[
+          DemoSection(
+            title: variant.name,
+            child: Tile(
+              variant: variant,
+              leading: _withLeading
+                  ? Icon(TablerIcons.user, size: 24, color: colors.foreground)
+                  : null,
+              title: 'Account',
+              subtitle:
+                  _withSubtitle ? 'Manage your account settings' : null,
+              trailing: _withTrailing
+                  ? Text(
+                      '\u203A',
+                      style: TextStyle(
+                          fontSize: 20, color: colors.mutedForeground),
+                    )
+                  : null,
+              onTap: () {},
+            ),
+          ),
+          const SizedBox(height: 24),
+        ],
       ],
     );
   }

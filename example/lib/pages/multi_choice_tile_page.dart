@@ -1,8 +1,8 @@
 import 'package:example/style.dart';
+import 'package:example/widgets/demo_section.dart';
 import 'package:example/widgets/multi_choice_tile.dart';
 import 'package:example/widgets/tile.dart';
 import 'package:example/widgets/toggle.dart';
-import 'package:example/widgets/variant_tabs.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
@@ -14,12 +14,17 @@ class MultiChoiceTilePage extends StatefulWidget {
 }
 
 class _MultiChoiceTilePageState extends State<MultiChoiceTilePage> {
-  TileVariant _variant = TileVariant.simple;
   bool _withSubtitle = true;
   bool _withLeading = false;
-  bool _email = true;
-  bool _sms = false;
-  bool _push = true;
+  final Map<TileVariant, List<bool>> _values = {
+    for (final v in TileVariant.values) v: [true, false, true],
+  };
+
+  static const _items = [
+    ('Email', 'Receive notifications via email', TablerIcons.mail),
+    ('SMS', 'Receive notifications via text', TablerIcons.message),
+    ('Push', 'Receive push notifications', TablerIcons.bell),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,67 +45,36 @@ class _MultiChoiceTilePageState extends State<MultiChoiceTilePage> {
             }, style),
           ],
         ),
-        const SizedBox(height: 16),
-        VariantTabs<TileVariant>(
-          values: TileVariant.values,
-          selected: _variant,
-          onChanged: (v) {
-            setState(() => _variant = v);
-          },
-        ),
         const SizedBox(height: 24),
-        Column(
-          children: [
-            MultiChoiceTile(
-              variant: _variant,
-              leading: _withLeading
-                  ? Icon(TablerIcons.mail, size: 24, color: style.colors.foreground)
-                  : null,
-              title: 'Email',
-              subtitle: _withSubtitle
-                  ? 'Receive notifications via email'
-                  : null,
-              value: _email,
-              onChanged: (v) {
-                setState(() => _email = v);
-              },
+        for (final variant in TileVariant.values) ...[
+          DemoSection(
+            title: variant.name,
+            child: Column(
+              children: [
+                for (int i = 0; i < _items.length; i++) ...[
+                  MultiChoiceTile(
+                    variant: variant,
+                    leading: _withLeading
+                        ? Icon(_items[i].$3,
+                            size: 24, color: style.colors.foreground)
+                        : null,
+                    title: _items[i].$1,
+                    subtitle: _withSubtitle ? _items[i].$2 : null,
+                    value: _values[variant]![i],
+                    onChanged: (v) {
+                      setState(() => _values[variant]![i] = v);
+                    },
+                  ),
+                  if (i < _items.length - 1 &&
+                      (variant == TileVariant.bordered ||
+                          variant == TileVariant.filled))
+                    const SizedBox(height: 8),
+                ],
+              ],
             ),
-            if (_variant == TileVariant.bordered ||
-                _variant == TileVariant.filled)
-              const SizedBox(height: 8),
-            MultiChoiceTile(
-              variant: _variant,
-              leading: _withLeading
-                  ? Icon(TablerIcons.message, size: 24, color: style.colors.foreground)
-                  : null,
-              title: 'SMS',
-              subtitle: _withSubtitle
-                  ? 'Receive notifications via text'
-                  : null,
-              value: _sms,
-              onChanged: (v) {
-                setState(() => _sms = v);
-              },
-            ),
-            if (_variant == TileVariant.bordered ||
-                _variant == TileVariant.filled)
-              const SizedBox(height: 8),
-            MultiChoiceTile(
-              variant: _variant,
-              leading: _withLeading
-                  ? Icon(TablerIcons.bell, size: 24, color: style.colors.foreground)
-                  : null,
-              title: 'Push',
-              subtitle: _withSubtitle
-                  ? 'Receive push notifications'
-                  : null,
-              value: _push,
-              onChanged: (v) {
-                setState(() => _push = v);
-              },
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 24),
+        ],
       ],
     );
   }

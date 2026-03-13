@@ -32,111 +32,38 @@ class ComponentsPage extends StatelessWidget {
     final isDesktop =
         MediaQuery.of(context).size.width >= Style.breakpoints.desktop;
 
+    // Pairs: [even=left, odd=right]. Tall left paired with short right.
     final sections = [
-      _componentSection(
-        context,
-        'InfoBanner',
-        'info_banner',
-        style,
-        const InfoBannerPage(),
-      ),
-      _componentSection(context, 'Picker', 'picker', style, const PickerPage()),
-      _componentSection(
-        context,
-        'CardBox',
-        'card_box',
-        style,
-        const CardBoxPage(),
-      ),
+      // L: Button (tall: 4 sections)     R: Toggle (short: 3 rows)
       _componentSection(context, 'Button', 'button', style, const ButtonPage()),
       _componentSection(context, 'Toggle', 'toggle', style, const TogglePage()),
-      _componentSection(
-        context,
-        'SingleChoice',
-        'single_choice',
-        style,
-        const SingleChoicePage(),
-      ),
+      // L: InfoBanner (tall: 5 variants)  R: CardBox (short: 2 variants)
+      _componentSection(context, 'InfoBanner', 'info_banner', style, const InfoBannerPage()),
+      _componentSection(context, 'CardBox', 'card_box', style, const CardBoxPage()),
+      // L: SingleChoice (short)           R: MultiChoice (short)
+      _componentSection(context, 'SingleChoice', 'single_choice', style, const SingleChoicePage()),
+      _componentSection(context, 'MultiChoice', 'multi_choice', style, const MultiChoicePage()),
+      // L: Tile (med: 3 variants)         R: ToggleTile (med: 3 variants)
       _componentSection(context, 'Tile', 'tile', style, const TilePage()),
-      _componentSection(
-        context,
-        'ToggleTile',
-        'toggle_tile',
-        style,
-        const ToggleTilePage(),
-      ),
-      _componentSection(
-        context,
-        'SingleChoiceTile',
-        'single_choice_tile',
-        style,
-        const SingleChoiceTilePage(),
-      ),
-      _componentSection(
-        context,
-        'MultiChoice',
-        'multi_choice',
-        style,
-        const MultiChoicePage(),
-      ),
-      _componentSection(
-        context,
-        'MultiChoiceTile',
-        'multi_choice_tile',
-        style,
-        const MultiChoiceTilePage(),
-      ),
-      _componentSection(
-        context,
-        'SearchField',
-        'search_field',
-        style,
-        const SearchFieldPage(),
-      ),
+      _componentSection(context, 'ToggleTile', 'toggle_tile', style, const ToggleTilePage()),
+      // L: SingleChoiceTile (tall)        R: MultiChoiceTile (tall)
+      _componentSection(context, 'SingleChoiceTile', 'single_choice_tile', style, const SingleChoiceTilePage()),
+      _componentSection(context, 'MultiChoiceTile', 'multi_choice_tile', style, const MultiChoiceTilePage()),
+      // L: SearchField (med)              R: Picker (short)
+      _componentSection(context, 'SearchField', 'search_field', style, const SearchFieldPage()),
+      _componentSection(context, 'Picker', 'picker', style, const PickerPage()),
+      // L: Toast (short)                  R: Spinner (short)
       _componentSection(context, 'Toast', 'toast', style, const ToastPage()),
-      _componentSection(
-        context,
-        'Spinner',
-        'spinner',
-        style,
-        const SpinnerPage(),
-      ),
-      _componentSection(
-        context,
-        'AlertPopup',
-        'alert_popup',
-        style,
-        const AlertPopupPage(),
-      ),
-      _componentSection(
-        context,
-        'CopyButton',
-        'copy_button',
-        style,
-        const CopyButtonPage(),
-      ),
-      _componentSection(
-        context,
-        'ConfirmationPopup',
-        'confirmation_popup',
-        style,
-        const ConfirmationPopupPage(),
-      ),
+      _componentSection(context, 'Spinner', 'spinner', style, const SpinnerPage()),
+      // L: AlertPopup (med)               R: ConfirmationPopup (med)
+      _componentSection(context, 'AlertPopup', 'alert_popup', style, const AlertPopupPage()),
+      _componentSection(context, 'ConfirmationPopup', 'confirmation_popup', style, const ConfirmationPopupPage()),
+      // L: Popup (short)                  R: CopyButton (short)
       _componentSection(context, 'Popup', 'popup', style, const PopupPage()),
-      _componentSection(
-        context,
-        'EmptyState',
-        'empty_state',
-        style,
-        const EmptyStatePage(),
-      ),
-      _componentSection(
-        context,
-        'NavBar',
-        'nav_bar',
-        style,
-        const NavBarPage(),
-      ),
+      _componentSection(context, 'CopyButton', 'copy_button', style, const CopyButtonPage()),
+      // L: NavBar (short)                  R: EmptyState (med)
+      _componentSection(context, 'NavBar', 'nav_bar', style, const NavBarPage()),
+      _componentSection(context, 'EmptyState', 'empty_state', style, const EmptyStatePage()),
     ];
 
     final header = Column(

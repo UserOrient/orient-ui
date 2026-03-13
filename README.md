@@ -137,7 +137,6 @@ final ColorTokens _colorsLight = ColorTokens(
 - [ ] TextField
 - [ ] Tabs
 - [ ] InlineTabs
-- [ ] Checkbox
 - [ ] Label
 - [ ] PopoverMenu
 - [ ] PickerPopup

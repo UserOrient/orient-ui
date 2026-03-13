@@ -153,7 +153,8 @@ class _PopoverMenuState extends State<PopoverMenu> {
 
   @override
   void dispose() {
-    _close();
+    _overlayEntry?.remove();
+    _overlayEntry = null;
     super.dispose();
   }
 

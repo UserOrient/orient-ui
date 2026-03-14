@@ -6,9 +6,9 @@ import 'package:flutter/widgets.dart';
 import 'style.dart';
 
 // Toggle dimensions
-const double _kTrackWidth = 48;
-const double _kTrackHeight = 26;
-const double _kThumbSize = 20;
+const double _kTrackWidth = 44;
+const double _kTrackHeight = 24;
+const double _kThumbSize = 18;
 const double _kThumbPadding = 3;
 
 // Small toggle dimensions

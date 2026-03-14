@@ -111,7 +111,7 @@ class _SearchFieldState extends State<SearchField> {
               const SizedBox(width: 8),
               Expanded(
                 child: Stack(
-                  alignment: Alignment.centerLeft,
+                  alignment: AlignmentDirectional.centerStart,
                   children: [
                     if (showPlaceholder)
                       Text(

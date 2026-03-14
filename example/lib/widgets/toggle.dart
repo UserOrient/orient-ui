@@ -139,7 +139,9 @@ class _ToggleState extends State<Toggle> with TickerProviderStateMixin {
         ..curve = Curves.linear
         ..reverseCurve = Curves.linear;
 
-      final double delta = details.primaryDelta! / _trackInnerLength;
+      final double sign =
+          Directionality.of(context) == TextDirection.rtl ? -1.0 : 1.0;
+      final double delta = details.primaryDelta! / _trackInnerLength * sign;
 
       _positionController.value += delta;
     }
@@ -284,8 +286,8 @@ class _ToggleState extends State<Toggle> with TickerProviderStateMixin {
                     ),
                     child: Stack(
                       children: [
-                        Positioned(
-                          left: pad + t * travel,
+                        PositionedDirectional(
+                          start: pad + t * travel,
                           top: pad,
                           child: Container(
                             width: thumbW,

@@ -135,11 +135,11 @@ final ColorTokens _colorsLight = ColorTokens(
 - [x] PopoverMenu (PopupMenuButton)
 - [x] TappableIcon (IconButton)
 - [x] SegmentBar (Pill TabBar)
+- [x] Tag (Chip/Label)
 
 ### Coming Soon
 - [ ] TextField
 - [ ] Tabs
-- [ ] Label
 - [ ] PickerPopup
 - [ ] VerticalTile
 - [ ] SocialButton

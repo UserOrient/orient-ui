@@ -16,6 +16,7 @@ import 'package:example/pages/tappable_icon_page.dart';
 import 'package:example/pages/popup_page.dart';
 import 'package:example/pages/search_field_page.dart';
 import 'package:example/pages/spinner_page.dart';
+import 'package:example/pages/tag_page.dart';
 import 'package:example/pages/toast_page.dart';
 import 'package:example/pages/toggle_page.dart';
 import 'package:example/pages/tile_page.dart';
@@ -426,6 +427,17 @@ PopoverMenu(
       'Omit onPressed to disable',
     ],
     page: TappableIconPage(),
+  ),
+  _WidgetDef(
+    title: 'Tag',
+    cliName: 'tag',
+    icon: TablerIcons.tag,
+    description: 'A small colored pill label for status indicators like "Implemented" or "In Progress".',
+    code: '''Tag(
+  label: 'Implemented',
+  color: style.colors.success,
+)''',
+    page: TagPage(),
   ),
   _WidgetDef(
     title: 'SegmentBar',

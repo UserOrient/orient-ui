@@ -303,6 +303,14 @@ PopoverMenu(
       'Omit onPressed to disable',
     ],
   ),
+  'tag': Usage(
+    code: [
+      '''Tag(
+  label: 'Implemented',
+  color: style.colors.success,
+)''',
+    ],
+  ),
   'segment_bar': Usage(
     code: [
       '''SegmentBar(

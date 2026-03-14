@@ -11,11 +11,11 @@ class TypographyPage extends StatelessWidget {
     final codeBackground = style.colors.border.withValues(alpha: 0.3);
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Typography', style: typo.heading),
+          Text('Typography', style: typo.display),
           const SizedBox(height: 8),
           Text(
             'Built-in type scale with context-aware theming.',

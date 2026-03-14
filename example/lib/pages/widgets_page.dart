@@ -254,15 +254,15 @@ SingleChoiceTile<String>(
     description:
         'A dropdown-style selector for picking a value from a list of options.',
     code: '''Picker<String>(
-  value: selected,
-  onChanged: (value) {
-    setState(() => selected = value);
-  },
-  items: [
-    PickerItem(value: 'a', label: 'Option A'),
-    PickerItem(value: 'b', label: 'Option B'),
-  ],
+  items: ['Apple', 'Banana', 'Cherry'],
+  value: chosen, // optional
+  onChanged: (value) => setState(() => chosen = value), // optional
+  label: 'Fruit', // optional
+  itemLabel: (item) => item.toUpperCase(), // optional
 )''',
+    hints: [
+      'Use itemLabel to display custom text (e.g. itemLabel: (user) => user.name)',
+    ],
     page: PickerPage(),
   ),
   _WidgetDef(
@@ -274,8 +274,11 @@ SingleChoiceTile<String>(
     code: '''Toast.show(
   context: context,
   message: 'Changes saved',
-  type: ToastType.success,
-)''',
+  type: ToastType.success, // .success, .error, .info, .warning
+  position: ToastPosition.top, // .top, .bottom
+)
+
+Toast.dismissAll() // dismiss all active toasts''',
     page: ToastPage(),
   ),
   _WidgetDef(
@@ -283,11 +286,7 @@ SingleChoiceTile<String>(
     cliName: 'spinner',
     icon: TablerIcons.loader_2,
     description: 'An animated loading indicator.',
-    code: '''// Default
-Spinner()
-
-// Custom size
-Spinner(size: 16)''',
+    code: '''Spinner(color: style.colors.foreground)''',
     page: SpinnerPage(),
   ),
   _WidgetDef(
@@ -299,7 +298,9 @@ Spinner(size: 16)''',
     code: '''AlertPopup.show(
   context: context,
   title: 'Something went wrong',
-  description: 'Please try again later.',
+  description: 'Please try again later.', // optional
+  icon: Icon(Icons.warning), // optional
+  action: Button(label: 'OK', onPressed: () {}), // optional
 )''',
     page: AlertPopupPage(),
   ),
@@ -312,11 +313,17 @@ Spinner(size: 16)''',
     code: '''ConfirmationPopup.show(
   context: context,
   title: 'Delete item?',
-  description: 'This action cannot be undone.',
-  onConfirm: () {
-    // delete
-  },
+  description: 'This action cannot be undone.', // optional
+  confirmLabel: 'Delete',
+  cancelLabel: 'Cancel',
+  onConfirm: () {},
+  onCancel: () {}, // optional
+  icon: Icon(Icons.delete), // optional
+  destructive: false, // optional
 )''',
+    hints: [
+      'Set destructive: true for red confirm button',
+    ],
     page: ConfirmationPopupPage(),
   ),
   _WidgetDef(
@@ -326,9 +333,8 @@ Spinner(size: 16)''',
     description: 'A base modal dialog for building custom popup content.',
     code: '''Popup.show(
   context: context,
-  builder: (context) {
-    return Text('Custom content');
-  },
+  title: 'My Popup', // optional
+  child: Text('Any content here'),
 )''',
     page: PopupPage(),
   ),
@@ -337,30 +343,18 @@ Spinner(size: 16)''',
     cliName: 'popover_menu',
     icon: TablerIcons.menu_2,
     description: 'A context menu that appears anchored to a trigger widget.',
-    code: '''// Imperative — call from any tap handler
+    code: '''// Imperative
 PopoverMenu.show(
   context: context,
   items: [
-    PopoverMenuItem(
-      label: 'Edit',
-      onTap: () {},
-    ),
-    PopoverMenuItem(
-      label: 'Delete',
-      onTap: () {},
-      isDestructive: true,
-    ),
+    PopoverMenuItem(label: 'Edit', icon: Icon(Icons.edit), onTap: () {}),
+    PopoverMenuItem(label: 'Delete', onTap: () {}),
   ],
 )
 
-// Declarative — wraps a trigger widget
+// Declarative — wraps a trigger
 PopoverMenu(
-  items: [
-    PopoverMenuItem(
-      label: 'Edit',
-      onTap: () {},
-    ),
-  ],
+  items: [...],
   child: TappableIcon(
     icon: Icon(Icons.more_vert),
     onPressed: () {},
@@ -376,9 +370,7 @@ PopoverMenu(
         'A button that copies a value to the clipboard with visual feedback.',
     code: '''CopyButton(
   value: 'Text to copy',
-  onCopied: () {
-    // show feedback
-  },
+  onCopied: () {}, // optional
 )''',
     page: CopyButtonPage(),
   ),
@@ -396,7 +388,13 @@ PopoverMenu(
     NavBarItem(icon: Icon(Icons.settings), label: 'Settings'),
   ],
   body: pages[_index],
+  railHeader: Text('My App'), // optional
+  railFooter: Text('v1.0'), // optional
+  railWidth: 240, // optional, default 240
 )''',
+    hints: [
+      'Side rail on desktop, bottom bar on mobile — automatic',
+    ],
     page: NavBarPage(),
   ),
   _WidgetDef(
@@ -406,9 +404,10 @@ PopoverMenu(
     description:
         'A placeholder for empty lists or screens with an icon, title, and description.',
     code: '''EmptyState(
-  icon: Icon(Icons.inbox),
   title: 'No items yet',
-  description: 'Create your first item to get started.',
+  description: 'Create your first item to get started.', // optional
+  icon: Icon(Icons.inbox), // optional
+  action: Button(label: 'Create', onPressed: () {}), // optional
 )''',
     page: EmptyStatePage(),
   ),
@@ -420,7 +419,12 @@ PopoverMenu(
     code: '''TappableIcon(
   icon: Icon(Icons.more_vert),
   onPressed: () {},
+  size: 40, // optional, default 40
+  tooltip: 'More options', // optional
 )''',
+    hints: [
+      'Omit onPressed to disable',
+    ],
     page: TappableIconPage(),
   ),
   _WidgetDef(
@@ -434,16 +438,9 @@ PopoverMenu(
   items: [
     SegmentItem(icon: Icon(Icons.home), label: 'Home'),
     SegmentItem(icon: Icon(Icons.settings), label: 'Settings'),
-    SegmentItem(label: 'About'),
+    SegmentItem(label: 'About'), // icon optional
   ],
-)
-
-// Wrap layout
-SegmentBar(
-  index: _selected,
-  onChanged: (i) => setState(() => _selected = i),
-  layout: SegmentBarLayout.wrap,
-  items: [...],
+  layout: SegmentBarLayout.scroll, // .scroll, .wrap
 )''',
     page: _SegmentBarDemoPage(),
   ),

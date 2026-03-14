@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'usage.dart';
 
 const String version = '0.6.0';
 
@@ -56,7 +57,7 @@ void main(List<String> args) async {
     return;
   }
 
-  final command = args[0];
+  final String command = args[0];
 
   switch (command) {
     case 'init':
@@ -117,28 +118,81 @@ Future<void> _initCommand() async {
 }
 
 Future<void> _addCommand(String widget) async {
-  _log('📦', 'Adding $widget...');
-
   if (!components.containsKey(widget)) {
     _log('❌', 'Widget "$widget" not found');
     _listComponents();
     exit(1);
   }
 
-  final component = components[widget]!;
+  final ComponentInfo component = components[widget]!;
 
   try {
     await _fetchAndSave(component.filename, 'lib/$widget.dart');
-    _log('📝', 'Don\'t forget to import style.dart in $widget.dart');
+    _log('✅', 'Created lib/$widget.dart');
+    _log('💡', 'Update the style.dart import path in $widget.dart');
 
     if (component.dependencies.isNotEmpty) {
-      _log('⚠️ ', 'Depends on: ${component.dependencies.join(', ')}');
-      print('   Run: orient_ui add ${component.dependencies.first}');
+      _log('⚠️ ', 'Depends on: ${component.dependencies.join(', ')} → orient_ui add ${component.dependencies.first}');
     }
+
+    _printUsageBox(widget);
   } catch (e) {
     _log('❌', 'Failed: $e');
     exit(1);
   }
+}
+
+// ANSI colors
+const _green = '\x1B[32m';
+const _blue = '\x1B[34m';
+const _yellow = '\x1B[33m';
+const _magenta = '\x1B[35m';
+const _dim = '\x1B[2m';
+const _r = '\x1B[0m';
+
+String _highlight(String code) {
+  // Single-pass: match strings, comments, keywords, types, numbers in order
+  final RegExp pattern = RegExp(
+    r"'[^']*'"        // strings
+    r'|//.*'          // comments
+    r'|\b(true|false|null)\b'  // keywords
+    r'|\b(\d+\.?\d*)\b'       // numbers
+    r'|\b([A-Z]\w+)\b'        // types
+  );
+
+  return code.replaceAllMapped(pattern, (m) {
+    final String match = m[0]!;
+    if (match.startsWith("'")) return '$_green$match$_r';
+    if (match.startsWith('//')) return '$_dim$match$_r';
+    if (match == 'true' || match == 'false' || match == 'null') return '$_blue$match$_r';
+    if (RegExp(r'^\d').hasMatch(match)) return '$_magenta$match$_r';
+    if (RegExp(r'^[A-Z]').hasMatch(match)) return '$_yellow$match$_r';
+    return match;
+  });
+}
+
+void _printUsageBox(String widget) {
+  final Usage? usage = usageMap[widget];
+  if (usage == null) return;
+
+  print('');
+  print('   $_dim┌${'─' * 60}$_r');
+
+  for (int i = 0; i < usage.code.length; i++) {
+    if (i > 0) print('   $_dim│$_r');
+    for (final line in usage.code[i].split('\n')) {
+      print('   $_dim│$_r ${_highlight(line)}');
+    }
+  }
+
+  if (usage.hints.isNotEmpty) {
+    print('   $_dim│$_r');
+    for (final hint in usage.hints) {
+      print('   $_dim│$_r • $hint');
+    }
+  }
+
+  print('   $_dim└${'─' * 60}$_r');
 }
 
 class ComponentInfo {
@@ -149,30 +203,28 @@ class ComponentInfo {
 }
 
 Future<void> _fetchAndSave(String filename, String destination) async {
-  final url = '$baseUrl/$filename';
-  final response = await http.get(Uri.parse(url));
+  final String url = '$baseUrl/$filename';
+  final http.Response response = await http.get(Uri.parse(url));
 
   if (response.statusCode != 200) {
     throw Exception('Failed to fetch (${response.statusCode})');
   }
 
-  final file = File(destination);
+  final File file = File(destination);
   file.createSync(recursive: true);
   file.writeAsStringSync(response.body);
-
-  _log('✨', 'Created $destination');
 }
 
 Future<void> _checkForUpdate() async {
   try {
-    final response = await http
+    final http.Response response = await http
         .get(Uri.parse('https://pub.dev/api/packages/orient_ui'))
         .timeout(const Duration(seconds: 3));
 
     if (response.statusCode != 200) return;
 
-    final data = jsonDecode(response.body);
-    final latest = data['latest']['version'] as String;
+    final Map<String, dynamic> data = jsonDecode(response.body);
+    final String latest = data['latest']['version'] as String;
 
     if (latest == version) return;
 
@@ -188,7 +240,7 @@ Future<void> _checkForUpdate() async {
     );
     _log('  ', '${dim}Updating...$reset');
 
-    final result = await Process.run(
+    final ProcessResult result = await Process.run(
       'dart',
       ['pub', 'global', 'activate', 'orient_ui'],
     );

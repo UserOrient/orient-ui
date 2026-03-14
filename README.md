@@ -134,6 +134,7 @@ final ColorTokens _colorsLight = ColorTokens(
 - [x] InfoBanner (MaterialBanner)
 - [x] PopoverMenu (PopupMenuButton)
 - [x] TappableIcon (IconButton)
+- [x] SegmentBar (Pill TabBar)
 
 ### Coming Soon
 - [ ] TextField

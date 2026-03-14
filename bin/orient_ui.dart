@@ -46,6 +46,7 @@ final Map<String, ComponentInfo> components = {
   'picker': ComponentInfo('picker.dart'),
   'popover_menu': ComponentInfo('popover_menu.dart'),
   'tappable_icon': ComponentInfo('tappable_icon.dart'),
+  'segment_bar': ComponentInfo('segment_bar.dart'),
 };
 
 void main(List<String> args) async {

@@ -191,7 +191,9 @@ class _ToastWidgetState extends State<_ToastWidget>
 
     return Directionality(
       textDirection: widget.direction,
-      child: AnimatedPositioned(
+      child: DefaultTextStyle(
+        style: const TextStyle(decoration: TextDecoration.none),
+        child: AnimatedPositioned(
         duration: Style.durations.normal,
         curve: Curves.easeOut,
         left: 0,
@@ -238,10 +240,7 @@ class _ToastWidgetState extends State<_ToastWidget>
                           Text(
                             widget.message,
                             style: context.typography.body
-                                .withColor(fgColor)
-                                .copyWith(
-                                  decoration: TextDecoration.none,
-                                ),
+                                .withColor(fgColor),
                           ),
                         ],
                       ),
@@ -251,6 +250,7 @@ class _ToastWidgetState extends State<_ToastWidget>
               ),
             ),
           ),
+        ),
         ),
       ),
     );

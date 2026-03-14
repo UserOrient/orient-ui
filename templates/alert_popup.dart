@@ -87,18 +87,14 @@ class AlertPopup extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: context.typography.title.copyWith(
-              decoration: TextDecoration.none,
-            ),
+            style: context.typography.title,
           ),
           if (description != null && description!.isNotEmpty) ...[
             const SizedBox(height: 8),
             Text(
               description!,
               textAlign: TextAlign.center,
-              style: context.typography.body.muted(context).copyWith(
-                decoration: TextDecoration.none,
-              ),
+              style: context.typography.body.muted(context),
             ),
           ],
           if (action != null) ...[
@@ -205,15 +201,18 @@ class _AlertPopupRoute extends PageRouteBuilder {
                       constraints: const BoxConstraints(
                         maxWidth: _maxWidth,
                       ),
-                      child: Semantics(
-                        scopesRoute: true,
-                        explicitChildNodes: true,
-                        label: 'Alert popup: $title',
-                        child: AlertPopup(
-                          icon: icon,
-                          title: title,
-                          description: description,
-                          action: action,
+                      child: DefaultTextStyle(
+                        style: const TextStyle(decoration: TextDecoration.none),
+                        child: Semantics(
+                          scopesRoute: true,
+                          explicitChildNodes: true,
+                          label: 'Alert popup: $title',
+                          child: AlertPopup(
+                            icon: icon,
+                            title: title,
+                            description: description,
+                            action: action,
+                          ),
                         ),
                       ),
                     ),

@@ -104,18 +104,14 @@ class ConfirmationPopup extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: context.typography.title.copyWith(
-              decoration: TextDecoration.none,
-            ),
+            style: context.typography.title,
           ),
           if (description != null && description!.isNotEmpty) ...[
             const SizedBox(height: 8),
             Text(
               description!,
               textAlign: TextAlign.center,
-              style: context.typography.body.muted(context).copyWith(
-                decoration: TextDecoration.none,
-              ),
+              style: context.typography.body.muted(context),
             ),
           ],
           const SizedBox(height: 32),
@@ -248,11 +244,13 @@ class _ConfirmationPopupRoute extends PageRouteBuilder {
                       constraints: const BoxConstraints(
                         maxWidth: _maxWidth,
                       ),
-                      child: Semantics(
-                        scopesRoute: true,
-                        explicitChildNodes: true,
-                        label: 'Confirmation dialog: $title',
-                        child: ConfirmationPopup(
+                      child: DefaultTextStyle(
+                        style: const TextStyle(decoration: TextDecoration.none),
+                        child: Semantics(
+                          scopesRoute: true,
+                          explicitChildNodes: true,
+                          label: 'Confirmation dialog: $title',
+                          child: ConfirmationPopup(
                           icon: icon,
                           title: title,
                           description: description,
@@ -267,6 +265,7 @@ class _ConfirmationPopupRoute extends PageRouteBuilder {
                             onCancel?.call();
                             Navigator.of(context).pop();
                           },
+                          ),
                         ),
                       ),
                     ),

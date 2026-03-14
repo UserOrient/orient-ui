@@ -90,7 +90,12 @@ class Popup extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          child,
+          DefaultTextStyle(
+            style: style.typography.body.copyWith(
+              decoration: TextDecoration.none,
+            ),
+            child: child,
+          ),
         ],
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:example/pages/colors_page.dart';
-import 'package:example/pages/components_page.dart';
+import 'package:example/pages/widgets_page.dart';
 import 'package:example/pages/typography_page.dart';
 import 'package:flutter/material.dart';
 import 'package:example/widgets/tappable_icon.dart';
@@ -61,9 +61,9 @@ class _RootPageState extends State<RootPage> {
 
   static const _pages = [
     _PageInfo(
-      title: 'Components',
+      title: 'Widgets',
       icon: TablerIcons.layout_dashboard,
-      page: ComponentsPage(),
+      page: WidgetsPage(),
     ),
     _PageInfo(
       title: 'Colors',
@@ -95,7 +95,12 @@ class _RootPageState extends State<RootPage> {
         }).toList(),
         railHeader: _buildHeader(),
         body: SafeArea(
-          child: _pages[_currentIndex].page,
+          child: ListView(
+            padding: .zero,
+            children: [
+              _pages[_currentIndex].page,
+            ],
+          ),
         ),
         railFooter: _buildFooter(),
       ),

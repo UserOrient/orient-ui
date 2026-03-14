@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center">Orient UI</h1>
-  <p align="center">Theming and components for Flutter. Works with Material, Cupertino, or on its own.</p>
+  <p align="center">Theming and widgets for Flutter. Works with Material, Cupertino, or on its own.</p>
 </p>
 
 <p align="center">
@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-  <img src="https://ui.userorient.com/_next/image?url=%2Fassets%2Fui%2Fhero.png&w=1920&q=75" alt="Orient UI Components" />
+  <img src="https://ui.userorient.com/_next/image?url=%2Fassets%2Fui%2Fhero.png&w=1920&q=75" alt="Orient UI Widgets" />
 </p>
 
 ## 🧩 What is Orient UI?
@@ -27,7 +27,7 @@
 Orient UI gives you two things:
 
 1. **`Style`** is a simple, Material-independent theming system. Colors, typography, radii, durations, breakpoints. All in one file you own. No `ThemeExtension`, no boilerplate.
-2. **Components** are neutral widgets (buttons, toggles, popovers, navigation, and more) that work on mobile, web, and desktop.
+2. **Widgets** are neutral widgets (buttons, toggles, popovers, navigation, and more) that work on mobile, web, and desktop.
 
 Use both, or just the theming. Your call.
 
@@ -63,7 +63,7 @@ final TextStyle heading = context.typography.heading;
 
 That's it. If all you need is theming, you're done.
 
-### 3. Add components (optional)
+### 3. Add widgets (optional)
 
 ```bash
 orient_ui add button
@@ -152,7 +152,7 @@ Try them at the [interactive demo](https://widgets.userorient.com).
 
 ![Tests](https://github.com/userorient/orient-ui/actions/workflows/test.yml/badge.svg?branch=main)
 
-All components are tested.
+All widgets are tested.
 
 ## License
 

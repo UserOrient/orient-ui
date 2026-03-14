@@ -50,7 +50,7 @@ class DocsPage extends StatelessWidget {
                       '    home: MyHomePage(),\n'
                       '  ),\n'
                       ')'),
-              _buildStep(style, '4', 'Add components', codeBackground,
+              _buildStep(style, '4', 'Add widgets', codeBackground,
                   'orient_ui add button'),
             ],
           ),
@@ -62,13 +62,13 @@ class DocsPage extends StatelessWidget {
                   codeBackground,
                   style,
                   'orient_ui init          # Initialize style\n'
-                      'orient_ui add           # List components\n'
+                      'orient_ui add           # List widgets\n'
                       'orient_ui add <widget>  # Add a component'),
             ],
           ),
           _buildSection(
             style: style,
-            title: 'Components',
+            title: 'Widgets',
             children: [
               _buildComponentList(style, [
                 'Button (6 variants)',

@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'style.dart';
 import 'package:flutter/widgets.dart';
+
+import 'style.dart';
 
 const Duration _toastDuration = Duration(milliseconds: 3000);
 
@@ -112,7 +113,7 @@ class _ToastWidgetState extends State<_ToastWidget>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _fadeAnimation;
-  late final Animation<Offset> _slideAnimation;
+  late final Animation<double> _scaleAnimation;
   Timer? _dismissTimer;
   bool _isExiting = false;
 
@@ -122,6 +123,7 @@ class _ToastWidgetState extends State<_ToastWidget>
     _controller = AnimationController(
       vsync: this,
       duration: Style.durations.normal,
+      reverseDuration: Style.durations.fast,
     );
 
     _fadeAnimation = Tween<double>(
@@ -129,13 +131,9 @@ class _ToastWidgetState extends State<_ToastWidget>
       end: 1,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
-    final slideBegin = widget.position == ToastPosition.top
-        ? const Offset(0, -1)
-        : const Offset(0, 1);
-
-    _slideAnimation = Tween<Offset>(
-      begin: slideBegin,
-      end: Offset.zero,
+    _scaleAnimation = Tween<double>(
+      begin: 0.8,
+      end: 1.0,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
     _controller.forward();
@@ -199,8 +197,8 @@ class _ToastWidgetState extends State<_ToastWidget>
         bottom: !isTop ? bottomPadding + 12 + offset : null,
         child: FadeTransition(
           opacity: _fadeAnimation,
-          child: SlideTransition(
-            position: _slideAnimation,
+          child: ScaleTransition(
+            scale: _scaleAnimation,
             child: Dismissible(
               key: UniqueKey(),
               direction: isTop ? DismissDirection.up : DismissDirection.down,
@@ -224,7 +222,7 @@ class _ToastWidgetState extends State<_ToastWidget>
                             blurRadius: 10,
                             spreadRadius: 2,
                             color: const Color(0xFF000000).withValues(
-                              alpha: 0.08 * 255,
+                              alpha: 0.08,
                             ),
                           ),
                         ],

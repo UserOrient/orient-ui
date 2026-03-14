@@ -6,11 +6,15 @@ import 'package:example/widgets/tappable_icon.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:example/style.dart';
-import 'package:example/widgets/button.dart';
 import 'package:example/widgets/nav_bar.dart';
+import 'package:example/widgets/picker.dart';
 
 final ValueNotifier<Brightness> _brightnessNotifier = ValueNotifier(
   Brightness.light,
+);
+
+final ValueNotifier<TextDirection> _directionNotifier = ValueNotifier(
+  TextDirection.ltr,
 );
 
 void main() {
@@ -27,22 +31,33 @@ class App extends StatelessWidget {
       builder: (context, brightness, _) {
         final bool isDark = brightness == Brightness.dark;
 
-        return Style(
-          brightness: brightness,
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Orient UI',
-            themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
-            theme: ThemeData(
-              brightness: Brightness.light,
-              scaffoldBackgroundColor: Colors.white,
-            ),
-            darkTheme: ThemeData(
-              brightness: Brightness.dark,
-              scaffoldBackgroundColor: const Color(0xFF09090B),
-            ),
-            home: const RootPage(),
-          ),
+        return ValueListenableBuilder<TextDirection>(
+          valueListenable: _directionNotifier,
+          builder: (context, direction, _) {
+            return Style(
+              brightness: brightness,
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Orient UI',
+                themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+                theme: ThemeData(
+                  brightness: Brightness.light,
+                  scaffoldBackgroundColor: Colors.white,
+                ),
+                darkTheme: ThemeData(
+                  brightness: Brightness.dark,
+                  scaffoldBackgroundColor: const Color(0xFF09090B),
+                ),
+                builder: (context, child) {
+                  return Directionality(
+                    textDirection: direction,
+                    child: child!,
+                  );
+                },
+                home: const RootPage(),
+              ),
+            );
+          },
         );
       },
     );
@@ -149,19 +164,25 @@ class _RootPageState extends State<RootPage> {
         ValueListenableBuilder<Brightness>(
           valueListenable: _brightnessNotifier,
           builder: (context, brightness, _) {
-            final bool isDark = brightness == Brightness.dark;
-
-            return Button.small(
-              onPressed: () {
-                _brightnessNotifier.value = isDark
-                    ? Brightness.light
-                    : Brightness.dark;
-              },
-              icon: Icon(
-                isDark ? Icons.light_mode : Icons.dark_mode,
-              ),
-              label: isDark ? 'Light mode' : 'Dark mode',
-              variant: ButtonVariant.ghost,
+            return Picker<Brightness>(
+              label: 'Theme',
+              value: brightness,
+              items: Brightness.values,
+              itemLabel: (b) => b == Brightness.light ? 'Light' : 'Dark',
+              onChanged: (b) => _brightnessNotifier.value = b,
+            );
+          },
+        ),
+        const SizedBox(height: 4),
+        ValueListenableBuilder<TextDirection>(
+          valueListenable: _directionNotifier,
+          builder: (context, direction, _) {
+            return Picker<TextDirection>(
+              label: 'Direction',
+              value: direction,
+              items: TextDirection.values,
+              itemLabel: (d) => d == TextDirection.ltr ? 'LTR' : 'RTL',
+              onChanged: (d) => _directionNotifier.value = d,
             );
           },
         ),

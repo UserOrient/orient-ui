@@ -121,21 +121,21 @@ final ColorTokens _colorsLight = ColorTokens(
 - [x] AlertPopup
 - [x] ConfirmationPopup
 - [x] SearchField
-- [x] CardBox (Card)
-- [x] Tile (ListTile)
+- [x] CardBox
+- [x] Tile
 - [x] Toggle
-- [x] ToggleTile (SwitchListTile)
-- [x] SingleChoice (Radio)
-- [x] SingleChoiceTile (RadioListTile)
-- [x] MultiChoice (Checkbox)
-- [x] MultiChoiceTile (CheckboxListTile)
+- [x] ToggleTile
+- [x] SingleChoice
+- [x] SingleChoiceTile
+- [x] MultiChoice
+- [x] MultiChoiceTile
 - [x] Typography
-- [x] Picker (Dropdown)
-- [x] InfoBanner (MaterialBanner)
-- [x] PopoverMenu (PopupMenuButton)
-- [x] TappableIcon (IconButton)
-- [x] SegmentBar (Pill TabBar)
-- [x] Tag (Chip/Label)
+- [x] Picker
+- [x] InfoBanner
+- [x] PopoverMenu
+- [x] TappableIcon
+- [x] SegmentBar
+- [x] Tag
 - [x] Tabs
 
 ### Coming Soon

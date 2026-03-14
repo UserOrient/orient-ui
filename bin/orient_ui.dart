@@ -49,6 +49,7 @@ final Map<String, ComponentInfo> components = {
   'popover_menu': ComponentInfo('popover_menu.dart'),
   'tappable_icon': ComponentInfo('tappable_icon.dart'),
   'segment_bar': ComponentInfo('segment_bar.dart'),
+  'tabs': ComponentInfo('tabs.dart'),
   'tag': ComponentInfo('tag.dart'),
 };
 

@@ -311,6 +311,15 @@ PopoverMenu(
 )''',
     ],
   ),
+  'tabs': Usage(
+    code: [
+      '''Tabs(
+  index: _selected,
+  onChanged: (i) => setState(() => _selected = i),
+  items: ['Approved', 'Pending', 'Archived'],
+)''',
+    ],
+  ),
   'segment_bar': Usage(
     code: [
       '''SegmentBar(

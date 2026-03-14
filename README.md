@@ -136,10 +136,10 @@ final ColorTokens _colorsLight = ColorTokens(
 - [x] TappableIcon (IconButton)
 - [x] SegmentBar (Pill TabBar)
 - [x] Tag (Chip/Label)
+- [x] Tabs
 
 ### Coming Soon
 - [ ] TextField
-- [ ] Tabs
 - [ ] PickerPopup
 - [ ] VerticalTile
 - [ ] SocialButton

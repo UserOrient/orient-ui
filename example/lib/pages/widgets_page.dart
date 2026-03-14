@@ -16,6 +16,7 @@ import 'package:example/pages/tappable_icon_page.dart';
 import 'package:example/pages/popup_page.dart';
 import 'package:example/pages/search_field_page.dart';
 import 'package:example/pages/spinner_page.dart';
+import 'package:example/pages/tabs_page.dart';
 import 'package:example/pages/tag_page.dart';
 import 'package:example/pages/toast_page.dart';
 import 'package:example/pages/toggle_page.dart';
@@ -438,6 +439,18 @@ PopoverMenu(
   color: style.colors.success,
 )''',
     page: TagPage(),
+  ),
+  _WidgetDef(
+    title: 'Tabs',
+    cliName: 'tabs',
+    icon: TablerIcons.layout_bottombar,
+    description: 'Horizontal text tabs with an accent-colored underline indicator for switching between views.',
+    code: '''Tabs(
+  index: _selected,
+  onChanged: (i) => setState(() => _selected = i),
+  items: ['Approved', 'Pending', 'Archived'],
+)''',
+    page: TabsPage(),
   ),
   _WidgetDef(
     title: 'SegmentBar',

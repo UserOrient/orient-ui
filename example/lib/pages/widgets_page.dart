@@ -34,6 +34,7 @@ class _WidgetDef {
   final IconData icon;
   final String description;
   final String code;
+  final List<String> hints;
   final Widget page;
 
   const _WidgetDef({
@@ -42,6 +43,7 @@ class _WidgetDef {
     required this.icon,
     required this.description,
     required this.code,
+    this.hints = const [],
     required this.page,
   });
 }
@@ -53,19 +55,19 @@ const _widgets = [
     icon: TablerIcons.click,
     description:
         'A versatile button with multiple variants: primary, secondary, ghost, destructive, outline, and link.',
-    code: '''// Primary button
-Button(
+    code: '''Button(
   onPressed: () {},
   label: 'Click me',
-  variant: ButtonVariant.primary,
+  icon: Icon(Icons.add), // optional
+  variant: ButtonVariant.primary, // .primary, .secondary, .ghost, .destructive, .outline, .link
+  loading: false, // optional
 )
 
-// Small with icon
-Button.small(
-  onPressed: () {},
-  label: 'Small',
-  icon: Icon(Icons.add),
-)''',
+Button.small(...) // same, just smaller''',
+    hints: [
+      'Omit onPressed to disable',
+      'Variants: primary, secondary, ghost, destructive, outline, link',
+    ],
     page: ButtonPage(),
   ),
   _WidgetDef(
@@ -79,7 +81,12 @@ Button.small(
   onChanged: (value) {
     setState(() => isOn = value);
   },
-)''',
+)
+
+Toggle.small(...) // same, just smaller''',
+    hints: [
+      'Omit onChanged to disable',
+    ],
     page: TogglePage(),
   ),
   _WidgetDef(
@@ -89,9 +96,10 @@ Button.small(
     description:
         'A banner for displaying contextual messages with success, error, warning, and info variants.',
     code: '''InfoBanner(
-  type: InfoBannerType.info,
   title: 'Update available',
-  description: 'A new version is ready to install.',
+  description: 'A new version is ready.', // optional
+  variant: InfoBannerVariant.info, // .info, .warning, .error, .success, .neutral
+  icon: Icon(Icons.info), // optional
 )''',
     page: InfoBannerPage(),
   ),
@@ -101,16 +109,15 @@ Button.small(
     icon: TablerIcons.square,
     description:
         'A container with optional border and tap interaction for grouping content.',
-    code: '''// Static
-CardBox(
-  child: Text('Card content'),
-)
-
-// Clickable
-CardBox(
-  onTap: () {},
-  child: Text('Clickable card'),
+    code: '''CardBox(
+  child: Text('Content'),
+  padding: EdgeInsets.all(16), // optional
+  variant: CardBoxVariant.bordered, // .bordered, .filled
+  onTap: () {}, // optional
 )''',
+    hints: [
+      'Omit onTap for a static card',
+    ],
     page: CardBoxPage(),
   ),
   _WidgetDef(
@@ -119,15 +126,18 @@ CardBox(
     icon: TablerIcons.circle_dot,
     description: 'A radio-style selector for picking one option from a list.',
     code: '''SingleChoice<String>(
-  value: selected,
-  onChanged: (value) {
-    setState(() => selected = value);
-  },
-  items: [
-    SingleChoiceItem(value: 'a', label: 'Option A'),
-    SingleChoiceItem(value: 'b', label: 'Option B'),
-  ],
+  value: 'apple',
+  groupValue: chosen,
+  onChanged: (v) => setState(() => chosen = v),
+)
+SingleChoice<String>(
+  value: 'banana',
+  groupValue: chosen,
+  onChanged: (v) => setState(() => chosen = v),
 )''',
+    hints: [
+      'Omit onChanged to disable',
+    ],
     page: SingleChoicePage(),
   ),
   _WidgetDef(
@@ -136,16 +146,13 @@ CardBox(
     icon: TablerIcons.checkbox,
     description:
         'A checkbox-style selector for picking multiple options from a list.',
-    code: '''MultiChoice<String>(
-  values: selected,
-  onChanged: (values) {
-    setState(() => selected = values);
-  },
-  items: [
-    MultiChoiceItem(value: 'a', label: 'Option A'),
-    MultiChoiceItem(value: 'b', label: 'Option B'),
-  ],
+    code: '''MultiChoice(
+  value: isChecked,
+  onChanged: (value) => setState(() => isChecked = value),
 )''',
+    hints: [
+      'Omit onChanged to disable',
+    ],
     page: MultiChoicePage(),
   ),
   _WidgetDef(
@@ -155,10 +162,12 @@ CardBox(
     description:
         'A list item with leading, title, subtitle, and trailing slots.',
     code: '''Tile(
-  leading: Icon(Icons.person),
   title: 'John Doe',
-  subtitle: 'john@example.com',
-  onTap: () {},
+  subtitle: 'john@example.com', // optional
+  leading: Icon(Icons.person), // optional
+  trailing: Icon(Icons.chevron_right), // optional
+  variant: TileVariant.simple, // .simple, .bordered, .filled
+  onTap: () {}, // optional
 )''',
     page: TilePage(),
   ),
@@ -169,12 +178,15 @@ CardBox(
     description: 'A tile with an integrated toggle switch.',
     code: '''ToggleTile(
   title: 'Notifications',
-  subtitle: 'Receive push notifications',
+  subtitle: 'Receive push notifications', // optional
+  leading: Icon(Icons.bell), // optional
   value: isEnabled,
-  onChanged: (value) {
-    setState(() => isEnabled = value);
-  },
+  onChanged: (value) => setState(() => isEnabled = value), // optional
+  variant: TileVariant.simple, // .simple, .bordered, .filled
 )''',
+    hints: [
+      'Omit onChanged to disable',
+    ],
     page: ToggleTilePage(),
   ),
   _WidgetDef(
@@ -184,15 +196,23 @@ CardBox(
     description:
         'A tile-based radio selector for picking one option from a list.',
     code: '''SingleChoiceTile<String>(
-  value: selected,
-  onChanged: (value) {
-    setState(() => selected = value);
-  },
-  items: [
-    SingleChoiceTileItem(value: 'a', title: 'Option A'),
-    SingleChoiceTileItem(value: 'b', title: 'Option B'),
-  ],
+  title: 'Apple',
+  value: 'apple',
+  groupValue: chosen,
+  onChanged: (v) => setState(() => chosen = v),
+  subtitle: 'A fruit', // optional
+  leading: Icon(Icons.apple), // optional
+  variant: TileVariant.simple, // .simple, .bordered, .filled
+)
+SingleChoiceTile<String>(
+  title: 'Banana',
+  value: 'banana',
+  groupValue: chosen,
+  onChanged: (v) => setState(() => chosen = v),
 )''',
+    hints: [
+      'Omit onChanged to disable',
+    ],
     page: SingleChoiceTilePage(),
   ),
   _WidgetDef(
@@ -200,16 +220,17 @@ CardBox(
     cliName: 'multi_choice_tile',
     icon: TablerIcons.list_details,
     description: 'A tile-based checkbox selector for picking multiple options.',
-    code: '''MultiChoiceTile<String>(
-  values: selected,
-  onChanged: (values) {
-    setState(() => selected = values);
-  },
-  items: [
-    MultiChoiceTileItem(value: 'a', title: 'Option A'),
-    MultiChoiceTileItem(value: 'b', title: 'Option B'),
-  ],
+    code: '''MultiChoiceTile(
+  title: 'Email notifications',
+  subtitle: 'Receive weekly digest', // optional
+  leading: Icon(Icons.email), // optional
+  value: isChecked,
+  onChanged: (value) => setState(() => isChecked = value), // optional
+  variant: TileVariant.simple, // .simple, .bordered, .filled
 )''',
+    hints: [
+      'Omit onChanged to disable',
+    ],
     page: MultiChoiceTilePage(),
   ),
   _WidgetDef(
@@ -218,10 +239,11 @@ CardBox(
     icon: TablerIcons.search,
     description: 'A search input field with built-in icon and clear button.',
     code: '''SearchField(
-  onChanged: (query) {
-    // filter results
-  },
-  placeholder: 'Search...',
+  onChanged: (query) {}, // optional
+  onSubmitted: (query) {}, // optional
+  placeholder: 'Search...', // optional
+  controller: myController, // optional
+  autofocus: false, // optional
 )''',
     page: SearchFieldPage(),
   ),
@@ -515,6 +537,28 @@ class _WidgetsPageState extends State<WidgetsPage> {
                   Text('Usage', style: context.typography.subtitle),
                   const SizedBox(height: 12),
                   CodeBlock(code: comp.code),
+                  if (comp.hints.isNotEmpty) ...[
+                    const SizedBox(height: 16),
+                    for (final hint in comp.hints)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 6),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '•  ',
+                              style: context.typography.body.muted(context),
+                            ),
+                            Expanded(
+                              child: Text(
+                                hint,
+                                style: context.typography.body.muted(context),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                  ],
                 ],
               );
 

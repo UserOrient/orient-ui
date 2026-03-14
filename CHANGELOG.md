@@ -1,3 +1,12 @@
+## 0.6.0
+
+* Added `SegmentBar`: horizontal pill-style tab selector tab with icon and label support. Two layouts: `scroll` (default) and `wrap`.
+* Renamed "Components" to "Widgets" across example app and README.
+* Fixed toast shadow being nearly opaque black on macOS (wrong alpha value).
+* Improved toast animation: scale + fade instead of slide.
+* Redesigned example app widget page with title, description, live preview, and usage code side by side.
+* Added `CodeBlock` to example app with syntax-highlighted Dart code (JetBrains Mono, dark theme).
+
 ## 0.5.2
 
 * Added `PopoverMenu`: floating menu anchored to any widget with smart positioning (flips up/down, shifts left/right). Both declarative (`PopoverMenu(child:)`) and imperative (`PopoverMenu.show()`) APIs.

@@ -128,6 +128,12 @@ class CompiledApp {
       _182: (x0,x1) => x0.addListener(x1),
       _183: (x0,x1) => x0.removeListener(x1),
       _184: (x0,x1) => x0.matchMedia(x1),
+      _185: (x0,x1) => x0.revokeObjectURL(x1),
+      _186: x0 => x0.close(),
+      _187: (x0,x1,x2,x3,x4) => ({type: x0,data: x1,premultiplyAlpha: x2,colorSpaceConversion: x3,preferAnimation: x4}),
+      _188: x0 => new window.ImageDecoder(x0),
+      _189: (x0,x1) => ({frameIndex: x0,completeFramesOnly: x1}),
+      _190: (x0,x1) => x0.decode(x1),
       _191: (module,f) => finalizeWrapper(f, function(x0) { return module.exports._191(f,arguments.length,x0) }),
       _192: (x0,x1,x2,x3) => x0.addEventListener(x1,x2,x3),
       _194: (x0,x1) => x0.getModifierState(x1),
@@ -170,6 +176,7 @@ class CompiledApp {
       _685: x0 => x0.navigator,
       _686: x0 => x0.visualViewport,
       _687: x0 => x0.performance,
+      _689: x0 => x0.URL,
       _691: (x0,x1) => x0.getComputedStyle(x1),
       _692: x0 => x0.screen,
       _693: (module,f) => finalizeWrapper(f, function(x0) { return module.exports._693(f,arguments.length,x0) }),
@@ -179,6 +186,7 @@ class CompiledApp {
       _702: () => globalThis.window,
       _703: () => globalThis.Intl,
       _704: () => globalThis.Symbol,
+      _705: (x0,x1,x2,x3,x4) => globalThis.createImageBitmap(x0,x1,x2,x3,x4),
       _707: x0 => x0.clipboard,
       _708: x0 => x0.maxTouchPoints,
       _709: x0 => x0.vendor,
@@ -243,6 +251,12 @@ class CompiledApp {
       _817: (x0,x1) => { x0.name = x1 },
       _818: x0 => x0.content,
       _819: (x0,x1) => { x0.content = x1 },
+      _823: (x0,x1) => { x0.src = x1 },
+      _824: x0 => x0.naturalWidth,
+      _825: x0 => x0.naturalHeight,
+      _829: (x0,x1) => { x0.crossOrigin = x1 },
+      _831: (x0,x1) => { x0.decoding = x1 },
+      _832: x0 => x0.decode(),
       _837: (x0,x1) => { x0.nonce = x1 },
       _841: (x0,x1) => { x0.width = x1 },
       _844: (x0,x1) => { x0.height = x1 },
@@ -256,6 +270,7 @@ class CompiledApp {
       _924: x0 => x0.read(),
       _925: x0 => x0.value,
       _926: x0 => x0.done,
+      _933: x0 => x0.name,
       _934: x0 => x0.x,
       _935: x0 => x0.y,
       _938: x0 => x0.top,
@@ -293,6 +308,8 @@ class CompiledApp {
       _988: x0 => x0.search,
       _989: x0 => x0.hash,
       _993: x0 => x0.state,
+      _996: (x0,x1) => x0.createObjectURL(x1),
+      _998: x0 => new Blob(x0),
       _1008: x0 => x0.matches,
       _1009: x0 => x0.matches,
       _1013: x0 => x0.relatedTarget,
@@ -380,6 +397,17 @@ class CompiledApp {
       _1216: (module,f) => finalizeWrapper(f, function(x0,x1) { return module.exports._1216(f,arguments.length,x0,x1) }),
       _1217: x0 => new Promise(x0),
       _1218: x0 => x0.length,
+      _1219: () => globalThis.window.ImageDecoder,
+      _1220: x0 => x0.tracks,
+      _1222: x0 => x0.completed,
+      _1224: x0 => x0.image,
+      _1230: x0 => x0.displayWidth,
+      _1231: x0 => x0.displayHeight,
+      _1232: x0 => x0.duration,
+      _1235: x0 => x0.ready,
+      _1236: x0 => x0.selectedTrack,
+      _1237: x0 => x0.repetitionCount,
+      _1238: x0 => x0.frameCount,
       _1300: x0 => x0.cancel(),
       _1303: x0 => x0.read(),
       _1331: (x0,x1,x2,x3) => x0.open(x1,x2,x3),
@@ -427,6 +455,7 @@ class CompiledApp {
       _1372: s => JSON.stringify(s),
       _1373: s => printToConsole(s),
       _1374: (o, p, r) => o.replaceAll(p, () => r),
+      _1375: (o, p, r) => o.replace(p, () => r),
       _1376: Function.prototype.call.bind(String.prototype.toLowerCase),
       _1377: s => s.toUpperCase(),
       _1378: s => s.trim(),
@@ -497,6 +526,7 @@ class CompiledApp {
             constructor, [null, ...args]);
         return new factoryFunction();
       },
+      _1516: (o, p) => p in o,
       _1517: (o, p) => o[p],
       _1518: (o, p, v) => o[p] = v,
       _1519: (o, m, a) => o[m].apply(o, a),
@@ -548,6 +578,18 @@ class CompiledApp {
           setValue(wasmArray, wasmArrayOffset + i, jsArray[jsArrayOffset + i]);
         }
       },
+      _1532: (jsArray, jsArrayOffset, wasmArray, wasmArrayOffset, length) => {
+        const getValue = dartInstance.exports.$wasmI16ArrayGet;
+        for (let i = 0; i < length; i++) {
+          jsArray[jsArrayOffset + i] = getValue(wasmArray, wasmArrayOffset + i);
+        }
+      },
+      _1533: (jsArray, jsArrayOffset, wasmArray, wasmArrayOffset, length) => {
+        const setValue = dartInstance.exports.$wasmI16ArraySet;
+        for (let i = 0; i < length; i++) {
+          setValue(wasmArray, wasmArrayOffset + i, jsArray[jsArrayOffset + i]);
+        }
+      },
       _1534: (jsArray, jsArrayOffset, wasmArray, wasmArrayOffset, length) => {
         const getValue = dartInstance.exports.$wasmI32ArrayGet;
         for (let i = 0; i < length; i++) {
@@ -592,6 +634,7 @@ class CompiledApp {
         return s;
       },
       _1543: x0 => x0.index,
+      _1544: x0 => x0.groups,
       _1545: x0 => x0.flags,
       _1546: x0 => x0.multiline,
       _1547: x0 => x0.ignoreCase,

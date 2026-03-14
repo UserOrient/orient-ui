@@ -2,12 +2,15 @@ import 'package:example/pages/colors_page.dart';
 import 'package:example/pages/widgets_page.dart';
 import 'package:example/pages/typography_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:example/widgets/tappable_icon.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:example/style.dart';
+import 'package:example/widgets/copy_button.dart';
 import 'package:example/widgets/nav_bar.dart';
 import 'package:example/widgets/picker.dart';
+import 'package:example/widgets/popup.dart';
 
 final ValueNotifier<Brightness> _brightnessNotifier = ValueNotifier(
   Brightness.light,
@@ -123,16 +126,58 @@ class _RootPageState extends State<RootPage> {
   }
 
   Widget _buildHeader() {
-    return const Column(
+    return Column(
       children: [
-        Text(
-          'Orient UI',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-        ),
-        SizedBox(height: 4),
-        Text(
-          'Widget Playground',
-          style: TextStyle(fontSize: 14, color: Color(0xFF71717A)),
+        GestureDetector(
+          onTap: () {
+            Popup.show(
+              context: context,
+              title: 'Built with Orient UI',
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Show some love! Add this badge to your app if you\'re building with Orient UI.',
+                    style: context.typography.body.muted(context),
+                    textAlign: TextAlign.left,
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Style.of(context).colors.surfaceContainer,
+                      borderRadius: BorderRadius.circular(Style.radii.small),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'https://userorient.com/built-with-orient-ui.svg',
+                            style: context.typography.bodySmall,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        CopyButton(
+                          value:
+                              'https://userorient.com/built-with-orient-ui.svg',
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+          child: MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: SvgPicture.network(
+              'https://userorient.com/built-with-orient-ui.svg',
+            ),
+          ),
         ),
       ],
     );

@@ -15,6 +15,7 @@ final Map<String, ComponentInfo> components = {
     'button.dart',
     dependencies: ['spinner'],
   ),
+  'info_banner': ComponentInfo('info_banner.dart'),
   'card_box': ComponentInfo('card_box.dart'),
   'multi_choice': ComponentInfo('multi_choice.dart'),
   'multi_choice_tile': ComponentInfo(

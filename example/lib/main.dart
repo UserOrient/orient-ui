@@ -176,6 +176,7 @@ class _RootPageState extends State<RootPage> {
             cursor: SystemMouseCursors.click,
             child: SvgPicture.network(
               'https://userorient.com/built-with-orient-ui.svg',
+              height: 56,
             ),
           ),
         ),

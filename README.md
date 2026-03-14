@@ -140,9 +140,7 @@ final ColorTokens _colorsLight = ColorTokens(
 
 ### Coming Soon
 - [ ] TextField
-- [ ] PickerPopup
 - [ ] VerticalTile
-- [ ] SocialButton
 - [ ] AdaptivePageTransition
 - [ ] DashedBorder
 

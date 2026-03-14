@@ -20,6 +20,7 @@ class Toast {
   }) {
     final OverlayState? overlayState = Navigator.of(context).overlay;
     if (overlayState == null) return;
+    final TextDirection direction = Directionality.of(context);
 
     late final _ToastEntry entry;
     late final OverlayEntry overlayEntry;
@@ -27,6 +28,7 @@ class Toast {
     overlayEntry = OverlayEntry(
       builder: (_) {
         return _ToastWidget(
+          direction: direction,
           key: entry.key,
           message: message,
           type: type,
@@ -93,6 +95,7 @@ class _ToastWidget extends StatefulWidget {
   final String message;
   final ToastType type;
   final ToastPosition position;
+  final TextDirection direction;
   final VoidCallback onRemove;
   final double Function() getOffset;
 
@@ -101,6 +104,7 @@ class _ToastWidget extends StatefulWidget {
     required this.message,
     required this.type,
     required this.position,
+    required this.direction,
     required this.onRemove,
     required this.getOffset,
   });
@@ -187,7 +191,7 @@ class _ToastWidgetState extends State<_ToastWidget>
     };
 
     return Directionality(
-      textDirection: TextDirection.ltr,
+      textDirection: widget.direction,
       child: AnimatedPositioned(
         duration: Style.durations.normal,
         curve: Curves.easeOut,

@@ -37,6 +37,7 @@ class PopoverMenu extends StatefulWidget {
     final Offset triggerPos = renderBox.localToGlobal(Offset.zero);
     final Size screenSize = MediaQuery.of(context).size;
 
+    final TextDirection direction = Directionality.of(context);
     final double menuWidth = _measureMenuWidth(items);
     final double menuHeight = _measureMenuHeight(items);
     final Offset position = _calculatePosition(
@@ -52,32 +53,35 @@ class PopoverMenu extends StatefulWidget {
       builder: (BuildContext overlayContext) {
         final ColorTokens colors = Style.of(overlayContext).colors;
 
-        return DefaultTextStyle(
-          style: Style.of(overlayContext).typography.body,
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: GestureDetector(
-                  onTap: () {
-                    entry.remove();
-                  },
-                  behavior: HitTestBehavior.translucent,
+        return Directionality(
+          textDirection: direction,
+          child: DefaultTextStyle(
+            style: Style.of(overlayContext).typography.body,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: GestureDetector(
+                    onTap: () {
+                      entry.remove();
+                    },
+                    behavior: HitTestBehavior.translucent,
+                  ),
                 ),
-              ),
-              Positioned(
-                left: position.dx,
-                top: position.dy,
-                child: _MenuPanel(
-                  width: menuWidth,
-                  colors: colors,
-                  items: items,
-                  onItemTap: (PopoverMenuItem item) {
-                    item.onTap?.call();
-                    entry.remove();
-                  },
+                Positioned(
+                  left: position.dx,
+                  top: position.dy,
+                  child: _MenuPanel(
+                    width: menuWidth,
+                    colors: colors,
+                    items: items,
+                    onItemTap: (PopoverMenuItem item) {
+                      item.onTap?.call();
+                      entry.remove();
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

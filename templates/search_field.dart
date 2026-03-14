@@ -5,15 +5,15 @@ import 'style.dart';
 
 // Customizable constants
 //
-// Default: Universal pill style (works on all platforms)
-const double _kHeight = 44;
-const double _kHorizontalPadding = 14;
-const double _kBorderRadius = 22;
+// Default: Compact Cupertino-like style (iOS only, not recommended for Android)
+const double _kHeight = 36;
+const double _kHorizontalPadding = 8;
+const double _kBorderRadius = 10;
 //
-// Alternative: Compact Cupertino-like style (iOS only, not recommended for Android)
-// const double _kHeight = 36;
-// const double _kHorizontalPadding = 8;
-// const double _kBorderRadius = 10;
+// Alternative: Universal pill style (works on all platforms)
+// const double _kHeight = 44;
+// const double _kHorizontalPadding = 14;
+// const double _kBorderRadius = 22;
 
 class SearchField extends StatefulWidget {
   final TextEditingController? controller;

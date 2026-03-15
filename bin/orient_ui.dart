@@ -10,6 +10,9 @@ const String version = '0.6.0';
 const String baseUrl =
     'https://raw.githubusercontent.com/userorient/orient-ui/main/templates';
 
+const String aiBaseUrl =
+    'https://raw.githubusercontent.com/userorient/orient-ui/main/ai';
+
 final Map<String, ComponentInfo> components = {
   'button': ComponentInfo(
     'button.dart',
@@ -104,8 +107,7 @@ Future<void> _initCommand() async {
 
   try {
     await _fetchAndSave('style.dart', 'lib/style.dart');
-
-    _log('🎉', 'All set! Created lib/style.dart');
+    _log('✅', 'lib/style.dart');
     _log('💡', 'Components follow system brightness by default.');
     _log('  ', 'To control brightness manually, wrap your app:');
     print('   ┌─────────────────────────────────');
@@ -114,10 +116,60 @@ Future<void> _initCommand() async {
     print('   │   child: MaterialApp(...)');
     print('   │ )');
     print('   └─────────────────────────────────');
+
+    await _setupAiRules();
+
+    print('');
+    _log('🎉', 'Orient UI is ready. Your AI already knows it.');
   } catch (e) {
     _log('❌', 'Failed: $e');
     exit(1);
   }
+}
+
+Future<void> _setupAiRules() async {
+  final String rules = await _fetchContent('$aiBaseUrl/rules.md');
+  final String cursorFrontmatter = await _fetchContent('$aiBaseUrl/cursor.yaml');
+
+  // CLAUDE.md
+  _writeRules('CLAUDE.md', rules);
+
+  // AGENTS.md (OpenAI Codex)
+  _writeRules('AGENTS.md', rules);
+
+  // .windsurfrules
+  _writeRules('.windsurfrules', rules);
+
+  // .cursor/rules/orient-ui.mdc (always own file, no append)
+  final File cursorFile = File('.cursor/rules/orient-ui.mdc');
+  cursorFile.createSync(recursive: true);
+  cursorFile.writeAsStringSync('$cursorFrontmatter$rules');
+  _log('✅', '.cursor/rules/orient-ui.mdc');
+}
+
+void _writeRules(String path, String rules) {
+  final File file = File(path);
+
+  if (file.existsSync()) {
+    // Bump headings: # -> ##, ## -> ###, etc.
+    final String bumped = rules.replaceAllMapped(
+      RegExp(r'^(#+)', multiLine: true),
+      (m) => '${m[1]}#',
+    );
+    file.writeAsStringSync('\n$bumped', mode: FileMode.append);
+  } else {
+    file.writeAsStringSync(rules);
+  }
+
+  _log('✅', path);
+}
+
+Future<String> _fetchContent(String url) async {
+  final http.Response response = await http.get(Uri.parse(url));
+  if (response.statusCode != 200) {
+    throw Exception('Failed to fetch $url (${response.statusCode})');
+  }
+  return response.body;
 }
 
 Future<void> _addCommand(String widget) async {

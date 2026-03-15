@@ -6,6 +6,7 @@ repository: https://github.com/userorient/orient-ui
 
 exclude:
   - templates/**
+  - ai/**
 
 executables:
   orient_ui:

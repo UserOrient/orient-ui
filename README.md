@@ -37,6 +37,7 @@ Use both, or just the theming. Your call.
 - **You own the code.** Every file lives in your project. Change anything you want. No package lock-in.
 - **Cross-platform.** Responsive layouts, hover states, keyboard navigation. Mobile, web, and desktop.
 - **Zero dependencies.** Nothing added to your pubspec.
+- **AI-native.** `init` sets up rules for Claude Code, Cursor, Windsurf, and Codex. Your AI uses Orient UI by default.
 
 ## 🏁 Getting Started
 
@@ -52,7 +53,7 @@ dart pub global activate orient_ui
 orient_ui init
 ```
 
-This creates `lib/style.dart` with light/dark colors, typography, radii, durations, and breakpoints. **You own this file.** Move it, rename it, extend it.
+This creates `lib/style.dart` with light/dark colors, typography, radii, durations, and breakpoints. **You own this file.** Move it, rename it, extend it. Also sets up AI rules so your coding agent understands Orient UI out of the box.
 
 Use it anywhere:
 

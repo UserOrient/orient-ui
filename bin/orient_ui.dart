@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'usage.dart';
 
-const String version = '0.6.0';
+const String version = '0.7.0';
 
 const String baseUrl =
     'https://raw.githubusercontent.com/userorient/orient-ui/main/templates';
@@ -129,7 +129,9 @@ Future<void> _initCommand() async {
 
 Future<void> _setupAiRules() async {
   final String rules = await _fetchContent('$aiBaseUrl/rules.md');
-  final String cursorFrontmatter = await _fetchContent('$aiBaseUrl/cursor.yaml');
+  final String cursorFrontmatter = await _fetchContent(
+    '$aiBaseUrl/cursor.yaml',
+  );
 
   // CLAUDE.md
   _writeRules('CLAUDE.md', rules);
@@ -187,7 +189,10 @@ Future<void> _addCommand(String widget) async {
     _log('💡', 'Update the style.dart import path in $widget.dart');
 
     if (component.dependencies.isNotEmpty) {
-      _log('⚠️ ', 'Depends on: ${component.dependencies.join(', ')} → orient_ui add ${component.dependencies.first}');
+      _log(
+        '⚠️ ',
+        'Depends on: ${component.dependencies.join(', ')} → orient_ui add ${component.dependencies.first}',
+      );
     }
 
     _printUsageBox(widget);
@@ -208,18 +213,19 @@ const _r = '\x1B[0m';
 String _highlight(String code) {
   // Single-pass: match strings, comments, keywords, types, numbers in order
   final RegExp pattern = RegExp(
-    r"'[^']*'"        // strings
-    r'|//.*'          // comments
-    r'|\b(true|false|null)\b'  // keywords
-    r'|\b(\d+\.?\d*)\b'       // numbers
-    r'|\b([A-Z]\w+)\b'        // types
+    r"'[^']*'" // strings
+    r'|//.*' // comments
+    r'|\b(true|false|null)\b' // keywords
+    r'|\b(\d+\.?\d*)\b' // numbers
+    r'|\b([A-Z]\w+)\b', // types
   );
 
   return code.replaceAllMapped(pattern, (m) {
     final String match = m[0]!;
     if (match.startsWith("'")) return '$_green$match$_r';
     if (match.startsWith('//')) return '$_dim$match$_r';
-    if (match == 'true' || match == 'false' || match == 'null') return '$_blue$match$_r';
+    if (match == 'true' || match == 'false' || match == 'null')
+      return '$_blue$match$_r';
     if (RegExp(r'^\d').hasMatch(match)) return '$_magenta$match$_r';
     if (RegExp(r'^[A-Z]').hasMatch(match)) return '$_yellow$match$_r';
     return match;

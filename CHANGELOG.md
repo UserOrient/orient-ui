@@ -1,3 +1,7 @@
+## 0.7.0
+
+* **AI-native**: `orient_ui init` now generates context files for Claude Code (`CLAUDE.md`), Cursor (`.cursor/rules/orient-ui.mdc`), OpenAI Codex (`AGENTS.md`), and Windsurf (`.windsurfrules`). Your AI already knows Orient UI. Zero extra setup.
+
 ## 0.6.0
 
 * Added `SegmentBar`: horizontal pill-style tab selector tab with icon and label support. Two layouts: `scroll` (default) and `wrap`.

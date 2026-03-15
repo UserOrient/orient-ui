@@ -6,9 +6,11 @@ This project uses Orient UI — a design system for Flutter. It replaces Materia
 
 - **Never use Material or Cupertino widgets for theming or UI components.** Use Orient UI equivalents instead.
 - Never hardcode colors, font sizes, radii, or durations. Always use Style tokens.
-- To add a component: `orient_ui add <name>`. It prints usage examples — follow them. Don't write Orient UI components from scratch.
+- Before adding a component, check if the project already has one that does the same job. Only run `orient_ui add <name>` if there's no equivalent. It prints usage examples — follow them.
+- After adding a component, fix the `import 'style.dart'` path to match where `style.dart` actually lives in the project. If the CLI mentions dependencies, add those too if they don't already exist.
 - These are plain Dart files in `lib/`, not a package. Edit them directly to customize.
 - New custom widgets you create should also use `Style.of(context)` and Orient UI tokens to stay consistent.
+- When you need a new color or token, add it to `style.dart` — don't hardcode values.
 
 ## Style System
 

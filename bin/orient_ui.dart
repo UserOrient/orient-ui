@@ -147,6 +147,12 @@ Future<void> _setupAiRules() async {
   cursorFile.createSync(recursive: true);
   cursorFile.writeAsStringSync('$cursorFrontmatter$rules');
   _log('✅', '.cursor/rules/orient-ui.mdc');
+
+  // .gemini/GEMINI.md (Antigravity, always own file)
+  final File geminiFile = File('.gemini/GEMINI.md');
+  geminiFile.createSync(recursive: true);
+  geminiFile.writeAsStringSync(rules);
+  _log('✅', '.gemini/GEMINI.md');
 }
 
 void _writeRules(String path, String rules) {
